@@ -6,6 +6,10 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+function sanitizePhoneNumber(phone: string) {
+  return phone.replace(/\D/g, '');
+}
+
 export default function PressClient() {
   const pressReleases = [
     {
