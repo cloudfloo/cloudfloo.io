@@ -263,7 +263,7 @@ export default function PressClient() {
                             <div className="text-sm text-white">{item.name}</div>
                             <div className="text-xs text-gray-400">{item.size} • {item.format}</div>
                           </div>
-                          <Button size="sm" variant="ghost" className="text-neon hover:bg-neon/10">
+                          <Button size="sm" variant="ghost" className="text-neon hover:bg-neon/10" aria-label={`Download ${item.name}`}>
                             <Download className="w-4 h-4" />
                           </Button>
                         </div>
