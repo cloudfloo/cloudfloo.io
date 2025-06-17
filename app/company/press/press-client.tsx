@@ -204,13 +204,15 @@ export default function PressClient() {
                           })}
                         </div>
                       </div>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-neon text-neon hover:bg-neon/10 ml-4"
-                      >
-                        Read More
-                      </Button>
+                      <Link href={release.link}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-neon text-neon hover:bg-neon/10 ml-4"
+                        >
+                          Read More
+                        </Button>
+                      </Link>
                     </div>
                   </CardHeader>
                 </Card>
