@@ -1,0 +1,4 @@
+# Global code owners for the entire repository
+# These users will be notified for all pull requests by default
+
+* @Sebastian-Debicki @wiatrM
