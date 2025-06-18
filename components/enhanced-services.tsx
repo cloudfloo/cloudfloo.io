@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Cloud, Code, Bot, Settings, Database, Zap, Server } from 'lucide-react';
+import { useState } from 'react';
+import { Cloud, Code, Bot, Settings, Database, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,31 @@ import { useStaggeredAnimation } from '@/hooks/use-scroll-animation';
 
 // Create a motion-enabled Button component
 const MotionButton = motion(Button);
+
+interface TechIconProps {
+  name: string;
+  logo: string;
+  fallbackIcon: any;
+  className?: string;
+}
+
+function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: TechIconProps) {
+  const [imageError, setImageError] = useState(false);
+
+  if (imageError) {
+    return <FallbackIcon className={`text-gray-400 group-hover:text-neon transition-colors duration-300 ${className}`} />;
+  }
+
+  return (
+    <img
+      src={`https://techicons.dev/icons/${logo}.svg`}
+      alt={name}
+      className={`group-hover:scale-110 transition-transform duration-300 ${className}`}
+      onError={() => setImageError(true)}
+      loading="lazy"
+    />
+  );
+}
 
 export default function EnhancedServices() {
   const services = [
@@ -18,7 +44,8 @@ export default function EnhancedServices() {
       description: 'Expert guidance tailored to your business goals, ensuring optimal cloud architecture and seamless migration strategies.',
       features: ['Architecture Design', 'Migration Planning', 'Cost Optimization', 'Security Assessment'],
       color: 'from-blue-500 to-cyan-500',
-      href: '/services/cloud-solutions'
+      href: '/services/cloud-solutions',
+      techIcons: [Server, Database, Shield, Network]
     },
     {
       icon: Code,
@@ -26,7 +53,8 @@ export default function EnhancedServices() {
       description: 'Scalable, modern applications built with your specific requirements in mind, leveraging cutting-edge technologies.',
       features: ['Full-Stack Development', 'API Integration', 'Performance Optimization', 'Responsive Design'],
       color: 'from-green-500 to-emerald-500',
-      href: '/services/app-development'
+      href: '/services/app-development',
+      techIcons: [Monitor, Smartphone, Code2, Globe]
     },
     {
       icon: Bot,
@@ -34,7 +62,8 @@ export default function EnhancedServices() {
       description: 'AI-powered solutions that streamline operations and enhance productivity through smart workflow automation.',
       features: ['Process Automation', 'AI Integration', 'Workflow Optimization', 'Predictive Analytics'],
       color: 'from-purple-500 to-pink-500',
-      href: '/services/ai-ml'
+      href: '/services/ai-ml',
+      techIcons: [Cpu, BarChart3, Activity, Target]
     },
     {
       icon: Settings,
@@ -42,7 +71,8 @@ export default function EnhancedServices() {
       description: 'Comprehensive DevOps practices that accelerate delivery while maintaining reliability and security.',
       features: ['CI/CD Implementation', 'Infrastructure as Code', 'Monitoring & Alerting', 'Security Integration'],
       color: 'from-orange-500 to-red-500',
-      href: '/services/devops'
+      href: '/services/devops',
+      techIcons: [GitBranch, Package, Workflow, CheckCircle]
     },
     {
       icon: Database,
@@ -50,7 +80,8 @@ export default function EnhancedServices() {
       description: 'Transform raw data into actionable insights with robust pipelines and advanced analytics platforms.',
       features: ['Data Pipeline Design', 'Real-time Processing', 'Analytics Platforms', 'Data Governance'],
       color: 'from-indigo-500 to-blue-500',
-      href: '/services/data-engineering'
+      href: '/services/data-engineering',
+      techIcons: [HardDrive, BarChart3, Activity, Search]
     },
     {
       icon: Zap,
@@ -58,7 +89,8 @@ export default function EnhancedServices() {
       description: 'End-to-end machine learning lifecycle management, from model development to production deployment.',
       features: ['Model Development', 'Automated Training', 'Performance Monitoring', 'Scalable Deployment'],
       color: 'from-yellow-500 to-orange-500',
-      href: '/services/ai-ml'
+      href: '/services/ai-ml',
+      techIcons: [Cpu, Target, Activity, Zap]
     },
     {
       icon: Server,
@@ -66,9 +98,62 @@ export default function EnhancedServices() {
       description: 'Ultra-fast, globally distributed solutions that bring computation closer to your users for optimal performance.',
       features: ['Global Distribution', 'Low Latency', 'Auto-scaling', 'Edge Optimization'],
       color: 'from-teal-500 to-green-500',
-      href: '/services/edge-computing'
+      href: '/services/edge-computing',
+      techIcons: [Globe, Network, Zap, Activity]
     }
   ];
+
+  // Technology showcase with REAL logos from techicons.dev
+  const technologyShowcase = {
+    'Cloud Platforms': [
+      { name: 'AWS', icon: Cloud, logo: 'aws' },
+      { name: 'Google Cloud', icon: Cloud, logo: 'gcp' },
+      { name: 'Azure', icon: Cloud, logo: 'azure' },
+      { name: 'DigitalOcean', icon: Server, logo: 'digitalocean' },
+      { name: 'Vercel', icon: Globe, logo: 'vercel' },
+      { name: 'Netlify', icon: Globe, logo: 'netlify' }
+    ],
+    'Backend & Database': [
+      { name: 'Node.js', icon: Server, logo: 'nodejs' },
+      { name: 'Python', icon: Code2, logo: 'python' },
+      { name: 'PostgreSQL', icon: Database, logo: 'postgresql' },
+      { name: 'MongoDB', icon: HardDrive, logo: 'mongodb' },
+      { name: 'Redis', icon: Zap, logo: 'redis' },
+      { name: 'Elasticsearch', icon: Search, logo: 'elasticsearch' }
+    ],
+    'Frontend & Mobile': [
+      { name: 'React', icon: Monitor, logo: 'react' },
+      { name: 'Next.js', icon: Layout, logo: 'nextjs' },
+      { name: 'TypeScript', icon: Code2, logo: 'typescript' },
+      { name: 'React Native', icon: Smartphone, logo: 'react' },
+      { name: 'Flutter', icon: Smartphone, logo: 'flutter' },
+      { name: 'Vue.js', icon: Palette, logo: 'vuejs' }
+    ],
+    'DevOps & Tools': [
+      { name: 'Docker', icon: Package, logo: 'docker' },
+      { name: 'Kubernetes', icon: Server, logo: 'kubernetes' },
+      { name: 'Jenkins', icon: GitBranch, logo: 'jenkins' },
+      { name: 'GitHub Actions', icon: Workflow, logo: 'githubactions' },
+      { name: 'Terraform', icon: Settings, logo: 'terraform' },
+      { name: 'Ansible', icon: Network, logo: 'ansible' }
+    ],
+    'Testing & Quality': [
+      { name: 'Jest', icon: CheckCircle, logo: 'jest' },
+      { name: 'Playwright', icon: Bug, logo: 'playwright' },
+      { name: 'Cypress', icon: Target, logo: 'cypress' },
+      { name: 'SonarQube', icon: Search, logo: 'sonarqube' },
+      { name: 'ESLint', icon: Shield, logo: 'eslint' },
+      { name: 'Prettier', icon: Palette, logo: 'prettier' }
+    ],
+    'AI & Analytics': [
+      { name: 'TensorFlow', icon: Cpu, logo: 'tensorflow' },
+      { name: 'PyTorch', icon: Bot, logo: 'pytorch' },
+      { name: 'Pandas', icon: BarChart3, logo: 'pandas' },
+      { name: 'Apache Spark', icon: Activity, logo: 'apachespark' },
+      { name: 'Apache Kafka', icon: Network, logo: 'apachekafka' },
+      { name: 'Grafana', icon: BarChart3, logo: 'grafana' }
+    ]
+  };
 
   const { ref, visibleItems } = useStaggeredAnimation(services.length, 150);
 
@@ -149,7 +234,7 @@ export default function EnhancedServices() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6 text-white"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -173,7 +258,7 @@ export default function EnhancedServices() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-20"
         >
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -223,6 +308,25 @@ export default function EnhancedServices() {
                       {service.description}
                     </CardDescription>
                     
+                    {/* Technology Icons for this service */}
+                    <motion.div 
+                      className="flex items-center justify-center gap-2 py-2"
+                      initial="hidden"
+                      animate={isVisible ? "visible" : "hidden"}
+                    >
+                      {service.techIcons.map((TechIcon, techIndex) => (
+                        <motion.div
+                          key={techIndex}
+                          className="p-2 bg-gradient-to-r from-gray-700/50 to-gray-600/50 rounded-lg"
+                          variants={featureVariants}
+                          custom={techIndex}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          <TechIcon className="w-4 h-4 text-neon" />
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                    
                     <motion.ul 
                       className="space-y-2"
                       initial="hidden"
@@ -255,7 +359,7 @@ export default function EnhancedServices() {
                         <Button 
                           size="sm" 
                           variant="outline"
-                          className="w-full border-gray-600 text-gray-300 hover:border-neon hover:text-neon hover:bg-neon/10 transition-all duration-300 group/btn"
+                          className="w-full border-gray-600 text-gray-300 hover:border-neon hover:text-neon hover:bg-neon/10 transition-all duration-300 group/btn btn-accessible"
                         >
                           Learn More
                           <motion.span
@@ -276,8 +380,105 @@ export default function EnhancedServices() {
           })}
         </motion.div>
 
+        {/* Technology Showcase with REAL Logos */}
         <motion.div 
-          className="text-center mt-12"
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h3 className="text-3xl font-bold text-center mb-12 text-white">
+            Technologies We <span className="text-neon">Master</span>
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Object.entries(technologyShowcase).map(([category, technologies], categoryIndex) => (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              >
+                <Card className="glass border-gray-700 hover:border-neon/30 transition-all duration-500 h-full">
+                  <CardHeader>
+                    <CardTitle className="text-lg text-white text-center">{category}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-3">
+                      {technologies.map((tech, techIndex) => (
+                        <motion.div
+                          key={techIndex}
+                          className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-lg hover:from-neon/10 hover:to-neon/20 transition-all duration-300 group cursor-pointer"
+                          whileHover={{ scale: 1.05 }}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: techIndex * 0.05 + categoryIndex * 0.1 }}
+                        >
+                          {/* Real Logo from techicons.dev */}
+                          <div className="w-5 h-5 flex items-center justify-center">
+                            <TechIcon 
+                              name={tech.name}
+                              logo={tech.logo}
+                              fallbackIcon={tech.icon}
+                              className="w-4 h-4"
+                            />
+                          </div>
+                          <span className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300 truncate">
+                            {tech.name}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Complete Technology Stack Grid with Real Logos */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h3 className="text-2xl font-bold text-center mb-8 text-white">
+            <span className="text-neon">48+ Technologies</span> We Work With
+          </h3>
+          
+          {/* Flat grid showing all technology logos */}
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-4">
+            {Object.values(technologyShowcase).flat().map((tech, index) => (
+              <motion.div
+                key={`${tech.name}-${index}`}
+                className="group p-3 glass rounded-lg border border-gray-700 hover:border-neon/50 transition-all duration-300 cursor-pointer aspect-square flex items-center justify-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.02 }}
+                title={tech.name}
+              >
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <TechIcon 
+                    name={tech.name}
+                    logo={tech.logo}
+                    fallbackIcon={tech.icon}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -286,7 +487,7 @@ export default function EnhancedServices() {
           <Link href="/services">
             <MotionButton 
               size="lg" 
-              className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+              className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 btn-accessible"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

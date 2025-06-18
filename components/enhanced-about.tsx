@@ -7,41 +7,21 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useCounterAnimation, useParallax } from '@/hooks/use-scroll-animation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EnhancedAbout() {
   const [isClient, setIsClient] = useState(false);
+  const { t } = useLanguage();
   
   const stats = [
-    { number: 500, label: 'Projects Delivered', icon: Rocket, suffix: '+' },
-    { number: 99.99, label: 'Uptime Guarantee', icon: Award, suffix: '%' },
-    { number: 50, label: 'Enterprise Clients', icon: Users, suffix: '+' },
-    { number: 24, label: 'Support Available', icon: Target, suffix: '/7' },
-  ];
-
-  const team = [
-    {
-      name: 'Alex Chen',
-      role: 'CEO & Founder',
-      bio: 'Former Google Cloud architect with 15+ years in distributed systems and cloud infrastructure.',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400'
-    },
-    {
-      name: 'Sarah Rodriguez',
-      role: 'CTO',
-      bio: 'Ex-AWS principal engineer specializing in serverless architectures and AI/ML operations.',
-      image: 'https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&w=400'
-    },
-    {
-      name: 'David Kim',
-      role: 'Head of DevOps',
-      bio: 'Kubernetes expert and CNCF ambassador, leading DevOps automation and infrastructure as code.',
-      image: 'https://images.pexels.com/photos/2102415/pexels-photo-2102415.jpeg?auto=compress&cs=tinysrgb&w=400'
-    }
+    { number: 500, label: t('about.stats.projects'), icon: Rocket, suffix: '+' },
+    { number: 99.99, label: t('about.stats.uptime'), icon: Award, suffix: '%' },
+    { number: 50, label: t('about.stats.clients'), icon: Users, suffix: '+' },
+    { number: 24, label: t('about.stats.support'), icon: Target, suffix: '/7' },
   ];
 
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation();
-  const { ref: teamRef, isVisible: teamVisible } = useScrollAnimation();
   const { ref: missionRef, isVisible: missionVisible } = useScrollAnimation();
   const { ref: parallaxRef, offset } = useParallax(0.3);
 
@@ -164,18 +144,18 @@ export default function EnhancedAbout() {
           animate={titleVisible ? "visible" : "hidden"}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6 text-white"
             variants={textRevealVariants}
             custom={0}
           >
-            Why Partner with <span className="text-neon">CloudFloo</span>
+            {t('about.title')}
           </motion.h2>
           <motion.p 
             className="text-xl text-gray-300 max-w-3xl mx-auto mb-12"
             variants={textRevealVariants}
             custom={1}
           >
-            We&apos;re more than a service provider—we&apos;re your strategic technology partner, committed to your long-term success through proven expertise and personalized solutions.
+            {t('about.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -227,128 +207,6 @@ export default function EnhancedAbout() {
           })}
         </motion.div>
 
-        {/* Team Section */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.h3 
-            className="text-3xl md:text-4xl font-bold mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Meet Your <span className="text-neon">Expert Team</span>
-          </motion.h3>
-          <motion.p 
-            className="text-lg text-gray-300 max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            Industry veterans dedicated to understanding your unique challenges and delivering tailored solutions
-          </motion.p>
-          
-          {/* Button to Team Page */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <Link href="/company/team">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mb-12"
-                >
-                  Meet Our Team
-                </Button>
-              </motion.div>
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        <motion.div 
-          ref={teamRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
-          variants={containerVariants}
-          initial="hidden"
-          animate={teamVisible ? "visible" : "hidden"}
-        >
-          {team.map((member, index) => (
-            <motion.div 
-              key={index} 
-              variants={itemVariants}
-              whileHover={{ 
-                y: -10,
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden">
-                <CardContent className="p-6 text-center">
-                  <motion.div 
-                    className="relative mb-4 mx-auto w-24 h-24 overflow-hidden rounded-full"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      initial={{ scale: 1.2 }}
-                      animate={{ scale: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-neon opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.2 }}
-                    />
-                  </motion.div>
-                  
-                  <motion.h4 
-                    className="text-xl font-semibold text-white mb-1"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={teamVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ delay: index * 0.2 + 0.3 }}
-                  >
-                    {member.name}
-                  </motion.h4>
-                  
-                  <motion.p 
-                    className="text-neon text-sm mb-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={teamVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ delay: index * 0.2 + 0.4 }}
-                  >
-                    {member.role}
-                  </motion.p>
-                  
-                  <motion.p 
-                    className="text-gray-300 text-sm leading-relaxed"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={teamVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ delay: index * 0.2 + 0.5 }}
-                  >
-                    {member.bio}
-                  </motion.p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-
         {/* Mission Statement */}
         <motion.div 
           ref={missionRef}
@@ -365,7 +223,7 @@ export default function EnhancedAbout() {
                 animate={missionVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Our Partnership Promise
+                {t('about.promise.title')}
               </motion.h3>
               <motion.p 
                 className="text-lg text-gray-300 leading-relaxed"
@@ -373,7 +231,7 @@ export default function EnhancedAbout() {
                 animate={missionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                We believe every business deserves a trusted technology partner who understands their unique journey. Through collaborative relationships and deep expertise, we empower organizations to harness the full potential of cloud technologies, ensuring sustainable growth and competitive advantage in an ever-evolving digital landscape.
+                {t('about.promise.description')}
               </motion.p>
             </CardContent>
           </Card>

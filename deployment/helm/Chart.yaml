@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cloudfloo
+description: A Helm chart for CloudFloo deployment
+version: 0.1.1
+appVersion: "1.0"

@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { Cloud, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Footer() {
   const footerLinks = {
@@ -13,7 +15,7 @@ export default function Footer() {
     ],
     Company: [
       { name: 'About Us', href: '/#about' },
-      { name: 'Our Team', href: '/company/team' },
+      { name: 'Our Team', href: '/team' },
       { name: 'Careers', href: '/company/careers' },
       { name: 'Blog', href: '/company/blog' },
       { name: 'Press', href: '/company/press' },
@@ -34,18 +36,39 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black/50 border-t border-gray-800">
-      <div className="container mx-auto px-6 py-12">
+    <footer className="bg-black/50 border-t border-gray-800" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+      <div className="container mx-auto px-6 py-12" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
             <div className="flex items-center space-x-2 mb-4">
-              <Cloud className="w-8 h-8 text-neon" />
-              <span className="text-xl font-bold text-neon">cloudfloo.io</span>
+              <div className="relative w-8 h-8">
+                <Image 
+                  src="/logo.png" 
+                  alt="CloudFloo Logo" 
+                  fill
+                  className="object-contain"
+                  sizes="32px"
+                />
+              </div>
+              <span className="text-xl font-bold text-neon" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>cloudfloo.io</span>
             </div>
-            <p className="text-gray-400 mb-6 max-w-md">
+            <p className="text-gray-400 mb-6 max-w-md" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               Empowering businesses with next-generation cloud solutions and AI-driven automation.
             </p>
+            
+            {/* Contact Information */}
+            <div className="mb-6 space-y-2" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+              <div className="text-sm text-gray-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Address:</strong><br />
+                <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Chmieleniec 17/69</span><br />
+                <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>30-348 Krakow, Poland</span>
+              </div>
+              <div className="text-sm text-gray-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Phone:</strong> <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>+48 728 963 591</span>
+              </div>
+            </div>
+            
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
@@ -67,14 +90,15 @@ export default function Footer() {
 
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-white font-semibold mb-4">{category}</h3>
-              <ul className="space-y-2">
+            <div key={category} style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+              <h3 className="text-white font-semibold mb-4" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{category}</h3>
+              <ul className="space-y-2" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                 {links.map((link, index) => (
-                  <li key={index}>
+                  <li key={index} style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                     <Link
                       href={link.href}
                       className="text-gray-400 hover:text-neon transition-colors duration-300 text-sm hover:translate-x-1 transform inline-block"
+                      style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}
                     >
                       {link.name}
                     </Link>
@@ -85,17 +109,21 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 CloudFloo.io. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <span className="text-sm text-gray-400">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
+            <p className="text-gray-400 text-sm" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+              © 2024 CloudFloo.io. All rights reserved.
+            </p>
+            <LanguageSwitcher />
+          </div>
+          
+          <div className="flex items-center space-x-6" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+            <span className="text-sm text-gray-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               Built with ❤️ using Next.js
             </span>
             <div className="flex items-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-400">All systems operational</span>
+              <span className="text-sm text-green-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>All systems operational</span>
             </div>
           </div>
         </div>

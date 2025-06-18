@@ -6,9 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "static": "next build && next export && next-sitemap",
     "lint": "next lint",
-    "clean": "rm -rf .next",
-    "test": "echo 'No tests yet' && mkdir -p coverage && echo 'mode: count' > coverage/coverage.txt"
+    "clean": "rm -rf .next out",
+    "test": "echo 'No tests yet' && mkdir -p coverage && echo 'mode: count' > coverage/coverage.txt",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "lighthouse": "lhci autorun",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -73,5 +79,11 @@
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.8.5",
+    "@lhci/cli": "^0.12.0",
+    "@playwright/test": "^1.40.1",
+    "next-sitemap": "^4.2.3"
   }
 }

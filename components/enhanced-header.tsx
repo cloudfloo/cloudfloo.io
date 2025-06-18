@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Menu, X, Cloud, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +15,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { usePathname } from 'next/navigation';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Create a motion-enabled Button component
 const MotionButton = motion(Button);
@@ -25,6 +27,7 @@ export default function EnhancedHeader() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   useEffect(() => {
     setHasMounted(true);
@@ -37,7 +40,7 @@ export default function EnhancedHeader() {
       // Only track active sections on homepage
       if (pathname === '/') {
         // Get all sections
-        const sections = ['home', 'services', 'about', 'projects', 'contact'];
+        const sections = ['home', 'services', 'about', 'team', 'projects', 'contact'];
         const sectionElements = sections.map(id => document.getElementById(id));
         
         // Find which section is currently in view
@@ -83,43 +86,44 @@ export default function EnhancedHeader() {
   };
 
   const navItems = [
-    { href: '#home', label: 'Home', id: 'home' },
-    { href: '#services', label: 'Services', id: 'services' },
-    { href: '#about', label: 'About', id: 'about' },
-    { href: '#projects', label: 'Projects', id: 'projects' },
-    { href: '#contact', label: 'Contact', id: 'contact' },
+    { href: '#home', label: t('navigation.home'), id: 'home' },
+    { href: '#services', label: t('navigation.services'), id: 'services' },
+    { href: '#about', label: t('navigation.about'), id: 'about' },
+    { href: '#team', label: t('navigation.team'), id: 'team' },
+    { href: '#projects', label: t('navigation.projects'), id: 'projects' },
+    { href: '#contact', label: t('navigation.contact'), id: 'contact' },
   ];
 
   const services = [
     {
-      title: 'Cloud Solutions',
+      title: t('services.cloudSolutions.title'),
       href: '/services/cloud-solutions',
-      description: 'Scalable cloud infrastructure and migration services'
+      description: t('services.cloudSolutions.description')
     },
     {
-      title: 'AI & Machine Learning',
+      title: t('services.aiAutomation.title'),
       href: '/services/ai-ml',
-      description: 'Intelligent automation and ML operations'
+      description: t('services.aiAutomation.description')
     },
     {
-      title: 'DevOps & Automation',
+      title: t('services.devops.title'),
       href: '/services/devops',
-      description: 'CI/CD pipelines and infrastructure automation'
+      description: t('services.devops.description')
     },
     {
-      title: 'Data Engineering',
+      title: t('services.dataEngineering.title'),
       href: '/services/data-engineering',
-      description: 'Data pipelines and analytics platforms'
+      description: t('services.dataEngineering.description')
     },
     {
-      title: 'Application Development',
+      title: t('services.appDevelopment.title'),
       href: '/services/app-development',
-      description: 'Custom web and mobile applications'
+      description: t('services.appDevelopment.description')
     },
     {
-      title: 'Edge Computing',
+      title: t('services.edgeComputing.title'),
       href: '/services/edge-computing',
-      description: 'Ultra-fast edge functions and CDN solutions'
+      description: t('services.edgeComputing.description')
     }
   ];
 
@@ -218,36 +222,17 @@ export default function EnhancedHeader() {
               className="relative"
             >
               <div className="w-12 h-12 relative overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center">
-                  <svg 
-                    viewBox="0 0 400 400" 
-                    className="w-10 h-10"
-                    style={{
-                      filter: 'drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))'
-                    }}
-                  >
-                    <defs>
-                      <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#00E5FF" />
-                        <stop offset="50%" stopColor="#3B82F6" />
-                        <stop offset="100%" stopColor="#FF00E0" />
-                      </linearGradient>
-                    </defs>
-                    
-                    <path
-                      d="M100 200 C100 150, 150 100, 200 100 C250 100, 300 150, 300 200 C350 200, 400 250, 400 300 C400 350, 350 400, 300 400 L100 400 C50 400, 0 350, 0 300 C0 250, 50 200, 100 200 Z"
-                      fill="url(#cloudGradient)"
-                      opacity="0.9"
-                    />
-                    
-                    <path
-                      d="M120 200 C120 180, 140 160, 160 160 C180 160, 200 180, 200 200 C200 180, 220 160, 240 160 C260 160, 280 180, 280 200 C280 220, 260 240, 240 240 C220 240, 200 220, 200 200 C200 220, 180 240, 160 240 C140 240, 120 220, 120 200 Z"
-                      fill="rgba(255, 255, 255, 0.8)"
-                      stroke="url(#cloudGradient)"
-                      strokeWidth="3"
-                    />
-                  </svg>
-                </div>
+                <Image 
+                  src="/logo.png" 
+                  alt="CloudFloo Logo" 
+                  fill
+                  className="object-contain"
+                  style={{
+                    filter: 'drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))'
+                  }}
+                  priority
+                  sizes="48px"
+                />
               </div>
             </motion.div>
             <motion.span 
@@ -281,7 +266,7 @@ export default function EnhancedHeader() {
                             onMouseEnter={() => setHoveredItem('services')}
                             onMouseLeave={() => setHoveredItem(null)}
                           >
-                            Services
+                            {t('navigation.services')}
                             <motion.span 
                               className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-neon transition-all duration-300 ${
                                 shouldShowUnderline('services') ? 'w-full' : 'w-0'
@@ -353,7 +338,7 @@ export default function EnhancedHeader() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Get Started
+                  {t('navigation.getStarted')}
                 </MotionButton>
               </button>
             </motion.div>
@@ -363,7 +348,7 @@ export default function EnhancedHeader() {
           <motion.button
             className="md:hidden text-white hover:text-neon transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={t('navigation.toggleMenu')}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -458,7 +443,7 @@ export default function EnhancedHeader() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Get Started
+                      {t('navigation.getStarted')}
                     </MotionButton>
                   </button>
                 </motion.div>
