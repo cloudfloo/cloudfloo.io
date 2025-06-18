@@ -60,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://cloudfloo.io" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,7 +71,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://techicons.dev" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <LanguageProvider>
           {children}
         </LanguageProvider>

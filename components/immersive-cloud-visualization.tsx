@@ -250,8 +250,8 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
 
   // Handle mouse movement
   const handleMouseMove = useCallback((event: MouseEvent) => {
-    mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouseRef.current.x = (event.clientX / window.innerWidth) * 6 - 1;
+    mouseRef.current.y = -(event.clientY / window.innerHeight) * 6 + 1;
   }, []);
 
   // Handle scroll
@@ -260,7 +260,7 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
     
     const scrollY = window.scrollY;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollProgress = Math.min(scrollY / (maxScroll * 0.3), 1);
+    const scrollProgress = Math.min(scrollY / (maxScroll * 1), 1);
     
     if (cloudRef.current.material instanceof THREE.ShaderMaterial) {
       cloudRef.current.material.uniforms.uScroll.value = scrollProgress;
@@ -282,9 +282,9 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
     }
 
     // QUICKER camera movement (increased speed)
-    cameraRef.current.position.x = Math.sin(time * 0.15) * 4; // 3x faster
-    cameraRef.current.position.y = Math.cos(time * 0.12) * 3; // 4x faster
-    cameraRef.current.position.z = 50 + Math.sin(time * 0.08) * 6; // 4x faster
+    cameraRef.current.position.x = Math.sin(time * 0.15) * 8; // 8x faster
+    cameraRef.current.position.y = Math.cos(time * 0.12) * 6; // 6x faster
+    cameraRef.current.position.z = 50 + Math.sin(time * 0.08) * 4; // 4x faster
     cameraRef.current.lookAt(0, 0, 0);
 
     // Render
@@ -303,6 +303,7 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
 
   // Initialize and cleanup
   useEffect(() => {
+    const mountNode = mountRef.current;
     const sceneData = initScene();
     if (!sceneData) return;
 
@@ -337,8 +338,8 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
       
       if (rendererRef.current) {
         rendererRef.current.dispose();
-        if (mountRef.current && rendererRef.current.domElement) {
-          mountRef.current.removeChild(rendererRef.current.domElement);
+        if (mountNode && rendererRef.current.domElement) {
+          mountNode.removeChild(rendererRef.current.domElement);
         }
       }
     };
@@ -350,7 +351,7 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
       className={`fixed inset-0 z-0 ${className}`}
       style={{ 
         width: '100vw', 
-        height: '1000vh',
+        height: '100vh',
         overflow: 'hidden'
       }}
     >

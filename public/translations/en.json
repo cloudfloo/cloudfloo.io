@@ -47,7 +47,7 @@
     "viewProfile": "View Profile"
   },
   "hero": {
-    "title": "Cloud-Native Software House from Poland",
+    "title": "<span class=\"text-neon\">Cloud-Native</span> Software House from Poland",
     "subtitle": "We deliver scalable micro-services, DevOps and frontend excellence.",
     "cta1": "Start Your Partnership",
     "cta2": "Explore Our Expertise",
@@ -97,7 +97,7 @@
     "learnMore": "Learn More"
   },
   "about": {
-    "title": "Why Partner with CloudFloo",
+    "title": "Why Partner with <span class=\"text-neon\">CloudFloo</span>",
     "subtitle": "We're more than a service provider—we're your strategic technology partner, committed to your long-term success through proven expertise and personalized solutions.",
     "stats": {
       "projects": "Projects Delivered",
@@ -142,7 +142,7 @@
     }
   },
   "projects": {
-    "title": "Featured Project",
+    "title": "Featured <span class=\"text-neon\">Project</span>",
     "subtitle": "Enterprise-grade solution showcasing advanced software engineering principles",
     "viewDetails": "View Full Project Details",
     "viewDemo": "View Live Demo",
@@ -224,7 +224,7 @@
     "legal": "Legal",
     "builtWith": "Built with ❤️ using Next.js",
     "systemsOperational": "All systems operational",
-    "copyright": "© 2024 CloudFloo.io. All rights reserved.",
+    "copyright": "© 2025 CloudFloo.io. All rights reserved.",
     "language": "Language",
     "selectLanguage": "Select language"
   },

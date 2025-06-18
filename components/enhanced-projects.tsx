@@ -15,7 +15,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function EnhancedProjects() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, isLoaded } = useLanguage();
 
   const project = {
     id: 1,
@@ -34,7 +34,7 @@ This enterprise solution demonstrates advanced software engineering principles w
     ],
     customer: {
       name: 'HSK Data Ltd. Sp. z o.o.',
-      logo: '/hsk-new.png'
+      logo: '/hsk.png'
     },
     technologies: {
       backend: ['NestJS', 'TypeORM', 'PostgreSQL', 'Docker', 'Kubernetes'],
@@ -107,8 +107,9 @@ This enterprise solution demonstrates advanced software engineering principles w
     return iconMap[tech] || Code2;
   };
 
+  // Unified rendering for SSR and client
   return (
-    <section id="projects" className="py-20 relative overflow-hidden scroll-offset">
+    <section id="projects" className="py-20 relative overflow-hidden scroll-offset" suppressHydrationWarning>
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
@@ -123,9 +124,8 @@ This enterprise solution demonstrates advanced software engineering principles w
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {t('projects.title')}
-          </motion.h2>
+            dangerouslySetInnerHTML={{ __html: t('projects.title') }}
+          />
           <motion.p 
             className="text-xl text-gray-300 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}

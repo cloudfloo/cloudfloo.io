@@ -11,7 +11,7 @@ import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EnhancedContact() {
-  const { t } = useLanguage();
+  const { t, isLoaded } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

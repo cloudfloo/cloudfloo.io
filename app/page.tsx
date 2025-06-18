@@ -1,4 +1,4 @@
-import EnhancedHeader from '@/components/enhanced-header';
+import EnhancedHeader from '@/components/enhanced-header-fixed';
 import Hero from '@/components/hero';
 import EnhancedServices from '@/components/enhanced-services';
 import EnhancedAbout from '@/components/enhanced-about';

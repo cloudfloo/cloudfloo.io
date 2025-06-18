@@ -48,7 +48,7 @@ export default function Footer() {
                   alt="CloudFloo Logo" 
                   fill
                   className="object-contain"
-                  sizes="32px"
+                  sizes="64px"
                 />
               </div>
               <span className="text-xl font-bold text-neon" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>cloudfloo.io</span>
@@ -112,7 +112,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
           <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
             <p className="text-gray-400 text-sm" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              © 2024 CloudFloo.io. All rights reserved.
+              © 2025 CloudFloo.io. All rights reserved.
             </p>
             <LanguageSwitcher />
           </div>

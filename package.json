@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "static": "next build && next export && next-sitemap",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "clean": "rm -rf .next out",
     "test": "echo 'No tests yet' && mkdir -p coverage && echo 'mode: count' > coverage/coverage.txt",
     "test:e2e": "playwright test",

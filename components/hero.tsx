@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useEffect, useState, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
@@ -18,7 +17,7 @@ export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
-  const { t } = useLanguage();
+  const { t, isLoaded } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -54,15 +53,17 @@ export default function Hero() {
     }
   };
 
+  // Unified rendering for SSR and client
   return (
     <section 
       ref={heroRef}
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden scroll-offset"
+      suppressHydrationWarning
     >
       {/* Immersive Cloud Visualization */}
-      <ImmersiveCloudVisualization />
-
+      {mounted && <ImmersiveCloudVisualization />}
+      
       {/* Enhanced overlay for better text readability */}
       <div className="absolute inset-0 z-10">
         <div 
@@ -89,9 +90,10 @@ export default function Hero() {
           
           {/* Main H1 Title */}
           <div className="mb-8 relative">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white">
-              {t('hero.title')}
-            </h1>
+            <h1
+              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white"
+              dangerouslySetInnerHTML={{ __html: t('hero.title') }}
+            />
           </div>
           
           {/* H2 Subtitle */}
@@ -113,27 +115,25 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <button onClick={() => smoothScrollTo('contact')}>
-              <Button 
-                size="lg" 
-                className="group relative bg-gradient-neon text-white px-8 py-4 text-lg font-semibold btn-accessible hover:scale-105 transition-transform duration-200"
-              >
-                <span className="relative z-10 flex items-center">
-                  {t('hero.cta1')}
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-2" />
-                </span>
-              </Button>
-            </button>
-            
-            <button onClick={() => smoothScrollTo('services')}>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-cyan-400 text-white bg-black/50 hover:bg-cyan-400/20 px-8 py-4 text-lg font-semibold btn-accessible hover:scale-105 transition-all duration-200"
-              >
-                {t('hero.cta2')}
-              </Button>
-            </button>
+            <Button
+              onClick={() => smoothScrollTo('contact')}
+              size="lg"
+              className="group relative bg-gradient-neon text-white px-8 py-4 text-lg font-semibold btn-accessible hover:scale-105 transition-transform duration-200"
+            >
+              <span className="relative z-10 flex items-center">
+                {t('hero.cta1')}
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-2" />
+              </span>
+            </Button>
+
+            <Button
+              onClick={() => smoothScrollTo('services')}
+              size="lg"
+              variant="outline"
+              className="border-2 border-cyan-400 text-white bg-black/50 hover:bg-cyan-400/20 px-8 py-4 text-lg font-semibold btn-accessible hover:scale-105 transition-all duration-200"
+            >
+              {t('hero.cta2')}
+            </Button>
           </motion.div>
         </motion.div>
       </div>

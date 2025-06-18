@@ -11,12 +11,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EnhancedAbout() {
   const [isClient, setIsClient] = useState(false);
-  const { t } = useLanguage();
+  const { t, isLoaded } = useLanguage();
   
   const stats = [
-    { number: 500, label: t('about.stats.projects'), icon: Rocket, suffix: '+' },
+    { number: 5, label: t('about.stats.projects'), icon: Rocket, suffix: '+' },
     { number: 99.99, label: t('about.stats.uptime'), icon: Award, suffix: '%' },
-    { number: 50, label: t('about.stats.clients'), icon: Users, suffix: '+' },
+    { number: 3, label: t('about.stats.clients'), icon: Users, suffix: '+' },
     { number: 24, label: t('about.stats.support'), icon: Target, suffix: '/7' },
   ];
 
@@ -147,9 +147,8 @@ export default function EnhancedAbout() {
             className="text-4xl md:text-5xl font-bold mb-6 text-white"
             variants={textRevealVariants}
             custom={0}
-          >
-            {t('about.title')}
-          </motion.h2>
+            dangerouslySetInnerHTML={{ __html: t('about.title') }}
+          />
           <motion.p 
             className="text-xl text-gray-300 max-w-3xl mx-auto mb-12"
             variants={textRevealVariants}

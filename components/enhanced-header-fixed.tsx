@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -27,8 +27,9 @@ export default function EnhancedHeader() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, isLoaded } = useLanguage();
 
+  // Fix hydration issues by only enabling client-side features after mount
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -38,7 +39,7 @@ export default function EnhancedHeader() {
       setIsScrolled(window.scrollY > 50);
       
       // Only track active sections on homepage
-      if (pathname === '/') {
+      if (pathname === '/' && hasMounted) {
         // Get all sections
         const sections = ['home', 'services', 'about', 'team', 'projects', 'contact'];
         const sectionElements = sections.map(id => document.getElementById(id));
@@ -56,14 +57,22 @@ export default function EnhancedHeader() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    if (hasMounted) {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial check
+    }
     
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+    return () => {
+      if (hasMounted) {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [pathname, hasMounted]);
 
   // Smooth scroll function
   const smoothScrollTo = (elementId: string) => {
+    if (!hasMounted) return;
+    
     // If we're not on the homepage, navigate there first
     if (pathname !== '/') {
       window.location.href = `/#${elementId}`;
@@ -190,6 +199,8 @@ export default function EnhancedHeader() {
 
   // Function to determine if a nav item should show underline
   const shouldShowUnderline = (itemId: string) => {
+    if (!hasMounted) return false;
+    
     // On homepage, show underline for active section or hovered item
     if (pathname === '/') {
       return hoveredItem === itemId || (hoveredItem === null && activeSection === itemId);
@@ -198,52 +209,63 @@ export default function EnhancedHeader() {
     return hoveredItem === itemId;
   };
 
+  // If client-side hydration hasn't happened yet, return a simple version without interactive elements
+  if (!hasMounted) {
+    return (
+      <header className="fixed top-0 w-full z-50 bg-transparent">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 relative"></div>
+              <span className="text-xl font-bold text-white">cloudfloo.io</span>
+            </div>
+            <div className="hidden md:block">
+              <div className="flex space-x-6">
+                {/* Static placeholders for nav items */}
+              </div>
+            </div>
+            <div className="md:hidden">
+              <div className="w-6 h-6"></div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    );
+  }
+
+  // Full interactive version after hydration
   return (
     <motion.header
       variants={headerVariants}
       initial="initial"
       animate="animate"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        hasMounted && isScrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
+        isScrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
       }`}
-      style={hasMounted && isScrolled ? headerVariants.scrolled : {}}
+      style={isScrolled ? headerVariants.scrolled : {}}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <button 
-            onClick={() => smoothScrollTo('home')}
-            className="flex items-center space-x-3 group cursor-pointer"
-          >
-            <motion.div
-              variants={logoVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-              className="relative"
-            >
-              <div className="w-12 h-12 relative overflow-hidden">
-                <Image 
-                  src="/logo.png" 
-                  alt="CloudFloo Logo" 
-                  fill
-                  className="object-contain"
-                  style={{
-                    filter: 'drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))'
-                  }}
-                  priority
-                  sizes="48px"
-                />
-              </div>
-            </motion.div>
-            <motion.span 
-              className="text-xl font-bold text-white group-hover:text-neon transition-colors duration-300"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.3 }}
+          <Link href="/" onClick={(e) => {
+            e.preventDefault();
+            smoothScrollTo('home');
+          }} className="flex items-center space-x-3 group cursor-pointer">
+            <Image
+              src="/logo.png"
+              alt="CloudFloo Logo"
+              width={64}
+              height={64}
+              className="w-12 h-12"
+            />
+             <motion.span 
+               className="text-xl font-bold text-white group-hover:text-neon transition-colors duration-700"
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ delay: 0.4, duration: 0.7 }}
             >
               cloudfloo.io
             </motion.span>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -275,7 +297,7 @@ export default function EnhancedHeader() {
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
                             <div className="grid w-[600px] grid-cols-2 gap-3 p-6 glass backdrop-blur-md border border-gray-700">
-                              {services.map((service, serviceIndex) => (
+                              {services.map((service) => (
                                 <NavigationMenuLink key={service.href} asChild>
                                   <Link
                                     href={service.href}
@@ -327,130 +349,69 @@ export default function EnhancedHeader() {
               </NavigationMenuList>
             </NavigationMenu>
             
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.3 }}
+            <MotionButton 
+              onClick={() => smoothScrollTo('contact')}
+              className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <button onClick={() => smoothScrollTo('contact')}>
-                <MotionButton 
-                  className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {t('navigation.getStarted')}
-                </MotionButton>
-              </button>
-            </motion.div>
+              {t('navigation.getStarted')}
+            </MotionButton>
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
+          <button
             className="md:hidden text-white hover:text-neon transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={t('navigation.toggleMenu')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            <AnimatePresence mode="wait">
-              {isMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-6 h-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="md:hidden mt-4 glass rounded-lg p-6 overflow-hidden"
-            >
-              <div className="space-y-4">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    variants={navItemVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={index}
-                  >
-                    <button
-                      onClick={() => smoothScrollTo(item.id)}
-                      className={`block text-gray-300 hover:text-neon transition-colors duration-300 py-2 w-full text-left ${
-                        pathname === '/' && activeSection === item.id ? 'text-neon' : ''
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  </motion.div>
-                ))}
-                
-                {/* Mobile Services Menu */}
-                <motion.div
-                  variants={navItemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={navItems.length}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 glass rounded-lg p-6 overflow-hidden">
+            <div className="space-y-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => smoothScrollTo(item.id)}
+                  className={`block text-gray-300 hover:text-neon transition-colors duration-300 py-2 w-full text-left ${
+                    pathname === '/' && activeSection === item.id ? 'text-neon' : ''
+                  }`}
                 >
-                  <div className="py-2">
-                    <div className="pl-4 space-y-2">
-                      {services.map((service) => (
-                        <Link
-                          key={service.href}
-                          href={service.href}
-                          className="block text-sm text-gray-400 hover:text-neon transition-colors duration-300 py-1"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {service.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div
-                  variants={navItemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={navItems.length + 1}
-                >
-                  <button onClick={() => smoothScrollTo('contact')}>
-                    <MotionButton 
-                      className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                  {item.label}
+                </button>
+              ))}
+              
+              {/* Mobile Services Menu */}
+              <div className="py-2">
+                <div className="pl-4 space-y-2">
+                  {services.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="block text-sm text-gray-400 hover:text-neon transition-colors duration-300 py-1"
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      {t('navigation.getStarted')}
-                    </MotionButton>
-                  </button>
-                </motion.div>
+                      {service.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              
+              <MotionButton 
+                onClick={() => smoothScrollTo('contact')}
+                className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {t('navigation.getStarted')}
+              </MotionButton>
+            </div>
+          </div>
+        )}
       </nav>
     </motion.header>
   );

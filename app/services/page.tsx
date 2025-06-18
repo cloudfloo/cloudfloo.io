@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, Cloud, Bot, Settings, Database, Code, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,11 +23,14 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
   }
 
   return (
-    <img
+    <Image
       src={`https://techicons.dev/icons/${logo}.svg`}
       alt={name}
       className={className}
       onError={() => setImageError(true)}
+      width={24}
+      height={24}
+      unoptimized
     />
   );
 }
@@ -158,9 +162,9 @@ export default function ServicesPage() {
   };
 
   const stats = [
-    { number: '500+', label: 'Projects Delivered', icon: Target },
+    { number: '5+', label: 'Projects Delivered', icon: Target },
     { number: '99.99%', label: 'Uptime Guarantee', icon: Shield },
-    { number: '50+', label: 'Enterprise Clients', icon: Globe },
+    { number: '3+', label: 'Enterprise Clients', icon: Globe },
     { number: '24/7', label: 'Support Available', icon: Activity }
   ];
 
@@ -334,26 +338,6 @@ export default function ServicesPage() {
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-
-          {/* Flat grid showing all technology logos */}
-          <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-4">
-            {Object.values(technologyStack).flat().map((tech, index) => (
-              <div
-                key={`${tech.name}-${index}`}
-                className="group p-3 glass rounded-lg border border-gray-700 hover:border-neon/50 transition-all duration-300 cursor-pointer aspect-square flex items-center justify-center"
-                title={`${tech.name} - ${tech.category}`}
-              >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <TechIcon 
-                    name={tech.name}
-                    logo={tech.logo}
-                    fallbackIcon={tech.icon}
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-              </div>
             ))}
           </div>
         </div>

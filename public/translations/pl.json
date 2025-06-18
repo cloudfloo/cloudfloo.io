@@ -47,7 +47,7 @@
     "viewProfile": "Zobacz profil"
   },
   "hero": {
-    "title": "Cloud-Native Software House z Polski",
+    "title": "<span class=\"text-neon\">Cloud-Native</span> Software House z Polski",
     "subtitle": "Dostarczamy skalowalne mikroserwisy, DevOps i doskonałość frontend.",
     "cta1": "Rozpocznij partnerstwo",
     "cta2": "Poznaj naszą ekspertyzę",
@@ -97,7 +97,7 @@
     "learnMore": "Dowiedz się więcej"
   },
   "about": {
-    "title": "Dlaczego warto współpracować z CloudFloo",
+    "title": "Dlaczego warto współpracować z <span class=\"text-neon\">CloudFloo</span>",
     "subtitle": "Jesteśmy więcej niż dostawcą usług — jesteśmy Twoim strategicznym partnerem technologicznym, zaangażowanym w Twój długoterminowy sukces poprzez sprawdzoną ekspertyzę i spersonalizowane rozwiązania.",
     "stats": {
       "projects": "Dostarczonych projektów",
@@ -142,7 +142,7 @@
     }
   },
   "projects": {
-    "title": "Wyróżniony projekt",
+    "title": "Wyróżniony <span class=\"text-neon\">projekt</span>",
     "subtitle": "Rozwiązanie klasy enterprise prezentujące zaawansowane zasady inżynierii oprogramowania",
     "viewDetails": "Zobacz pełne szczegóły projektu",
     "viewDemo": "Zobacz demo na żywo",

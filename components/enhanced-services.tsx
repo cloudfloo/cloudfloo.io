@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Cloud, Code, Bot, Settings, Database, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useStaggeredAnimation } from '@/hooks/use-scroll-animation';
@@ -26,12 +27,15 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
   }
 
   return (
-    <img
+    <Image
       src={`https://techicons.dev/icons/${logo}.svg`}
       alt={name}
       className={`group-hover:scale-110 transition-transform duration-300 ${className}`}
       onError={() => setImageError(true)}
       loading="lazy"
+      width={24}
+      height={24}
+      unoptimized
     />
   );
 }
@@ -437,63 +441,6 @@ export default function EnhancedServices() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Complete Technology Stack Grid with Real Logos */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3 className="text-2xl font-bold text-center mb-8 text-white">
-            <span className="text-neon">48+ Technologies</span> We Work With
-          </h3>
-          
-          {/* Flat grid showing all technology logos */}
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-4">
-            {Object.values(technologyShowcase).flat().map((tech, index) => (
-              <motion.div
-                key={`${tech.name}-${index}`}
-                className="group p-3 glass rounded-lg border border-gray-700 hover:border-neon/50 transition-all duration-300 cursor-pointer aspect-square flex items-center justify-center"
-                whileHover={{ scale: 1.1, y: -5 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.02 }}
-                title={tech.name}
-              >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <TechIcon 
-                    name={tech.name}
-                    logo={tech.logo}
-                    fallbackIcon={tech.icon}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Link href="/services">
-            <MotionButton 
-              size="lg" 
-              className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 btn-accessible"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Discuss Your Project
-            </MotionButton>
-          </Link>
         </motion.div>
       </div>
     </section>
