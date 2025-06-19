@@ -78,6 +78,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: [lighthouse, accessibility]
+    if: always()
     permissions:
       packages: write
     steps:
