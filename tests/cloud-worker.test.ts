@@ -21,6 +21,23 @@ test('init handles undefined canvas gracefully', async () => {
   await expect(init(undefined as any, 100, 100)).resolves.toBeUndefined();
 });
 
+test('init creates fallback canvas when OffscreenCanvas exists', async () => {
+  class DummyOffscreen {
+    width: number;
+    height: number;
+    constructor(w: number, h: number) {
+      this.width = w;
+      this.height = h;
+    }
+    getContext() {
+      return {} as any;
+    }
+  }
+  (globalThis as any).OffscreenCanvas = DummyOffscreen as any;
+  await expect(init(undefined as any, 50, 50)).resolves.toBeUndefined();
+  delete (globalThis as any).OffscreenCanvas;
+});
+
 test('resize before init does nothing', () => {
   expect(() => resize(100, 100)).not.toThrow();
 });

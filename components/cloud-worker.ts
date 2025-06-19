@@ -198,8 +198,17 @@ function animate() {
 
 async function init(canvas: OffscreenCanvas | undefined, width: number, height: number) {
   if (!canvas) {
-    console.error('Worker init called without an OffscreenCanvas');
-    return;
+    if (typeof (self as any).OffscreenCanvas === 'function') {
+      try {
+        canvas = new (self as any).OffscreenCanvas(width, height);
+      } catch (err) {
+        console.error('Failed to create fallback OffscreenCanvas', err);
+        return;
+      }
+    } else {
+      console.error('Worker init called without an OffscreenCanvas');
+      return;
+    }
   }
 
   scene = new THREE.Scene();
