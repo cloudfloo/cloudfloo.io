@@ -3,6 +3,7 @@
 import { Users, Target, Award, Rocket } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 
 export default function About() {
   const stats = [
@@ -81,6 +82,9 @@ export default function About() {
                   height={256}
                   className="w-full h-64 object-cover rounded-lg"
                   unoptimized
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={placeholders[member.image] ?? DEFAULT_BLUR}
                 />
                 <div className="absolute inset-0 bg-gradient-neon opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </div>

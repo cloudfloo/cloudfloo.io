@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -35,6 +36,8 @@ export default function TeamCard({ person }: TeamCardProps) {
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={placeholders[person.image] ?? DEFAULT_BLUR}
                 />
               </motion.div>
               

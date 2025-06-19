@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { ArrowLeft, Cloud, Bot, Settings, Database, Code, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,9 +29,12 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
       alt={name}
       className={className}
       onError={() => setImageError(true)}
+      placeholder="blur"
+      blurDataURL={DEFAULT_BLUR}
       width={24}
       height={24}
       unoptimized
+      loading="lazy"
     />
   );
 }

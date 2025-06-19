@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageCarouselProps {
@@ -47,6 +48,8 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
               loading="lazy"
+              placeholder="blur"
+              blurDataURL={placeholders[images[currentIndex]] ?? DEFAULT_BLUR}
             />
           </motion.div>
         </AnimatePresence>

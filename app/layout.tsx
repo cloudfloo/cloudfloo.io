@@ -5,6 +5,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import Analytics from "@/components/Analytics";
 export const metadata: Metadata = {
   title: 'CloudFloo | Polish Cloud-Native Software House & DevOps Agency',
   description: 'CloudFloo is a senior team of Polish engineers building cloud-native, micro-service, and DevOps solutions in NestJS, React, and Kubernetes.',
@@ -76,6 +77,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <LanguageProvider>
           {children}
+          <Analytics />
         </LanguageProvider>
       </body>
     </html>
