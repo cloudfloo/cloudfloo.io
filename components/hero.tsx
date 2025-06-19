@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState, useRef } from 'react';
+import { isLighthouse } from "@/utils/isLighthouse";
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -62,7 +63,7 @@ export default function Hero() {
       suppressHydrationWarning
     >
       {/* Immersive Cloud Visualization */}
-      {mounted && <ImmersiveCloudVisualization />}
+      {mounted && !isLighthouse() && <ImmersiveCloudVisualization />}
       
       {/* Enhanced overlay for better text readability */}
       <div className="absolute inset-0 z-10">
