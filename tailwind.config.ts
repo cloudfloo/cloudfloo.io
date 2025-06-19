@@ -3,9 +3,33 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   darkMode: ['class'],
   content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './hooks/**/*.{js,ts,jsx,tsx,mdx}',
+    './contexts/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  safelist: [
+    'bg-neon/20',
+    'text-neon',
+    'border',
+    'border-neon/30',
+    'text-gray-300',
+    'hover:bg-white/10',
+    'hover:text-white',
+    'from-blue-500',
+    'to-cyan-500',
+    'from-purple-500',
+    'to-pink-500',
+    'from-orange-500',
+    'to-red-500',
+    'from-indigo-500',
+    'to-blue-500',
+    'from-green-500',
+    'to-emerald-500',
+    'from-teal-500',
+    'to-green-500'
   ],
   theme: {
     extend: {
@@ -85,6 +109,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };
 export default config;
