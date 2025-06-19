@@ -206,10 +206,22 @@ async function init(canvas: OffscreenCanvas | undefined, width: number, height: 
   camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
   camera.position.set(0, 0, 50);
 
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min((self as any).devicePixelRatio || 1, 2));
-  renderer.setClearColor(0x000000, 0);
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    if (renderer.domElement) {
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min((self as any).devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x000000, 0);
+    } else {
+      console.error('WebGLRenderer created without a canvas');
+      renderer = undefined;
+      return;
+    }
+  } catch (err) {
+    console.error('Failed to create WebGLRenderer', err);
+    renderer = undefined;
+    return;
+  }
 
   cloud = await createCloudSystem();
   scene.add(cloud);
@@ -221,7 +233,7 @@ function resize(width: number, height: number) {
   if (!camera || !renderer) return;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  if (renderer) {
+  if (renderer && (renderer as any).domElement) {
     renderer.setSize(width, height);
   }
 }
@@ -259,3 +271,6 @@ self.onmessage = (event: MessageEvent) => {
       break;
   }
 };
+
+// Export functions for unit testing
+export { init, resize, dispose };
