@@ -74,7 +74,7 @@ export default function FAQSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6 text-white"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

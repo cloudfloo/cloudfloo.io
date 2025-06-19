@@ -1,0 +1,235 @@
+{
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces",
+    "close": "Zamknij",
+    "open": "Otwórz",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "submit": "Wyślij",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "view": "Zobacz",
+    "download": "Pobierz",
+    "upload": "Prześlij",
+    "search": "Szukaj",
+    "filter": "Filtruj",
+    "sort": "Sortuj",
+    "next": "Następny",
+    "previous": "Poprzedni",
+    "home": "Strona główna",
+    "about": "O nas",
+    "services": "Usługi",
+    "team": "Zespół",
+    "projects": "Projekty",
+    "contact": "Kontakt",
+    "blog": "Blog",
+    "careers": "Kariera",
+    "press": "Prasa",
+    "privacy": "Polityka prywatności",
+    "terms": "Regulamin",
+    "cookies": "Polityka cookies",
+    "gdpr": "Zgodność z RODO"
+  },
+  "navigation": {
+    "home": "Strona główna",
+    "services": "Usługi",
+    "about": "O nas",
+    "team": "Nasz zespół",
+    "projects": "Projekty",
+    "contact": "Kontakt",
+    "getStarted": "Rozpocznij",
+    "backToHome": "Powrót do strony głównej",
+    "backToTeam": "Powrót do zespołu",
+    "toggleMenu": "Przełącz menu",
+    "viewFullProfile": "Zobacz pełny profil",
+    "viewProfile": "Zobacz profil"
+  },
+  "hero": {
+    "title": "<span class=\"text-neon\">Cloud-Native</span> Software House z Polski",
+    "subtitle": "Dostarczamy skalowalne mikroserwisy, DevOps i doskonałość frontend.",
+    "cta1": "Rozpocznij partnerstwo",
+    "cta2": "Poznaj naszą ekspertyzę",
+    "scrollIndicator": "Przewiń do następnej sekcji"
+  },
+  "services": {
+    "title": "Ekspertowe rozwiązania dostosowane do Twoich potrzeb",
+    "subtitle": "Kompleksowe usługi technologiczne zaprojektowane wokół potrzeb Twojego biznesu, dostarczane przez doświadczonych profesjonalistów, którzy rozumieją wyzwania Twojej branży.",
+    "technologiesMaster": "Technologie, które opanowaliśmy",
+    "technologiesCount": "48+ technologii, z którymi pracujemy",
+    "discussProject": "Omów swój projekt",
+    "cloudSolutions": {
+      "title": "Strategiczne doradztwo chmurowe",
+      "description": "Eksperckie wskazówki dostosowane do celów Twojego biznesu, zapewniające optymalną architekturę chmury i płynne strategie migracji.",
+      "features": ["Projektowanie architektury", "Planowanie migracji", "Optymalizacja kosztów", "Ocena bezpieczeństwa"]
+    },
+    "appDevelopment": {
+      "title": "Niestandardowe tworzenie aplikacji",
+      "description": "Skalowalne, nowoczesne aplikacje zbudowane z myślą o Twoich konkretnych wymaganiach, wykorzystujące najnowocześniejsze technologie.",
+      "features": ["Rozwój Full-Stack", "Integracja API", "Optymalizacja wydajności", "Responsywny design"]
+    },
+    "aiAutomation": {
+      "title": "Inteligentna automatyzacja",
+      "description": "Rozwiązania oparte na AI, które usprawniają operacje i zwiększają produktywność poprzez inteligentną automatyzację przepływów pracy.",
+      "features": ["Automatyzacja procesów", "Integracja AI", "Optymalizacja przepływów pracy", "Analityka predykcyjna"]
+    },
+    "devops": {
+      "title": "Doskonałość DevOps",
+      "description": "Kompleksowe praktyki DevOps, które przyspieszają dostarczanie przy zachowaniu niezawodności i bezpieczeństwa.",
+      "features": ["Implementacja CI/CD", "Infrastruktura jako kod", "Monitorowanie i alerty", "Integracja bezpieczeństwa"]
+    },
+    "dataEngineering": {
+      "title": "Rozwiązania inżynierii danych",
+      "description": "Przekształć surowe dane w praktyczne spostrzeżenia dzięki solidnym potokom i zaawansowanym platformom analitycznym.",
+      "features": ["Projektowanie potoków danych", "Przetwarzanie w czasie rzeczywistym", "Platformy analityczne", "Zarządzanie danymi"]
+    },
+    "mlOps": {
+      "title": "Operacje ML",
+      "description": "Kompleksowe zarządzanie cyklem życia uczenia maszynowego, od rozwoju modelu do wdrożenia produkcyjnego.",
+      "features": ["Rozwój modeli", "Automatyczne szkolenie", "Monitorowanie wydajności", "Skalowalne wdrażanie"]
+    },
+    "edgeComputing": {
+      "title": "Obliczenia brzegowe",
+      "description": "Ultraszybkie, globalnie rozproszone rozwiązania, które przybliżają obliczenia do użytkowników dla optymalnej wydajności.",
+      "features": ["Globalna dystrybucja", "Niskie opóźnienia", "Automatyczne skalowanie", "Optymalizacja brzegowa"]
+    },
+    "learnMore": "Dowiedz się więcej"
+  },
+  "about": {
+    "title": "Dlaczego warto współpracować z <span class=\"text-neon\">CloudFloo</span>",
+    "subtitle": "Jesteśmy więcej niż dostawcą usług — jesteśmy Twoim strategicznym partnerem technologicznym, zaangażowanym w Twój długoterminowy sukces poprzez sprawdzoną ekspertyzę i spersonalizowane rozwiązania.",
+    "stats": {
+      "projects": "Dostarczonych projektów",
+      "uptime": "Gwarancja dostępności",
+      "clients": "Klientów korporacyjnych",
+      "support": "Dostępne wsparcie"
+    },
+    "promise": {
+      "title": "Nasza obietnica partnerstwa",
+      "description": "Wierzymy, że każdy biznes zasługuje na zaufanego partnera technologicznego, który rozumie jego unikalną podróż. Poprzez współpracę i głęboką ekspertyzę, umożliwiamy organizacjom wykorzystanie pełnego potencjału technologii chmurowych, zapewniając zrównoważony wzrost i przewagę konkurencyjną w ciągle ewoluującym krajobrazie cyfrowym."
+    }
+  },
+  "team": {
+    "title": "Poznaj nasz zespół ekspertów",
+    "subtitle": "Weterani branży z głęboką ekspertyzą i pasją do innowacji. Nie jesteśmy tylko dostawcami usług — jesteśmy Twoimi strategicznymi partnerami technologicznymi.",
+    "stats": {
+      "experience": "Lat łącznego doświadczenia",
+      "engineers": "Seniorskich inżynierów",
+      "projectsDelivered": "Dostarczonych projektów"
+    },
+    "keyExpertise": "Kluczowa ekspertyza",
+    "philosophy": {
+      "title": "Nasza filozofia",
+      "technicalExcellence": {
+        "title": "Doskonałość techniczna",
+        "description": "Wierzymy w pisanie czystego, łatwego w utrzymaniu kodu i przestrzeganie najlepszych praktyk branżowych w celu dostarczania solidnych rozwiązań."
+      },
+      "continuousLearning": {
+        "title": "Ciągłe uczenie się",
+        "description": "Technologia szybko ewoluuje, a my wyprzedzamy konkurencję, ciągle ucząc się i dostosowując do nowych narzędzi i metodologii."
+      },
+      "clientPartnership": {
+        "title": "Partnerstwo z klientem",
+        "description": "Pracujemy jako prawdziwi partnerzy, rozumiejąc cele Twojego biznesu i dostarczając rozwiązania, które przynoszą rzeczywistą wartość."
+      }
+    },
+    "cta": {
+      "title": "Gotowy do pracy z naszym zespołem?",
+      "subtitle": "Porozmawiajmy o tym, jak nasza ekspertyza może pomóc przyspieszyć Twoją transformację cyfrową.",
+      "startProject": "Rozpocznij swój projekt",
+      "joinTeam": "Dołącz do naszego zespołu"
+    }
+  },
+  "projects": {
+    "title": "Wyróżniony <span class=\"text-neon\">projekt</span>",
+    "subtitle": "Rozwiązanie klasy enterprise prezentujące zaawansowane zasady inżynierii oprogramowania",
+    "viewDetails": "Zobacz pełne szczegóły projektu",
+    "viewDemo": "Zobacz demo na żywo",
+    "viewSource": "Zobacz kod źródłowy",
+    "client": "Klient",
+    "overview": "Przegląd projektu",
+    "techStack": "Stos technologiczny",
+    "keyFeatures": "Kluczowe funkcje",
+    "achievements": "Kluczowe osiągnięcia",
+    "practices": "Praktyki rozwoju",
+    "clickDetails": "Kliknij gdziekolwiek, aby zobaczyć pełne szczegóły"
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "subtitle": "Uzyskaj odpowiedzi na najczęstsze pytania dotyczące naszych usług i procesów",
+    "tableOfContents": "Wszystko, co musisz wiedzieć",
+    "questions": {
+      "cloudPlatforms": {
+        "question": "Jakie platformy chmurowe obsługujecie?",
+        "answer": "Obsługujemy wszystkie główne platformy chmurowe, w tym AWS, Google Cloud Platform, Microsoft Azure i rozwiązania chmury hybrydowej. Nasz zespół ma bogate doświadczenie z każdą platformą i może pomóc wybrać najlepsze rozwiązanie dla Twoich konkretnych potrzeb."
+      },
+      "security": {
+        "question": "Jak zapewniacie bezpieczeństwo danych i zgodność?",
+        "answer": "Bezpieczeństwo to nasz najwyższy priorytet. Wdrażamy standardowe praktyki bezpieczeństwa branżowego, w tym szyfrowanie w spoczynku i podczas przesyłania, uwierzytelnianie wieloskładnikowe, regularne audyty bezpieczeństwa i zgodność ze standardami takimi jak SOC 2, HIPAA i RODO w zależności od wymagań."
+      },
+      "timeline": {
+        "question": "Jaki jest typowy harmonogram projektu?",
+        "answer": "Harmonogramy projektów różnią się w zależności od złożoności i zakresu. Proste aplikacje można wdrożyć w ciągu 2-4 tygodni, podczas gdy rozwiązania klasy enterprise zazwyczaj zajmują 3-6 miesięcy. Dostarczamy szczegółowe harmonogramy projektów podczas wstępnej konsultacji."
+      },
+      "support": {
+        "question": "Czy zapewniacie bieżące wsparcie i konserwację?",
+        "answer": "Tak, oferujemy kompleksowe pakiety wsparcia, w tym monitorowanie 24/7, regularne aktualizacje, optymalizację wydajności i wsparcie techniczne. Nasze poziomy wsparcia obejmują od podstawowego monitorowania po pełne usługi zarządzane."
+      },
+      "migration": {
+        "question": "Czy możecie pomóc w migracji istniejących aplikacji do chmury?",
+        "answer": "Absolutnie! Specjalizujemy się w strategiach migracji do chmury, w tym lift-and-shift, re-platforming i kompletną modernizację aplikacji. Oceniamy Twoją obecną infrastrukturę i tworzymy plan migracji, który minimalizuje przestoje i maksymalizuje korzyści."
+      },
+      "aiAgents": {
+        "question": "Co wyróżnia Wasze agenty AI?",
+        "answer": "Nasze agenty AI są budowane na zamówienie dla Twoich konkretnych przypadków użycia, trenowane na Twoich danych i zaprojektowane tak, aby płynnie integrować się z istniejącymi przepływami pracy. Ciągle uczą się i doskonalą, zapewniając coraz dokładniejsze i wartościowe spostrzeżenia w czasie."
+      }
+    }
+  },
+  "contact": {
+    "title": "Skontaktuj się z nami",
+    "subtitle": "Gotowy na transformację swojego biznesu? Porozmawiajmy o Twoim projekcie i poznajmy możliwości.",
+    "form": {
+      "title": "Wyślij nam wiadomość",
+      "name": "Imię",
+      "nameRequired": "Imię *",
+      "email": "Email",
+      "emailRequired": "Email *",
+      "company": "Firma",
+      "message": "Wiadomość",
+      "messageRequired": "Wiadomość *",
+      "namePlaceholder": "Twoje imię",
+      "emailPlaceholder": "twoj@email.com",
+      "companyPlaceholder": "Twoja firma",
+      "messagePlaceholder": "Opowiedz nam o swoim projekcie...",
+      "submit": "Wyślij wiadomość"
+    },
+    "info": {
+      "title": "Informacje kontaktowe",
+      "email": "Email",
+      "phone": "Telefon",
+      "office": "Biuro",
+      "liveChat": "Czat na żywo",
+      "available247": "Dostępne 24/7",
+      "mapComing": "Interaktywna mapa wkrótce",
+      "location": "Kraków, Polska"
+    }
+  },
+  "footer": {
+    "description": "Wzmacniamy firmy dzięki rozwiązaniom chmurowym nowej generacji i automatyzacji opartej na AI.",
+    "address": "Adres:",
+    "phone": "Telefon:",
+    "services": "Usługi",
+    "company": "Firma",
+    "legal": "Prawne",
+    "builtWith": "Zbudowane z ❤️ używając Next.js",
+    "systemsOperational": "Wszystkie systemy działają",
+    "copyright": "© 2024 CloudFloo.io. Wszelkie prawa zastrzeżone.",
+    "language": "Język",
+    "selectLanguage": "Wybierz język"
+  },
+  "languages": {
+    "en": "Angielski",
+    "pl": "Polski"
+  }
+}

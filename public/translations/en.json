@@ -1,0 +1,235 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "next": "Next",
+    "previous": "Previous",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "team": "Team",
+    "projects": "Projects",
+    "contact": "Contact",
+    "blog": "Blog",
+    "careers": "Careers",
+    "press": "Press",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "gdpr": "GDPR Compliance"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "team": "Our Team",
+    "projects": "Projects",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "backToHome": "Back to Home",
+    "backToTeam": "Back to Team",
+    "toggleMenu": "Toggle menu",
+    "viewFullProfile": "View Full Profile",
+    "viewProfile": "View Profile"
+  },
+  "hero": {
+    "title": "<span class=\"text-neon\">Cloud-Native</span> Software House from Poland",
+    "subtitle": "We deliver scalable micro-services, DevOps and frontend excellence.",
+    "cta1": "Start Your Partnership",
+    "cta2": "Explore Our Expertise",
+    "scrollIndicator": "Scroll to next section"
+  },
+  "services": {
+    "title": "Expert Solutions Tailored for You",
+    "subtitle": "Comprehensive technology services designed around your business needs, delivered by seasoned professionals who understand your industry challenges.",
+    "technologiesMaster": "Technologies We Master",
+    "technologiesCount": "48+ Technologies We Work With",
+    "discussProject": "Discuss Your Project",
+    "cloudSolutions": {
+      "title": "Strategic Cloud Consulting",
+      "description": "Expert guidance tailored to your business goals, ensuring optimal cloud architecture and seamless migration strategies.",
+      "features": ["Architecture Design", "Migration Planning", "Cost Optimization", "Security Assessment"]
+    },
+    "appDevelopment": {
+      "title": "Custom Application Development",
+      "description": "Scalable, modern applications built with your specific requirements in mind, leveraging cutting-edge technologies.",
+      "features": ["Full-Stack Development", "API Integration", "Performance Optimization", "Responsive Design"]
+    },
+    "aiAutomation": {
+      "title": "Intelligent Automation",
+      "description": "AI-powered solutions that streamline operations and enhance productivity through smart workflow automation.",
+      "features": ["Process Automation", "AI Integration", "Workflow Optimization", "Predictive Analytics"]
+    },
+    "devops": {
+      "title": "DevOps Excellence",
+      "description": "Comprehensive DevOps practices that accelerate delivery while maintaining reliability and security.",
+      "features": ["CI/CD Implementation", "Infrastructure as Code", "Monitoring & Alerting", "Security Integration"]
+    },
+    "dataEngineering": {
+      "title": "Data Engineering Solutions",
+      "description": "Transform raw data into actionable insights with robust pipelines and advanced analytics platforms.",
+      "features": ["Data Pipeline Design", "Real-time Processing", "Analytics Platforms", "Data Governance"]
+    },
+    "mlOps": {
+      "title": "ML Operations",
+      "description": "End-to-end machine learning lifecycle management, from model development to production deployment.",
+      "features": ["Model Development", "Automated Training", "Performance Monitoring", "Scalable Deployment"]
+    },
+    "edgeComputing": {
+      "title": "Edge Computing",
+      "description": "Ultra-fast, globally distributed solutions that bring computation closer to your users for optimal performance.",
+      "features": ["Global Distribution", "Low Latency", "Auto-scaling", "Edge Optimization"]
+    },
+    "learnMore": "Learn More"
+  },
+  "about": {
+    "title": "Why Partner with <span class=\"text-neon\">CloudFloo</span>",
+    "subtitle": "We're more than a service provider—we're your strategic technology partner, committed to your long-term success through proven expertise and personalized solutions.",
+    "stats": {
+      "projects": "Projects Delivered",
+      "uptime": "Uptime Guarantee",
+      "clients": "Enterprise Clients",
+      "support": "Support Available"
+    },
+    "promise": {
+      "title": "Our Partnership Promise",
+      "description": "We believe every business deserves a trusted technology partner who understands their unique journey. Through collaborative relationships and deep expertise, we empower organizations to harness the full potential of cloud technologies, ensuring sustainable growth and competitive advantage in an ever-evolving digital landscape."
+    }
+  },
+  "team": {
+    "title": "Meet Your Expert Team",
+    "subtitle": "Industry veterans with deep expertise and a passion for innovation. We're not just service providers—we're your strategic technology partners.",
+    "stats": {
+      "experience": "Years Combined Experience",
+      "engineers": "Senior Engineers",
+      "projectsDelivered": "Projects Delivered"
+    },
+    "keyExpertise": "Key Expertise",
+    "philosophy": {
+      "title": "Our Philosophy",
+      "technicalExcellence": {
+        "title": "Technical Excellence",
+        "description": "We believe in writing clean, maintainable code and following industry best practices to deliver robust solutions."
+      },
+      "continuousLearning": {
+        "title": "Continuous Learning",
+        "description": "Technology evolves rapidly, and we stay ahead by continuously learning and adapting to new tools and methodologies."
+      },
+      "clientPartnership": {
+        "title": "Client Partnership",
+        "description": "We work as true partners, understanding your business goals and delivering solutions that drive real value."
+      }
+    },
+    "cta": {
+      "title": "Ready to Work with Our Team?",
+      "subtitle": "Let's discuss how our expertise can help accelerate your digital transformation.",
+      "startProject": "Start Your Project",
+      "joinTeam": "Join Our Team"
+    }
+  },
+  "projects": {
+    "title": "Featured <span class=\"text-neon\">Project</span>",
+    "subtitle": "Enterprise-grade solution showcasing advanced software engineering principles",
+    "viewDetails": "View Full Project Details",
+    "viewDemo": "View Live Demo",
+    "viewSource": "View Source Code",
+    "client": "Client",
+    "overview": "Project Overview",
+    "techStack": "Technology Stack",
+    "keyFeatures": "Key Features",
+    "achievements": "Key Achievements",
+    "practices": "Development Practices",
+    "clickDetails": "Click anywhere to view full details"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Get answers to common questions about our services and processes",
+    "tableOfContents": "Everything you need to know",
+    "questions": {
+      "cloudPlatforms": {
+        "question": "What cloud platforms do you support?",
+        "answer": "We support all major cloud platforms including AWS, Google Cloud Platform, Microsoft Azure, and hybrid cloud solutions. Our team has extensive experience with each platform and can help you choose the best fit for your specific needs."
+      },
+      "security": {
+        "question": "How do you ensure data security and compliance?",
+        "answer": "Security is our top priority. We implement industry-standard security practices including encryption at rest and in transit, multi-factor authentication, regular security audits, and compliance with standards like SOC 2, HIPAA, and GDPR depending on your requirements."
+      },
+      "timeline": {
+        "question": "What is your typical project timeline?",
+        "answer": "Project timelines vary based on complexity and scope. Simple applications can be deployed in 2-4 weeks, while enterprise-grade solutions typically take 3-6 months. We provide detailed project timelines during our initial consultation."
+      },
+      "support": {
+        "question": "Do you provide ongoing support and maintenance?",
+        "answer": "Yes, we offer comprehensive support packages including 24/7 monitoring, regular updates, performance optimization, and technical support. Our support tiers range from basic monitoring to full managed services."
+      },
+      "migration": {
+        "question": "Can you help migrate existing applications to the cloud?",
+        "answer": "Absolutely! We specialize in cloud migration strategies including lift-and-shift, re-platforming, and complete application modernization. We assess your current infrastructure and create a migration plan that minimizes downtime and maximizes benefits."
+      },
+      "aiAgents": {
+        "question": "What makes your AI agents different?",
+        "answer": "Our AI agents are custom-built for your specific use cases, trained on your data, and designed to integrate seamlessly with your existing workflows. They continuously learn and improve, providing increasingly accurate and valuable insights over time."
+      }
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to transform your business? Let's discuss your project and explore the possibilities.",
+    "form": {
+      "title": "Send us a message",
+      "name": "Name",
+      "nameRequired": "Name *",
+      "email": "Email",
+      "emailRequired": "Email *",
+      "company": "Company",
+      "message": "Message",
+      "messageRequired": "Message *",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "companyPlaceholder": "Your company",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Send Message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "office": "Office",
+      "liveChat": "Live Chat",
+      "available247": "Available 24/7",
+      "mapComing": "Interactive map coming soon",
+      "location": "Krakow, Poland"
+    }
+  },
+  "footer": {
+    "description": "Empowering businesses with next-generation cloud solutions and AI-driven automation.",
+    "address": "Address:",
+    "phone": "Phone:",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "builtWith": "Built with ❤️ using Next.js",
+    "systemsOperational": "All systems operational",
+    "copyright": "© 2025 CloudFloo.io. All rights reserved.",
+    "language": "Language",
+    "selectLanguage": "Select language"
+  },
+  "languages": {
+    "en": "English",
+    "pl": "Polish"
+  }
+}

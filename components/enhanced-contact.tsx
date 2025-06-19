@@ -8,8 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EnhancedContact() {
+  const { t, isLoaded } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,29 +34,29 @@ export default function EnhancedContact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
+      title: t('contact.info.email'),
       value: 'hello@cloudfloo.io',
       link: 'mailto:hello@cloudfloo.io',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Phone,
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      title: t('contact.info.phone'),
+      value: '+48 728 963 591',
+      link: 'tel:+48728963591',
       color: 'from-green-500 to-emerald-500'
     },
     {
       icon: MapPin,
-      title: 'Office',
-      value: 'San Francisco, CA',
-      link: '#',
+      title: t('contact.info.office'),
+      value: 'Chmieleniec 17/69, 30-348 Krakow, Poland',
+      link: 'https://maps.google.com/?q=Chmieleniec+17/69,+30-348+Krakow,+Poland',
       color: 'from-purple-500 to-pink-500'
     },
     {
       icon: MessageSquare,
-      title: 'Live Chat',
-      value: 'Available 24/7',
+      title: t('contact.info.liveChat'),
+      value: t('contact.info.available247'),
       link: '#',
       color: 'from-orange-500 to-red-500'
     }
@@ -128,7 +130,7 @@ export default function EnhancedContact() {
             animate={titleVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Get In <span className="text-neon">Touch</span>
+            {t('contact.title')}
           </motion.h2>
           <motion.p 
             className="text-xl text-gray-300 max-w-3xl mx-auto"
@@ -136,7 +138,7 @@ export default function EnhancedContact() {
             animate={titleVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Ready to transform your business? Let&apos;s discuss your project and explore the possibilities.
+            {t('contact.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -151,7 +153,7 @@ export default function EnhancedContact() {
             <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-white mb-6">
-                  Send us a message
+                  {t('contact.form.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -159,7 +161,7 @@ export default function EnhancedContact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <motion.div variants={inputVariants}>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                        Name *
+                        {t('contact.form.nameRequired')}
                       </label>
                       <Input
                         id="name"
@@ -169,12 +171,12 @@ export default function EnhancedContact() {
                         value={formData.name}
                         onChange={handleChange}
                         className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
-                        placeholder="Your name"
+                        placeholder={t('contact.form.namePlaceholder')}
                       />
                     </motion.div>
                     <motion.div variants={inputVariants}>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                        Email *
+                        {t('contact.form.emailRequired')}
                       </label>
                       <Input
                         id="email"
@@ -184,14 +186,14 @@ export default function EnhancedContact() {
                         value={formData.email}
                         onChange={handleChange}
                         className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
-                        placeholder="your@email.com"
+                        placeholder={t('contact.form.emailPlaceholder')}
                       />
                     </motion.div>
                   </div>
                   
                   <motion.div variants={inputVariants}>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
-                      Company
+                      {t('contact.form.company')}
                     </label>
                     <Input
                       id="company"
@@ -200,13 +202,13 @@ export default function EnhancedContact() {
                       value={formData.company}
                       onChange={handleChange}
                       className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
-                      placeholder="Your company"
+                      placeholder={t('contact.form.companyPlaceholder')}
                     />
                   </motion.div>
                   
                   <motion.div variants={inputVariants}>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                      Message *
+                      {t('contact.form.messageRequired')}
                     </label>
                     <Textarea
                       id="message"
@@ -216,7 +218,7 @@ export default function EnhancedContact() {
                       value={formData.message}
                       onChange={handleChange}
                       className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 resize-none transition-all duration-300"
-                      placeholder="Tell us about your project..."
+                      placeholder={t('contact.form.messagePlaceholder')}
                     />
                   </motion.div>
                   
@@ -230,7 +232,7 @@ export default function EnhancedContact() {
                         size="lg"
                         className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 group"
                       >
-                        Send Message
+                        {t('contact.form.submit')}
                         <motion.span
                           className="ml-2"
                           initial={{ x: 0 }}
@@ -259,7 +261,7 @@ export default function EnhancedContact() {
               <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-white mb-6">
-                    Contact Information
+                    {t('contact.info.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -269,23 +271,25 @@ export default function EnhancedContact() {
                       <motion.a
                         key={index}
                         href={info.link}
-                        className="flex items-center space-x-4 group hover:text-neon transition-colors duration-300 p-3 rounded-lg hover:bg-white/5"
+                        className="flex items-start space-x-4 group hover:text-neon transition-colors duration-300 p-3 rounded-lg hover:bg-white/5"
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                         initial={{ opacity: 0, x: -20 }}
                         animate={infoVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                         style={{ transitionDelay: `${index * 0.1}s` }}
+                        target={info.link.startsWith('http') ? '_blank' : undefined}
+                        rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                       >
                         <motion.div 
-                          className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                          className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
                           whileHover={{ rotate: 360 }}
                           transition={{ duration: 0.6 }}
                         >
                           <Icon className="w-5 h-5 text-white" />
                         </motion.div>
-                        <div>
+                        <div className="flex-1">
                           <div className="text-sm text-gray-400">{info.title}</div>
-                          <div className="text-white group-hover:text-neon transition-colors duration-300">
+                          <div className="text-white group-hover:text-neon transition-colors duration-300 text-sm">
                             {info.value}
                           </div>
                         </div>
@@ -312,8 +316,8 @@ export default function EnhancedContact() {
                     >
                       <MapPin className="w-12 h-12 text-neon mx-auto mb-4" />
                     </motion.div>
-                    <p className="text-gray-300">Interactive map coming soon</p>
-                    <p className="text-sm text-gray-400 mt-2">San Francisco Bay Area</p>
+                    <p className="text-gray-300">{t('contact.info.mapComing')}</p>
+                    <p className="text-sm text-gray-400 mt-2">{t('contact.info.location')}</p>
                   </motion.div>
                 </CardContent>
               </Card>

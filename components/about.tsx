@@ -1,6 +1,8 @@
 'use client';
 
 import { Users, Target, Award, Rocket } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
 
 export default function About() {
   const stats = [
@@ -71,10 +73,14 @@ export default function About() {
           {team.map((member, index) => (
             <div key={index} className="glass rounded-lg p-6 text-center group hover:neon-glow transition-all duration-300">
               <div className="relative mb-4 mx-auto w-24 h-24 overflow-hidden rounded-full">
-                <img
+                {/* Team member profile image */}
+                <Image
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  width={400}
+                  height={256}
+                  className="w-full h-64 object-cover rounded-lg"
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-neon opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </div>
