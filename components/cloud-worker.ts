@@ -38,7 +38,7 @@ async function createCloudSystem(): Promise<THREE.Points> {
 
     // Yield every few thousand iterations so we don't block for >16ms
     if (i % 5000 === 0) {
-      await new Promise(r => requestIdleCallback(r, { timeout: 50 }));
+      await new Promise(r => setTimeout(r, 50));
     }
   }
 
