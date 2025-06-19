@@ -10,18 +10,46 @@ import { useLanguage } from '@/contexts/LanguageContext';
 // Dynamically import the visualization component with SSR disabled
 const ImmersiveCloudVisualization = dynamic(
   () => import('@/components/immersive-cloud-visualization'),
-  { ssr: false }
+  { ssr: false, loading: () => null }
 );
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
+  const [showVisualization, setShowVisualization] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const { t, isLoaded } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (showVisualization) return;
+
+    const load = () => setShowVisualization(true);
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && entry.intersectionRect.height >= 300) {
+        load();
+      }
+    });
+    if (heroRef.current) observer.observe(heroRef.current);
+
+    window.addEventListener('mousemove', load, { once: true });
+    window.addEventListener('touchstart', load, { once: true });
+    window.addEventListener('keydown', load, { once: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('mousemove', load);
+      window.removeEventListener('touchstart', load);
+      window.removeEventListener('keydown', load);
+    };
+  }, [showVisualization]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -62,7 +90,7 @@ export default function Hero() {
       suppressHydrationWarning
     >
       {/* Immersive Cloud Visualization */}
-      {mounted && <ImmersiveCloudVisualization />}
+      {mounted && showVisualization && <ImmersiveCloudVisualization />}
       
       {/* Enhanced overlay for better text readability */}
       <div className="absolute inset-0 z-10">

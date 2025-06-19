@@ -250,13 +250,19 @@ export default function EnhancedHeader() {
             e.preventDefault();
             smoothScrollTo('home');
           }} className="flex items-center space-x-3 group cursor-pointer">
-            <Image
-              src="/logo.png"
-              alt="CloudFloo Logo"
-              width={64}
-              height={64}
-              className="w-12 h-12"
-            />
+            <picture>
+              <source srcSet="/logo.avif" type="image/avif" />
+              <source srcSet="/logo.webp" type="image/webp" />
+              <Image
+                src="/logo.png"
+                alt="CloudFloo Logo"
+                width={64}
+                height={64}
+                priority
+                fetchPriority="high"
+                className="w-12 h-12"
+              />
+            </picture>
              <motion.span 
                className="text-xl font-bold text-white group-hover:text-neon transition-colors duration-700"
                initial={{ opacity: 0, x: -20 }}

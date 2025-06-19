@@ -103,7 +103,7 @@ export default function SEO({
             "@type": "Organization",
             "name": "CloudFloo",
             "url": "https://cloudfloo.io",
-            "logo": "https://cloudfloo.io/logo.png",
+            "logo": "https://cloudfloo.io/logo.avif",
             "founder": [
               {
                 "@type": "Person",
