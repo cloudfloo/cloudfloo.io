@@ -9,7 +9,7 @@
     "static": "next build && next export && next-sitemap",
     "lint": "next lint --fix",
     "clean": "rm -rf .next out",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",

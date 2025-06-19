@@ -1,3 +1,4 @@
+import { test, expect } from '@playwright/test';
 import config from '../next.config.js';
 
 test('headers configuration', async () => {
