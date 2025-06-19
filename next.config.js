@@ -1,3 +1,17 @@
+const customHeaders = [
+  {
+    source: '/:path*',
+    headers: [{ key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' }],
+  },
+  {
+    source: '/:path*\.(?:avif|js|css)',
+    headers: [{ key: 'Content-Encoding', value: 'br' }],
+  },
+  {
+    source: '/:path*\.(?:woff2|woff|ttf|otf)',
+    headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+  },
+];
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
@@ -14,41 +28,12 @@ const nextConfig = {
     // Ensure static export compatibility
     esmExternals: false,
   },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Link',
-            value: '<https://images.pexels.com>; rel=preconnect; crossorigin'
-          },
-        ],
-      },
-      {
-        source: '/:path*\.(?:avif|js|css)',
-        headers: [
-          {
-            key: 'Content-Encoding',
-            value: 'br'
-          }
-        ],
-      },
-      {
-        source: '/:path*\.(?:woff2|woff|ttf|otf)',
-        headers: [
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'cross-origin'
-          }
-        ],
-      }
-    ];
-  },
   webpack(config) {
-    config.experiments = { ...config.experiments, brotliSize: true };
     return config;
   },
 };
 
-module.exports = nextConfig;
+
+const exported = () => nextConfig;
+exported.customHeaders = customHeaders;
+module.exports = exported;
