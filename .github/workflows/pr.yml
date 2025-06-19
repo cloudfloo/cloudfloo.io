@@ -33,6 +33,10 @@ jobs:
           lhci autorun --collect.staticDistDir=out --collect.url=/index.html
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          LHCI_BUILD_CONTEXT__PROJECT_NAME: ${{ github.repository }}
+      - name: Generate badge
+        run: node scripts/generate-lighthouse-badge.mjs
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps

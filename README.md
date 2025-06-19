@@ -3,6 +3,7 @@
 # CloudFloo.io
 
 [![Build Status](https://github.com/cloudfloo/cloudfloo.io/actions/workflows/main.yml/badge.svg)](https://github.com/cloudfloo/cloudfloo.io/actions/workflows/main.yml)
+[![Lighthouse Score](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/cloudfloo/cloudfloo.io/main/docs/lighthouse-badge.json)](https://github.com/cloudfloo/cloudfloo.io/actions/workflows/main.yml)
 
 CloudFloo is a senior team of Polish engineers building cloud-native, micro-service, and DevOps solutions in NestJS, React, and Kubernetes.
 
@@ -92,6 +93,7 @@ The project uses GitHub Actions for continuous integration and deployment:
 1. Lighthouse Testing: Performance, accessibility, and best practices
 2. Accessibility Testing: Automated WCAG compliance checks
 3. Docker Build: Creates and publishes Docker images to GitHub Container Registry
+4. Badge generation: Lighthouse scores are turned into a status badge. Builds fail if minimum scores are not met.
 
 ## Tech Stack Details
 
@@ -126,6 +128,9 @@ The project uses GitHub Actions for continuous integration and deployment:
 - Security headers with CSP
 - Regular dependency updates
 - Input sanitization and validation
+
+## Documentation
+The `docs/` directory holds architectural decision records and design notes. See [docs/README.md](docs/README.md) for details.
 
 ## Contributing
 
