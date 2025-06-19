@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 let scene: THREE.Scene;
 let camera: THREE.PerspectiveCamera;
-let renderer: THREE.WebGLRenderer;
+let renderer: THREE.WebGLRenderer | undefined;
 let cloud: THREE.Points | undefined;
 let mouse = new THREE.Vector2();
 let animationId: number;
@@ -196,7 +196,12 @@ function animate() {
   animationId = requestAnimationFrame(animate);
 }
 
-async function init(canvas: OffscreenCanvas, width: number, height: number) {
+async function init(canvas: OffscreenCanvas | undefined, width: number, height: number) {
+  if (!canvas) {
+    console.error('Worker init called without an OffscreenCanvas');
+    return;
+  }
+
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
   camera.position.set(0, 0, 50);
@@ -216,7 +221,9 @@ function resize(width: number, height: number) {
   if (!camera || !renderer) return;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
+  if (renderer) {
+    renderer.setSize(width, height);
+  }
 }
 
 function dispose() {
@@ -226,9 +233,11 @@ function dispose() {
     if (cloud.material instanceof THREE.Material) {
       cloud.material.dispose();
     }
+    cloud = undefined;
   }
   if (renderer) {
     renderer.dispose();
+    renderer = undefined;
   }
 }
 
