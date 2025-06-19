@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useStaggeredAnimation } from '@/hooks/use-scroll-animation';
 
 // Create a motion-enabled Button component
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 const MotionButton = motion(Button);
 
 interface TechIconProps {
@@ -33,6 +34,8 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
       className={`group-hover:scale-110 transition-transform duration-300 ${className}`}
       onError={() => setImageError(true)}
       loading="lazy"
+      placeholder="blur"
+      blurDataURL={DEFAULT_BLUR}
       width={24}
       height={24}
       unoptimized

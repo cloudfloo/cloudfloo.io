@@ -3,6 +3,7 @@
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 
 export default function Projects() {
   const projects = [
@@ -80,6 +81,8 @@ export default function Projects() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     unoptimized
                     loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={placeholders[project.image] ?? DEFAULT_BLUR}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

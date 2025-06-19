@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { ImageCarousel } from '@/components/ui/image-carousel';
@@ -157,6 +158,8 @@ This enterprise solution demonstrates advanced software engineering principles w
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
                   priority
+                  placeholder="blur"
+                  blurDataURL={placeholders[project.image] ?? DEFAULT_BLUR}
                 />
               </div>
               
@@ -199,12 +202,15 @@ This enterprise solution demonstrates advanced software engineering principles w
                 </Badge>
                 <div className="flex items-center gap-2 px-3 py-1 bg-black/70 rounded-full">
                   <div className="relative w-6 h-6">
-                    <Image 
-                      src={project.customer.logo} 
+                    <Image
+                      src={project.customer.logo}
                       alt={project.customer.name}
                       fill
                       className="object-contain"
                       sizes="24px"
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={placeholders[project.customer.logo] ?? DEFAULT_BLUR}
                     />
                   </div>
                   <span className="text-white text-sm font-medium">{project.customer.name}</span>
@@ -310,12 +316,15 @@ This enterprise solution demonstrates advanced software engineering principles w
                   <CardHeader>
                     <div className="flex items-center gap-4">
                       <div className="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center relative">
-                        <Image 
-                          src={selectedProject.customer.logo} 
+                        <Image
+                          src={selectedProject.customer.logo}
                           alt={selectedProject.customer.name}
                           fill
                           className="object-contain p-2"
                           sizes="64px"
+                          loading="lazy"
+                          placeholder="blur"
+                          blurDataURL={placeholders[selectedProject.customer.logo] ?? DEFAULT_BLUR}
                         />
                       </div>
                       <div>
