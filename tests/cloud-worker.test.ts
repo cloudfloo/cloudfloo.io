@@ -35,6 +35,7 @@ test('init creates fallback canvas when OffscreenCanvas exists', async () => {
   }
   (globalThis as any).OffscreenCanvas = DummyOffscreen as any;
   await expect(init(undefined as any, 50, 50)).resolves.toBeUndefined();
+  expect(() => resize(25, 25)).not.toThrow();
   delete (globalThis as any).OffscreenCanvas;
 });
 

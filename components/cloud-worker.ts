@@ -218,7 +218,8 @@ async function init(canvas: OffscreenCanvas | undefined, width: number, height: 
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
     if (renderer.domElement) {
-      renderer.setSize(width, height);
+      const hasStyle = (renderer.domElement as any).style !== undefined;
+      renderer.setSize(width, height, hasStyle);
       renderer.setPixelRatio(Math.min((self as any).devicePixelRatio || 1, 2));
       renderer.setClearColor(0x000000, 0);
     } else {
@@ -243,7 +244,8 @@ function resize(width: number, height: number) {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   if (renderer && (renderer as any).domElement) {
-    renderer.setSize(width, height);
+    const hasStyle = (renderer.domElement as any).style !== undefined;
+    renderer.setSize(width, height, hasStyle);
   }
 }
 
