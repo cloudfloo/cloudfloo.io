@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ENV NODE_ENV=production
 RUN npm run static
 
 # Production image with nginx to serve static files
