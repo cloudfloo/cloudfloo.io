@@ -1,13 +1,25 @@
 'use client'
-import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
 export default function Analytics() {
+  if (!GA_ID) return null;
+
   return (
     <>
-      <GoogleAnalytics gaId={GA_ID} />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="lazyOnload"
+      />
+      <Script id="ga-init" strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+        `}
+      </Script>
       <Script id="next-web-vitals" strategy="afterInteractive">
         {`
           function sendToGA({name, value}) {
