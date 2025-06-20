@@ -1,7 +1,10 @@
 const customHeaders = [
   {
     source: '/:path*',
-    headers: [{ key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' }],
+    headers: [
+      { key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' },
+      { key: 'Link', value: '<https://www.googletagmanager.com>; rel=preconnect; crossorigin' },
+    ],
   },
   {
     source: '/:path*\.(?:avif|js|css)',
