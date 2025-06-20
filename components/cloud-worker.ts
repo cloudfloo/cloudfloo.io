@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 
 let scene: THREE.Scene;
 let camera: THREE.PerspectiveCamera;
@@ -12,13 +12,19 @@ const hardware = nav.hardwareConcurrency ?? 8;
 const memory = nav.deviceMemory ?? 8;
 const config = {
   lowEndThresholds: { hardware: 4, memory: 4 },
-  particleCounts: { lowEnd: 15000, highEnd: 30000 },
+  particleCounts: { lowEnd: 10000, highEnd: 20000 },
   frameIntervals: { lowEnd: 1000 / 30, highEnd: 1000 / 60 },
 };
 
-const isLowEnd = hardware <= config.lowEndThresholds.hardware || memory <= config.lowEndThresholds.memory;
-const PARTICLE_COUNT = isLowEnd ? config.particleCounts.lowEnd : config.particleCounts.highEnd;
-const FRAME_INTERVAL = isLowEnd ? config.frameIntervals.lowEnd : config.frameIntervals.highEnd;
+const isLowEnd =
+  hardware <= config.lowEndThresholds.hardware ||
+  memory <= config.lowEndThresholds.memory;
+const PARTICLE_COUNT = isLowEnd
+  ? config.particleCounts.lowEnd
+  : config.particleCounts.highEnd;
+const FRAME_INTERVAL = isLowEnd
+  ? config.frameIntervals.lowEnd
+  : config.frameIntervals.highEnd;
 let lastFrame = 0;
 
 // Creating thousands of particles at once can block the worker event loop for
@@ -50,13 +56,13 @@ async function createCloudSystem(): Promise<THREE.Points> {
 
     // Yield every few thousand iterations so we don't block for >16ms
     if (i % 5000 === 0) {
-      await new Promise(r => setTimeout(r, 50));
+      await new Promise((r) => setTimeout(r, 50));
     }
   }
 
   const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('aRandom', new THREE.BufferAttribute(randomValues, 3));
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute("aRandom", new THREE.BufferAttribute(randomValues, 3));
 
   const material = new THREE.ShaderMaterial({
     transparent: true,
@@ -65,7 +71,7 @@ async function createCloudSystem(): Promise<THREE.Points> {
     uniforms: {
       uTime: { value: 0 },
       uMouse: { value: new THREE.Vector2() },
-      uScroll: { value: 0 }
+      uScroll: { value: 0 },
     },
     vertexShader: `
       uniform float uTime;
@@ -182,7 +188,7 @@ async function createCloudSystem(): Promise<THREE.Points> {
 
         gl_FragColor = vec4(finalColor, finalAlpha);
       }
-    `
+    `,
   });
 
   const cloud = new THREE.Points(geometry, material);
@@ -214,17 +220,21 @@ function animate(time: number = 0) {
   animationId = requestAnimationFrame(animate);
 }
 
-async function init(canvas: OffscreenCanvas | undefined, width: number, height: number) {
+async function init(
+  canvas: OffscreenCanvas | undefined,
+  width: number,
+  height: number
+) {
   if (!canvas) {
-    if (typeof (self as any).OffscreenCanvas === 'function') {
+    if (typeof (self as any).OffscreenCanvas === "function") {
       try {
         canvas = new (self as any).OffscreenCanvas(width, height);
       } catch (err) {
-        console.error('Failed to create fallback OffscreenCanvas', err);
+        console.error("Failed to create fallback OffscreenCanvas", err);
         return;
       }
     } else {
-      console.error('Worker init called without an OffscreenCanvas');
+      console.error("Worker init called without an OffscreenCanvas");
       return;
     }
   }
@@ -234,20 +244,27 @@ async function init(canvas: OffscreenCanvas | undefined, width: number, height: 
   camera.position.set(0, 0, 50);
 
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
     if (renderer.domElement) {
       const hasStyle = (renderer.domElement as any).style !== undefined;
       renderer.setSize(width, height, hasStyle);
-      const pixelRatio = isLowEnd ? 1 : Math.min((self as any).devicePixelRatio || 1, 2);
+      const pixelRatio = isLowEnd
+        ? 1
+        : Math.min((self as any).devicePixelRatio || 1, 2);
       renderer.setPixelRatio(pixelRatio);
       renderer.setClearColor(0x000000, 0);
     } else {
-      console.error('WebGLRenderer created without a canvas');
+      console.error("WebGLRenderer created without a canvas");
       renderer = undefined;
       return;
     }
   } catch (err) {
-    console.error('Failed to create WebGLRenderer', err);
+    console.error("Failed to create WebGLRenderer", err);
     renderer = undefined;
     return;
   }
@@ -286,22 +303,23 @@ function dispose() {
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
   switch (data.type) {
-    case 'init':
+    case "init":
       init(data.canvas, data.width, data.height);
       break;
-    case 'resize':
+    case "resize":
       resize(data.width, data.height);
       break;
-    case 'mouse':
+    case "mouse":
       mouse.x = data.x;
       mouse.y = data.y;
       break;
-    case 'scroll':
+    case "scroll":
       if (cloud && (cloud.material as THREE.ShaderMaterial).uniforms) {
-        (cloud.material as THREE.ShaderMaterial).uniforms.uScroll.value = data.value;
+        (cloud.material as THREE.ShaderMaterial).uniforms.uScroll.value =
+          data.value;
       }
       break;
-    case 'dispose':
+    case "dispose":
       dispose();
       break;
   }
