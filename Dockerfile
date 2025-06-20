@@ -2,6 +2,7 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
+ENV NODE_ENV=production
 RUN npm ci
 COPY . .
 RUN npm run static
