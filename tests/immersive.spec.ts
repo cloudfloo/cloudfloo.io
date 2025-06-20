@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
-const waitForCanvas = async (page) => {
+const waitForCanvas = async (page: Page) => {
   await page.waitForSelector('canvas', { timeout: 5000 });
 };
 

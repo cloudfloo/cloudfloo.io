@@ -13,7 +13,7 @@ const customHeaders = [
     source: '/:path*',
     headers: [
       { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
-      { key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' },
+      { key: 'Link', value: '<https://www.googletagmanager.com>; rel=preconnect; crossorigin' },
     ],
   },
   {
