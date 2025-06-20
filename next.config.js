@@ -1,7 +1,20 @@
+const CompressionPlugin = require('compression-webpack-plugin');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+});
+
 const customHeaders = [
   {
     source: '/:path*',
-    headers: [{ key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' }],
+    headers: [
+      { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
+      { key: 'Link', value: '<https://images.pexels.com>; rel=preconnect; crossorigin' },
+    ],
   },
   {
     source: '/:path*\.(?:avif|js|css)',
@@ -18,7 +31,21 @@ const nextConfig = {
   trailingSlash: true,
   compress: true,
   images: {
-    unoptimized: true
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 60,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    unoptimized: true, // Required for static export
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'techicons.dev',
+      },
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -28,12 +55,24 @@ const nextConfig = {
     // Ensure static export compatibility
     esmExternals: false,
   },
-  webpack(config) {
+  webpack(config, { dev, isServer }) {
+    // Only run in production build
+    if (!dev && !isServer) {
+      // Add compression plugin
+      config.plugins.push(
+        new CompressionPlugin({
+          algorithm: 'gzip',
+          test: /\.(js|css|html|svg)$/,
+          threshold: 10240,
+          minRatio: 0.8,
+        })
+      );
+    }
+
     return config;
   },
 };
 
-
 const exported = () => nextConfig;
 exported.customHeaders = customHeaders;
-module.exports = exported;
+module.exports = withPWA(withBundleAnalyzer(exported()));
