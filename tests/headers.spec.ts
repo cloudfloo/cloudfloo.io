@@ -4,6 +4,7 @@ import config from '../next.config.js';
 test('headers configuration', async () => {
   const headers = config.customHeaders;
   const linkRule = headers.find(h => h.source === '/:path*');
-  expect(linkRule.headers[0].key).toBe('Link');
-  expect(linkRule.headers[0].value).toContain('https://images.pexels.com');
+  expect(linkRule).toBeDefined();
+  expect(linkRule!.headers[0].key).toBe('Link');
+  expect(linkRule!.headers[0].value).toContain('https://images.pexels.com');
 });
