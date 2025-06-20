@@ -2,9 +2,9 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
+ENV NODE_ENV=production
 RUN npm ci
 COPY . .
-ENV NODE_ENV=production
 RUN npm run static
 
 # Production image with nginx to serve static files
