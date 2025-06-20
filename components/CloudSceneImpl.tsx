@@ -40,8 +40,16 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
       worker.postMessage({ type: 'mouse', x, y });
     };
 
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollRatio = docHeight > 0 ? scrollTop / docHeight : 0;
+      worker.postMessage({ type: 'scroll', value: scrollRatio });
+    };
+
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
     setIsLoaded(true);
 
     return () => {
@@ -49,6 +57,7 @@ export default function ImmersiveCloudVisualization({ className = '' }: Immersiv
       worker.terminate();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
       if (canvasRef.current && mountNode) {
         mountNode.removeChild(canvasRef.current);
       }

@@ -7,7 +7,19 @@ let cloud: THREE.Points | undefined;
 let mouse = new THREE.Vector2();
 let animationId: number;
 
-const PARTICLE_COUNT = 30000;
+const nav = (self as any).navigator || {};
+const hardware = nav.hardwareConcurrency ?? 8;
+const memory = nav.deviceMemory ?? 8;
+const config = {
+  lowEndThresholds: { hardware: 4, memory: 4 },
+  particleCounts: { lowEnd: 15000, highEnd: 30000 },
+  frameIntervals: { lowEnd: 1000 / 30, highEnd: 1000 / 60 },
+};
+
+const isLowEnd = hardware <= config.lowEndThresholds.hardware || memory <= config.lowEndThresholds.memory;
+const PARTICLE_COUNT = isLowEnd ? config.particleCounts.lowEnd : config.particleCounts.highEnd;
+const FRAME_INTERVAL = isLowEnd ? config.frameIntervals.lowEnd : config.frameIntervals.highEnd;
+let lastFrame = 0;
 
 // Creating thousands of particles at once can block the worker event loop for
 // noticeable time. We generate them in chunks during idle periods to keep the
@@ -138,7 +150,7 @@ async function createCloudSystem(): Promise<THREE.Points> {
         vec3 mixB = mix(color3, color4, sin(colorPhase * 1.3) * 0.5 + 0.5);
         vColor = mix(mixA, mixB, sin(colorPhase * 0.7 + aRandom.y * 3.0) * 0.5 + 0.5);
 
-        vBrightness = randomLighting(pos, aRandom) * 0.6 + 0.3;
+        vBrightness = randomLighting(pos, aRandom) * 0.5 + 0.2;
       }
     `,
     fragmentShader: `
@@ -164,9 +176,9 @@ async function createCloudSystem(): Promise<THREE.Points> {
 
         float pulse = sin(uTime * 1.5 + vDistance * 0.05 + vRandom.z * 5.0) * 0.2 + 0.8;
 
-        vec3 finalColor = vColor * vBrightness;
+        vec3 finalColor = vColor * vBrightness * 0.8;
 
-        float finalAlpha = alpha * distanceFade * pulse * 0.1;
+        float finalAlpha = alpha * distanceFade * pulse * 0.07;
 
         gl_FragColor = vec4(finalColor, finalAlpha);
       }
@@ -177,19 +189,25 @@ async function createCloudSystem(): Promise<THREE.Points> {
   return cloud;
 }
 
-function animate() {
+function animate(time: number = 0) {
   if (!scene || !camera || !renderer || !cloud) return;
 
-  const time = Date.now() * 0.001;
+  if (time - lastFrame < FRAME_INTERVAL) {
+    animationId = requestAnimationFrame(animate);
+    return;
+  }
+  lastFrame = time;
+
+  const t = time * 0.001;
 
   if ((cloud.material as THREE.ShaderMaterial).uniforms) {
-    (cloud.material as THREE.ShaderMaterial).uniforms.uTime.value = time;
+    (cloud.material as THREE.ShaderMaterial).uniforms.uTime.value = t;
     (cloud.material as THREE.ShaderMaterial).uniforms.uMouse.value = mouse;
   }
 
-  camera.position.x = Math.sin(time * 0.15) * 8;
-  camera.position.y = Math.cos(time * 0.12) * 6;
-  camera.position.z = 50 + Math.sin(time * 0.08) * 4;
+  camera.position.x = Math.sin(t * 0.15) * 8;
+  camera.position.y = Math.cos(t * 0.12) * 6;
+  camera.position.z = 50 + Math.sin(t * 0.08) * 4;
   camera.lookAt(0, 0, 0);
 
   renderer.render(scene, camera);
@@ -220,7 +238,8 @@ async function init(canvas: OffscreenCanvas | undefined, width: number, height: 
     if (renderer.domElement) {
       const hasStyle = (renderer.domElement as any).style !== undefined;
       renderer.setSize(width, height, hasStyle);
-      renderer.setPixelRatio(Math.min((self as any).devicePixelRatio || 1, 2));
+      const pixelRatio = isLowEnd ? 1 : Math.min((self as any).devicePixelRatio || 1, 2);
+      renderer.setPixelRatio(pixelRatio);
       renderer.setClearColor(0x000000, 0);
     } else {
       console.error('WebGLRenderer created without a canvas');
@@ -236,7 +255,7 @@ async function init(canvas: OffscreenCanvas | undefined, width: number, height: 
   cloud = await createCloudSystem();
   scene.add(cloud);
 
-  animate();
+  animate(0);
 }
 
 function resize(width: number, height: number) {
@@ -276,6 +295,11 @@ self.onmessage = (event: MessageEvent) => {
     case 'mouse':
       mouse.x = data.x;
       mouse.y = data.y;
+      break;
+    case 'scroll':
+      if (cloud && (cloud.material as THREE.ShaderMaterial).uniforms) {
+        (cloud.material as THREE.ShaderMaterial).uniforms.uScroll.value = data.value;
+      }
       break;
     case 'dispose':
       dispose();
