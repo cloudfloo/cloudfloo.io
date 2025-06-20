@@ -10,10 +10,15 @@ let animationId: number;
 const nav = (self as any).navigator || {};
 const hardware = nav.hardwareConcurrency ?? 8;
 const memory = nav.deviceMemory ?? 8;
-const isLowEnd = hardware <= 4 || memory <= 4;
+const config = {
+  lowEndThresholds: { hardware: 4, memory: 4 },
+  particleCounts: { lowEnd: 15000, highEnd: 30000 },
+  frameIntervals: { lowEnd: 1000 / 30, highEnd: 1000 / 60 },
+};
 
-const PARTICLE_COUNT = isLowEnd ? 15000 : 30000;
-const FRAME_INTERVAL = isLowEnd ? 1000 / 30 : 1000 / 60;
+const isLowEnd = hardware <= config.lowEndThresholds.hardware || memory <= config.lowEndThresholds.memory;
+const PARTICLE_COUNT = isLowEnd ? config.particleCounts.lowEnd : config.particleCounts.highEnd;
+const FRAME_INTERVAL = isLowEnd ? config.frameIntervals.lowEnd : config.frameIntervals.highEnd;
 let lastFrame = 0;
 
 // Creating thousands of particles at once can block the worker event loop for
