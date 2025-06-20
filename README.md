@@ -72,6 +72,7 @@ npm start
 docker build -t cloudfloo.io .
 
 # Run the Docker container
+# Expose port 3000 from the container
 docker run -p 3000:3000 cloudfloo.io
 ```
 
