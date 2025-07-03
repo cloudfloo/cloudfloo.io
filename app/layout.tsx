@@ -56,7 +56,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Resource Hints for Performance */}
+        <link rel="canonical" href="https://cloudfloo.io" />
+        {/* Hreflang for bilingual SEO */}
+        <link rel="alternate" hrefLang="pl" href="https://cloudfloo.io/" />
+        <link rel="alternate" hrefLang="en" href="https://cloudfloo.io/en/" />
+        <link rel="alternate" hrefLang="x-default" href="https://cloudfloo.io/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#00E5FF" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preload" as="image" href="/logo.avif" fetchPriority="high" />
+        <link rel="preconnect" href="https://techicons.dev" />
+        <link rel="preconnect" href="https://images.pexels.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />

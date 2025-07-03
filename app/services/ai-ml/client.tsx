@@ -109,7 +109,6 @@ export default function AIMachineLearningClient() {
               <Brain className="w-10 h-10 text-white" />
             </div>
             <h1 
-              id="ai-ml-solutions"
               className="text-5xl md:text-6xl font-bold mb-6"
               dangerouslySetInnerHTML={{ __html: t('services.aiAutomation.heroTitle') }}
             />

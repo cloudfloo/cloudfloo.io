@@ -1,11 +1,23 @@
 import { Metadata } from 'next';
-import { generatePageMetadata } from '@/lib/metadata';
-import dynamic from 'next/dynamic';
-
-// Critical components - load immediately
+import { generateMetadata, BilingualMetadata, detectLanguage } from '@/lib/metadata';
 import EnhancedHeader from '@/components/enhanced-header-fixed';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
+
+const bilingualMeta: BilingualMetadata = {
+  pl: {
+    title: 'Rozwiązania Chmurowe i Automatyzacja DevOps | CloudFloo',
+    description: 'Przekształć swój biznes z ekspertami chmury AWS, Azure i GCP. Oferujemy kompleksowe rozwiązania cloud-native, DevOps i AI dla firm w Polsce 🔧',
+  },
+  en: {
+    title: 'Cloud Solutions & DevOps Automation | CloudFloo',
+    description: 'Transform your business with AWS, Azure & GCP cloud experts. We deliver comprehensive cloud-native, DevOps & AI solutions for companies 🔧',
+  },
+  keywords: 'cloud solutions, DevOps automation, AI agents, Polish engineers, cloud-native development, microservices, NestJS, React, Kubernetes, AWS, Azure, GCP',
+  canonicalUrl: 'https://cloudfloo.io',
+};
+
+export const metadata: Metadata = generateMetadata(bilingualMeta, 'pl');
 
 // Above-the-fold components - load with priority
 const EnhancedServices = dynamic(() => import('@/components/enhanced-services'), { 

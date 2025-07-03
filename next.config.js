@@ -58,7 +58,6 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   compress: true,
-  poweredByHeader: false,
   // Note: i18n routing not supported with static export
   // Will implement manual locale detection and hreflang
   images: {

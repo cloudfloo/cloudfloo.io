@@ -15,102 +15,47 @@ export interface BilingualMetadata {
 
 export function generateMetadata(bilingualMeta: BilingualMetadata, preferLang: 'pl' | 'en' = 'pl'): Metadata {
   const meta = bilingualMeta[preferLang];
-  const baseUrl = 'https://cloudfloo.io';
   
   return {
-    metadataBase: new URL(baseUrl),
     title: meta.title,
     description: meta.description,
     keywords: bilingualMeta.keywords,
     alternates: {
-      canonical: bilingualMeta.canonicalUrl || baseUrl,
+      canonical: bilingualMeta.canonicalUrl,
       languages: {
-        'pl': bilingualMeta.canonicalUrl || baseUrl,
-        'en': `${bilingualMeta.canonicalUrl || baseUrl}/en`,
-        'x-default': bilingualMeta.canonicalUrl || baseUrl,
-      },
+        'pl': bilingualMeta.canonicalUrl || 'https://cloudfloo.io',
+        'en': `${bilingualMeta.canonicalUrl || 'https://cloudfloo.io'}/en`,
+        'x-default': bilingualMeta.canonicalUrl || 'https://cloudfloo.io',
+      }
     },
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: bilingualMeta.canonicalUrl || baseUrl,
-      siteName: 'CloudFloo',
       locale: preferLang === 'pl' ? 'pl_PL' : 'en_US',
-      type: 'website',
-      images: [
-        {
-          url: '/og-cover.jpg',
-          width: 1200,
-          height: 630,
-          alt: meta.title,
-        },
-      ],
+      alternateLocale: preferLang === 'pl' ? 'en_US' : 'pl_PL',
     },
     twitter: {
-      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-      images: ['/og-cover.jpg'],
-    },
+    }
   };
 }
 
-/**
- * Generate metadata with canonical URL and hreflang for a specific page
- */
-export function generatePageMetadata(
-  path: string,
-  title: string,
-  description: string,
-  hasEnTranslation = true
-): Metadata {
-  const baseUrl = 'https://cloudfloo.io';
-  const canonicalUrl = `${baseUrl}${path}`;
-  
-  const alternateLanguages: Record<string, string> = {
-    'pl': canonicalUrl,
-    'x-default': canonicalUrl,
-  };
-  
-  if (hasEnTranslation) {
-    alternateLanguages['en'] = `${canonicalUrl}/en`;
+// Detect user's preferred language from headers or localStorage
+export function detectLanguage(acceptLanguage?: string): 'pl' | 'en' {
+  if (typeof window !== 'undefined') {
+    // Client-side detection
+    const stored = localStorage.getItem('preferred-language');
+    if (stored === 'en' || stored === 'pl') return stored;
+    
+    const browserLang = navigator.language.split('-')[0];
+    return browserLang === 'pl' ? 'pl' : 'en';
   }
   
-  return {
-    metadataBase: new URL(baseUrl),
-    title,
-    description,
-    alternates: {
-      canonical: canonicalUrl,
-      languages: alternateLanguages,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: 'CloudFloo',
-      locale: 'pl_PL',
-      type: 'website',
-      images: [
-        {
-          url: '/og-cover.jpg',
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: ['/og-cover.jpg'],
-    },
-  };
-}
-
-// Detect language from request (for future use)
-export function detectLanguage(acceptLanguage?: string): 'pl' | 'en' {
-  if (!acceptLanguage) return 'pl';
-  return acceptLanguage.includes('en') && !acceptLanguage.includes('pl') ? 'en' : 'pl';
+  // Server-side detection from Accept-Language header
+  if (acceptLanguage) {
+    return acceptLanguage.includes('pl') ? 'pl' : 'en';
+  }
+  
+  return 'pl'; // Default to Polish
 } 
