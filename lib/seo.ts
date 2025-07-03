@@ -12,7 +12,7 @@ export function generatePageSeo({
   title,
   description,
   path = '',
-  image = '/og-cover.jpg',
+  image = '/og-cover.webp',
   noindex = false,
 }: PageSeoConfig): NextSeoProps {
   const url = `https://cloudfloo.io${path}`;
@@ -32,7 +32,7 @@ export function generatePageSeo({
           width: 1200,
           height: 630,
           alt: title,
-          type: 'image/jpeg',
+          type: 'image/webp',
         },
       ],
     },

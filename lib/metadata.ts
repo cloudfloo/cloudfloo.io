@@ -57,6 +57,7 @@ export function generateMetadata(bilingualMeta: BilingualMetadata, preferLang: '
 
 /**
  * Generate metadata with canonical URL and hreflang for a specific page
+ * Updated to handle the URL structure: Polish at root, English at /en prefix
  */
 export function generatePageMetadata(
   path: string,
@@ -65,15 +66,23 @@ export function generatePageMetadata(
   hasEnTranslation = true
 ): Metadata {
   const baseUrl = 'https://cloudfloo.io';
-  const canonicalUrl = `${baseUrl}${path}`;
+  
+  // Determine if this is an English page
+  const isEnglishPage = path.startsWith('/en');
+  const basePath = isEnglishPage ? path.substring(3) : path; // Remove /en prefix if present
+  
+  // Set canonical URLs properly
+  const polishUrl = `${baseUrl}${basePath}`;
+  const englishUrl = `${baseUrl}/en${basePath}`;
+  const canonicalUrl = isEnglishPage ? englishUrl : polishUrl;
   
   const alternateLanguages: Record<string, string> = {
-    'pl': canonicalUrl,
-    'x-default': canonicalUrl,
+    'pl': polishUrl,
+    'x-default': polishUrl, // Default to Polish
   };
   
   if (hasEnTranslation) {
-    alternateLanguages['en'] = `${canonicalUrl}/en`;
+    alternateLanguages['en'] = englishUrl;
   }
   
   return {
@@ -89,7 +98,7 @@ export function generatePageMetadata(
       description,
       url: canonicalUrl,
       siteName: 'CloudFloo',
-      locale: 'pl_PL',
+      locale: isEnglishPage ? 'en_US' : 'pl_PL',
       type: 'website',
       images: [
         {
@@ -113,4 +122,11 @@ export function generatePageMetadata(
 export function detectLanguage(acceptLanguage?: string): 'pl' | 'en' {
   if (!acceptLanguage) return 'pl';
   return acceptLanguage.includes('en') && !acceptLanguage.includes('pl') ? 'en' : 'pl';
+}
+
+/**
+ * Detect language from pathname
+ */
+export function detectLanguageFromPath(pathname: string): 'pl' | 'en' {
+  return pathname.startsWith('/en') ? 'en' : 'pl';
 } 

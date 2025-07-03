@@ -1,15 +1,18 @@
 import { Metadata } from 'next';
-import BackToHomeButton from '@/components/BackToHomeButton';
-import { Settings, GitBranch, Zap, Shield, Monitor, Rocket } from 'lucide-react';
+import { generatePageMetadata } from '@/lib/metadata';
+import Link from 'next/link';
+import { ArrowLeft, Settings, GitBranch, Zap, Shield, Monitor, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-export const metadata: Metadata = {
-  title: 'DevOps i Automatyzacja - CI/CD, Kubernetes | CloudFloo',
-  description: 'Pipeline\'y CI/CD, Kubernetes, Terraform, monitoring Grafana/Prometheus. Automatyzacja infrastruktury i deploymentów 🔧',
-};
+export const metadata: Metadata = generatePageMetadata(
+  '/en/services/devops',
+  'DevOps & Automation Services | CloudFloo',
+  'Professional DevOps automation, CI/CD pipelines, infrastructure as code, and cloud operations. Streamline your development workflow.',
+  true
+);
 
-export default function DevOpsPage() {
+export default function EnglishDevOpsPage() {
   const features = [
     {
       icon: GitBranch,
@@ -96,7 +99,10 @@ export default function DevOpsPage() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <BackToHomeButton />
+            <Link href="/en" className="flex items-center text-gray-300 hover:text-neon transition-colors">
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back to Home
+            </Link>
             <div className="text-gray-500">/</div>
             <div className="text-neon">DevOps & Automation</div>
           </div>

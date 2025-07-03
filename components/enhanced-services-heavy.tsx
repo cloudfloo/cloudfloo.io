@@ -1,27 +1,22 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
-import { Cloud, Code, Bot, Settings, Database, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { useStaggeredAnimation } from '@/hooks/use-scroll-animation';
+import Image from 'next/image';
+import { Cloud, Code2, Database, Cpu, Shield, GitBranch, Bot, Zap, ArrowRight } from 'lucide-react';
+import { DEFAULT_BLUR } from "@/data/placeholders";
+import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Create a motion-enabled Button component
-import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
-const MotionButton = motion(Button);
-
-interface TechIconProps {
+// Simplified tech icon component - reduced complexity
+function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: {
   name: string;
   logo: string;
-  fallbackIcon: any;
+  fallbackIcon: React.ComponentType<any>;
   className?: string;
-}
-
-function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: TechIconProps) {
+}) {
   const [imageError, setImageError] = useState(false);
 
   if (imageError) {
@@ -46,409 +41,191 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
 
 export default function EnhancedServices() {
   const { t } = useLanguage();
-  
+
+  // Simplified services data - reduced complexity
   const services = [
     {
       icon: Cloud,
-      title: 'Strategic Cloud Consulting',
-      description: 'Expert guidance tailored to your business goals, ensuring optimal cloud architecture and seamless migration strategies.',
-      features: ['Architecture Design', 'Migration Planning', 'Cost Optimization', 'Security Assessment'],
-      color: 'from-blue-500 to-cyan-500',
-      href: '/services/cloud-solutions',
-      techIcons: [Server, Database, Shield, Network]
-    },
-    {
-      icon: Code,
-      title: 'Custom Application Development',
-      description: 'Scalable, modern applications built with your specific requirements in mind, leveraging cutting-edge technologies.',
-      features: ['Full-Stack Development', 'API Integration', 'Performance Optimization', 'Responsive Design'],
-      color: 'from-green-500 to-emerald-500',
-      href: '/services/app-development',
-      techIcons: [Monitor, Smartphone, Code2, Globe]
+      title: t('services.cloudSolutions.title'),
+      description: t('services.cloudSolutions.description'),
+      features: [
+        t('services.cloudSolutions.features.aws'),
+        t('services.cloudSolutions.features.azure'),
+        t('services.cloudSolutions.features.gcp'),
+        t('services.cloudSolutions.features.architecture'),
+      ],
+      link: '/services/cloud-solutions',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Bot,
-      title: 'Intelligent Automation',
-      description: 'AI-powered solutions that streamline operations and enhance productivity through smart workflow automation.',
-      features: ['Process Automation', 'AI Integration', 'Workflow Optimization', 'Predictive Analytics'],
-      color: 'from-purple-500 to-pink-500',
-      href: '/services/ai-ml',
-      techIcons: [Cpu, BarChart3, Activity, Target]
+      title: t('services.aiMl.title'),
+      description: t('services.aiMl.description'),
+      features: [
+        t('services.aiMl.features.models'),
+        t('services.aiMl.features.automation'),
+        t('services.aiMl.features.analytics'),
+        t('services.aiMl.features.deployment'),
+      ],
+      link: '/services/ai-ml',
+      color: 'from-purple-500 to-pink-500'
     },
     {
-      icon: Settings,
-      title: 'DevOps Excellence',
-      description: 'Comprehensive DevOps practices that accelerate delivery while maintaining reliability and security.',
-      features: ['CI/CD Implementation', 'Infrastructure as Code', 'Monitoring & Alerting', 'Security Integration'],
-      color: 'from-orange-500 to-red-500',
-      href: '/services/devops',
-      techIcons: [GitBranch, Package, Workflow, CheckCircle]
+      icon: GitBranch,
+      title: t('services.devops.title'),
+      description: t('services.devops.description'),
+      features: [
+        t('services.devops.features.kubernetes'),
+        t('services.devops.features.cicd'),
+        t('services.devops.features.infrastructure'),
+        t('services.devops.features.monitoring'),
+      ],
+      link: '/services/devops',
+      color: 'from-green-500 to-emerald-500'
     },
     {
       icon: Database,
-      title: 'Data Engineering Solutions',
-      description: 'Transform raw data into actionable insights with robust pipelines and advanced analytics platforms.',
-      features: ['Data Pipeline Design', 'Real-time Processing', 'Analytics Platforms', 'Data Governance'],
-      color: 'from-indigo-500 to-blue-500',
-      href: '/services/data-engineering',
-      techIcons: [HardDrive, BarChart3, Activity, Search]
-    },
-    {
-      icon: Zap,
-      title: 'ML Operations',
-      description: 'End-to-end machine learning lifecycle management, from model development to production deployment.',
-      features: ['Model Development', 'Automated Training', 'Performance Monitoring', 'Scalable Deployment'],
-      color: 'from-yellow-500 to-orange-500',
-      href: '/services/ai-ml',
-      techIcons: [Cpu, Target, Activity, Zap]
-    },
-    {
-      icon: Server,
-      title: 'Edge Computing',
-      description: 'Ultra-fast, globally distributed solutions that bring computation closer to your users for optimal performance.',
-      features: ['Global Distribution', 'Low Latency', 'Auto-scaling', 'Edge Optimization'],
-      color: 'from-teal-500 to-green-500',
-      href: '/services/edge-computing',
-      techIcons: [Globe, Network, Zap, Activity]
+      title: t('services.dataEngineering.title'),
+      description: t('services.dataEngineering.description'),
+      features: [
+        t('services.dataEngineering.features.pipelines'),
+        t('services.dataEngineering.features.analytics'),
+        t('services.dataEngineering.features.streaming'),
+        t('services.dataEngineering.features.governance'),
+      ],
+      link: '/services/data-engineering',
+      color: 'from-orange-500 to-red-500'
     }
   ];
 
-  // Technology showcase with REAL logos from techicons.dev
-  const technologyShowcase = {
-    'Cloud Platforms': [
-      { name: 'AWS', icon: Cloud, logo: 'aws' },
-      { name: 'Google Cloud', icon: Cloud, logo: 'gcp' },
-      { name: 'Azure', icon: Cloud, logo: 'azure' },
-      { name: 'DigitalOcean', icon: Server, logo: 'digitalocean' },
-      { name: 'Vercel', icon: Globe, logo: 'vercel' },
-      { name: 'Netlify', icon: Globe, logo: 'netlify' }
+  // Simplified tech stack - reduced number of items
+  const technologyStack = {
+    [t('services.techStack.backend')]: [
+      { name: 'Node.js', logo: 'nodejs', fallback: Code2 },
+      { name: 'NestJS', logo: 'nestjs', fallback: Code2 },
+      { name: 'PostgreSQL', logo: 'postgresql', fallback: Database },
+      { name: 'Redis', logo: 'redis', fallback: Database },
     ],
-    'Backend & Database': [
-      { name: 'Node.js', icon: Server, logo: 'nodejs' },
-      { name: 'Python', icon: Code2, logo: 'python' },
-      { name: 'PostgreSQL', icon: Database, logo: 'postgresql' },
-      { name: 'MongoDB', icon: HardDrive, logo: 'mongodb' },
-      { name: 'Redis', icon: Zap, logo: 'redis' },
-      { name: 'Elasticsearch', icon: Search, logo: 'elasticsearch' }
+    [t('services.techStack.frontend')]: [
+      { name: 'React', logo: 'react', fallback: Code2 },
+      { name: 'Next.js', logo: 'nextjs', fallback: Code2 },
+      { name: 'TypeScript', logo: 'typescript', fallback: Code2 },
+      { name: 'Tailwind', logo: 'tailwindcss', fallback: Code2 },
     ],
-    'Frontend & Mobile': [
-      { name: 'React', icon: Monitor, logo: 'react' },
-      { name: 'Next.js', icon: Layout, logo: 'nextjs' },
-      { name: 'TypeScript', icon: Code2, logo: 'typescript' },
-      { name: 'React Native', icon: Smartphone, logo: 'react' },
-      { name: 'Flutter', icon: Smartphone, logo: 'flutter' },
-      { name: 'Vue.js', icon: Palette, logo: 'vuejs' }
-    ],
-    'DevOps & Tools': [
-      { name: 'Docker', icon: Package, logo: 'docker' },
-      { name: 'Kubernetes', icon: Server, logo: 'kubernetes' },
-      { name: 'Jenkins', icon: GitBranch, logo: 'jenkins' },
-      { name: 'GitHub Actions', icon: Workflow, logo: 'githubactions' },
-      { name: 'Terraform', icon: Settings, logo: 'terraform' },
-      { name: 'Ansible', icon: Network, logo: 'ansible' }
-    ],
-    'Testing & Quality': [
-      { name: 'Jest', icon: CheckCircle, logo: 'jest' },
-      { name: 'Playwright', icon: Bug, logo: 'playwright' },
-      { name: 'Cypress', icon: Target, logo: 'cypress' },
-      { name: 'SonarQube', icon: Search, logo: 'sonarqube' },
-      { name: 'ESLint', icon: Shield, logo: 'eslint' },
-      { name: 'Prettier', icon: Palette, logo: 'prettier' }
-    ],
-    'AI & Analytics': [
-      { name: 'TensorFlow', icon: Cpu, logo: 'tensorflow' },
-      { name: 'PyTorch', icon: Bot, logo: 'pytorch' },
-      { name: 'Pandas', icon: BarChart3, logo: 'pandas' },
-      { name: 'Apache Spark', icon: Activity, logo: 'apachespark' },
-      { name: 'Apache Kafka', icon: Network, logo: 'apachekafka' },
-      { name: 'Grafana', icon: BarChart3, logo: 'grafana' }
+    [t('services.techStack.cloud')]: [
+      { name: 'AWS', logo: 'aws', fallback: Cloud },
+      { name: 'Kubernetes', logo: 'kubernetes', fallback: Cpu },
+      { name: 'Docker', logo: 'docker', fallback: Cpu },
+      { name: 'Terraform', logo: 'terraform', fallback: Shield },
     ]
   };
 
-  const { ref, visibleItems } = useStaggeredAnimation(services.length, 150);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60,
-      scale: 0.8,
-      rotateX: -15
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-        duration: 0.6
-      }
-    }
-  };
-
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
-      rotate: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 200,
-        damping: 15,
-        delay: 0.2
-      }
-    },
-    hover: {
-      scale: 1.2,
-      rotate: 360,
-      transition: { duration: 0.6, ease: 'easeInOut' }
-    }
-  };
-
-  const featureVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.1 + 0.4,
-        duration: 0.3
-      }
-    })
-  };
-
   return (
-    <section id="services" className="py-20 relative overflow-hidden scroll-offset">
-      {/* Background Effects */}
-      <div className="absolute inset-0 volumetric-lighting"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.h2 
-            id="expert-solutions"
+    <section id="services" className="py-20 relative scroll-offset">
+      <div className="container mx-auto px-6">
+        
+        {/* Header */}
+        <div className="text-center mb-16 animate-slide-in">
+          <h2 
+            id="expert-solutions" 
             className="text-4xl md:text-5xl font-bold mb-6 text-white"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Expert <span className="text-neon">Solutions</span> Tailored for You
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            Comprehensive technology services designed around your business needs, delivered by seasoned professionals who understand your industry challenges.
-          </motion.p>
-        </motion.div>
+            dangerouslySetInnerHTML={{ __html: t('services.title') }}
+          />
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            {t('services.subtitle')}
+          </p>
+        </div>
 
-        <motion.div 
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-20"
-        >
+        {/* Services Grid - simplified layout with CSS animations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {services.map((service, index) => {
             const Icon = service.icon;
-            const isVisible = visibleItems[index];
-            
             return (
-              <motion.div
+              <Card 
                 key={index}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-                whileHover={{ 
-                  y: -10,
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
-                }}
-                className="h-full"
+                className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 group h-full card-3d"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 h-full group cursor-pointer overflow-hidden">
-                  <CardHeader className="pb-4">
-                    <motion.div 
-                      className={`w-12 h-12 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-4 relative overflow-hidden`}
-                      variants={iconVariants}
-                      initial="hidden"
-                      animate={isVisible ? "visible" : "hidden"}
-                      whileHover="hover"
-                    >
-                      <Icon className="w-6 h-6 text-white relative z-10" />
-                      <motion.div
-                        className="absolute inset-0 bg-white/20"
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileHover={{ 
-                          scale: 1, 
-                          opacity: 1,
-                          transition: { duration: 0.3 }
-                        }}
-                      />
-                    </motion.div>
-                    
-                    <CardTitle className="text-xl text-white group-hover:text-neon transition-colors duration-300">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
+                <CardHeader>
+                  <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl text-white group-hover:text-neon transition-colors duration-300">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
                   
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-gray-300 leading-relaxed">
-                      {service.description}
-                    </CardDescription>
-                    
-                    {/* Technology Icons for this service */}
-                    <motion.div 
-                      className="flex items-center justify-center gap-2 py-2"
-                      initial="hidden"
-                      animate={isVisible ? "visible" : "hidden"}
-                    >
-                      {service.techIcons.map((TechIcon, techIndex) => (
-                        <motion.div
-                          key={techIndex}
-                          className="p-2 bg-gradient-to-r from-gray-700/50 to-gray-600/50 rounded-lg"
-                          variants={featureVariants}
-                          custom={techIndex}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <TechIcon className="w-4 h-4 text-neon" />
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                    
-                    <motion.ul 
-                      className="space-y-2"
-                      initial="hidden"
-                      animate={isVisible ? "visible" : "hidden"}
-                    >
-                      {service.features.map((feature, featureIndex) => (
-                        <motion.li 
-                          key={featureIndex} 
-                          className="text-xs text-gray-400 flex items-center"
-                          variants={featureVariants}
-                          custom={featureIndex}
-                        >
-                          <motion.span 
-                            className={`w-1.5 h-1.5 bg-gradient-to-r ${service.color} rounded-full mr-2`}
-                            initial={{ scale: 0 }}
-                            animate={isVisible ? { scale: 1 } : { scale: 0 }}
-                            transition={{ delay: featureIndex * 0.1 + 0.6 }}
-                          />
-                          {feature}
-                        </motion.li>
-                      ))}
-                    </motion.ul>
+                  <div className="space-y-2 mb-6">
+                    {service.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center opacity-0 animate-slide-in" style={{ animationDelay: `${(index * 0.1) + (featureIndex * 0.1)}s`, animationFillMode: 'forwards' }}>
+                        <div className="w-2 h-2 bg-neon rounded-full mr-3 flex-shrink-0"></div>
+                        <span className="text-sm text-gray-300">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ delay: 0.8 }}
+                  <Link href={service.link}>
+                    <Button 
+                      className="w-full group bg-gradient-to-r from-neon/20 to-transparent border border-neon/30 text-neon hover:bg-neon/10"
                     >
-                      <Link href={service.href}>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          className="w-full border-gray-600 text-gray-300 hover:border-neon hover:text-neon hover:bg-neon/10 transition-all duration-300 group/btn btn-accessible"
-                        >
-                          {t('common.learnMore')}
-                          <motion.span
-                            className="ml-2"
-                            initial={{ x: 0 }}
-                            whileHover={{ x: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            →
-                          </motion.span>
-                        </Button>
-                      </Link>
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                      {t('services.learnMore')}
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-2" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Technology Showcase with REAL Logos */}
-        <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 id="technologies-we-master" className="text-3xl font-bold text-center mb-12 text-white">
-            Technologies We <span className="text-neon">Master</span>
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(technologyShowcase).map(([category, technologies], categoryIndex) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              >
-                <Card className="glass border-gray-700 hover:border-neon/30 transition-all duration-500 h-full">
-                  <CardHeader>
-                    <CardTitle className="text-lg text-white text-center">{category}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 gap-3">
-                      {technologies.map((tech, techIndex) => (
-                        <motion.div
-                          key={techIndex}
-                          className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-lg hover:from-neon/10 hover:to-neon/20 transition-all duration-300 group cursor-pointer"
-                          whileHover={{ scale: 1.05 }}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: techIndex * 0.05 + categoryIndex * 0.1 }}
-                        >
-                          {/* Real Logo from techicons.dev */}
-                          <div className="w-5 h-5 flex items-center justify-center">
-                            <TechIcon 
-                              name={tech.name}
-                              logo={tech.logo}
-                              fallbackIcon={tech.icon}
-                              className="w-4 h-4"
-                            />
-                          </div>
-                          <span className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300 truncate">
-                            {tech.name}
-                          </span>
-                        </motion.div>
-                      ))}
+        {/* Technology Stack - simplified */}
+        <div className="text-center mb-16 animate-slide-in" style={{ animationDelay: '0.4s' }}>
+          <h3 
+            id="technologies-we-master"
+            className="text-3xl font-bold mb-6 text-white"
+            dangerouslySetInnerHTML={{ __html: t('services.techStack.title') }}
+          />
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            {t('services.techStack.subtitle')}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {Object.entries(technologyStack).map(([category, technologies], categoryIndex) => (
+            <Card 
+              key={category} 
+              className="glass border-gray-700 hover:border-neon/30 transition-all duration-500 h-full card-3d"
+              style={{ animationDelay: `${0.5 + (categoryIndex * 0.1)}s` }}
+            >
+              <CardHeader>
+                <CardTitle className="text-lg text-white text-center">{category}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  {technologies.map((tech, techIndex) => (
+                    <div 
+                      key={techIndex}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-white/5 transition-colors duration-300 group opacity-0 animate-slide-in"
+                      style={{ animationDelay: `${0.6 + (categoryIndex * 0.1) + (techIndex * 0.05)}s`, animationFillMode: 'forwards' }}
+                    >
+                      <TechIcon 
+                        name={tech.name}
+                        logo={tech.logo}
+                        fallbackIcon={tech.fallback}
+                        className="w-8 h-8 mb-2"
+                      />
+                      <span className="text-xs text-gray-300 text-center">{tech.name}</span>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   );

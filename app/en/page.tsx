@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import EnhancedHeader from '@/components/enhanced-header-fixed';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
-import PolishLanguageWrapper from '@/components/PolishLanguageWrapper';
 
 // Cloud visualization - lazy load when needed
 const ImmersiveCloudVisualization = dynamic(() => import('@/components/immersive-cloud-visualization'), { 
@@ -47,26 +46,25 @@ const EnhancedContact = dynamic(() => import('@/components/enhanced-contact'), {
 });
 
 export const metadata: Metadata = generatePageMetadata(
-  '',
+  '/en',
   'CloudFloo | Polish Cloud-Native Software House & DevOps Agency',
-  'CloudFloo is a senior team of Polish engineers building cloud-native, micro-service, and DevOps solutions in NestJS, React, and Kubernetes.'
+  'CloudFloo is a senior team of Polish engineers building cloud-native, micro-service, and DevOps solutions in NestJS, React, and Kubernetes.',
+  true
 );
 
-export default function Home() {
+export default function EnglishHome() {
   return (
-    <PolishLanguageWrapper>
-      <main className="relative">
-        <ImmersiveCloudVisualization />
-        <EnhancedHeader />
-        <Hero />
-        <EnhancedServices />
-        <EnhancedAbout />
-        <TeamSection />
-        <EnhancedProjects />
-        <FAQSection />
-        <EnhancedContact />
-        <Footer />
-      </main>
-    </PolishLanguageWrapper>
+    <main className="relative">
+      <ImmersiveCloudVisualization />
+      <EnhancedHeader />
+      <Hero />
+      <EnhancedServices />
+      <EnhancedAbout />
+      <TeamSection />
+      <EnhancedProjects />
+      <FAQSection />
+      <EnhancedContact />
+      <Footer />
+    </main>
   );
-}
+} 

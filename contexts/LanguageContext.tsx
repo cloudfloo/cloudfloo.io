@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 
 type Language = 'en' | 'pl';
 
@@ -9,6 +10,8 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
   isLoaded: boolean;
+  getLanguageAwarePath: (path: string) => string;
+  getHomeUrl: () => string;
 }
 
 // Default translations to prevent hydration mismatches
@@ -22,7 +25,8 @@ const defaultTranslations = {
     projects: 'Projects',
     contact: 'Contact',
     getStarted: 'Get Started',
-    toggleMenu: 'Toggle menu'
+    toggleMenu: 'Toggle menu',
+    backToHome: 'Back to Home'
   },
   hero: {
     title: 'Cloud-Native Software House from Poland',
@@ -112,20 +116,45 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
+// Helper function to detect language from pathname
+function detectLanguageFromPath(pathname: string | null): Language {
+  if (!pathname) return 'pl'; // Default to Polish if pathname is null
+  if (pathname.startsWith('/en')) {
+    return 'en';
+  }
+  return 'pl'; // Default to Polish for root paths
+}
+
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [language, setLanguageState] = useState<Language>('en');
+  const pathname = usePathname();
+  
+  // Initialize with URL-based language for consistent SSR/CSR
+  const [language, setLanguageState] = useState<Language>(() => {
+    return detectLanguageFromPath(pathname);
+  });
+  
   const [translations, setTranslations] = useState<Record<string, any>>(defaultTranslations);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Set isClient to true on mount to detect client-side rendering
+  // Set hydration flag after mount
   useEffect(() => {
-    setIsClient(true);
+    setIsHydrated(true);
   }, []);
 
-  // Load translations
+  // Sync language with URL pathname after hydration
   useEffect(() => {
-    if (!isClient) return;
+    if (!isHydrated) return;
+    
+    const urlLanguage = detectLanguageFromPath(pathname);
+    if (urlLanguage !== language) {
+      setLanguageState(urlLanguage);
+    }
+  }, [pathname, language, isHydrated]);
+
+  // Load translations after hydration
+  useEffect(() => {
+    if (!isHydrated) return;
     
     const loadTranslations = async () => {
       try {
@@ -155,18 +184,21 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     };
 
     loadTranslations();
-  }, [language, isClient]);
+  }, [language, isHydrated]);
 
-  // Load saved language preference on mount
+  // Load saved language preference only after hydration and for non-English URLs
   useEffect(() => {
-    if (!isClient) return;
+    if (!isHydrated || !pathname) return;
     
     try {
       const savedLanguage = localStorage.getItem('cloudfloo-language') as Language;
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'pl')) {
+      // Only use saved preference if we're not on a language-specific URL
+      const urlLanguage = detectLanguageFromPath(pathname);
+      
+      if (!pathname.startsWith('/en') && savedLanguage && (savedLanguage === 'en' || savedLanguage === 'pl')) {
         setLanguageState(savedLanguage);
-      } else {
-        // Detect browser language
+      } else if (!pathname.startsWith('/en') && !savedLanguage) {
+        // Detect browser language only for root paths
         const browserLanguage = navigator.language.toLowerCase();
         if (browserLanguage.startsWith('pl')) {
           setLanguageState('pl');
@@ -175,10 +207,10 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     } catch (e) {
       console.error('Error accessing localStorage:', e);
     }
-  }, [isClient]);
+  }, [isHydrated, pathname]);
 
   const setLanguage = (lang: Language) => {
-    if (!isClient) return;
+    if (!isHydrated) return;
     
     setLanguageState(lang);
     try {
@@ -186,6 +218,36 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     } catch (e) {
       console.error('Error accessing localStorage:', e);
     }
+  };
+
+  // Helper function to build language-aware URLs
+  const getLanguageAwarePath = (path: string): string => {
+    // Don't modify external URLs, mailto links, tel links, or hash links
+    if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:') || path.startsWith('#')) {
+      return path;
+    }
+
+    // If we're in English context, prefix with /en
+    if (language === 'en') {
+      // Don't double-prefix if already starts with /en
+      if (path.startsWith('/en')) {
+        return path;
+      }
+      return path === '/' ? '/en' : `/en${path}`;
+    }
+
+    // For Polish (default), remove /en prefix if present
+    if (path.startsWith('/en')) {
+      const withoutEn = path.substring(3);
+      return withoutEn === '' ? '/' : withoutEn;
+    }
+
+    return path;
+  };
+
+  // Helper function to get the correct home URL
+  const getHomeUrl = (): string => {
+    return language === 'en' ? '/en' : '/';
   };
 
   // Translation function with nested key support
@@ -197,7 +259,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        if (isClient) console.warn(`Translation key not found: ${key}`);
+        if (isHydrated) console.warn(`Translation key not found: ${key}`);
         return key; // Return the key if translation is not found
       }
     }
@@ -206,7 +268,14 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, isLoaded }}>
+    <LanguageContext.Provider value={{ 
+      language, 
+      setLanguage, 
+      t, 
+      isLoaded: isLoaded || !isHydrated, // Consider loaded during SSR
+      getLanguageAwarePath, 
+      getHomeUrl 
+    }}>
       {children}
     </LanguageContext.Provider>
   );

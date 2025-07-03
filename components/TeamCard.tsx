@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import LanguageAwareLink from '@/components/LanguageAwareLink';
 import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -25,7 +25,7 @@ export default function TeamCard({ person }: TeamCardProps) {
     >
       <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden h-full rounded-2xl shadow-md">
         <CardHeader className="p-4">
-          <Link href={`/team/${person.slug}`} className="block">
+          <LanguageAwareLink href={`/team/${person.slug}`} className="block">
             <div className="relative w-full aspect-square mb-4 overflow-hidden rounded-xl">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -58,40 +58,44 @@ export default function TeamCard({ person }: TeamCardProps) {
                 </div>
               </motion.div>
             </div>
-          </Link>
+          </LanguageAwareLink>
           
           <CardTitle className="text-xl text-white group-hover:text-neon transition-colors duration-300">
             {person.name}
           </CardTitle>
-          <p className="text-neon text-sm font-medium">{person.title}</p>
+          <p className="text-neon font-medium text-sm">
+            {t(`team.members.${person.slug}.title`) || person.title}
+          </p>
         </CardHeader>
         
         <CardContent className="p-4 pt-0 space-y-4">
           <p className="text-gray-300 text-sm leading-relaxed">
-            {person.shortBio}
+            {t(`team.members.${person.slug}.shortBio`) || person.shortBio}
           </p>
           
-          {/* Top 3 Expertise Areas */}
           <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">{t('team.keyExpertise')}</h4>
+            <h4 className="text-sm font-semibold text-white">{t('team.member.expertise')}:</h4>
             <div className="flex flex-wrap gap-1">
               {person.expertise.slice(0, 3).map((skill, index) => (
-                <Badge
-                  key={index}
-                  className="bg-gradient-neon/10 text-neon border border-neon/20 text-xs px-2 py-1"
+                <Badge 
+                  key={index} 
+                  variant="outline" 
+                  className="text-xs bg-gradient-neon/10 text-neon border-neon/20"
                 >
                   {skill}
                 </Badge>
               ))}
               {person.expertise.length > 3 && (
-                <Badge className="bg-gray-700/50 text-gray-300 border border-gray-600 text-xs px-2 py-1">
-                  +{person.expertise.length - 3} more
+                <Badge 
+                  variant="outline" 
+                  className="text-xs bg-gray-700/50 text-gray-300 border-gray-600"
+                >
+                  +{person.expertise.length - 3}
                 </Badge>
               )}
             </div>
           </div>
           
-          {/* Social Links */}
           <div className="flex items-center justify-between pt-4 border-t border-gray-700">
             <div className="flex items-center gap-2">
               {person.linkedin && (
@@ -123,7 +127,7 @@ export default function TeamCard({ person }: TeamCardProps) {
               )}
             </div>
             
-            <Link href={`/team/${person.slug}`}>
+            <LanguageAwareLink href={`/team/${person.slug}`}>
               <motion.button
                 className="text-xs text-gray-400 hover:text-neon transition-colors duration-300 flex items-center gap-1"
                 whileHover={{ x: 2 }}
@@ -132,7 +136,7 @@ export default function TeamCard({ person }: TeamCardProps) {
                 {t('team.member.viewProfile')}
                 <ExternalLink className="w-3 h-3" />
               </motion.button>
-            </Link>
+            </LanguageAwareLink>
           </div>
         </CardContent>
       </Card>

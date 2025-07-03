@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import LanguageAwareLink from '@/components/LanguageAwareLink';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -27,7 +27,7 @@ export default function EnhancedHeader() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
-  const { t, isLoaded } = useLanguage();
+  const { t, isLoaded, language } = useLanguage();
 
   // Fix hydration issues by only enabling client-side features after mount
   useEffect(() => {
@@ -39,7 +39,8 @@ export default function EnhancedHeader() {
       setIsScrolled(window.scrollY > 50);
       
       // Only track active sections on homepage
-      if (pathname === '/' && hasMounted) {
+      const isHomepage = pathname === '/' || pathname === '/en';
+      if (isHomepage && hasMounted) {
         // Get all sections
         const sections = ['home', 'services', 'about', 'team', 'projects', 'contact'];
         const sectionElements = sections.map(id => document.getElementById(id));
@@ -73,9 +74,13 @@ export default function EnhancedHeader() {
   const smoothScrollTo = (elementId: string) => {
     if (!hasMounted) return;
     
+    // Check if we're on the homepage using pathname directly
+    const isHomepage = pathname === '/' || pathname === '/en';
+    
     // If we're not on the homepage, navigate there first
-    if (pathname !== '/') {
-      window.location.href = `/#${elementId}`;
+    if (!isHomepage) {
+      const homeUrl = pathname?.startsWith('/en') ? '/en' : '/';
+      window.location.href = `${homeUrl}#${elementId}`;
       return;
     }
 
@@ -141,7 +146,7 @@ export default function EnhancedHeader() {
     animate: { y: 0, opacity: 1 },
     scrolled: {
       backdropFilter: 'blur(20px)',
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: 'rgba(0, 0, 0, 0.9)',
       borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     }
   };
@@ -201,31 +206,31 @@ export default function EnhancedHeader() {
   const shouldShowUnderline = (itemId: string) => {
     if (!hasMounted) return false;
     
+    // Check if we're on the homepage
+    const isHomepage = pathname === '/' || pathname === '/en';
+    
     // On homepage, show underline for active section or hovered item
-    if (pathname === '/') {
+    if (isHomepage) {
       return hoveredItem === itemId || (hoveredItem === null && activeSection === itemId);
     }
     // On other pages, only show on hover
     return hoveredItem === itemId;
   };
 
-  // If client-side hydration hasn't happened yet, return a simple version without interactive elements
-  if (!hasMounted) {
+  // Don't render anything during SSR or until mounted to prevent hydration mismatch
+  if (!hasMounted || !isLoaded) {
     return (
-      <header className="fixed top-0 w-full z-50 bg-transparent">
+      <header className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 relative"></div>
-              <span className="text-xl font-bold text-white">cloudfloo.io</span>
+              <div className="w-12 h-12 bg-gray-800 rounded-lg animate-pulse" />
+              <div className="w-32 h-6 bg-gray-800 rounded animate-pulse" />
             </div>
-            <div className="hidden md:block">
-              <div className="flex space-x-6">
-                {/* Static placeholders for nav items */}
-              </div>
-            </div>
-            <div className="md:hidden">
-              <div className="w-6 h-6"></div>
+            <div className="hidden md:flex space-x-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="w-16 h-4 bg-gray-800 rounded animate-pulse" />
+              ))}
             </div>
           </div>
         </nav>
@@ -240,38 +245,62 @@ export default function EnhancedHeader() {
       initial="initial"
       animate="animate"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
+        isScrolled || isMenuOpen 
+          ? 'bg-black/90 backdrop-blur-md border-b border-gray-800/50' 
+          : 'bg-transparent'
       }`}
       style={isScrolled ? headerVariants.scrolled : {}}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" onClick={(e) => {
+          <LanguageAwareLink href="/" onClick={(e) => {
             e.preventDefault();
             smoothScrollTo('home');
-          }} className="flex items-center space-x-3 group cursor-pointer">
-            <picture>
-              <source srcSet="/logo.avif" type="image/avif" />
-              <source srcSet="/logo.webp" type="image/webp" />
-              <Image
-                src="/logo.png"
-                alt="CloudFloo Logo"
-                width={64}
-                height={64}
-                priority
-                fetchPriority="high"
-                className="w-12 h-12"
-              />
-            </picture>
-             <motion.span 
-               className="text-xl font-bold text-white group-hover:text-neon transition-colors duration-700"
-               initial={{ opacity: 0, x: -20 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ delay: 0.4, duration: 0.7 }}
+          }} className="flex items-center space-x-3 group cursor-pointer relative">
+            {/* Enhanced logo container with better background for mobile */}
+            <div className="relative">
+              <picture>
+                <source srcSet="/logo.avif" type="image/avif" />
+                <source srcSet="/logo.webp" type="image/webp" />
+                <Image
+                  src="/logo.png"
+                  alt="CloudFloo Logo"
+                  width={48}
+                  height={48}
+                  priority
+                  fetchPriority="high"
+                  className="w-12 h-12 object-contain relative z-10"
+                  sizes="48px"
+                />
+              </picture>
+              {/* Logo glow effect for better visibility */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+            
+            {/* Enhanced logo text with better contrast */}
+            <motion.span 
+              className="text-xl font-bold relative z-10"
+              style={{
+                color: '#ffffff',
+                textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.5)',
+                background: 'linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%)',
+                backgroundClip: 'padding-box',
+                WebkitBackgroundClip: 'padding-box',
+                padding: '4px 8px',
+                borderRadius: '6px',
+                backdropFilter: 'blur(8px)'
+              }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              whileHover={{
+                textShadow: '0 0 20px rgba(0, 229, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)',
+                transition: { duration: 0.3 }
+              }}
             >
               cloudfloo.io
             </motion.span>
-          </Link>
+          </LanguageAwareLink>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -302,12 +331,12 @@ export default function EnhancedHeader() {
                             />
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <div className="grid w-[600px] grid-cols-2 gap-3 p-6 glass backdrop-blur-md border border-gray-700">
+                            <div className="grid w-[600px] grid-cols-2 gap-3 p-6 bg-black/95 backdrop-blur-md border border-gray-700 rounded-lg">
                               {services.map((service) => (
                                 <NavigationMenuLink key={service.href} asChild>
-                                  <Link
+                                  <LanguageAwareLink
                                     href={service.href}
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-800/50 focus:bg-gray-800/50 group"
                                   >
                                     <div className="text-sm font-medium leading-none text-white group-hover:text-neon transition-colors">
                                       {service.title}
@@ -315,7 +344,7 @@ export default function EnhancedHeader() {
                                     <p className="line-clamp-2 text-sm leading-snug text-gray-400">
                                       {service.description}
                                     </p>
-                                  </Link>
+                                  </LanguageAwareLink>
                                 </NavigationMenuLink>
                               ))}
                             </div>
@@ -367,9 +396,16 @@ export default function EnhancedHeader() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white hover:text-neon transition-colors duration-300"
+            className="md:hidden text-white hover:text-neon transition-colors duration-300 relative z-10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={t('navigation.toggleMenu')}
+            style={{
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
+              padding: '8px',
+              borderRadius: '6px',
+              background: isMenuOpen ? 'rgba(0, 0, 0, 0.3)' : 'transparent',
+              backdropFilter: isMenuOpen ? 'blur(8px)' : 'none'
+            }}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -377,46 +413,58 @@ export default function EnhancedHeader() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 glass rounded-lg p-6 overflow-hidden">
+          <motion.div 
+            className="md:hidden mt-4 bg-black/95 backdrop-blur-md rounded-lg p-6 overflow-hidden border border-gray-800/50"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
             <div className="space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => smoothScrollTo(item.id)}
-                  className={`block text-gray-300 hover:text-neon transition-colors duration-300 py-2 w-full text-left ${
+                  className={`block text-gray-300 hover:text-neon transition-colors duration-300 py-3 w-full text-left text-lg font-medium ${
                     pathname === '/' && activeSection === item.id ? 'text-neon' : ''
                   }`}
+                  style={{
+                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.8)',
+                  }}
                 >
                   {item.label}
                 </button>
               ))}
               
               {/* Mobile Services Menu */}
-              <div className="py-2">
-                <div className="pl-4 space-y-2">
+              <div className="py-2 border-t border-gray-800/50 mt-4">
+                <div className="pl-4 space-y-3">
                   {services.map((service) => (
-                    <Link
+                    <LanguageAwareLink
                       key={service.href}
                       href={service.href}
-                      className="block text-sm text-gray-400 hover:text-neon transition-colors duration-300 py-1"
+                      className="block text-sm text-gray-400 hover:text-neon transition-colors duration-300 py-2"
                       onClick={() => setIsMenuOpen(false)}
+                      style={{
+                        textShadow: '0 1px 4px rgba(0, 0, 0, 0.8)',
+                      }}
                     >
                       {service.title}
-                    </Link>
+                    </LanguageAwareLink>
                   ))}
                 </div>
               </div>
               
               <MotionButton 
                 onClick={() => smoothScrollTo('contact')}
-                className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+                className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mt-6"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {t('navigation.getStarted')}
               </MotionButton>
             </div>
-          </div>
+          </motion.div>
         )}
       </nav>
     </motion.header>

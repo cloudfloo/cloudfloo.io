@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import BackToHomeButton from '@/components/BackToHomeButton';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -14,10 +14,7 @@ export default function GDPRClient() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              {t('common.backToHome')}
-            </Link>
+            <BackToHomeButton />
             <div className="text-gray-500">/</div>
             <div className="text-neon">{t('common.gdpr')}</div>
           </div>

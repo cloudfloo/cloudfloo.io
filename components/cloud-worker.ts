@@ -1,5 +1,7 @@
 import * as THREE from "three";
 
+console.log('Cloud worker loaded, THREE version:', THREE.REVISION);
+
 let scene: THREE.Scene;
 let camera: THREE.PerspectiveCamera;
 let renderer: THREE.WebGLRenderer | undefined;
@@ -26,6 +28,8 @@ const FRAME_INTERVAL = isLowEnd
   ? config.frameIntervals.lowEnd
   : config.frameIntervals.highEnd;
 let lastFrame = 0;
+
+console.log('Cloud worker config:', { isLowEnd, PARTICLE_COUNT, FRAME_INTERVAL });
 
 // Creating thousands of particles at once can block the worker event loop for
 // noticeable time. We generate them in chunks during idle periods to keep the
@@ -225,10 +229,13 @@ async function init(
   width: number,
   height: number
 ) {
+  console.log('Cloud worker init called with:', { canvas: !!canvas, width, height });
+  
   if (!canvas) {
     if (typeof (self as any).OffscreenCanvas === "function") {
       try {
         canvas = new (self as any).OffscreenCanvas(width, height);
+        console.log('Created fallback OffscreenCanvas');
       } catch (err) {
         console.error("Failed to create fallback OffscreenCanvas", err);
         return;
@@ -269,10 +276,13 @@ async function init(
     return;
   }
 
+  console.log('Creating cloud system...');
   cloud = await createCloudSystem();
   scene.add(cloud);
+  console.log('Cloud system created and added to scene');
 
   animate(0);
+  console.log('Animation started');
 }
 
 function resize(width: number, height: number) {
@@ -302,6 +312,7 @@ function dispose() {
 
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
+  console.log('Cloud worker received message:', data.type);
   switch (data.type) {
     case "init":
       init(data.canvas, data.width, data.height);
