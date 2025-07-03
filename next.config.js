@@ -30,6 +30,8 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   compress: true,
+  // Note: i18n routing not supported with static export
+  // Will implement manual locale detection and hreflang
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,

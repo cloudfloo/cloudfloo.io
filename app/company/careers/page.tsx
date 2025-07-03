@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import SEO from '@/components/SEO';
 
 export default function CareersPage() {
   const [selectedDepartment, setSelectedDepartment] = useState('all');
@@ -139,6 +140,13 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Kariera w IT - Praca w Cloud Computing | CloudFloo"
+        description="Dołącz do zespołu CloudFloo! Oferujemy atrakcyjne stanowiska dla programistów, inżynierów cloud i specjalistów DevOps w Polsce 🔧"
+        keywords="praca IT Polska, cloud engineer jobs, DevOps careers, remote work Poland, AWS Azure jobs, Kubernetes engineer"
+        url="https://cloudfloo.io/company/careers"
+      />
+      
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">

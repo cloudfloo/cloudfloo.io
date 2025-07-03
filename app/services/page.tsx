@@ -7,6 +7,7 @@ import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { ArrowLeft, Cloud, Bot, Settings, Database, Code, Zap, Server, Monitor, Smartphone, GitBranch, Package, Workflow, CheckCircle, Search, Bug, Shield, Target, Cpu, HardDrive, Network, Activity, BarChart3, Globe, Palette, Layout, Code2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useLanguage } from '@/contexts/LanguageContext';
 import SEO from '@/components/SEO';
 
 interface TechIconProps {
@@ -40,11 +41,13 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
 }
 
 export default function ServicesPage() {
+  const { t } = useLanguage();
+
   const services = [
     {
       icon: Cloud,
-      title: 'Cloud Solutions',
-      description: 'Scalable cloud infrastructure and migration services for modern businesses.',
+      title: t('services.cloudSolutions.title'),
+      description: t('services.cloudSolutions.description'),
       href: '/services/cloud-solutions',
       features: ['Cloud Migration', 'Infrastructure as Code', 'Auto-scaling', 'Security & Compliance'],
       color: 'from-blue-500 to-cyan-500',
@@ -52,8 +55,8 @@ export default function ServicesPage() {
     },
     {
       icon: Bot,
-      title: 'AI & Machine Learning',
-      description: 'Intelligent automation and ML operations for data-driven insights.',
+      title: t('services.aiAutomation.title'),
+      description: t('services.aiAutomation.description'),
       href: '/services/ai-ml',
       features: ['Custom ML Models', 'Intelligent Automation', 'Predictive Analytics', 'MLOps Pipeline'],
       color: 'from-purple-500 to-pink-500',
@@ -61,8 +64,8 @@ export default function ServicesPage() {
     },
     {
       icon: Settings,
-      title: 'DevOps & Automation',
-      description: 'Streamlined CI/CD pipelines and infrastructure automation.',
+      title: t('services.devops.title'),
+      description: t('services.devops.description'),
       href: '/services/devops',
       features: ['CI/CD Pipelines', 'Infrastructure as Code', 'Monitoring & Alerting', 'Security Integration'],
       color: 'from-orange-500 to-red-500',
@@ -70,8 +73,8 @@ export default function ServicesPage() {
     },
     {
       icon: Database,
-      title: 'Data Engineering',
-      description: 'Robust data pipelines and analytics solutions for business intelligence.',
+      title: t('services.dataEngineering.title'),
+      description: t('services.dataEngineering.description'),
       href: '/services/data-engineering',
       features: ['Data Pipeline Design', 'Real-time Processing', 'Analytics Platforms', 'Data Governance'],
       color: 'from-indigo-500 to-blue-500',
@@ -79,8 +82,8 @@ export default function ServicesPage() {
     },
     {
       icon: Code,
-      title: 'Application Development',
-      description: 'Custom web and mobile applications built with modern frameworks.',
+      title: t('services.appDevelopment.title'),
+      description: t('services.appDevelopment.description'),
       href: '/services/app-development',
       features: ['Full-Stack Development', 'Mobile Applications', 'Web Applications', 'Performance Optimization'],
       color: 'from-green-500 to-emerald-500',
@@ -88,8 +91,8 @@ export default function ServicesPage() {
     },
     {
       icon: Zap,
-      title: 'Edge Computing',
-      description: 'Ultra-fast edge functions and CDN solutions for global performance.',
+      title: t('services.edgeComputing.title'),
+      description: t('services.edgeComputing.description'),
       href: '/services/edge-computing',
       features: ['Ultra-Low Latency', 'Global Distribution', 'Serverless Functions', 'Real-time Processing'],
       color: 'from-teal-500 to-green-500',
@@ -166,17 +169,17 @@ export default function ServicesPage() {
   };
 
   const stats = [
-    { number: '5+', label: 'Projects Delivered', icon: Target },
-    { number: '99.99%', label: 'Uptime Guarantee', icon: Shield },
-    { number: '3+', label: 'Enterprise Clients', icon: Globe },
-    { number: '24/7', label: 'Support Available', icon: Activity }
+    { number: '5+', label: t('services.projectsDelivered'), icon: Target },
+    { number: '99.99%', label: t('services.uptimeGuarantee'), icon: Shield },
+    { number: '3+', label: t('services.enterpriseClients'), icon: Globe },
+    { number: '24/7', label: t('services.supportAvailable'), icon: Activity }
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Services"
-        description="Comprehensive cloud solutions, DevOps automation, AI/ML services, and application development by CloudFloo's senior Polish engineering team."
+        title="Usługi Cloud, DevOps, AI i Rozwój Aplikacji | CloudFloo"
+        description="Kompleksowe usługi IT: migracja do chmury AWS/Azure/GCP, automatyzacja DevOps, rozwój aplikacji React/Next.js i wdrożenia AI/ML dla firm 🔧"
         keywords="cloud solutions, DevOps automation, AI machine learning, application development, data engineering, edge computing, NestJS, React, Kubernetes, Polish engineers"
         url="https://cloudfloo.io/services"
       />
@@ -187,10 +190,10 @@ export default function ServicesPage() {
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Home
+              {t('common.backToHome')}
             </Link>
             <div className="text-gray-500">/</div>
-            <div className="text-neon">Services</div>
+            <div className="text-neon">{t('common.services')}</div>
           </div>
         </div>
       </header>
@@ -200,12 +203,12 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-              Our <span className="text-neon">Services</span>
-            </h1>
+            <h1 
+              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              dangerouslySetInnerHTML={{ __html: t('services.title') }}
+            />
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Comprehensive technology solutions designed to accelerate your digital transformation. 
-              From cloud infrastructure to AI automation, we provide the expertise you need to succeed.
+              {t('services.subtitle')}
             </p>
           </div>
         </div>
@@ -235,9 +238,9 @@ export default function ServicesPage() {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-white">Complete Technology Solutions</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">{t('services.completeTechSolutions')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Expert services across the entire technology stack, delivered by seasoned professionals.
+              {t('services.expertServices')}
             </p>
           </div>
           
@@ -284,7 +287,7 @@ export default function ServicesPage() {
                         variant="outline" 
                         className="w-full border-gray-600 text-gray-300 hover:border-neon hover:text-neon hover:bg-neon/10 transition-all duration-300 btn-accessible"
                       >
-                        Learn More →
+                        {t('common.learnMore')} →
                       </Button>
                     </Link>
                   </CardContent>
@@ -299,11 +302,12 @@ export default function ServicesPage() {
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-white">
-              Our Complete <span className="text-neon">Technology Stack</span>
-            </h2>
+            <h2 
+              className="text-4xl font-bold mb-6 text-white"
+              dangerouslySetInnerHTML={{ __html: t('services.completeStack') }}
+            />
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Comprehensive expertise across all modern technology categories
+              {t('services.comprehensiveExpertise')}
             </p>
           </div>
 
@@ -351,27 +355,27 @@ export default function ServicesPage() {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-8 text-white">Why Choose CloudFloo?</h2>
+            <h2 className="text-4xl font-bold mb-8 text-white">{t('services.whyChoose')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
                   <Users className="w-12 h-12 text-neon mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">Expert Team</h3>
-                  <p className="text-gray-300">Industry veterans with deep expertise across all major cloud platforms and technologies.</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{t('common.expertTeam')}</h3>
+                  <p className="text-gray-300">{t('services.expertTeamDesc')}</p>
                 </Card>
               </div>
               <div className="text-center">
                 <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
                   <Target className="w-12 h-12 text-neon mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">Proven Results</h3>
-                  <p className="text-gray-300">500+ successful projects with measurable business impact and ROI.</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{t('common.provenResults')}</h3>
+                  <p className="text-gray-300">{t('services.provenResultsDesc')}</p>
                 </Card>
               </div>
               <div className="text-center">
                 <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
                   <Shield className="w-12 h-12 text-neon mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">Partnership Approach</h3>
-                  <p className="text-gray-300">We work as your technology partner, not just a service provider.</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{t('common.partnershipApproach')}</h3>
+                  <p className="text-gray-300">{t('services.partnershipDesc')}</p>
                 </Card>
               </div>
             </div>
@@ -382,16 +386,16 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Get Started?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-white">{t('services.readyToStart')}</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Let's discuss your project and explore how our services can help you achieve your goals.
+            {t('services.readyToStartDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-gradient-neon text-white btn-accessible">
-              Schedule Consultation
+              {t('common.scheduleConsultation')}
             </Button>
             <Button size="lg" variant="outline" className="border-neon text-neon hover:bg-neon/10 btn-accessible">
-              View Case Studies
+              {t('common.viewCaseStudies')}
             </Button>
           </div>
         </div>

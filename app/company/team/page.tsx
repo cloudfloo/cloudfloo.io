@@ -1,11 +1,11 @@
 'use client';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Linkedin, Twitter, Github, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import SEO from '@/components/SEO';
 
 export default function TeamPage() {
   const leadership = [
@@ -119,6 +119,13 @@ export default function TeamPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="O Firmie - Zespół i Historia CloudFloo | CloudFloo"
+        description="Poznaj historię CloudFloo i nasz zespół liderów. Alex Chen, Sarah Rodriguez i David Kim prowadzą rozwój technologii cloud computing 🔧"
+        keywords="CloudFloo company, team leadership, cloud computing company, Polish software house, Alex Chen, Sarah Rodriguez, David Kim"
+        url="https://cloudfloo.io/company/team"
+      />
+      
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">

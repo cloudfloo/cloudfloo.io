@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: TeamMemberPageProps): Promise
   }
 
   return {
-    title: `${person.name} - ${person.title} | CloudFloo`,
-    description: `Learn more about ${person.name}, ${person.title} at CloudFloo. ${person.shortBio}`,
+    title: `${person.name} - Ekspert ${person.title} | CloudFloo`,
+    description: `Poznaj ${person.name}, specjalistę ${person.title} w CloudFloo. Doświadczony inżynier z Polski z expertise w cloud computing i DevOps 🔧`,
     keywords: `${person.name}, CloudFloo team, ${person.title}, Polish engineers, cloud experts, ${person.expertise.join(', ')}`,
   };
 }
@@ -46,8 +46,8 @@ export default function TeamMemberPage({ params }: TeamMemberPageProps) {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title={`${person.name} - ${person.title}`}
-        description={`Learn more about ${person.name}, ${person.title} at CloudFloo. ${person.shortBio}`}
+        title={`${person.name} - Ekspert ${person.title} | CloudFloo`}
+        description={`Poznaj ${person.name}, specjalistę ${person.title} w CloudFloo. Doświadczony inżynier z Polski z expertise w cloud computing i DevOps 🔧`}
         keywords={`${person.name}, CloudFloo team, ${person.title}, Polish engineers, cloud experts, ${person.expertise.join(', ')}`}
         url={`https://cloudfloo.io/team/${person.slug}`}
       />

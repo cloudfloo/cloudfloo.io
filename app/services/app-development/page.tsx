@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Application Development - CloudFloo.io',
-  description: 'Custom web and mobile application development with modern frameworks and best practices.',
+  title: 'Rozwój Aplikacji Web i Mobile - React, Next.js | CloudFloo',
+  description: 'Profesjonalny rozwój aplikacji webowych i mobilnych. Tworzymy nowoczesne rozwiązania w React, Next.js, TypeScript i React Native 🔧',
 };
 
 export default function AppDevelopmentPage() {

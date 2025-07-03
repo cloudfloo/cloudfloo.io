@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import SEO from '@/components/SEO';
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -99,6 +100,13 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Blog - Najnowsze Trendy w Cloud Computing | CloudFloo"
+        description="Poznaj najnowsze trendy w technologii chmurowej, DevOps, AI i programowaniu. Eksperci CloudFloo dzielą się wiedzą o AWS, Azure, Kubernetes 🔧"
+        keywords="cloud computing blog, DevOps tutorials, AI machine learning, AWS Azure GCP, Kubernetes, Polish tech blog"
+        url="https://cloudfloo.io/company/blog"
+      />
+      
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">

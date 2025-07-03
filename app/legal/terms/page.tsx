@@ -4,8 +4,8 @@ import { ArrowLeft, FileText, Scale, AlertTriangle, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - CloudFloo.io',
-  description: 'CloudFloo.io Terms of Service - Legal terms and conditions for using our services.',
+  title: 'Regulamin Usług - Warunki Współpracy | CloudFloo',
+  description: 'Regulamin usług CloudFloo - warunki prawne i zasady korzystania z naszych usług cloud computing i DevOps w Polsce 🔧',
 };
 
 export default function TermsOfServicePage() {

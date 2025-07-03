@@ -8,8 +8,8 @@ import SEO from '@/components/SEO';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Our Team | CloudFloo',
-  description: 'Meet the expert team behind CloudFloo - experienced Polish engineers specializing in cloud-native solutions, DevOps, and modern web development.',
+  title: 'Zespół Założycieli - Eksperci Cloud Computing | CloudFloo',
+  description: 'Poznaj zespół założycieli CloudFloo. Doświadczeni eksperci Michał Wiatr, Sebastian Dębicki i Damian Ogrodnik specjalizują się w cloud computing 🔧',
 };
 
 export default function TeamPage() {
@@ -22,8 +22,8 @@ export default function TeamPage() {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Our Team"
-        description="Meet the expert team behind CloudFloo - experienced Polish engineers specializing in cloud-native solutions, DevOps, and modern web development."
+        title="Zespół Założycieli - Eksperci Cloud Computing | CloudFloo"
+        description="Poznaj zespół założycieli CloudFloo. Doświadczeni eksperci Michał Wiatr, Sebastian Dębicki i Damian Ogrodnik specjalizują się w cloud computing 🔧"
         keywords="CloudFloo team, Polish engineers, cloud experts, DevOps specialists, software developers, Michał Wiatr, Sebastian Dębicki, Damian Ogrodnik"
         url="https://cloudfloo.io/team"
       />

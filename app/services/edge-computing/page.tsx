@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Edge Computing - CloudFloo.io',
-  description: 'Ultra-fast edge computing solutions with global distribution and minimal latency.',
+  title: 'Edge Computing - CDN i Funkcje Serverless | CloudFloo',
+  description: 'Ultraszybkie funkcje edge, CDN, przetwarzanie rozproszone. Optymalizacja wydajności globalnych aplikacji web 🔧',
 };
 
 export default function EdgeComputingPage() {

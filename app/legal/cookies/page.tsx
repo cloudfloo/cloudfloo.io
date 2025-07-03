@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - CloudFloo.io',
-  description: 'CloudFloo.io Cookie Policy - How we use cookies and similar technologies.',
+  title: 'Polityka Cookies - Zarządzanie Plikami Cookie | CloudFloo',
+  description: 'Polityka plików cookie CloudFloo - informacje o używaniu cookies i technologii śledzących na naszej stronie 🔧',
 };
 
 export default function CookiePolicyPage() {

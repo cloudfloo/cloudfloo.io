@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'DevOps & Automation - CloudFloo.io',
-  description: 'Comprehensive DevOps solutions including CI/CD pipelines, infrastructure automation, and monitoring.',
+  title: 'DevOps i Automatyzacja - CI/CD, Kubernetes | CloudFloo',
+  description: 'Pipeline\'y CI/CD, Kubernetes, Terraform, monitoring Grafana/Prometheus. Automatyzacja infrastruktury i deploymentów 🔧',
 };
 
 export default function DevOpsPage() {

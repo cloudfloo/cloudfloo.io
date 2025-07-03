@@ -129,7 +129,7 @@ export default function SEO({
                 "jobTitle": "Head of Backend",
                 "sameAs": [
                   "https://www.linkedin.com/in/damian-ogrodnik-193408143/",
-                  "https://github.com/orgs/cloudfloo/people/Damian-Ogrodnik"
+                  "https://github.com/Damian-Ogrodnik"
                 ]
               }
             ]
