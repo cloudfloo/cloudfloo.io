@@ -132,7 +132,7 @@ export default function AppDevelopmentPage() {
             <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Code className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 id="app-development" className="text-5xl md:text-6xl font-bold mb-6">
               Application <span className="text-neon">Development</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">

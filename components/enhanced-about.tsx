@@ -144,6 +144,7 @@ export default function EnhancedAbout() {
           animate={titleVisible ? "visible" : "hidden"}
         >
           <motion.h2 
+            id="about-us"
             className="text-4xl md:text-5xl font-bold mb-6 text-white"
             variants={textRevealVariants}
             custom={0}
@@ -217,6 +218,7 @@ export default function EnhancedAbout() {
           <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 max-w-4xl mx-auto overflow-hidden">
             <CardContent className="p-8">
               <motion.h3 
+                id="our-promise"
                 className="text-2xl font-bold text-neon mb-4"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={missionVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}

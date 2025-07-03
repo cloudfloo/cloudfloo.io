@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Image from 'next/image';
 
 // Dynamically import the visualization component with SSR disabled
 const ImmersiveCloudVisualization = dynamic(
@@ -89,6 +90,38 @@ export default function Hero() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden scroll-offset"
       suppressHydrationWarning
     >
+      {/* Optimized Hero Background */}
+      <div className="absolute inset-0 z-0">
+        {/* CSS Gradient Background for now - replace with Image component when hero images are ready */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"
+          style={{
+            background: `
+              linear-gradient(135deg, 
+                rgba(15, 23, 42, 0.95) 0%, 
+                rgba(30, 58, 138, 0.90) 35%, 
+                rgba(67, 56, 202, 0.85) 100%
+              )
+            `
+          }}
+        />
+        {/* 
+        TODO: Replace the CSS gradient above with this optimized Image component when hero images are available:
+        
+        <Image
+          src="/hero-bg.webp"
+          alt="CloudFloo Cloud Computing Background"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 100vw"
+          className="object-cover object-center"
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+        />
+        */}
+      </div>
+
       {/* Immersive Cloud Visualization */}
       {mounted && showVisualization && <ImmersiveCloudVisualization />}
       
@@ -119,6 +152,7 @@ export default function Hero() {
           {/* Main H1 Title */}
           <div className="mb-8 relative">
             <h1
+              id="hero-title"
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white"
               dangerouslySetInnerHTML={{ __html: t('hero.title') }}
             />

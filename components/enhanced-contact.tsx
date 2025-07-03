@@ -150,6 +150,7 @@ export default function EnhancedContact() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2 
+            id="contact-us"
             className="text-4xl md:text-5xl font-bold mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={titleVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -177,7 +178,7 @@ export default function EnhancedContact() {
           >
             <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-white mb-6">
+                <CardTitle id="contact-form" className="text-2xl font-bold text-white mb-6">
                   {t('contact.form.title')}
                 </CardTitle>
               </CardHeader>
@@ -285,7 +286,7 @@ export default function EnhancedContact() {
             <motion.div variants={itemVariants}>
               <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-white mb-6">
+                  <CardTitle id="contact-info" className="text-2xl font-bold text-white mb-6">
                     {t('contact.info.title')}
                   </CardTitle>
                 </CardHeader>

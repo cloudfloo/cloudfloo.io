@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { team } from '@/data/team';
-import LongBio from '@/components/LongBio';
 import SEO from '@/components/SEO';
+import TeamMemberClient from './client';
 
 interface TeamMemberPageProps {
   params: {
@@ -44,30 +42,14 @@ export default function TeamMemberPage({ params }: TeamMemberPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <SEO 
         title={`${person.name} - Ekspert ${person.title} | CloudFloo`}
         description={`Poznaj ${person.name}, specjalistę ${person.title} w CloudFloo. Doświadczony inżynier z Polski z expertise w cloud computing i DevOps 🔧`}
         keywords={`${person.name}, CloudFloo team, ${person.title}, Polish engineers, cloud experts, ${person.expertise.join(', ')}`}
         url={`https://cloudfloo.io/team/${person.slug}`}
       />
-      
-      {/* Header */}
-      <header className="border-b border-gray-800 bg-black/50">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center space-x-4">
-            <Link href="/team" className="flex items-center text-gray-300 hover:text-neon transition-colors">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Team
-            </Link>
-            <div className="text-gray-500">/</div>
-            <div className="text-neon">{person.name}</div>
-          </div>
-        </div>
-      </header>
-
-      {/* Team Member Profile */}
-      <LongBio person={person} />
-    </div>
+      <TeamMemberClient slug={params.slug} />
+    </>
   );
 }

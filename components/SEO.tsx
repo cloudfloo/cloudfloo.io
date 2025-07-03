@@ -104,6 +104,10 @@ export default function SEO({
             "name": "CloudFloo",
             "url": "https://cloudfloo.io",
             "logo": "https://cloudfloo.io/logo.avif",
+            "sameAs": [
+              "https://linkedin.com/company/cloudfloo-io",
+              "https://github.com/cloudfloo"
+            ],
             "founder": [
               {
                 "@type": "Person",

@@ -238,6 +238,30 @@
       "subtitle": "Let's discuss how our expertise can help accelerate your digital transformation.",
       "startProject": "Start Your Project",
       "joinTeam": "Join Our Team"
+    },
+    "member": {
+      "backToTeam": "Back to Team",
+      "viewFullProfile": "View Full Profile",
+      "viewProfile": "View Profile",
+      "keyAchievements": "Key Achievements",
+      "companies": "Companies",
+      "technologies": "Technologies",
+      "about": "About",
+      "professionalExperience": "Professional Experience",
+      "coreExpertise": "Core Expertise",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "education": "Education",
+      "languages": "Languages",
+      "interests": "Interests",
+      "workingWithTeam": "Interested in working with {name} and the CloudFloo team?",
+      "workingDescription": "Let's discuss how our expertise can help accelerate your digital transformation.",
+      "scheduleConsultation": "Schedule Consultation",
+      "teamMemberNotFound": "Team Member Not Found | CloudFloo"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "ourTeam": "Our Team"
     }
   },
   "projects": {

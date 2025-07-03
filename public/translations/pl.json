@@ -238,6 +238,30 @@
       "subtitle": "Porozmawiajmy o tym, jak nasza ekspertyza może pomóc przyspieszyć Twoją transformację cyfrową.",
       "startProject": "Rozpocznij swój projekt",
       "joinTeam": "Dołącz do naszego zespołu"
+    },
+    "member": {
+      "backToTeam": "Powrót do zespołu",
+      "viewFullProfile": "Zobacz pełny profil",
+      "viewProfile": "Zobacz profil",
+      "keyAchievements": "Kluczowe osiągnięcia",
+      "companies": "Firmy",
+      "technologies": "Technologie",
+      "about": "O",
+      "professionalExperience": "Doświadczenie zawodowe",
+      "coreExpertise": "Główna ekspertyza",
+      "primary": "Podstawowe",
+      "secondary": "Dodatkowe",
+      "education": "Wykształcenie",
+      "languages": "Języki",
+      "interests": "Zainteresowania",
+      "workingWithTeam": "Zainteresowany pracą z {name} i zespołem CloudFloo?",
+      "workingDescription": "Porozmawiajmy o tym, jak nasza ekspertyza może pomóc przyspieszyć Twoją transformację cyfrową.",
+      "scheduleConsultation": "Umów konsultację",
+      "teamMemberNotFound": "Nie znaleziono członka zespołu | CloudFloo"
+    },
+    "breadcrumb": {
+      "home": "Strona główna",
+      "ourTeam": "Nasz zespół"
     }
   },
   "projects": {
