@@ -7,6 +7,21 @@ module.exports = {
   sitemapSize: 5000,
   generateIndexSitemap: false,
   exclude: ['/draft/*'],
+  // Enable alternate language references for bilingual SEO
+  alternateRefs: [
+    {
+      href: 'https://cloudfloo.io',
+      hreflang: 'pl',
+    },
+    {
+      href: 'https://cloudfloo.io/en',
+      hreflang: 'en',
+    },
+    {
+      href: 'https://cloudfloo.io',
+      hreflang: 'x-default',
+    },
+  ],
   
   // Additional paths to include
   additionalPaths: async (config) => {

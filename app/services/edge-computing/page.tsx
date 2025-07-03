@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Edge Computing - CloudFloo.io',
-  description: 'Ultra-fast edge computing solutions with global distribution and minimal latency.',
+  title: 'Edge Computing - CDN i Funkcje Serverless | CloudFloo',
+  description: 'Ultraszybkie funkcje edge, CDN, przetwarzanie rozproszone. Optymalizacja wydajności globalnych aplikacji web 🔧',
 };
 
 export default function EdgeComputingPage() {
@@ -132,7 +132,7 @@ export default function EdgeComputingPage() {
             <div className="w-20 h-20 bg-gradient-to-r from-teal-500 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Zap className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 id="edge-computing" className="text-5xl md:text-6xl font-bold mb-6">
               Edge <span className="text-neon">Computing</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">

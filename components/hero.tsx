@@ -1,71 +1,18 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useEffect, useState, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Dynamically import the visualization component with SSR disabled
-const ImmersiveCloudVisualization = dynamic(
-  () => import('@/components/immersive-cloud-visualization'),
-  { ssr: false, loading: () => null }
-);
-
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
-  const [showVisualization, setShowVisualization] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const { t, isLoaded } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (showVisualization) return;
-
-    const load = () => setShowVisualization(true);
-
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry.isIntersecting && entry.intersectionRect.height >= 300) {
-        load();
-      }
-    });
-    if (heroRef.current) observer.observe(heroRef.current);
-
-    window.addEventListener('mousemove', load, { once: true });
-    window.addEventListener('touchstart', load, { once: true });
-    window.addEventListener('keydown', load, { once: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('mousemove', load);
-      window.removeEventListener('touchstart', load);
-      window.removeEventListener('keydown', load);
-    };
-  }, [showVisualization]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        setMousePosition({ x, y });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
   }, []);
 
   const smoothScrollTo = (elementId: string) => {
@@ -81,7 +28,27 @@ export default function Hero() {
     }
   };
 
-  // Unified rendering for SSR and client
+  // Show loading state until mounted and translations loaded
+  if (!mounted || !isLoaded) {
+    return (
+      <section 
+        id="home" 
+        className="min-h-screen flex items-center justify-center relative overflow-hidden scroll-offset bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"
+      >
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-5xl mx-auto">
+            <div className="h-16 bg-gray-700/50 rounded-lg mb-6 animate-pulse"></div>
+            <div className="h-8 bg-gray-700/50 rounded-lg mb-8 max-w-2xl mx-auto animate-pulse"></div>
+            <div className="flex gap-4 justify-center">
+              <div className="h-12 w-32 bg-gray-700/50 rounded-lg animate-pulse"></div>
+              <div className="h-12 w-32 bg-gray-700/50 rounded-lg animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section 
       ref={heroRef}
@@ -89,60 +56,39 @@ export default function Hero() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden scroll-offset"
       suppressHydrationWarning
     >
-      {/* Immersive Cloud Visualization */}
-      {mounted && showVisualization && <ImmersiveCloudVisualization />}
-      
-      {/* Enhanced overlay for better text readability */}
-      <div className="absolute inset-0 z-10">
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse 70% 60% at 50% 50%, 
-                rgba(0, 0, 0, 0.4) 0%, 
-                rgba(0, 0, 0, 0.6) 50%, 
-                rgba(0, 0, 0, 0.8) 100%
-              )
-            `
-          }}
-        />
-      </div>
+      {/* Optimized static gradient background for fast LCP */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: `linear-gradient(135deg, 
+            rgba(15, 23, 42, 0.98) 0%, 
+            rgba(30, 58, 138, 0.95) 35%, 
+            rgba(67, 56, 202, 0.92) 100%
+          )`
+        }}
+      />
 
       <div className="container mx-auto px-6 text-center relative z-20">
-        <motion.div 
-          className="max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
+        <div className="max-w-5xl mx-auto">
           
-          {/* Main H1 Title */}
+          {/* Main H1 Title - Critical for LCP */}
           <div className="mb-8 relative">
             <h1
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white"
+              id="hero-title"
+              className="hero-title text-white font-bold mb-6 leading-tight"
               dangerouslySetInnerHTML={{ __html: t('hero.title') }}
             />
           </div>
           
           {/* H2 Subtitle */}
-          <motion.div 
-            className="mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
+          <div className="mb-12">
             <h2 className="text-xl md:text-2xl text-white font-medium max-w-4xl mx-auto leading-relaxed">
               {t('hero.subtitle')}
             </h2>
-          </motion.div>
+          </div>
 
           {/* Enhanced CTA Buttons - Accessible */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <Button
               onClick={() => smoothScrollTo('contact')}
               size="lg"
@@ -162,8 +108,8 @@ export default function Hero() {
             >
               {t('hero.cta2')}
             </Button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Enhanced Scroll Indicator - Accessible */}

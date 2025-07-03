@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import PressClient from "./press-client";
 
 export const metadata: Metadata = {
-  title: 'Press Kit - CloudFloo.io',
-  description: 'Media resources, press releases, and brand assets for CloudFloo.io.',
+  title: 'Prasa i Media - Aktualności CloudFloo | CloudFloo',
+  description: 'Komunikaty prasowe CloudFloo, relacje medialne i aktualności firmowe. Pobierz nasze materiały prasowe i zasoby marki 🔧',
 };
 
 export default function PressPage() {

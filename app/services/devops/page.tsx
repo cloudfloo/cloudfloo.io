@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'DevOps & Automation - CloudFloo.io',
-  description: 'Comprehensive DevOps solutions including CI/CD pipelines, infrastructure automation, and monitoring.',
+  title: 'DevOps i Automatyzacja - CI/CD, Kubernetes | CloudFloo',
+  description: 'Pipeline\'y CI/CD, Kubernetes, Terraform, monitoring Grafana/Prometheus. Automatyzacja infrastruktury i deploymentów 🔧',
 };
 
 export default function DevOpsPage() {
@@ -114,7 +114,7 @@ export default function DevOpsPage() {
             <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Settings className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 id="devops-automation" className="text-5xl md:text-6xl font-bold mb-6">
               DevOps & <span className="text-neon">Automation</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">

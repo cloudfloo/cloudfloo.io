@@ -104,6 +104,10 @@ export default function SEO({
             "name": "CloudFloo",
             "url": "https://cloudfloo.io",
             "logo": "https://cloudfloo.io/logo.avif",
+            "sameAs": [
+              "https://linkedin.com/company/cloudfloo-io",
+              "https://github.com/cloudfloo"
+            ],
             "founder": [
               {
                 "@type": "Person",
@@ -129,7 +133,7 @@ export default function SEO({
                 "jobTitle": "Head of Backend",
                 "sameAs": [
                   "https://www.linkedin.com/in/damian-ogrodnik-193408143/",
-                  "https://github.com/orgs/cloudfloo/people/Damian-Ogrodnik"
+                  "https://github.com/Damian-Ogrodnik"
                 ]
               }
             ]

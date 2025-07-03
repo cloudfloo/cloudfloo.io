@@ -8,12 +8,15 @@ import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Linkedin } from 'lucide-react';
 import { TeamMember } from '@/data/team';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TeamCardProps {
   person: TeamMember;
 }
 
 export default function TeamCard({ person }: TeamCardProps) {
+  const { t } = useLanguage();
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -49,7 +52,7 @@ export default function TeamCard({ person }: TeamCardProps) {
               >
                 <div className="absolute bottom-4 left-4 right-4">
                   <p className="text-white text-sm font-medium flex items-center gap-2">
-                    View Full Profile
+                    {t('team.member.viewFullProfile')}
                     <ExternalLink className="w-3 h-3" />
                   </p>
                 </div>
@@ -70,7 +73,7 @@ export default function TeamCard({ person }: TeamCardProps) {
           
           {/* Top 3 Expertise Areas */}
           <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Key Expertise</h4>
+            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">{t('team.keyExpertise')}</h4>
             <div className="flex flex-wrap gap-1">
               {person.expertise.slice(0, 3).map((skill, index) => (
                 <Badge
@@ -126,7 +129,7 @@ export default function TeamCard({ person }: TeamCardProps) {
                 whileHover={{ x: 2 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                View Profile
+                {t('team.member.viewProfile')}
                 <ExternalLink className="w-3 h-3" />
               </motion.button>
             </Link>

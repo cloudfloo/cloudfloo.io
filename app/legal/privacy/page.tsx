@@ -4,8 +4,8 @@ import { ArrowLeft, Shield, Eye, Lock, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - CloudFloo.io',
-  description: 'CloudFloo.io Privacy Policy - How we collect, use, and protect your personal information.',
+  title: 'Polityka Prywatności - Ochrona Danych | CloudFloo',
+  description: 'Polityka prywatności CloudFloo - jak gromadzimy, używamy i chronimy Twoje dane osobowe zgodnie z RODO i prawem polskim 🔧',
 };
 
 export default function PrivacyPolicyPage() {

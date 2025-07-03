@@ -32,8 +32,8 @@ export default function Footer() {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/cloudfloo', label: 'GitHub' },
     { icon: Twitter, href: 'https://twitter.com/cloudfloo', label: 'Twitter' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/cloudfloo', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:hello@cloudfloo.io', label: 'Email' },
+    { icon: Linkedin, href: 'https://linkedin.com/company/cloudfloo-io', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:contact@cloudfloo.io', label: 'Email' },
   ];
 
   return (
@@ -53,8 +53,6 @@ export default function Footer() {
                   height={32}
                   priority
                   fetchPriority="high"
-                  placeholder="blur"
-                  blurDataURL={placeholders['/logo.png'] ?? DEFAULT_BLUR}
                   className="object-contain w-8 h-8"
                 />
               </picture>
