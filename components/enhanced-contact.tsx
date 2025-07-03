@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { toast } from '@/hooks/use-toast';
 
 export default function EnhancedContact() {
   const { t, isLoaded } = useLanguage();
@@ -19,9 +20,33 @@ export default function EnhancedContact() {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+
+    const data = new FormData();
+    data.append('field-0', formData.name);
+    data.append('field-1', formData.email);
+    data.append('field-2', formData.company);
+    data.append('field-3', formData.message);
+
+    try {
+      const res = await fetch(
+        'https://n8n.cloudfloo.io/form/c6bf2752-faf4-4d71-a439-0337795009b2',
+        {
+          method: 'POST',
+          body: data,
+        }
+      );
+
+      if (res.ok) {
+        toast({ title: t('common.success') });
+        setFormData({ name: '', email: '', company: '', message: '' });
+      } else {
+        toast({ title: t('common.error'), variant: 'destructive' });
+      }
+    } catch (error) {
+      toast({ title: t('common.error'), variant: 'destructive' });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
