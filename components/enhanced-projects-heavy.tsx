@@ -52,11 +52,11 @@ This enterprise solution demonstrates advanced software engineering principles w
       'Monorepo Structure',
       'Internationalization'
     ],
-    metrics: { 
-      architecture: 'Microservices', 
-      testing: '95% Coverage', 
-      performance: 'Enterprise Grade',
-      deployment: 'Kubernetes'
+    metrics: {
+      performance: '99.9% Uptime',
+      security: 'Enterprise Grade',
+      scalability: 'Auto-scaling',
+      testing: '95% Coverage'
     },
     achievements: [
       'Modern microservices architecture for scalability',
@@ -71,21 +71,19 @@ This enterprise solution demonstrates advanced software engineering principles w
       'Comprehensive documentation',
       'Consistent code styling with ESLint and Prettier',
       'Structured PR workflow with quality gates'
-    ]
+    ],
+    github: 'https://github.com/cloudfloo/webkd',
+    demo: 'https://demo.webkd.com'
   };
 
   const { ref, isVisible } = useScrollAnimation();
 
-  const handleProjectClick = (e: React.MouseEvent) => {
-    // Prevent event bubbling if clicking on action buttons
-    if ((e.target as HTMLElement).closest('button')) {
-      return;
-    }
+  const handleProjectClick = () => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
   };
@@ -108,7 +106,22 @@ This enterprise solution demonstrates advanced software engineering principles w
     return iconMap[tech] || Code2;
   };
 
-  // Unified rendering for SSR and client
+  if (!isLoaded) {
+    return (
+      <section id="projects" className="py-20 scroll-offset">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="h-12 bg-gray-700/50 rounded-lg mb-6 animate-pulse max-w-md mx-auto"></div>
+            <div className="h-6 bg-gray-700/50 rounded-lg animate-pulse max-w-2xl mx-auto"></div>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="h-96 bg-gray-700/50 rounded-lg animate-pulse"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="projects" className="py-20 relative overflow-hidden scroll-offset" suppressHydrationWarning>
       <div className="container mx-auto px-6">
@@ -151,7 +164,7 @@ This enterprise solution demonstrates advanced software engineering principles w
             onClick={handleProjectClick}
           >
             <div className="relative overflow-hidden">
-              <div className="relative w-full h-64 md:h-80">
+              <div className="relative w-full aspect-[16/9]">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -162,6 +175,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                   placeholder="blur"
                   blurDataURL={placeholders[project.image] ?? DEFAULT_BLUR}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               </div>
               
               <motion.div 
@@ -177,7 +191,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                     whileTap={{ scale: 0.9 }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleProjectClick(e);
+                      handleProjectClick();
                     }}
                   >
                     <ExternalLink className="w-5 h-5 text-white" />
@@ -202,7 +216,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                   Enterprise Solution
                 </Badge>
                 <div className="flex items-center gap-2 px-3 py-1 bg-black/70 rounded-full">
-                  <div className="relative w-6 h-6">
+                  <div className="relative w-6 h-6 flex-shrink-0">
                     <Image
                       src={project.customer.logo}
                       alt={project.customer.name}
@@ -214,7 +228,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                       blurDataURL={placeholders[project.customer.logo] ?? DEFAULT_BLUR}
                     />
                   </div>
-                  <span className="text-white text-sm font-medium">{project.customer.name}</span>
+                  <span className="text-white text-sm font-medium whitespace-nowrap">{project.customer.name}</span>
                 </div>
               </div>
             </div>
@@ -230,45 +244,44 @@ This enterprise solution demonstrates advanced software engineering principles w
             
             <CardContent className="space-y-6">
               <motion.div 
-                className="flex flex-wrap gap-2"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"
                 initial={{ opacity: 0 }}
                 animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                {project.technologies.backend.slice(0, 5).map((tech, techIndex) => (
-                  <motion.span
-                    key={techIndex}
-                    className="px-3 py-1 bg-gradient-neon/10 text-neon text-sm rounded-full border border-neon/20 font-medium"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={isVisible ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                    transition={{ delay: techIndex * 0.1 + 0.4 }}
+                {Object.entries(project.metrics).map(([key, value], index) => (
+                  <motion.div 
+                    key={index} 
+                    className="text-center p-3 bg-black/30 rounded-lg"
+                    initial={{ scale: 0 }}
+                    animate={isVisible ? { scale: 1 } : { scale: 0 }}
+                    transition={{ delay: index * 0.1 + 0.4, type: 'spring', stiffness: 200 }}
                   >
-                    {tech}
-                  </motion.span>
+                    <div className="text-neon font-semibold text-sm">{value}</div>
+                    <div className="text-gray-400 text-xs capitalize">{key}</div>
+                  </motion.div>
                 ))}
-                <span className="px-3 py-1 bg-gray-700/50 text-gray-300 text-sm rounded-full border border-gray-600">
-                  +{Object.values(project.technologies).flat().length - 5} more
-                </span>
               </motion.div>
               
-              <motion.div 
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-700"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.5 }}
               >
-                {Object.entries(project.metrics).map(([key, value], metricIndex) => (
-                  <motion.div 
-                    key={metricIndex} 
-                    className="text-center"
-                    initial={{ scale: 0 }}
-                    animate={isVisible ? { scale: 1 } : { scale: 0 }}
-                    transition={{ delay: metricIndex * 0.1 + 0.6, type: 'spring', stiffness: 200 }}
-                  >
-                    <div className="text-lg font-semibold text-neon">{value}</div>
-                    <div className="text-xs text-gray-400 capitalize">{key}</div>
-                  </motion.div>
-                ))}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {[...project.technologies.backend.slice(0, 3), ...project.technologies.frontend.slice(0, 2)].map((tech, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="outline" 
+                      className="border-gray-600 text-gray-300 text-xs"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                  <Badge variant="outline" className="border-neon text-neon text-xs">
+                    +{Object.values(project.technologies).flat().length - 5} more
+                  </Badge>
+                </div>
               </motion.div>
               
               <motion.div
@@ -279,7 +292,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                 <Button 
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleProjectClick(e);
+                    handleProjectClick();
                   }}
                   className="w-full bg-gradient-neon text-white hover:scale-105 transition-all duration-300 group/btn btn-accessible text-lg py-3"
                 >
@@ -299,9 +312,9 @@ This enterprise solution demonstrates advanced software engineering principles w
         </motion.div>
 
         {/* Project Detail Modal */}
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
           {selectedProject && (
-            <div className="p-8">
+            <div className="p-6">
               <div className="mb-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -316,7 +329,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                 <Card className="glass border-gray-700 mb-6">
                   <CardHeader>
                     <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center relative">
+                      <div className="w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center relative flex-shrink-0">
                         <Image
                           src={selectedProject.customer.logo}
                           alt={selectedProject.customer.name}
@@ -423,15 +436,15 @@ This enterprise solution demonstrates advanced software engineering principles w
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-700">
-                <Button className="flex-1 bg-gradient-neon text-white btn-accessible">
+              {/* Project Links */}
+              <div className="flex gap-4">
+                <Button className="bg-gradient-neon text-white">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  {t('projects.viewDemo')}
+                  {t('projects.viewLive')}
                 </Button>
-                <Button variant="outline" className="flex-1 border-gray-600 text-gray-300 hover:border-neon hover:text-neon btn-accessible">
+                <Button variant="outline" className="border-gray-600 text-gray-300 hover:border-neon">
                   <Github className="w-4 h-4 mr-2" />
-                  {t('projects.viewSource')}
+                  {t('projects.viewCode')}
                 </Button>
               </div>
             </div>

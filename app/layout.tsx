@@ -56,7 +56,33 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Google Analytics 4 - Production Only */}
+        {/* Resource Hints for Performance */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://images.pexels.com" />
+        <link rel="dns-prefetch" href="https://techicons.dev" />
+        
+        {/* Google Search Console Verification - Production Only */}
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
+          <meta name="google-site-verification" content="verify_token" />
+        )}
+
+        {/* Critical CSS for hero section performance */}
+        <style id="critical">{`
+          #home{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+          .hero-title{font-size:clamp(2.5rem,8vw,6rem);line-height:1.1;font-weight:700}
+          .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+          .text-neon{background:linear-gradient(135deg,#00E5FF,#FF00E0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        `}</style>
+      </head>
+      <body className={inter.className} suppressHydrationWarning>
+        <DefaultSeoProvider />
+        <LanguageProvider>
+          {children}
+          <Analytics />
+        </LanguageProvider>
+        
+        {/* Google Analytics 4 - Non-blocking, Production Only */}
         {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
           <>
             <script
@@ -69,27 +95,15 @@ export default function RootLayout({
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', 'G-D5F48XPHZJ');
+                  gtag('config', 'G-D5F48XPHZJ', {
+                    page_title: document.title,
+                    page_location: window.location.href
+                  });
                 `,
               }}
             />
           </>
         )}
-        
-        {/* Google Search Console Verification - Production Only */}
-        {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
-          <meta name="google-site-verification" content="verify_token" />
-        )}
-
-        {/* Critical CSS for hero section performance */}
-        <style id="critical">{`#home{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}`}</style>
-      </head>
-      <body className={inter.className} suppressHydrationWarning>
-        <DefaultSeoProvider />
-        <LanguageProvider>
-          {children}
-          <Analytics />
-        </LanguageProvider>
       </body>
     </html>
   );
