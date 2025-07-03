@@ -65,7 +65,8 @@ const defaultTranslations = {
       companyPlaceholder: 'Your company',
       messageRequired: 'Message *',
       messagePlaceholder: 'Tell us about your project...',
-      submit: 'Send Message'
+      submit: 'Send Message',
+      success: 'Message sent successfully!'
     },
     info: {
       title: 'Contact Information',
