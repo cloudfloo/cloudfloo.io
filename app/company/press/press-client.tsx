@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft, Download, FileText, Image, Video, Mail, Phone } from 'lucide-react';
+import BackToHomeButton from '@/components/BackToHomeButton';
+import { Download, FileText, Image, Video, Mail, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -44,47 +44,40 @@ export default function PressClient() {
         { name: 'Black Logo (PNG)', size: '1.9 MB', format: 'PNG' }
       ]
     },
-    {
-      category: 'Brand Guidelines',
-      icon: FileText,
-      items: [
-        { name: 'Brand Style Guide', size: '8.5 MB', format: 'PDF' },
-        { name: 'Logo Usage Guidelines', size: '3.2 MB', format: 'PDF' },
-        { name: 'Color Palette', size: '1.1 MB', format: 'PDF' }
-      ]
-    },
-    {
-      category: 'Media Assets',
-      icon: Video,
-      items: [
-        { name: 'Company Overview Video', size: '45 MB', format: 'MP4' },
-        { name: 'Product Demo Screenshots', size: '12 MB', format: 'ZIP' },
-        { name: 'Team Photos', size: '25 MB', format: 'ZIP' }
-      ]
-    }
+    // {
+    //   category: 'Brand Guidelines',
+    //   icon: FileText,
+    //   items: [
+    //     { name: 'Brand Style Guide', size: '8.5 MB', format: 'PDF' },
+    //     { name: 'Logo Usage Guidelines', size: '3.2 MB', format: 'PDF' },
+    //     { name: 'Color Palette', size: '1.1 MB', format: 'PDF' }
+    //   ]
+    // },
+    // {
+    //   category: 'Media Assets',
+    //   icon: Video,
+    //   items: [
+    //     { name: 'Company Overview Video', size: '45 MB', format: 'MP4' },
+    //     { name: 'Product Demo Screenshots', size: '12 MB', format: 'ZIP' },
+    //     { name: 'Team Photos', size: '25 MB', format: 'ZIP' }
+    //   ]
+    // }
   ];
 
   const companyFacts = [
-    { label: 'Founded', value: '2022' },
-    { label: 'Headquarters', value: 'San Francisco, CA' },
-    { label: 'Employees', value: '50+' },
-    { label: 'Funding', value: '$15M Series A' },
-    { label: 'Clients', value: '500+ Companies' },
-    { label: 'Global Reach', value: '25+ Countries' }
+    { label: 'Founded', value: '2025' },
+    { label: 'Headquarters', value: 'Kraków, Poland' },
+    { label: 'Employees', value: '4' },
+    { label: 'Clients', value: '3+ Companies' },
+    { label: 'Global Reach', value: '2+ Countries' }
   ];
 
   const mediaContacts = [
     {
-      name: 'Sarah Johnson',
-      role: 'Head of Communications',
-      email: 'press@cloudfloo.io',
-      phone: '+1 (555) 123-4567'
-    },
-    {
-      name: 'Michael Chen',
-      role: 'PR Manager',
-      email: 'media@cloudfloo.io',
-      phone: '+1 (555) 123-4568'
+      name: 'Michał Wiatr',
+      role: 'CEO',
+      email: 'michal@cloudfloo.io',
+      phone: '+48 728 963 591'
     }
   ];
 
@@ -94,10 +87,7 @@ export default function PressClient() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Home
-            </Link>
+            <BackToHomeButton />
             <div className="text-gray-500">/</div>
             <div className="text-neon">Press Kit</div>
           </div>
@@ -208,15 +198,14 @@ export default function PressClient() {
                           })}
                         </div>
                       </div>
-                      <Link href={release.link}>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="border-neon text-neon hover:bg-neon/10 ml-4"
-                        >
-                          Read More
-                        </Button>
-                      </Link>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-neon text-neon hover:bg-neon/10 ml-4"
+                        onClick={() => window.open(release.link, '_blank')}
+                      >
+                        Read More
+                      </Button>
                     </div>
                   </CardHeader>
                 </Card>

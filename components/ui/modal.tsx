@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface ModalProps {
@@ -10,65 +9,63 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Close on escape key
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
     };
-    
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
     if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
-      // Prevent scrolling when modal is open
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'hidden';
     }
-    
+
     return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'auto';
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 
-  // Close when clicking outside
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose();
-    }
-  };
+  if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          onClick={handleBackdropClick}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop with CSS animation */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-modal-backdrop"
+        onClick={onClose}
+      />
+      
+      {/* Modal content with CSS animation */}
+      <div 
+        ref={modalRef}
+        className="relative z-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-slate-900 border border-gray-700 rounded-lg shadow-2xl animate-modal-content"
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors z-20 bg-slate-800/80 rounded-full"
         >
-          <motion.div
-            ref={modalRef}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl modal-content"
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          >
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 glass rounded-full hover:bg-white/20 transition-colors z-10 btn-accessible"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
-            
-            {children}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          <X className="w-5 h-5" />
+        </button>
+        
+        {/* Content */}
+        <div className="p-6">
+          {children}
+        </div>
+      </div>
+    </div>
   );
 }

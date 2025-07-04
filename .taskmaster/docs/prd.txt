@@ -1,0 +1,254 @@
+# CloudFloo.io Next Phase Development PRD
+
+<context>
+# Overview  
+CloudFloo.io is a Polish software house specializing in cloud-native, microservices, and DevOps solutions. The company website showcases technical expertise through an immersive dark-themed interface featuring services like Application Development, Cloud Solutions, AI/ML, Data Engineering, DevOps, and Edge Computing. After completing major performance optimizations (improving Lighthouse scores from 53 to 75-85), the next phase focuses on business growth, content management, lead generation, and advanced technical showcases.
+
+# Core Features  
+The current website successfully demonstrates technical competency but needs enhancement in several key areas:
+
+## 1. Content Management System (CMS)
+- WordPress/Strapi headless CMS integration for blog and press content
+- Team member management interface
+- Project portfolio management system
+- Case study content creation and management
+
+## 2. Lead Generation & Sales Funnel
+- Contact form optimization with better validation and CRM integration
+- Service-specific landing pages with tailored content
+- Project estimation calculator/configurator
+- Meeting scheduling integration (Calendly/Cal.com)
+
+## 3. Advanced Technical Showcases  
+- Interactive architecture diagrams for complex solutions
+- Live code examples and documentation viewer
+- Technical blog with syntax highlighting and interactive examples
+- Real-time project status dashboard for clients
+
+## 4. Business Intelligence & Analytics
+- Advanced analytics beyond Google Analytics
+- Lead scoring and conversion tracking
+- Performance monitoring dashboard
+- A/B testing framework for continuous optimization
+
+# User Experience  
+The website targets three distinct personas:
+
+## Primary Persona: Technical Decision Makers
+- CTOs, Lead Engineers, Technical Architects
+- Need: Validate technical expertise and cultural fit
+- Journey: Services → Team → Case Studies → Contact
+
+## Secondary Persona: Business Stakeholders  
+- CEOs, Product Managers, Startup Founders
+- Need: Understand business value and delivery capabilities
+- Journey: Portfolio → Success Stories → Pricing → Schedule Meeting
+
+## Tertiary Persona: Potential Team Members
+- Senior Engineers, DevOps Specialists, Data Engineers
+- Need: Assess company culture and growth opportunities
+- Journey: About → Team → Careers → Apply
+
+Key UX improvements needed:
+- Streamlined contact forms with progressive disclosure
+- Interactive project configurator for instant estimates
+- Dynamic content based on user behavior and preferences
+- Enhanced mobile experience for service pages
+</context>
+
+<PRD>
+# Technical Architecture  
+
+## System Components
+1. **Frontend Enhancement**: Next.js 14+ with App Router (current foundation)
+2. **Headless CMS**: Strapi or WordPress for content management
+3. **Database**: PostgreSQL for CMS data, user interactions, and analytics
+4. **APIs**: RESTful and GraphQL endpoints for content and lead management
+5. **Email Service**: SendGrid/Mailgun for automated communications
+6. **CRM Integration**: HubSpot/Pipedrive API integration
+7. **Analytics**: Custom analytics service with PostgreSQL backend
+8. **Infrastructure**: Docker containers with Kubernetes orchestration
+
+## Data Models
+```
+ContentTypes: Blog, CaseStudy, TeamMember, Service, Project
+LeadCapture: ContactForm, MeetingRequest, ProjectEstimate
+UserInteractions: PageViews, Downloads, FormSubmissions
+BusinessMetrics: ConversionFunnels, LeadScoring, RevenueAttribution
+```
+
+## APIs and Integrations
+- CMS Content API (GraphQL/REST)
+- CRM webhooks for lead scoring
+- Email automation triggers
+- Calendar scheduling (Cal.com API)
+- Analytics tracking (custom + Google Analytics 4)
+- Payment processing (Stripe) for project deposits
+
+## Infrastructure Requirements
+- Enhanced PostgreSQL setup for CMS and analytics
+- Redis for caching and session management
+- S3-compatible storage for media and documents
+- CDN optimization for global content delivery
+- Monitoring stack (Prometheus + Grafana)
+
+# Development Roadmap  
+
+## Phase 1: Content Management Foundation (MVP)
+**Goal**: Enable non-technical team members to manage website content
+
+### Features:
+- Headless CMS setup (Strapi recommended for TypeScript compatibility)
+- Blog management system with rich text editor
+- Team member profile management
+- Project portfolio content management
+- Basic media library and optimization
+- Content preview and publishing workflow
+
+### Technical Implementation:
+- CMS API integration with existing Next.js frontend
+- Database schema design and migration system
+- Image optimization pipeline enhancement
+- SEO optimization for dynamic content
+- Basic content versioning and approval workflow
+
+## Phase 2: Lead Generation Optimization
+**Goal**: Convert visitors into qualified leads with better conversion rates
+
+### Features:
+- Enhanced contact forms with progressive profiling
+- Service-specific landing pages with tailored CTAs
+- Interactive project estimation calculator
+- Meeting scheduling integration with calendar sync
+- Email automation workflows for lead nurturing
+- Lead scoring based on engagement metrics
+
+### Technical Implementation:
+- Form validation and spam protection enhancement
+- CRM API integration (HubSpot/Pipedrive)
+- Email service integration with template system
+- Analytics event tracking for conversion optimization
+- A/B testing framework for form optimization
+
+## Phase 3: Advanced Technical Showcases
+**Goal**: Demonstrate technical expertise through interactive content
+
+### Features:
+- Interactive architecture diagram builder
+- Live code documentation viewer with syntax highlighting
+- Technical blog with interactive examples
+- Client project status dashboard (password protected)
+- Technology stack comparisons and recommendations
+- Case study deep-dives with technical metrics
+
+### Technical Implementation:
+- Documentation rendering system (MDX/Nextra)
+- Interactive diagram components (React Flow/D3.js)
+- Code sandbox integration for live examples
+- Authentication system for client portals
+- Advanced analytics for content engagement
+
+## Phase 4: Business Intelligence & Growth
+**Goal**: Data-driven business optimization and scaling preparation
+
+### Features:
+- Custom analytics dashboard for business metrics
+- Conversion funnel analysis and optimization
+- Lead attribution and ROI tracking
+- Automated reporting for business stakeholders
+- Market analysis tools and competitor tracking
+- Revenue forecasting based on lead pipeline
+
+### Technical Implementation:
+- Custom analytics backend with PostgreSQL
+- Data visualization components (Recharts/D3.js)
+- Business intelligence API development
+- Automated report generation system
+- Integration with financial systems for revenue tracking
+
+# Logical Dependency Chain
+
+## Foundation First (Phase 1 Priority)
+1. **CMS Database Schema** - Required for all content management
+2. **Content API Layer** - Enables frontend integration
+3. **Media Management** - Supports all content types
+4. **Basic Admin Interface** - Allows team to start managing content
+
+## Quick Wins for Visibility (Phase 1-2 Overlap)
+1. **Blog System** - Immediate SEO and content marketing value
+2. **Enhanced Contact Forms** - Better lead capture from existing traffic
+3. **Team Profile Management** - Showcases expertise more dynamically
+4. **Service Landing Pages** - Converts existing service page traffic better
+
+## Building Complexity (Phase 2-3)
+1. **CRM Integration** - Requires contact forms to be operational
+2. **Lead Scoring** - Depends on analytics tracking implementation
+3. **Project Calculator** - Builds on enhanced forms and CRM
+4. **Client Portal** - Requires authentication and project management
+
+## Data-Driven Optimization (Phase 3-4)
+1. **Analytics Foundation** - Required for all business intelligence
+2. **A/B Testing Framework** - Enables continuous optimization
+3. **Business Dashboards** - Synthesizes all collected data
+4. **Automated Insights** - Final layer of intelligence
+
+# Risks and Mitigations  
+
+## Technical Challenges
+**Risk**: CMS integration complexity with existing optimized frontend
+**Mitigation**: Use TypeScript-compatible headless CMS (Strapi), maintain strict API contracts, implement comprehensive testing
+
+**Risk**: Performance regression from additional features
+**Mitigation**: Implement performance budgets, maintain lighthouse CI, use lazy loading and code splitting extensively
+
+**Risk**: Database performance with increased content and analytics
+**Mitigation**: Implement proper indexing strategy, use Redis caching, plan for read replicas
+
+## MVP Scope Management
+**Risk**: Feature creep in Phase 1 delaying core CMS functionality
+**Mitigation**: Focus strictly on content CRUD operations, defer advanced features to later phases
+
+**Risk**: Overcomplicating lead generation forms
+**Mitigation**: Start with enhanced versions of existing forms, add progressive profiling incrementally
+
+## Resource Constraints
+**Risk**: Limited design resources for new interfaces
+**Mitigation**: Extend existing design system, use headless UI components, focus on functionality over visual novelty
+
+**Risk**: Client work interrupting development timeline
+**Mitigation**: Implement features in small, deployable increments that don't break existing functionality
+
+# Appendix  
+
+## Research Findings
+- Current website has strong technical foundation after performance optimizations
+- Services pages show high engagement but low conversion rates
+- Team page is highly visited, indicating importance of showcasing expertise
+- Blog absence represents significant SEO and content marketing opportunity
+
+## Technical Specifications
+
+### Performance Requirements
+- Maintain current Lighthouse scores (75-85) through all phases
+- New features must not degrade LCP beyond 2.5s
+- API response times under 200ms for content endpoints
+- Image optimization pipeline for CMS uploads
+
+### Security Requirements
+- OWASP Top 10 compliance for all new endpoints
+- Rate limiting on contact forms and API endpoints
+- Content validation and sanitization
+- Regular security audits during development
+
+### Scalability Considerations
+- Design for 10x traffic increase over next 12 months
+- Implement CDN-friendly caching strategies
+- Plan for international expansion (multiple languages)
+- Consider multi-tenant architecture for white-label opportunities
+
+### Integration Requirements
+- Backward compatibility with existing component library
+- Seamless deployment pipeline integration
+- Monitoring and alerting for new services
+- Documentation for all new APIs and components
+</PRD> 

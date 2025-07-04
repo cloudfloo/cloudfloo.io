@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowLeft, Shield, Eye, Lock, Users } from 'lucide-react';
+import BackToHomeButton from '@/components/BackToHomeButton';
+import { Shield, Eye, Lock, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
@@ -32,10 +32,7 @@ export default function PrivacyPolicyPage() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Home
-            </Link>
+            <BackToHomeButton />
             <div className="text-gray-500">/</div>
             <div className="text-neon">Privacy Policy</div>
           </div>

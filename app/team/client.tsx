@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import LanguageAwareLink from '@/components/LanguageAwareLink';
 import { ArrowLeft, Users, Award, Globe } from 'lucide-react';
 import TeamCard from '@/components/TeamCard';
 import { team } from '@/data/team';
@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function TeamPageClient() {
-  const { t } = useLanguage();
+  const { t, getHomeUrl } = useLanguage();
 
   const teamStats = [
     { number: '30+', labelKey: 'team.stats.experience', icon: Award },
@@ -22,10 +22,10 @@ export default function TeamPageClient() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
+            <LanguageAwareLink href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
               {t('team.breadcrumb.home')}
-            </Link>
+            </LanguageAwareLink>
             <div className="text-gray-500">/</div>
             <div className="text-neon">{t('team.breadcrumb.ourTeam')}</div>
           </div>
@@ -80,27 +80,25 @@ export default function TeamPageClient() {
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 id="team-philosophy" className="text-4xl font-bold mb-8 text-white">{t('team.philosophy.title')}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
-                <div>
-                  <h3 className="text-lg text-white mb-4">{t('team.philosophy.technicalExcellence.title')}</h3>
-                  <p className="text-gray-300">{t('team.philosophy.technicalExcellence.description')}</p>
-                </div>
+            <h2 className="text-4xl font-bold mb-6 text-white">{t('team.philosophy.title')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-neon mb-3">{t('team.philosophy.technicalExcellence.title')}</h3>
+                  <p className="text-sm text-gray-300">{t('team.philosophy.technicalExcellence.description')}</p>
+                </CardContent>
               </Card>
-              
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
-                <div>
-                  <h3 className="text-lg text-white mb-4">{t('team.philosophy.continuousLearning.title')}</h3>
-                  <p className="text-gray-300">{t('team.philosophy.continuousLearning.description')}</p>
-                </div>
+              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-neon mb-3">{t('team.philosophy.continuousLearning.title')}</h3>
+                  <p className="text-sm text-gray-300">{t('team.philosophy.continuousLearning.description')}</p>
+                </CardContent>
               </Card>
-              
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 p-6 h-full">
-                <div>
-                  <h3 className="text-lg text-white mb-4">{t('team.philosophy.clientPartnership.title')}</h3>
-                  <p className="text-gray-300">{t('team.philosophy.clientPartnership.description')}</p>
-                </div>
+              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-neon mb-3">{t('team.philosophy.clientPartnership.title')}</h3>
+                  <p className="text-sm text-gray-300">{t('team.philosophy.clientPartnership.description')}</p>
+                </CardContent>
               </Card>
             </div>
           </div>
@@ -115,16 +113,16 @@ export default function TeamPageClient() {
             {t('team.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/#contact">
+            <LanguageAwareLink href="/#contact">
               <button className="bg-gradient-neon text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform duration-200 btn-accessible">
                 {t('team.cta.startProject')}
               </button>
-            </Link>
-            <Link href="/company/careers">
+            </LanguageAwareLink>
+            <LanguageAwareLink href="/company/careers">
               <button className="border-2 border-neon text-neon hover:bg-neon/10 px-8 py-4 rounded-lg font-semibold transition-all duration-200 btn-accessible">
                 {t('team.cta.joinTeam')}
               </button>
-            </Link>
+            </LanguageAwareLink>
           </div>
         </div>
       </section>

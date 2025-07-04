@@ -15,47 +15,118 @@ export interface BilingualMetadata {
 
 export function generateMetadata(bilingualMeta: BilingualMetadata, preferLang: 'pl' | 'en' = 'pl'): Metadata {
   const meta = bilingualMeta[preferLang];
+  const baseUrl = 'https://cloudfloo.io';
   
   return {
+    metadataBase: new URL(baseUrl),
     title: meta.title,
     description: meta.description,
     keywords: bilingualMeta.keywords,
     alternates: {
-      canonical: bilingualMeta.canonicalUrl,
+      canonical: bilingualMeta.canonicalUrl || baseUrl,
       languages: {
-        'pl': bilingualMeta.canonicalUrl || 'https://cloudfloo.io',
-        'en': `${bilingualMeta.canonicalUrl || 'https://cloudfloo.io'}/en`,
-        'x-default': bilingualMeta.canonicalUrl || 'https://cloudfloo.io',
-      }
+        'pl': bilingualMeta.canonicalUrl || baseUrl,
+        'en': `${bilingualMeta.canonicalUrl || baseUrl}/en`,
+        'x-default': bilingualMeta.canonicalUrl || baseUrl,
+      },
     },
     openGraph: {
       title: meta.title,
       description: meta.description,
+      url: bilingualMeta.canonicalUrl || baseUrl,
+      siteName: 'CloudFloo',
       locale: preferLang === 'pl' ? 'pl_PL' : 'en_US',
-      alternateLocale: preferLang === 'pl' ? 'en_US' : 'pl_PL',
+      type: 'website',
+      images: [
+        {
+          url: '/og-cover.jpg',
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
     },
     twitter: {
+      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-    }
+      images: ['/og-cover.jpg'],
+    },
   };
 }
 
-// Detect user's preferred language from headers or localStorage
+/**
+ * Generate metadata with canonical URL and hreflang for a specific page
+ * Updated to handle the URL structure: Polish at root, English at /en prefix
+ */
+export function generatePageMetadata(
+  path: string,
+  title: string,
+  description: string,
+  hasEnTranslation = true
+): Metadata {
+  const baseUrl = 'https://cloudfloo.io';
+  
+  // Determine if this is an English page
+  const isEnglishPage = path.startsWith('/en');
+  const basePath = isEnglishPage ? path.substring(3) : path; // Remove /en prefix if present
+  
+  // Set canonical URLs properly
+  const polishUrl = `${baseUrl}${basePath}`;
+  const englishUrl = `${baseUrl}/en${basePath}`;
+  const canonicalUrl = isEnglishPage ? englishUrl : polishUrl;
+  
+  const alternateLanguages: Record<string, string> = {
+    'pl': polishUrl,
+    'x-default': polishUrl, // Default to Polish
+  };
+  
+  if (hasEnTranslation) {
+    alternateLanguages['en'] = englishUrl;
+  }
+  
+  return {
+    metadataBase: new URL(baseUrl),
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: 'CloudFloo',
+      locale: isEnglishPage ? 'en_US' : 'pl_PL',
+      type: 'website',
+      images: [
+        {
+          url: '/og-cover.jpg',
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-cover.jpg'],
+    },
+  };
+}
+
+// Detect language from request (for future use)
 export function detectLanguage(acceptLanguage?: string): 'pl' | 'en' {
-  if (typeof window !== 'undefined') {
-    // Client-side detection
-    const stored = localStorage.getItem('preferred-language');
-    if (stored === 'en' || stored === 'pl') return stored;
-    
-    const browserLang = navigator.language.split('-')[0];
-    return browserLang === 'pl' ? 'pl' : 'en';
-  }
-  
-  // Server-side detection from Accept-Language header
-  if (acceptLanguage) {
-    return acceptLanguage.includes('pl') ? 'pl' : 'en';
-  }
-  
-  return 'pl'; // Default to Polish
+  if (!acceptLanguage) return 'pl';
+  return acceptLanguage.includes('en') && !acceptLanguage.includes('pl') ? 'en' : 'pl';
+}
+
+/**
+ * Detect language from pathname
+ */
+export function detectLanguageFromPath(pathname: string): 'pl' | 'en' {
+  return pathname.startsWith('/en') ? 'en' : 'pl';
 } 

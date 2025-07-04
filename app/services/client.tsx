@@ -29,8 +29,6 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
       alt={name}
       className={className}
       onError={() => setImageError(true)}
-      placeholder="blur"
-      blurDataURL={DEFAULT_BLUR}
       width={24}
       height={24}
       unoptimized
@@ -54,8 +52,8 @@ export default function ServicesClient() {
     },
     {
       icon: Bot,
-      title: t('services.aiAutomation.title'),
-      description: t('services.aiAutomation.description'),
+      title: t('services.aiMl.title'),
+      description: t('services.aiMl.description'),
       href: '/services/ai-ml',
       features: ['Custom ML Models', 'Intelligent Automation', 'Predictive Analytics', 'MLOps Pipeline'],
       color: 'from-purple-500 to-pink-500',

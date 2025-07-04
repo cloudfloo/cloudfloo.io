@@ -1,26 +1,27 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import DefaultSeoProvider from '@/components/DefaultSeoProvider';
 
-const inter = localFont({
-  src: [
-    {
-      path: '../public/InterVariable.woff2',
-      weight: '100 900',
-      style: 'normal',
-    },
-    {
-      path: '../public/InterVariable-Italic.woff2',
-      weight: '100 900',
-      style: 'italic',
-    },
-  ],
+// Primary font (regular) - preloaded for immediate use
+const interRegular = localFont({
+  src: '../public/InterVariable.woff2',
   variable: '--font-inter',
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+  adjustFontFallback: 'Arial',
+});
+
+// Italic font - loaded on demand to avoid preload warning
+const interItalic = localFont({
+  src: '../public/InterVariable-Italic.woff2',
+  variable: '--font-inter-italic',
+  display: 'swap',
+  preload: false,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
 });
 
 import Analytics from "@/components/Analytics";
@@ -56,38 +57,41 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://cloudfloo.io" />
-        {/* Hreflang for bilingual SEO */}
-        <link rel="alternate" hrefLang="pl" href="https://cloudfloo.io/" />
-        <link rel="alternate" hrefLang="en" href="https://cloudfloo.io/en/" />
-        <link rel="alternate" hrefLang="x-default" href="https://cloudfloo.io/" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#00E5FF" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preload" as="image" href="/logo.avif" fetchPriority="high" />
-        <link rel="preconnect" href="https://techicons.dev" />
-        <link rel="preconnect" href="https://images.pexels.com" />
+        {/* Resource Hints for Performance */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
         <link rel="dns-prefetch" href="https://techicons.dev" />
         
+        {/* Preload critical assets - fonts are handled by Next.js localFont */}
+        <link rel="preload" as="image" href="/logo.avif" fetchPriority="high" />
+        
         {/* Google Search Console Verification - Production Only */}
         {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
           <meta name="google-site-verification" content="verify_token" />
         )}
+        
+        {/* PWA Theme Color */}
+        <meta name="theme-color" content="#000000" />
 
         {/* Critical CSS for hero section performance */}
         <style id="critical">{`
+          *,*::before,*::after{box-sizing:border-box}
+          html{scroll-behavior:smooth}
+          body{margin:0;background:#000;color:#fff;font-family:var(--font-inter),system-ui,-apple-system,sans-serif;font-display:swap}
           #home{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-          .hero-title{font-size:clamp(2.5rem,8vw,6rem);line-height:1.1;font-weight:700}
+          .hero-title{font-size:clamp(2.5rem,8vw,6rem);line-height:1.1;font-weight:700;color:#fff;font-display:swap}
           .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
           .text-neon{background:linear-gradient(135deg,#00E5FF,#FF00E0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+          .bg-gradient-neon{background:linear-gradient(135deg,#00E5FF,#FF00E0)}
+          .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+          .btn-accessible{min-height:44px;border-radius:8px;transition:all 0.2s ease-in-out}
+          @media(max-width:767px){.hero-title{font-size:2.5rem}.container{padding:0 1rem}}
         `}</style>
       </head>
-      <body className={inter.className} suppressHydrationWarning>
-        <DefaultSeoProvider />
+      <body className={`${interRegular.className} ${interItalic.variable}`} suppressHydrationWarning>
         <LanguageProvider>
+          <DefaultSeoProvider />
           {children}
           <Analytics />
         </LanguageProvider>
@@ -95,23 +99,21 @@ export default function RootLayout({
         {/* Google Analytics 4 - Non-blocking, Production Only */}
         {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
           <>
-            <script
-              async
+            <Script
               src="https://www.googletagmanager.com/gtag/js?id=G-D5F48XPHZJ"
+              strategy="afterInteractive"
             />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-D5F48XPHZJ', {
-                    page_title: document.title,
-                    page_location: window.location.href
-                  });
-                `,
-              }}
-            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-D5F48XPHZJ', {
+                  page_title: document.title,
+                  page_location: window.location.href
+                });
+              `}
+            </Script>
           </>
         )}
       </body>

@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { Badge } from '@/components/ui/badge';
-import { Modal } from '@/components/ui/modal';
+import Modal from '@/components/ui/modal';
 import { ImageCarousel } from '@/components/ui/image-carousel';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -171,7 +171,8 @@ This enterprise solution demonstrates advanced software engineering principles w
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
-                  priority
+                  priority={false}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL={placeholders[project.image] ?? DEFAULT_BLUR}
                 />

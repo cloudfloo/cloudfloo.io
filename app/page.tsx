@@ -1,23 +1,18 @@
 import { Metadata } from 'next';
-import { generateMetadata, BilingualMetadata, detectLanguage } from '@/lib/metadata';
+import { generatePageMetadata } from '@/lib/metadata';
+import dynamic from 'next/dynamic';
+
+// Critical components - load immediately
 import EnhancedHeader from '@/components/enhanced-header-fixed';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
+import PolishLanguageWrapper from '@/components/PolishLanguageWrapper';
 
-const bilingualMeta: BilingualMetadata = {
-  pl: {
-    title: 'Rozwiązania Chmurowe i Automatyzacja DevOps | CloudFloo',
-    description: 'Przekształć swój biznes z ekspertami chmury AWS, Azure i GCP. Oferujemy kompleksowe rozwiązania cloud-native, DevOps i AI dla firm w Polsce 🔧',
-  },
-  en: {
-    title: 'Cloud Solutions & DevOps Automation | CloudFloo',
-    description: 'Transform your business with AWS, Azure & GCP cloud experts. We deliver comprehensive cloud-native, DevOps & AI solutions for companies 🔧',
-  },
-  keywords: 'cloud solutions, DevOps automation, AI agents, Polish engineers, cloud-native development, microservices, NestJS, React, Kubernetes, AWS, Azure, GCP',
-  canonicalUrl: 'https://cloudfloo.io',
-};
-
-export const metadata: Metadata = generateMetadata(bilingualMeta, 'pl');
+// Cloud visualization - lazy load when needed
+const ImmersiveCloudVisualization = dynamic(() => import('@/components/immersive-cloud-visualization'), { 
+  ssr: false,
+  loading: () => null
+});
 
 // Above-the-fold components - load with priority
 const EnhancedServices = dynamic(() => import('@/components/enhanced-services'), { 
@@ -59,16 +54,19 @@ export const metadata: Metadata = generatePageMetadata(
 
 export default function Home() {
   return (
-    <main className="relative">
-      <EnhancedHeader />
-      <Hero />
-      <EnhancedServices />
-      <EnhancedAbout />
-      <TeamSection />
-      <EnhancedProjects />
-      <FAQSection />
-      <EnhancedContact />
-      <Footer />
-    </main>
+    <PolishLanguageWrapper>
+      <main className="relative">
+        <ImmersiveCloudVisualization />
+        <EnhancedHeader />
+        <Hero />
+        <EnhancedServices />
+        <EnhancedAbout />
+        <TeamSection />
+        <EnhancedProjects />
+        <FAQSection />
+        <EnhancedContact />
+        <Footer />
+      </main>
+    </PolishLanguageWrapper>
   );
 }

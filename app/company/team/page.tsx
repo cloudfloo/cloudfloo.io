@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft, Linkedin, Twitter, Github, Mail } from 'lucide-react';
+import BackToHomeButton from '@/components/BackToHomeButton';
+import { Linkedin, Twitter, Github, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -130,10 +130,7 @@ export default function TeamPage() {
       <header className="border-b border-gray-800 bg-black/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Home
-            </Link>
+            <BackToHomeButton />
             <div className="text-gray-500">/</div>
             <div className="text-neon">Our Team</div>
           </div>
@@ -203,22 +200,22 @@ export default function TeamPage() {
                       <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex space-x-2 justify-center">
                           {member.social.linkedin && (
-                            <a href={member.social.linkedin} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.linkedin} aria-label={`LinkedIn ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Linkedin className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.twitter && (
-                            <a href={member.social.twitter} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.twitter} aria-label={`Twitter ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Twitter className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.github && (
-                            <a href={member.social.github} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.github} aria-label={`GitHub ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Github className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.email && (
-                            <a href={`mailto:${member.social.email}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={`mailto:${member.social.email}`} aria-label={`Email ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Mail className="w-4 h-4 text-white" />
                             </a>
                           )}
@@ -347,16 +344,12 @@ export default function TeamPage() {
               Let's discuss how our expertise can help accelerate your digital transformation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/#contact">
-                <Button size="lg" className="bg-gradient-neon text-white">
-                  Start Your Project
-                </Button>
-              </Link>
-              <Link href="/company/careers">
-                <Button size="lg" variant="outline" className="border-neon text-neon hover:bg-neon/10">
-                  Join Our Team
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-gradient-neon text-white" onClick={() => window.location.href = '/#contact'}>
+                Start Your Project
+              </Button>
+              <Button size="lg" variant="outline" className="border-neon text-neon hover:bg-neon/10" onClick={() => window.location.href = '/company/careers'}>
+                Join Our Team
+              </Button>
             </div>
           </motion.div>
         </div>

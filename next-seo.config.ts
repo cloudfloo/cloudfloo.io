@@ -14,11 +14,11 @@ const config: DefaultSeoProps = {
     description: 'CloudFloo is a senior team of Polish engineers building cloud-native, micro-service, and DevOps solutions in NestJS, React, and Kubernetes.',
     images: [
       {
-        url: 'https://cloudfloo.io/og-cover.jpg',
+        url: 'https://cloudfloo.io/og-cover.png',
         width: 1200,
         height: 630,
         alt: 'CloudFloo - Cloud Solutions & DevOps Automation',
-        type: 'image/jpeg',
+        type: 'image/png',
       },
     ],
   },
@@ -27,6 +27,16 @@ const config: DefaultSeoProps = {
     site: '@cloudfloo',
     cardType: 'summary_large_image',
   },
+  languageAlternates: [
+    {
+      hrefLang: 'pl',
+      href: 'https://cloudfloo.io/',
+    },
+    {
+      hrefLang: 'en',
+      href: 'https://cloudfloo.io/en/',
+    },
+  ],
   additionalMetaTags: [
     {
       name: 'viewport',

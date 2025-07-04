@@ -94,7 +94,12 @@
       "shortTitle": "Strategiczne doradztwo chmurowe",
       "description": "Skalowalna infrastruktura chmurowa i usługi migracji dla nowoczesnych firm.",
       "longDescription": "Eksperckie wskazówki dostosowane do celów Twojego biznesu, zapewniające optymalną architekturę chmury i płynne strategie migracji.",
-      "features": ["Migracja do chmury", "Infrastruktura jako kod", "Automatyczne skalowanie", "Bezpieczeństwo i zgodność"],
+      "features": {
+        "aws": "Rozwiązania AWS",
+        "azure": "Microsoft Azure",
+        "gcp": "Google Cloud Platform",
+        "architecture": "Architektura chmury"
+      },
       "detailedFeatures": ["Projektowanie architektury", "Planowanie migracji", "Optymalizacja kosztów", "Ocena bezpieczeństwa"],
       "heroTitle": "<span class=\"text-neon\">Rozwiązania</span> chmurowe",
       "heroDescription": "Przekształć swoją infrastrukturę za pomocą rozwiązań chmurowych klasy enterprise. Dostarczamy kompleksowe usługi migracji, skalowania i optymalizacji, które obniżają koszty przy jednoczesnej poprawie wydajności i niezawodności.",
@@ -121,12 +126,45 @@
       "ctaDevelopment": "Rozpocznij rozwój",
       "ctaEstimate": "Otrzymaj wycenę projektu"
     },
-    "aiAutomation": {
+    "aiMl": {
       "title": "AI i Machine Learning",
       "shortTitle": "Inteligentna automatyzacja",
       "description": "Inteligentna automatyzacja i operacje ML dla spostrzeżeń opartych na danych.",
       "longDescription": "Rozwiązania oparte na AI, które usprawniają operacje i zwiększają produktywność poprzez inteligentną automatyzację przepływów pracy.",
-      "features": ["Niestandardowe modele ML", "Inteligentna automatyzacja", "Analityka predykcyjna", "Pipeline MLOps"],
+      "heroTitle": "Rozwiązania <span class=\"text-gradient-neon\">AI i Machine Learning</span>",
+      "heroDescription": "Przekształć swój biznes dzięki inteligentnej automatyzacji i operacjom ML dla spostrzeżeń opartych na danych.",
+      "ctaMain": "Rozpocznij projekt AI",
+      "ctaSecondary": "Zobacz portfolio AI",
+      "featuresTitle": "Możliwości AI/ML",
+      "featuresDescription": "Kompleksowe rozwiązania AI i machine learning do napędzania Twojego biznesu.",
+      "aiServicesTitle": "Kategorie usług AI",
+      "aiServicesDescription": "Specjalistyczne usługi AI w różnych domenach i przypadkach użycia.",
+      "technologiesTitle": "Technologie AI",
+      "technologiesDescription": "Najnowocześniejsze technologie i frameworki używane w rozwoju AI/ML.",
+      "useCasesTitle": "Rzeczywiste aplikacje AI",
+      "useCasesDescription": "Sprawdzone rozwiązania AI, które dostarczają wymierne rezultaty biznesowe.",
+      "readyTitle": "Gotowy wykorzystać moc AI?",
+      "readyDescription": "Porozmawiajmy o tym, jak AI i machine learning mogą przekształcić Twoje operacje biznesowe.",
+      "ctaProject": "Rozpocznij projekt AI",
+      "ctaGuide": "Pobierz przewodnik AI",
+      "intelligentAutomation": "Inteligentna automatyzacja",
+      "intelligentAutomationDesc": "Automatyzuj złożone przepływy pracy dzięki podejmowaniu decyzji zasilanym przez AI i optymalizacji procesów.",
+      "customMLModels": "Niestandardowe modele ML",
+      "customMLModelsDesc": "Opracowuj dostosowane modele machine learning specjalnie zaprojektowane dla Twoich potrzeb biznesowych.",
+      "mlOpsPipeline": "Pipeline MLOps",
+      "mlOpsPipelineDesc": "Kompletny pipeline operacji machine learning od rozwoju do wdrożenia produkcyjnego.",
+      "predictiveAnalytics": "Analityka predykcyjna",
+      "predictiveAnalyticsDesc": "Prognozuj trendy i zachowania przy użyciu zaawansowanego modelowania statystycznego i machine learning.",
+      "realTimeProcessing": "Przetwarzanie w czasie rzeczywistym",
+      "realTimeProcessingDesc": "Przetwarzaj i analizuj strumienie danych w czasie rzeczywistym dla natychmiastowych spostrzeżeń i działań.",
+      "modelOptimization": "Optymalizacja modeli",
+      "modelOptimizationDesc": "Optymalizuj modele ML pod kątem wydajności, dokładności i efektywności zasobów.",
+      "features": {
+        "models": "Niestandardowe modele ML",
+        "automation": "Inteligentna automatyzacja",
+        "analytics": "Analityka predykcyjna",
+        "deployment": "Pipeline MLOps"
+      },
       "detailedFeatures": ["Automatyzacja procesów", "Integracja AI", "Optymalizacja przepływów pracy", "Analityka predykcyjna"],
       "heroTitle": "AI i <span class=\"text-neon\">Machine Learning</span>",
       "heroDescription": "Wykorzystaj moc sztucznej inteligencji do automatyzacji procesów, uzyskiwania spostrzeżeń i napędzania innowacji. Nasze rozwiązania AI są zaprojektowane do płynnej integracji z istniejącymi systemami i skalowania wraz z biznesem.",
@@ -162,7 +200,12 @@
       "shortTitle": "Doskonałość DevOps",
       "description": "Usprawnienie pipeline CI/CD i automatyzacja infrastruktury.",
       "longDescription": "Kompleksowe praktyki DevOps, które przyspieszają dostarczanie przy zachowaniu niezawodności i bezpieczeństwa.",
-      "features": ["Pipeline CI/CD", "Infrastruktura jako kod", "Monitorowanie i alerty", "Integracja bezpieczeństwa"],
+      "features": {
+        "kubernetes": "Kubernetes",
+        "cicd": "Pipeline CI/CD",
+        "infrastructure": "Infrastruktura jako kod",
+        "monitoring": "Monitorowanie i alerty"
+      },
       "heroTitle": "DevOps i <span class=\"text-neon\">automatyzacja</span>",
       "heroDescription": "Przyspiesz cykl rozwoju za pomocą nowoczesnych praktyk DevOps. Wdrażamy automatyczne pipeline, infrastrukturę jako kod i kompleksowe monitorowanie, aby zapewnić szybkie, niezawodne i bezpieczne wdrożenia.",
       "ctaMain": "Optymalizuj swój pipeline",
@@ -173,7 +216,12 @@
       "shortTitle": "Rozwiązania inżynierii danych",
       "description": "Solidne pipeline danych i rozwiązania analityczne dla business intelligence.",
       "longDescription": "Przekształć surowe dane w praktyczne spostrzeżenia dzięki solidnym pipeline i zaawansowanym platformom analitycznym.",
-      "features": ["Projektowanie pipeline danych", "Przetwarzanie w czasie rzeczywistym", "Platformy analityczne", "Zarządzanie danymi"],
+      "features": {
+        "pipelines": "Projektowanie pipeline danych",
+        "analytics": "Przetwarzanie w czasie rzeczywistym",
+        "streaming": "Platformy analityczne",
+        "governance": "Zarządzanie danymi"
+      },
       "readyTitle": "Gotowy na odblokowanie potencjału swoich danych?",
       "readyDescription": "Zbudujmy infrastrukturę danych, która przekształci Twoje dane w przewagę konkurencyjną.",
       "ctaProject": "Rozpocznij projekt danych",
@@ -193,7 +241,14 @@
       "ctaDeploy": "Wdróż funkcje brzegowe",
       "ctaAudit": "Audyt wydajności brzegowej"
     },
-    "learnMore": "Dowiedz się więcej"
+    "learnMore": "Dowiedz się więcej",
+    "techStack": {
+      "title": "Stos technologiczny",
+      "subtitle": "Nowoczesne technologie, w których się specjalizujemy",
+      "backend": "Technologie backend",
+      "frontend": "Technologie frontend",
+      "cloud": "Platformy chmurowe"
+    }
   },
   "about": {
     "title": "Dlaczego warto współpracować z <span class=\"text-neon\">CloudFloo</span>",
@@ -254,10 +309,25 @@
       "education": "Wykształcenie",
       "languages": "Języki",
       "interests": "Zainteresowania",
+      "expertise": "Ekspertyza",
       "workingWithTeam": "Zainteresowany pracą z {name} i zespołem CloudFloo?",
       "workingDescription": "Porozmawiajmy o tym, jak nasza ekspertyza może pomóc przyspieszyć Twoją transformację cyfrową.",
       "scheduleConsultation": "Umów konsultację",
       "teamMemberNotFound": "Nie znaleziono członka zespołu | CloudFloo"
+    },
+    "members": {
+      "michal-wiatr": {
+        "title": "CEO i CTO",
+        "shortBio": "Były tech lead w Sabre i architekt 5G RAN w Samsung z 10+ letnim doświadczeniem w skalowaniu systemów rozproszonych."
+      },
+      "sebastian-debicki": {
+        "title": "Head of Frontend",
+        "shortBio": "Specjalista React i dostępności z 900+ commitami produkcyjnymi, ekspert w optymalizacji wydajności i projektowaniu inkluzywnym."
+      },
+      "damian-ogrodnik": {
+        "title": "Head of Backend",
+        "shortBio": "Inżynier Node.js skupiający się na architekturach event-driven i PostgreSQL, z MSc z Uniwersytetu Ekonomicznego we Wrocławiu."
+      }
     },
     "breadcrumb": {
       "home": "Strona główna",
