@@ -9,18 +9,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import SEO from '@/components/SEO';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function BlogPage() {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const categories = [
-    { id: 'all', label: 'All Posts' },
-    { id: 'cloud', label: 'Cloud Computing' },
-    { id: 'ai', label: 'AI & Machine Learning' },
-    { id: 'devops', label: 'DevOps' },
-    { id: 'security', label: 'Security' },
-    { id: 'tutorials', label: 'Tutorials' }
+    { id: 'all', label: t('blog.categories.all') },
+    { id: 'cloud', label: t('blog.categories.cloud') },
+    { id: 'ai', label: t('blog.categories.ai') },
+    { id: 'devops', label: t('blog.categories.devops') },
+    { id: 'security', label: t('blog.categories.security') },
+    { id: 'tutorials', label: t('blog.categories.tutorials') }
   ];
 
   const blogPosts = [
@@ -123,21 +125,20 @@ export default function BlogPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-            >
-              CloudFloo <span className="text-neon">Blog</span>
-            </motion.h1>
-            <motion.p 
+              dangerouslySetInnerHTML={{ __html: t('blog.heroTitle') }}
+            />
+            <motion.p
               className="text-xl text-gray-300 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Insights, tutorials, and thought leadership on cloud computing, AI, and modern software development.
+              {t('blog.heroSubtitle')}
             </motion.p>
           </div>
         </div>
@@ -146,16 +147,16 @@ export default function BlogPage() {
       {/* Featured Posts Carousel */}
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-6">Featured Posts</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('blog.featuredTitle')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our latest insights and deep dives into cutting-edge technology.
+              {t('blog.featuredSubtitle')}
             </p>
           </motion.div>
 
@@ -179,7 +180,7 @@ export default function BlogPage() {
                     />
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-gradient-neon text-white">
-                        Featured
+                        {t('blog.featured')}
                       </Badge>
                     </div>
                   </div>
@@ -221,7 +222,7 @@ export default function BlogPage() {
                       size="sm" 
                       className="w-full bg-transparent border border-neon text-neon hover:bg-neon hover:text-black transition-all duration-300 group/btn"
                     >
-                      Read More
+                      {t('blog.readMore')}
                       <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
                   </CardContent>
@@ -247,7 +248,7 @@ export default function BlogPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
                 type="text"
-                placeholder="Search articles..."
+                placeholder={t('blog.searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20"
@@ -343,7 +344,7 @@ export default function BlogPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="text-gray-400 text-lg">No posts found matching your criteria.</p>
+                <p className="text-gray-400 text-lg">{t('blog.noPosts')}</p>
               </motion.div>
             )}
           </div>
@@ -360,18 +361,18 @@ export default function BlogPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('blog.stayUpdatedTitle')}</h2>
             <p className="text-xl text-gray-300 mb-8">
-              Subscribe to our newsletter for the latest insights and updates.
+              {t('blog.stayUpdatedSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('blog.newsletterPlaceholder')}
                 className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20"
               />
               <Button className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
-                Subscribe
+                {t('blog.subscribe')}
               </Button>
             </div>
           </motion.div>

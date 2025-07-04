@@ -354,6 +354,8 @@
     "gdpr": {
       "title": "GDPR Compliance - Data Protection | CloudFloo",
       "description": "Information about CloudFloo's GDPR compliance and personal data protection measures in cloud computing services",
+      "heroTitle": "GDPR <span class=\"text-neon\">Compliance</span>",
+      "heroSubtitle": "Your data protection rights and our commitment to privacy compliance.",
       "exercisingRights": "Exercising Your Rights",
       "exercisingRightsDesc": "To exercise your GDPR rights, you can:",
       "contactDPO": "Contact our Data Protection Officer at dpo@cloudfloo.io",
@@ -367,6 +369,8 @@
     "cookies": {
       "title": "Cookie Policy - Cookie Management | CloudFloo",
       "description": "Information about CloudFloo's cookie usage and management in cloud computing services",
+      "heroTitle": "Cookie Policy",
+      "heroSubtitle": "Learn about how we use cookies and similar technologies to improve your experience.",
       "managingCookies": "Managing Cookies",
       "managingCookiesDesc": "You have several options for managing cookies:",
       "browserSettings": "Browser Settings",
@@ -385,6 +389,8 @@
     "terms": {
       "title": "Terms of Service - Cooperation Conditions | CloudFloo",
       "description": "CloudFloo's terms of service and cooperation conditions for cloud computing services",
+      "heroTitle": "Terms of Service",
+      "heroSubtitle": "Legal terms and conditions governing your use of CloudFloo.io services",
       "userAccounts": "User Accounts",
       "userAccountsDesc": "To access certain features of our Services, you may be required to create an account. You agree to:",
       "provideAccurate": "Provide accurate, current, and complete information",
@@ -396,7 +402,9 @@
     },
     "privacy": {
       "title": "Privacy Policy - Data Protection | CloudFloo",
-      "description": "CloudFloo's privacy policy and data protection measures in cloud computing services"
+      "description": "CloudFloo's privacy policy and data protection measures in cloud computing services",
+      "heroTitle": "Privacy Policy",
+      "heroSubtitle": "Your privacy is important to us. This policy explains how we collect, use, and protect your information."
     }
   },
   "careers": {
@@ -484,6 +492,28 @@
   "languages": {
     "en": "English",
     "pl": "Polish"
+  },
+  "blog": {
+    "heroTitle": "CloudFloo <span class=\"text-neon\">Blog</span>",
+    "heroSubtitle": "Insights, tutorials, and thought leadership on cloud computing, AI, and modern software development.",
+    "featuredTitle": "Featured Posts",
+    "featuredSubtitle": "Our latest insights and deep dives into cutting-edge technology.",
+    "featured": "Featured",
+    "categories": {
+      "all": "All Posts",
+      "cloud": "Cloud Computing",
+      "ai": "AI & Machine Learning",
+      "devops": "DevOps",
+      "security": "Security",
+      "tutorials": "Tutorials"
+    },
+    "searchPlaceholder": "Search articles...",
+    "readMore": "Read More",
+    "stayUpdatedTitle": "Stay Updated",
+    "stayUpdatedSubtitle": "Subscribe to our newsletter for the latest insights and updates.",
+    "newsletterPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "noPosts": "No posts found matching your criteria."
   },
   "projectWebkd": {
     "title": "WebKD: Advanced Enterprise Web Solution",
