@@ -1,6 +1,9 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://cloudfloo.io',
+  // Output sitemaps to the static export directory so they are
+  // included in the final Docker image served by nginx
+  outDir: './out',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
