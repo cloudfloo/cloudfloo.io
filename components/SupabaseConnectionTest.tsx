@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase/client'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client'
 
 export function SupabaseConnectionTest() {
   const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error'>('testing')
@@ -9,9 +9,15 @@ export function SupabaseConnectionTest() {
 
   useEffect(() => {
     const testConnection = async () => {
+      if (!isSupabaseConfigured) {
+        setConnectionStatus('error')
+        setError('Supabase not configured')
+        return
+      }
+
       try {
         console.log('🔗 Testing Supabase connection...')
-        
+
         // Test basic connection
         const { data, error } = await supabase
           .from('profiles')

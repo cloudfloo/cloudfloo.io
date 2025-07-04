@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client'
 import { AuthUser, UserProfile, SignInCredentials, SignUpCredentials } from './auth.types'
 import { AuthError, User } from '@supabase/supabase-js'
 
@@ -7,11 +7,15 @@ class AuthService {
    * Transform Supabase user to our AuthUser type
    */
   private async transformUser(user: User): Promise<AuthUser> {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .single()
+    let profile: any = null
+    if (isSupabaseConfigured) {
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single()
+      profile = data
+    }
 
     return {
       id: user.id,
@@ -33,6 +37,9 @@ class AuthService {
    * Get current user session
    */
   async getCurrentUser(): Promise<AuthUser | null> {
+    if (!isSupabaseConfigured) {
+      return null
+    }
     try {
       const { data: { user }, error } = await supabase.auth.getUser()
       
@@ -51,6 +58,9 @@ class AuthService {
    * Sign in with email and password
    */
   async signIn(credentials: SignInCredentials): Promise<AuthUser> {
+    if (!isSupabaseConfigured) {
+      throw new Error('Supabase not configured')
+    }
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: credentials.email,
@@ -76,6 +86,9 @@ class AuthService {
    * Sign up with email and password
    */
   async signUp(credentials: SignUpCredentials): Promise<AuthUser> {
+    if (!isSupabaseConfigured) {
+      throw new Error('Supabase not configured')
+    }
     try {
       const { data, error } = await supabase.auth.signUp({
         email: credentials.email,
@@ -106,6 +119,9 @@ class AuthService {
    * Sign out current user
    */
   async signOut(): Promise<void> {
+    if (!isSupabaseConfigured) {
+      throw new Error('Supabase not configured')
+    }
     try {
       const { error } = await supabase.auth.signOut()
       
@@ -122,6 +138,9 @@ class AuthService {
    * Reset password
    */
   async resetPassword(email: string): Promise<void> {
+    if (!isSupabaseConfigured) {
+      throw new Error('Supabase not configured')
+    }
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/reset-password`
@@ -140,6 +159,9 @@ class AuthService {
    * Update user profile
    */
   async updateProfile(userId: string, updates: Partial<UserProfile>): Promise<UserProfile> {
+    if (!isSupabaseConfigured) {
+      throw new Error('Supabase not configured')
+    }
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -199,6 +221,9 @@ class AuthService {
    * Listen to auth state changes
    */
   onAuthStateChange(callback: (user: AuthUser | null) => void) {
+    if (!isSupabaseConfigured) {
+      return { data: null }
+    }
     return supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         const authUser = await this.transformUser(session.user)
