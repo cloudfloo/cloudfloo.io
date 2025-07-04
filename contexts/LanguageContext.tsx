@@ -83,21 +83,48 @@ const defaultTranslations = {
     }
   },
   services: {
+    title: 'Our Services',
+    subtitle: 'Comprehensive technology solutions',
+    learnMore: 'Learn More',
     cloudSolutions: {
       title: 'Strategic Cloud Consulting',
-      description: 'Expert guidance tailored to your business goals.'
+      description: 'Expert guidance tailored to your business goals.',
+      features: {
+        aws: 'AWS Solutions',
+        azure: 'Microsoft Azure', 
+        gcp: 'Google Cloud Platform',
+        architecture: 'Cloud Architecture'
+      }
     },
-    aiAutomation: {
-      title: 'Intelligent Automation',
-      description: 'AI-powered solutions that streamline operations.'
+    aiMl: {
+      title: 'AI & Machine Learning',
+      description: 'Intelligent automation and ML operations.',
+      features: {
+        models: 'Custom ML Models',
+        automation: 'Intelligent Automation',
+        analytics: 'Predictive Analytics',
+        deployment: 'MLOps Pipeline'
+      }
     },
     devops: {
       title: 'DevOps Excellence',
-      description: 'Comprehensive DevOps practices that accelerate delivery.'
+      description: 'Comprehensive DevOps practices that accelerate delivery.',
+      features: {
+        kubernetes: 'Kubernetes',
+        cicd: 'CI/CD Pipelines',
+        infrastructure: 'Infrastructure as Code',
+        monitoring: 'Monitoring & Alerting'
+      }
     },
     dataEngineering: {
       title: 'Data Engineering Solutions',
-      description: 'Transform raw data into actionable insights.'
+      description: 'Transform raw data into actionable insights.',
+      features: {
+        pipelines: 'Data Pipeline Design',
+        analytics: 'Real-time Processing',
+        streaming: 'Analytics Platforms',
+        governance: 'Data Governance'
+      }
     },
     appDevelopment: {
       title: 'Custom Application Development',
@@ -106,7 +133,42 @@ const defaultTranslations = {
     edgeComputing: {
       title: 'Edge Computing',
       description: 'Ultra-fast, globally distributed solutions.'
+    },
+    techStack: {
+      title: 'Technology Stack',
+      subtitle: 'Modern technologies we specialize in',
+      backend: 'Backend Technologies',
+      frontend: 'Frontend Technologies',
+      cloud: 'Cloud Platforms'
     }
+  },
+  team: {
+    member: {
+      viewFullProfile: 'View Full Profile',
+      viewProfile: 'View Profile',
+      expertise: 'Expertise'
+    },
+    members: {
+      'michal-wiatr': {
+        title: 'CEO & CTO',
+        shortBio: 'Tech leader with extensive experience'
+      },
+      'sebastian-debicki': {
+        title: 'Head of Frontend',
+        shortBio: 'React specialist and performance expert'
+      },
+      'damian-ogrodnik': {
+        title: 'Head of Backend',
+        shortBio: 'Node.js engineer and architecture specialist'
+      }
+    }
+  },
+  footer: {
+    selectLanguage: 'Select language'
+  },
+  languages: {
+    en: 'English',
+    pl: 'Polish'
   }
 };
 
@@ -259,7 +321,8 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        if (isHydrated) console.warn(`Translation key not found: ${key}`);
+        // Only show warnings when translations are loaded and hydrated
+        if (isHydrated && isLoaded) console.warn(`Translation key not found: ${key}`);
         return key; // Return the key if translation is not found
       }
     }
