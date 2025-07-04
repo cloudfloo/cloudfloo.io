@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import BackToHomeButton from '@/components/BackToHomeButton';
 import { Shield, Eye, Lock, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Polityka Prywatności - Ochrona Danych | CloudFloo',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPolicyPage() {
+  const { t } = useLanguage();
   const lastUpdated = '2024-01-15';
 
   const tableOfContents = [

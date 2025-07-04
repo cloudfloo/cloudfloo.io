@@ -3,6 +3,7 @@ import BackToHomeButton from '@/components/BackToHomeButton';
 import { Cookie, Settings, BarChart, Shield } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Polityka Cookies - Zarządzanie Plikami Cookie | CloudFloo',
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function CookiePolicyPage() {
+  const { t } = useLanguage();
   const lastUpdated = '2024-01-15';
 
   const tableOfContents = [
