@@ -9,6 +9,8 @@ export const metadata: Metadata = generatePageMetadata(
   true
 );
 
+
+
 export default function AIMachineLearningPage() {
   return <AIMachineLearningClient />;
 }

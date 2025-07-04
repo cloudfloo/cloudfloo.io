@@ -152,7 +152,7 @@ export default function Hero() {
             <h2 className="text-xl md:text-2xl text-white font-medium max-w-4xl mx-auto leading-relaxed">
               {t('hero.subtitle')}
             </h2>
-          </motion.div>
+          </div>
 
           {/* Enhanced CTA Buttons with Staggered Animation */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
