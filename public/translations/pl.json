@@ -369,8 +369,165 @@
     "cookies": {
       "title": "Polityka Cookies - Zarządzanie Cookies | CloudFloo",
       "description": "Informacje o używaniu i zarządzaniu cookies przez CloudFloo w usługach cloud computing",
+<<<<<<< HEAD
       "heroTitle": "Polityka Cookies",
       "heroSubtitle": "Dowiedz się, jak używamy plików cookie i podobnych technologii, aby ulepszyć Twoje doświadczenia.",
+=======
+      "breadcrumb": "Polityka Cookies",
+      "subtitle": "Dowiedz się, jak używamy plików cookie i podobnych technologii, aby poprawić Twoje doświadczenia.",
+      "lastUpdated": "Ostatnia aktualizacja",
+      "tableOfContents": "Spis treści",
+      
+      "sections": {
+        "whatAreCookies": "Czym są pliki cookie?",
+        "howWeUse": "Jak używamy plików cookie",
+        "typesOfCookies": "Rodzaje plików cookie",
+        "thirdParty": "Pliki cookie stron trzecich",
+        "managingCookies": "Zarządzanie plikami cookie",
+        "updates": "Aktualizacje polityki",
+        "contact": "Informacje kontaktowe"
+      },
+
+      "content": {
+        "whatAreCookies": {
+          "paragraph1": "Pliki cookie to małe pliki tekstowe przechowywane na Twoim urządzeniu podczas odwiedzania strony internetowej. Są powszechnie używane, aby strony internetowe działały bardziej efektywnie i dostarczały informacje właścicielom witryn.",
+          "paragraph2": "Pliki cookie mogą być \"trwałe\" (pozostają na urządzeniu do czasu usunięcia) lub \"sesyjne\" (usuwane po zamknięciu przeglądarki). Mogą także być \"własne\" (ustawiane przez naszą stronę) lub \"stron trzecich\" (ustawiane przez inne domeny)."
+        },
+        "howWeUse": {
+          "intro": "Używamy plików cookie w kilku celach:",
+          "list": {
+            "essential": {
+              "title": "Podstawowa funkcjonalność",
+              "description": "Aby zapewnić główne funkcje strony i bezpieczeństwo"
+            },
+            "performance": {
+              "title": "Wydajność",
+              "description": "Aby analizować sposób korzystania z naszej strony i poprawiać wydajność"
+            },
+            "personalization": {
+              "title": "Personalizacja",
+              "description": "Aby zapamiętywać Twoje preferencje i dostarczać spersonalizowane treści"
+            },
+            "analytics": {
+              "title": "Analityka",
+              "description": "Aby zrozumieć zachowania odwiedzających i optymalizować nasze usługi"
+            },
+            "marketing": {
+              "title": "Marketing",
+              "description": "Aby dostarczać odpowiednie reklamy i mierzyć skuteczność kampanii"
+            }
+          }
+        },
+        "thirdParty": {
+          "intro": "Możemy korzystać z usług stron trzecich, które ustawiają pliki cookie na naszej stronie:",
+          "list": {
+            "googleAnalytics": {
+              "title": "Google Analytics",
+              "description": "Do analityki strony internetowej i monitorowania wydajności"
+            },
+            "socialMedia": {
+              "title": "Media społecznościowe",
+              "description": "Do udostępniania w mediach społecznościowych i osadzonych treści"
+            },
+            "advertising": {
+              "title": "Reklamy",
+              "description": "Do reklam ukierunkowanych i pomiaru kampanii"
+            },
+            "supportTools": {
+              "title": "Narzędzia wsparcia",
+              "description": "Do obsługi klienta i funkcjonalności czatu na żywo"
+            }
+          },
+          "conclusion": "Te strony trzecie mają własne polityki prywatności i praktyki dotyczące plików cookie. Zalecamy przejrzenie ich polityk, aby zrozumieć sposób używania plików cookie."
+        },
+        "managing": {
+          "intro": "Masz kilka opcji zarządzania plikami cookie:",
+          "browserSettings": {
+            "title": "Ustawienia przeglądarki",
+            "intro": "Większość przeglądarek pozwala na:",
+            "list": {
+              "viewDelete": "Przeglądanie i usuwanie plików cookie",
+              "blockSpecific": "Blokowanie plików cookie z określonych witryn",
+              "blockThirdParty": "Blokowanie plików cookie stron trzecich",
+              "clearAll": "Usuwanie wszystkich plików cookie przy zamykaniu przeglądarki",
+              "notifications": "Ustawienie powiadomień o ustawianiu plików cookie"
+            }
+          },
+          "cookiePreferences": {
+            "title": "Preferencje plików cookie",
+            "description": "Możesz zarządzać swoimi preferencjami plików cookie za pomocą naszego narzędzia zgody na pliki cookie:"
+          },
+          "optOutLinks": {
+            "title": "Linki rezygnacji",
+            "description": "Możesz zrezygnować z niektórych plików cookie stron trzecich:",
+            "googleAnalytics": "Rezygnacja z Google Analytics",
+            "digitalAdvertising": "Rezygnacja z Digital Advertising Alliance",
+            "networkAdvertising": "Rezygnacja z Network Advertising Initiative"
+          },
+          "disclaimer": "Wyłączenie niektórych plików cookie może wpłynąć na funkcjonalność strony internetowej i Twoje doświadczenie użytkownika."
+        },
+        "updates": {
+          "paragraph": "Możemy od czasu do czasu aktualizować tę Politykę plików cookie, aby odzwierciedlić zmiany w naszych praktykach lub z powodów prawnych. Powiadomimy Cię o wszelkich istotnych zmianach, publikując zaktualizowaną politykę na tej stronie."
+        },
+        "contact": {
+          "intro": "Jeśli masz jakiekolwiek pytania dotyczące naszego używania plików cookie, skontaktuj się z nami:",
+          "email": "Email",
+          "address": "Adres",
+          "phone": "Telefon"
+        }
+      },
+
+      "types": {
+        "essential": {
+          "title": "Pliki cookie niezbędne",
+          "description": "Wymagane do podstawowej funkcjonalności i bezpieczeństwa strony internetowej.",
+          "examples": {
+            "authentication": "Uwierzytelnianie",
+            "security": "Bezpieczeństwo",
+            "loadBalancing": "Równoważenie obciążenia",
+            "formSubmissions": "Przesyłanie formularzy"
+          }
+        },
+        "analytics": {
+          "title": "Pliki cookie analityczne",
+          "description": "Pomagają nam zrozumieć, jak odwiedzający wchodzą w interakcje z naszą stroną internetową.",
+          "examples": {
+            "googleAnalytics": "Google Analytics",
+            "pageViews": "Wyświetlenia stron",
+            "userBehavior": "Zachowanie użytkowników",
+            "performanceMetrics": "Metryki wydajności"
+          }
+        },
+        "functional": {
+          "title": "Pliki cookie funkcjonalne",
+          "description": "Zapamiętują Twoje preferencje i zapewniają ulepszone funkcje.",
+          "examples": {
+            "languagePreferences": "Preferencje językowe",
+            "themeSettings": "Ustawienia motywu",
+            "regionSelection": "Wybór regionu",
+            "savedPreferences": "Zapisane preferencje"
+          }
+        },
+        "marketing": {
+          "title": "Pliki cookie marketingowe",
+          "description": "Służą do dostarczania odpowiednich reklam i śledzenia skuteczności kampanii.",
+          "examples": {
+            "adTargeting": "Targetowanie reklam",
+            "campaignTracking": "Śledzenie kampanii",
+            "socialMediaIntegration": "Integracja z mediami społecznościowymi",
+            "remarketing": "Remarketing"
+          }
+        }
+      },
+
+      "labels": {
+        "required": "Wymagane",
+        "optional": "Opcjonalne",
+        "examples": "Przykłady",
+        "note": "Uwaga"
+      },
+
+>>>>>>> d3f7d7b (feat: Połączenie preferencji cookies z stroną /legal/cookies/ + pełne tłumaczenie PL)
       "managingCookies": "Zarządzanie cookies",
       "managingCookiesDesc": "Masz kilka opcji zarządzania cookies:",
       "browserSettings": "Ustawienia przeglądarki",

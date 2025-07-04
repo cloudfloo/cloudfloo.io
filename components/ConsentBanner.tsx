@@ -39,6 +39,18 @@ export default function ConsentBanner() {
       setConsent(parsedConsent);
       updateGoogleConsent(parsedConsent);
     }
+
+    // Listen for custom event to open consent settings
+    const handleOpenConsentSettings = () => {
+      setShowSettings(true);
+      setShowBanner(true);
+    };
+
+    window.addEventListener('openConsentSettings', handleOpenConsentSettings);
+    
+    return () => {
+      window.removeEventListener('openConsentSettings', handleOpenConsentSettings);
+    };
   }, []);
 
   // Initialize Google Consent Mode with default values

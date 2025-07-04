@@ -27,6 +27,26 @@ const defaultTranslations = {
   'team.member.viewFullProfile': 'View Full Profile',
   'team.member.viewProfile': 'View Profile',
   'team.member.expertise': 'Expertise',
+  
+  // Legal/Cookies section
+  'legal.cookies.title': 'Cookie Policy',
+  'legal.cookies.breadcrumb': 'Cookie Policy',
+  'legal.cookies.subtitle': 'Learn about how we use cookies and similar technologies to improve your experience.',
+  'legal.cookies.manageCookiePreferences': 'Manage Cookie Preferences',
+  'legal.cookies.sections.whatAreCookies': 'What Are Cookies?',
+  'legal.cookies.sections.howWeUse': 'How We Use Cookies',
+  'legal.cookies.sections.typesOfCookies': 'Types of Cookies',
+  'legal.cookies.sections.thirdParty': 'Third-Party Cookies',
+  'legal.cookies.sections.managingCookies': 'Managing Cookies',
+  'legal.cookies.sections.updates': 'Policy Updates',
+  'legal.cookies.sections.contact': 'Contact Information',
+  'legal.cookies.types.essential.title': 'Essential Cookies',
+  'legal.cookies.types.analytics.title': 'Analytics Cookies',
+  'legal.cookies.types.functional.title': 'Functional Cookies',
+  'legal.cookies.types.marketing.title': 'Marketing Cookies',
+  'legal.cookies.labels.required': 'Required',
+  'legal.cookies.labels.optional': 'Optional',
+  'legal.cookies.labels.examples': 'Examples',
   // Add default values for commonly used keys to prevent hydration errors
   navigation: {
     home: 'Home',
