@@ -334,9 +334,19 @@ function dispose() {
   performanceMetrics = { initTime: 0, frameCount: 0, avgFrameTime: 0 };
 }
 
+let debugLogCount = 0;
+const MAX_DEBUG_LOGS = 5;
+
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
-  console.log('Cloud worker received message:', data.type);
+  
+  // Only log first few messages and important ones to reduce console spam
+  if (debugLogCount < MAX_DEBUG_LOGS || ['init', 'dispose', 'visibility'].includes(data.type)) {
+    console.log('Cloud worker received message:', data.type);
+    if (data.type === 'mouse' || data.type === 'scroll') {
+      debugLogCount++;
+    }
+  }
   
   switch (data.type) {
     case "init":

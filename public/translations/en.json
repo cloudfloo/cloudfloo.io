@@ -94,7 +94,12 @@
       "shortTitle": "Strategic Cloud Consulting",
       "description": "Scalable cloud infrastructure and migration services for modern businesses.",
       "longDescription": "Expert guidance tailored to your business goals, ensuring optimal cloud architecture and seamless migration strategies.",
-      "features": ["Cloud Migration", "Infrastructure as Code", "Auto-scaling", "Security & Compliance"],
+      "features": {
+        "aws": "AWS Solutions",
+        "azure": "Microsoft Azure",
+        "gcp": "Google Cloud Platform",
+        "architecture": "Cloud Architecture"
+      },
       "detailedFeatures": ["Architecture Design", "Migration Planning", "Cost Optimization", "Security Assessment"],
       "heroTitle": "Cloud <span class=\"text-neon\">Solutions</span>",
       "heroDescription": "Transform your infrastructure with enterprise-grade cloud solutions. We provide comprehensive migration, scaling, and optimization services that reduce costs while improving performance and reliability.",
@@ -121,12 +126,17 @@
       "ctaDevelopment": "Start Development",
       "ctaEstimate": "Get Project Estimate"
     },
-    "aiAutomation": {
+    "aiMl": {
       "title": "AI & Machine Learning",
       "shortTitle": "Intelligent Automation",
       "description": "Intelligent automation and ML operations for data-driven insights.",
       "longDescription": "AI-powered solutions that streamline operations and enhance productivity through smart workflow automation.",
-      "features": ["Custom ML Models", "Intelligent Automation", "Predictive Analytics", "MLOps Pipeline"],
+      "features": {
+        "models": "Custom ML Models",
+        "automation": "Intelligent Automation",
+        "analytics": "Predictive Analytics",
+        "deployment": "MLOps Pipeline"
+      },
       "detailedFeatures": ["Process Automation", "AI Integration", "Workflow Optimization", "Predictive Analytics"],
       "heroTitle": "AI & <span class=\"text-neon\">Machine Learning</span>",
       "heroDescription": "Harness the power of artificial intelligence to automate processes, gain insights, and drive innovation. Our AI solutions are designed to integrate seamlessly with your existing systems and scale with your business.",
@@ -162,7 +172,12 @@
       "shortTitle": "DevOps Excellence",
       "description": "Streamlined CI/CD pipelines and infrastructure automation.",
       "longDescription": "Comprehensive DevOps practices that accelerate delivery while maintaining reliability and security.",
-      "features": ["CI/CD Pipelines", "Infrastructure as Code", "Monitoring & Alerting", "Security Integration"],
+      "features": {
+        "kubernetes": "Kubernetes",
+        "cicd": "CI/CD Pipelines",
+        "infrastructure": "Infrastructure as Code",
+        "monitoring": "Monitoring & Alerting"
+      },
       "heroTitle": "DevOps & <span class=\"text-neon\">Automation</span>",
       "heroDescription": "Accelerate your development lifecycle with modern DevOps practices. We implement automated pipelines, infrastructure as code, and comprehensive monitoring to ensure fast, reliable, and secure deployments.",
       "ctaMain": "Optimize Your Pipeline",
@@ -173,7 +188,12 @@
       "shortTitle": "Data Engineering Solutions",
       "description": "Robust data pipelines and analytics solutions for business intelligence.",
       "longDescription": "Transform raw data into actionable insights with robust pipelines and advanced analytics platforms.",
-      "features": ["Data Pipeline Design", "Real-time Processing", "Analytics Platforms", "Data Governance"],
+      "features": {
+        "pipelines": "Data Pipeline Design",
+        "analytics": "Real-time Processing",
+        "streaming": "Analytics Platforms",
+        "governance": "Data Governance"
+      },
       "readyTitle": "Ready to Unlock Your Data's Potential?",
       "readyDescription": "Let's build a data infrastructure that turns your data into a competitive advantage.",
       "ctaProject": "Start Data Project",
@@ -193,7 +213,14 @@
       "ctaDeploy": "Deploy Edge Functions",
       "ctaAudit": "Edge Performance Audit"
     },
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "techStack": {
+      "title": "Technology Stack",
+      "subtitle": "Modern technologies we specialize in",
+      "backend": "Backend Technologies",
+      "frontend": "Frontend Technologies",
+      "cloud": "Cloud Platforms"
+    }
   },
   "about": {
     "title": "Why Partner with <span class=\"text-neon\">CloudFloo</span>",
@@ -254,10 +281,25 @@
       "education": "Education",
       "languages": "Languages",
       "interests": "Interests",
+      "expertise": "Expertise",
       "workingWithTeam": "Interested in working with {name} and the CloudFloo team?",
       "workingDescription": "Let's discuss how our expertise can help accelerate your digital transformation.",
       "scheduleConsultation": "Schedule Consultation",
       "teamMemberNotFound": "Team Member Not Found | CloudFloo"
+    },
+    "members": {
+      "michal-wiatr": {
+        "title": "CEO & CTO",
+        "shortBio": "Ex-Sabre tech lead and former Samsung 5G RAN architect with 10+ years scaling distributed systems."
+      },
+      "sebastian-debicki": {
+        "title": "Head of Frontend",
+        "shortBio": "React & accessibility specialist with 900+ production commits, expert in performance optimization and inclusive design."
+      },
+      "damian-ogrodnik": {
+        "title": "Head of Backend",
+        "shortBio": "Node.js engineer focusing on event-driven architectures and PostgreSQL, with MSc from Wrocław University of Economics."
+      }
     },
     "breadcrumb": {
       "home": "Home",

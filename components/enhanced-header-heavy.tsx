@@ -18,7 +18,7 @@ import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Create a motion-enabled Button component
-const MotionButton = motion(Button);
+const MotionButton = motion.create(Button);
 
 export default function EnhancedHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

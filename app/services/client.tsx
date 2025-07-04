@@ -29,8 +29,6 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: Te
       alt={name}
       className={className}
       onError={() => setImageError(true)}
-      placeholder="blur"
-      blurDataURL={DEFAULT_BLUR}
       width={24}
       height={24}
       unoptimized

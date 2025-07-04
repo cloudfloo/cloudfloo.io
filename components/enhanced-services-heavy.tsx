@@ -30,8 +30,6 @@ function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: {
       className={`group-hover:scale-110 transition-transform duration-300 ${className}`}
       onError={() => setImageError(true)}
       loading="lazy"
-      placeholder="blur"
-      blurDataURL={DEFAULT_BLUR}
       width={24}
       height={24}
       unoptimized
