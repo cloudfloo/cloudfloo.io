@@ -216,157 +216,193 @@ export default function ConsentBanner() {
 
   if (showSettings) {
     return (
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold flex items-center gap-2">
-                <Settings className="w-5 h-5" />
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop">
+        <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-neon/20 border border-white/20 animate-modal-content">
+          <div className="p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold flex items-center gap-3 bg-gradient-to-r from-neon to-blue-400 bg-clip-text text-transparent">
+                <Settings className="w-6 h-6 text-neon" />
                 {texts.settings.title}
               </h2>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowSettings(false)}
-                className="h-8 w-8 p-0"
+                className="h-10 w-10 p-0 rounded-full hover:bg-white/10 transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </Button>
             </div>
             
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
+            <p className="text-gray-300 mb-8 text-base leading-relaxed">
               {texts.settings.description}
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {/* Necessary Cookies */}
-              <div className="flex items-start justify-between p-4 border rounded-lg bg-gray-50 dark:bg-gray-800">
-                <div className="flex-1">
-                  <h3 className="font-medium flex items-center gap-2 mb-1">
-                    <Shield className="w-4 h-4 text-green-600" />
-                    {texts.settings.necessary.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {texts.settings.necessary.description}
-                  </p>
-                </div>
-                <div className="ml-4">
-                  <div className="w-10 h-6 bg-green-600 rounded-full relative">
-                    <div className="w-4 h-4 bg-white rounded-full absolute top-1 right-1 transition-transform" />
+              <div className="bg-gradient-to-r from-green-500/10 to-green-400/10 backdrop-blur-sm rounded-xl p-6 border border-green-500/30">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
+                      <Shield className="w-5 h-5 text-green-400" />
+                      {texts.settings.necessary.title}
+                    </h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      {texts.settings.necessary.description}
+                    </p>
+                  </div>
+                  <div className="ml-6">
+                    <div className="w-12 h-7 bg-gradient-to-r from-green-400 to-green-500 rounded-full relative shadow-lg">
+                      <div className="w-5 h-5 bg-white rounded-full absolute top-1 right-1 transition-transform shadow-sm" />
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Analytics Cookies */}
-              <div className="flex items-start justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h3 className="font-medium flex items-center gap-2 mb-1">
-                    <Eye className="w-4 h-4 text-blue-600" />
-                    {texts.settings.analytics.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {texts.settings.analytics.description}
-                  </p>
-                </div>
-                <div className="ml-4">
-                  <button
-                    onClick={() => toggleConsent('analytics')}
-                    className={`w-10 h-6 rounded-full relative transition-colors ${
-                      consent.analytics ? 'bg-blue-600' : 'bg-gray-300'
-                    }`}
-                  >
-                    <div className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-transform ${
-                      consent.analytics ? 'translate-x-4' : 'translate-x-1'
-                    }`} />
-                  </button>
+              <div className="bg-gradient-to-r from-blue-500/10 to-blue-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-blue-400/40 transition-colors">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
+                      <Eye className="w-5 h-5 text-blue-400" />
+                      {texts.settings.analytics.title}
+                    </h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      {texts.settings.analytics.description}
+                    </p>
+                  </div>
+                  <div className="ml-6">
+                    <button
+                      onClick={() => toggleConsent('analytics')}
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                        consent.analytics 
+                          ? 'bg-gradient-to-r from-blue-400 to-blue-500 shadow-blue-400/25' 
+                          : 'bg-gray-600 hover:bg-gray-500'
+                      }`}
+                    >
+                      <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
+                        consent.analytics ? 'translate-x-5' : 'translate-x-1'
+                      }`} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Marketing Cookies */}
-              <div className="flex items-start justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h3 className="font-medium flex items-center gap-2 mb-1">
-                    <Shield className="w-4 h-4 text-purple-600" />
-                    {texts.settings.marketing.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {texts.settings.marketing.description}
-                  </p>
-                </div>
-                <div className="ml-4">
-                  <button
-                    onClick={() => toggleConsent('marketing')}
-                    className={`w-10 h-6 rounded-full relative transition-colors ${
-                      consent.marketing ? 'bg-purple-600' : 'bg-gray-300'
-                    }`}
-                  >
-                    <div className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-transform ${
-                      consent.marketing ? 'translate-x-4' : 'translate-x-1'
-                    }`} />
-                  </button>
+              <div className="bg-gradient-to-r from-purple-500/10 to-purple-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-purple-400/40 transition-colors">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
+                      <Shield className="w-5 h-5 text-purple-400" />
+                      {texts.settings.marketing.title}
+                    </h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      {texts.settings.marketing.description}
+                    </p>
+                  </div>
+                  <div className="ml-6">
+                    <button
+                      onClick={() => toggleConsent('marketing')}
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                        consent.marketing 
+                          ? 'bg-gradient-to-r from-purple-400 to-purple-500 shadow-purple-400/25' 
+                          : 'bg-gray-600 hover:bg-gray-500'
+                      }`}
+                    >
+                      <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
+                        consent.marketing ? 'translate-x-5' : 'translate-x-1'
+                      }`} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Functional Cookies */}
-              <div className="flex items-start justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h3 className="font-medium flex items-center gap-2 mb-1">
-                    <Settings className="w-4 h-4 text-orange-600" />
-                    {texts.settings.functional.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {texts.settings.functional.description}
-                  </p>
-                </div>
-                <div className="ml-4">
-                  <button
-                    onClick={() => toggleConsent('functional')}
-                    className={`w-10 h-6 rounded-full relative transition-colors ${
-                      consent.functional ? 'bg-orange-600' : 'bg-gray-300'
-                    }`}
-                  >
-                    <div className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-transform ${
-                      consent.functional ? 'translate-x-4' : 'translate-x-1'
-                    }`} />
-                  </button>
+              <div className="bg-gradient-to-r from-orange-500/10 to-orange-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-orange-400/40 transition-colors">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
+                      <Settings className="w-5 h-5 text-orange-400" />
+                      {texts.settings.functional.title}
+                    </h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      {texts.settings.functional.description}
+                    </p>
+                  </div>
+                  <div className="ml-6">
+                    <button
+                      onClick={() => toggleConsent('functional')}
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                        consent.functional 
+                          ? 'bg-gradient-to-r from-orange-400 to-orange-500 shadow-orange-400/25' 
+                          : 'bg-gray-600 hover:bg-gray-500'
+                      }`}
+                    >
+                      <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
+                        consent.functional ? 'translate-x-5' : 'translate-x-1'
+                      }`} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex gap-3 mt-6">
-              <Button onClick={() => saveConsent(consent)} className="flex-1">
+            <div className="flex gap-4 mt-8">
+              <Button 
+                onClick={() => saveConsent(consent)} 
+                className="flex-1 bg-gradient-to-r from-neon via-cyan-400 to-blue-400 hover:from-neon/90 hover:via-cyan-400/90 hover:to-blue-400/90 text-black font-bold py-3 rounded-xl shadow-lg shadow-neon/30 transition-all duration-300 text-base"
+              >
                 {texts.settings.save}
               </Button>
-              <Button variant="outline" onClick={() => setShowSettings(false)}>
+              <Button 
+                variant="outline" 
+                onClick={() => setShowSettings(false)}
+                className="border-white/30 hover:border-white/50 hover:bg-white/10 rounded-xl px-6 transition-all duration-300"
+              >
                 {texts.settings.close}
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-      <Card className="max-w-4xl mx-auto bg-white dark:bg-gray-900 shadow-2xl border-t-4 border-neon">
-        <CardContent className="p-6">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-slide-in">
+      <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-900/98 via-gray-800/98 to-gray-900/98 backdrop-blur-xl rounded-2xl shadow-2xl shadow-neon/25 border border-neon/40">
+        <div className="p-6">
           <div className="flex items-start gap-4">
-            <Shield className="w-6 h-6 text-neon flex-shrink-0 mt-1" />
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold mb-2">{texts.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+            <div className="flex-shrink-0 p-3 bg-gradient-to-br from-neon/30 to-blue-400/30 rounded-xl border border-neon/20">
+              <Shield className="w-6 h-6 text-neon" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-xl font-bold mb-3 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                {texts.title}
+              </h2>
+              <p className="text-gray-200 text-sm mb-6 leading-relaxed">
                 {texts.description}
               </p>
               
               <div className="flex flex-wrap gap-3">
-                <Button onClick={acceptAll} className="bg-neon hover:bg-neon/90 text-black">
+                <Button 
+                  onClick={acceptAll} 
+                  className="bg-gradient-to-r from-neon via-cyan-400 to-blue-400 hover:from-neon hover:via-cyan-300 hover:to-blue-300 text-black font-bold px-8 py-3 rounded-xl shadow-xl shadow-neon/40 transition-all duration-300 transform hover:scale-105 text-base border-2 border-neon/20 hover:border-neon/40"
+                >
                   {texts.acceptAll}
                 </Button>
-                <Button variant="outline" onClick={acceptNecessary}>
+                <Button 
+                  variant="outline" 
+                  onClick={acceptNecessary}
+                  className="border-white/40 hover:border-white/60 hover:bg-white/10 text-white rounded-xl px-6 py-3 transition-all duration-300 bg-white/5"
+                >
                   {texts.acceptNecessary}
                 </Button>
-                <Button variant="ghost" onClick={() => setShowSettings(true)}>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setShowSettings(true)}
+                  className="text-gray-200 hover:text-white hover:bg-white/10 rounded-xl px-6 py-3 transition-all duration-300"
+                >
                   {texts.customize}
                 </Button>
               </div>
@@ -375,13 +411,13 @@ export default function ConsentBanner() {
               variant="ghost"
               size="sm"
               onClick={() => setShowBanner(false)}
-              className="h-8 w-8 p-0 flex-shrink-0"
+              className="h-10 w-10 p-0 rounded-full hover:bg-white/15 transition-colors flex-shrink-0"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 } 
