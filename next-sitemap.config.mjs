@@ -1,6 +1,9 @@
 /** @type {import('next-sitemap').IConfig} */
 export default {
   siteUrl: 'https://cloudfloo.io',
+  // Output sitemaps to the static export directory so they are
+  // served correctly when using `next export`
+  outDir: './out',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: ['/server-sitemap.xml'],
@@ -35,3 +38,4 @@ export default {
     ],
   },
 } 
+
