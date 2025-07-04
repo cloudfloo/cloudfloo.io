@@ -200,22 +200,22 @@ export default function TeamPage() {
                       <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex space-x-2 justify-center">
                           {member.social.linkedin && (
-                            <a href={member.social.linkedin} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.linkedin} aria-label={`LinkedIn ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Linkedin className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.twitter && (
-                            <a href={member.social.twitter} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.twitter} aria-label={`Twitter ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Twitter className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.github && (
-                            <a href={member.social.github} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={member.social.github} aria-label={`GitHub ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Github className="w-4 h-4 text-white" />
                             </a>
                           )}
                           {member.social.email && (
-                            <a href={`mailto:${member.social.email}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
+                            <a href={`mailto:${member.social.email}`} aria-label={`Email ${member.name}`} className="glass p-2 rounded-full hover:bg-neon/20 transition-colors">
                               <Mail className="w-4 h-4 text-white" />
                             </a>
                           )}

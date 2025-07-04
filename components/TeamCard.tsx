@@ -103,6 +103,7 @@ export default function TeamCard({ person }: TeamCardProps) {
                   href={person.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`LinkedIn ${person.name}`}
                   className="w-8 h-8 glass rounded-full flex items-center justify-center hover:bg-neon/20 transition-colors duration-300 group/social"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -117,6 +118,7 @@ export default function TeamCard({ person }: TeamCardProps) {
                   href={person.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`GitHub ${person.name}`}
                   className="w-8 h-8 glass rounded-full flex items-center justify-center hover:bg-neon/20 transition-colors duration-300 group/social"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}

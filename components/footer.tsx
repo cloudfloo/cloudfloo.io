@@ -43,20 +43,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2 mt-4" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
             <div className="flex items-center space-x-2 mb-6">
-              <picture>
-                <source srcSet="/logo.avif" type="image/avif" />
-                <source srcSet="/logo.webp" type="image/webp" />
-                <Image
-                  src="/logo.png"
-                  alt="CloudFloo Logo"
-                  width={32}
-                  height={32}
-                  priority
-                  fetchPriority="high"
-                  className="object-contain w-8 h-8"
-                  sizes="32px"
-                />
-              </picture>
+              <Image
+                src="/logo.avif"
+                alt="CloudFloo Logo"
+                width={32}
+                height={32}
+                priority={false}
+                className="object-contain w-8 h-8"
+                sizes="32px"
+              />
               <span className="text-xl font-bold text-neon" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                 cloudfloo.io
               </span>

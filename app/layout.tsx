@@ -70,6 +70,9 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
           <meta name="google-site-verification" content="verify_token" />
         )}
+        
+        {/* PWA Theme Color */}
+        <meta name="theme-color" content="#000000" />
 
         {/* Critical CSS for hero section performance */}
         <style id="critical">{`

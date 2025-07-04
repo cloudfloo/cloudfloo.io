@@ -171,7 +171,8 @@ This enterprise solution demonstrates advanced software engineering principles w
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
-                  priority
+                  priority={false}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL={placeholders[project.image] ?? DEFAULT_BLUR}
                 />
