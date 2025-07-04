@@ -67,7 +67,12 @@
     "subtitle": "Dostarczamy skalowalne mikroserwisy, DevOps i doskonałość frontend.",
     "cta1": "Rozpocznij partnerstwo",
     "cta2": "Poznaj naszą ekspertyzę",
-    "scrollIndicator": "Przewiń do następnej sekcji"
+    "scrollIndicator": "Przewiń do następnej sekcji",
+    "cta": {
+      "primary": "Rozpocznij partnerstwo",
+      "secondary": "Poznaj naszą ekspertyzę"
+    },
+    "scroll": "Przewiń do następnej sekcji"
   },
   "services": {
     "title": "Nasze <span class=\"text-neon\">Usługi</span>",

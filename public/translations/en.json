@@ -67,7 +67,12 @@
     "subtitle": "We deliver scalable micro-services, DevOps and frontend excellence.",
     "cta1": "Start Your Partnership",
     "cta2": "Explore Our Expertise",
-    "scrollIndicator": "Scroll to next section"
+    "scrollIndicator": "Scroll to next section",
+    "cta": {
+      "primary": "Start Your Partnership",
+      "secondary": "Explore Our Expertise"
+    },
+    "scroll": "Scroll to next section"
   },
   "services": {
     "title": "Our <span class=\"text-neon\">Services</span>",

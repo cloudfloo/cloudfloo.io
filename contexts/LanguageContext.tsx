@@ -14,8 +14,19 @@ interface LanguageContextType {
   getHomeUrl: () => string;
 }
 
-// Default translations to prevent hydration mismatches
+// Enhanced default translations to prevent console warnings during loading
 const defaultTranslations = {
+  // Hero section
+  'hero.title': 'Cloud-Native Software House from Poland',
+  'hero.subtitle': 'We deliver scalable micro-services, DevOps and frontend excellence.',
+  'hero.cta.primary': 'Start Your Partnership',
+  'hero.cta.secondary': 'Explore Our Expertise',
+  'hero.scroll': 'Scroll to next section',
+  
+  // Team member keys
+  'team.member.viewFullProfile': 'View Full Profile',
+  'team.member.viewProfile': 'View Profile',
+  'team.member.expertise': 'Expertise',
   // Add default values for commonly used keys to prevent hydration errors
   navigation: {
     home: 'Home',
@@ -27,13 +38,6 @@ const defaultTranslations = {
     getStarted: 'Get Started',
     toggleMenu: 'Toggle menu',
     backToHome: 'Back to Home'
-  },
-  hero: {
-    title: 'Cloud-Native Software House from Poland',
-    subtitle: 'We deliver scalable micro-services, DevOps and frontend excellence.',
-    cta1: 'Start Your Partnership',
-    cta2: 'Explore Our Expertise',
-    scrollIndicator: 'Scroll to next section'
   },
   about: {
     title: 'Why Partner with CloudFloo',
