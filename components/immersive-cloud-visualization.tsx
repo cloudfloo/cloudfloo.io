@@ -1,34 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
- * Lazily load the heavy cloud visualization only when the container becomes
- * visible in the viewport. This keeps the initial bundle small and avoids
- * blocking the main thread during first paint.
+ * Defer loading of the heavy WebGL cloud scene until the page is idle. The
+ * container is not rendered until the scene is ready, keeping the initial LCP
+ * dominated by the hero section rather than the canvas.
  */
 export default function ImmersiveCloudVisualization() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [Scene, setScene] = useState<React.ComponentType | null>(null);
 
+  // Trigger loading when the browser is idle to avoid blocking important work
   useEffect(() => {
-    const load = () => import("./CloudSceneImpl").then(m => setScene(() => m.default));
+    const start = () => setShouldLoad(true);
 
-    if ("IntersectionObserver" in window && containerRef.current) {
-      const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          load();
-          observer.disconnect();
-        }
-      }, { rootMargin: "200px" });
-
-      observer.observe(containerRef.current);
-      return () => observer.disconnect();
+    if (typeof (window as any).requestIdleCallback === "function") {
+      const id = (window as any).requestIdleCallback(start, { timeout: 3000 });
+      return () => (window as any).cancelIdleCallback?.(id);
     }
 
-    const id = setTimeout(load, 2000);
-    return () => clearTimeout(id);
+    const t = setTimeout(start, 3000);
+    return () => clearTimeout(t);
   }, []);
 
-  return <div ref={containerRef} className="fixed inset-0 z-0">{Scene && <Scene />}</div>;
+  // Dynamically import the scene once loading has been triggered
+  useEffect(() => {
+    if (!shouldLoad) return;
+    let cancelled = false;
+    import("./CloudSceneImpl").then(m => {
+      if (!cancelled) setScene(() => m.default);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [shouldLoad]);
+
+  if (!shouldLoad || !Scene) return null;
+
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none">
+      <Scene />
+    </div>
+  );
 }
