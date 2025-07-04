@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "npx serve out -l 3000",
+    "start": "npm run static && npx serve out -l 3000",
     "start:dev": "next start",
     "serve-static": "npx serve out -l 3000",
     "static": "next build && next export && next-sitemap",

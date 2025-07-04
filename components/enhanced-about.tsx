@@ -70,10 +70,10 @@ export default function EnhancedAbout() {
     setIsClient(true);
     // Reduce number of floating elements for performance
     const elements = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      size: Math.random() * 4 + 2,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+        id: i,
+        size: Math.random() * 4 + 2,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
       delay: Math.random() * 5,
       duration: Math.random() * 10 + 15
     }));

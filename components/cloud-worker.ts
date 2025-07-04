@@ -55,16 +55,16 @@ function generateParticle(
   positions: Float32Array, 
   randomValues: Float32Array
 ): void {
-  const spreadBias = Math.pow(Math.random(), 0.1);
-  const radius = spreadBias * 25 + Math.random() * 15;
-  const layer = Math.floor(Math.random() * 6);
-  const layerRadius = radius * (0.6 + layer * 0.15);
-  const height = (Math.random() - 0.5) * (8 - layer) * 1.5;
+    const spreadBias = Math.pow(Math.random(), 0.1);
+    const radius = spreadBias * 25 + Math.random() * 15;
+    const layer = Math.floor(Math.random() * 6);
+    const layerRadius = radius * (0.6 + layer * 0.15);
+    const height = (Math.random() - 0.5) * (8 - layer) * 1.5;
 
-  const angle = Math.random() * Math.PI * 2;
-  const x = Math.cos(angle) * layerRadius * (0.3 + Math.random() * 0.7);
-  const z = Math.sin(angle) * layerRadius * (0.3 + Math.random() * 0.7);
-  const y = height + Math.sin(x * 0.03) * 2.5 + Math.cos(z * 0.03) * 2.5;
+    const angle = Math.random() * Math.PI * 2;
+    const x = Math.cos(angle) * layerRadius * (0.3 + Math.random() * 0.7);
+    const z = Math.sin(angle) * layerRadius * (0.3 + Math.random() * 0.7);
+    const y = height + Math.sin(x * 0.03) * 2.5 + Math.cos(z * 0.03) * 2.5;
 
   positions[index * 3] = x;
   positions[index * 3 + 1] = y;
@@ -103,7 +103,7 @@ async function createCloudSystem(): Promise<Points> {
       uniform vec2 uMouse;
       uniform float uScroll;
       attribute vec3 aRandom;
-      
+
       varying vec3 vColor;
       varying float vAlpha;
       varying float vDistance;
@@ -111,28 +111,28 @@ async function createCloudSystem(): Promise<Points> {
       void main() {
         vec3 pos = position;
         vDistance = length(position);
-        
+
         float angle = uTime * 0.05;
         pos.x = position.x * cos(angle) - position.z * sin(angle);
         pos.z = position.x * sin(angle) + position.z * cos(angle);
         
         pos.y += sin(uTime * 0.5 + position.x * 0.1) * 2.0;
         pos.x += cos(uTime * 0.3 + position.z * 0.1) * 1.0;
-        
+
         pos *= 1.0 + uScroll * 0.2;
-        
+
         vec2 mouseOffset = pos.xy - uMouse * 5.0;
         float mouseDist = length(mouseOffset);
         if(mouseDist < 8.0) {
           vec2 pushDir = normalize(mouseOffset + vec2(aRandom.x - 0.5, aRandom.y - 0.5) * 2.0);
           pos.xy += pushDir * (8.0 - mouseDist) * 0.5;
         }
-        
+
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        
+
         float distanceFactor = 1.0 - vDistance / 40.0;
         gl_PointSize = max(40.0 * distanceFactor * (0.8 + aRandom.z * 0.4), 8.0);
-        
+
         float colorPhase = uTime * 0.2 + vDistance * 0.1 + aRandom.x;
         vColor = mix(
           vec3(0.2, 0.6, 0.8), 
@@ -153,7 +153,7 @@ async function createCloudSystem(): Promise<Points> {
         vec2 center = gl_PointCoord - vec2(0.5);
         float dist = length(center);
         if (dist > 0.5) discard;
-        
+
         float alpha = (1.0 - dist * 2.0) * vAlpha;
         
         alpha *= 0.8 + sin(uTime + vDistance * 0.1) * 0.2;
@@ -339,7 +339,7 @@ self.onmessage = (event: MessageEvent) => {
   
   // Only log important messages to reduce console spam
   if (['init', 'dispose', 'visibility'].includes(data.type)) {
-    console.log('Cloud worker received message:', data.type);
+  console.log('Cloud worker received message:', data.type);
   }
   
   switch (data.type) {

@@ -172,7 +172,7 @@ export const updateConsentMode = (consentState: {
       window.gtag('event', 'consent_update', {
         event_category: 'consent',
         event_label: 'analytics_granted',
-      });
+  });
     }
     
     console.log('Consent mode updated:', consentState);

@@ -259,16 +259,16 @@ export default function EnhancedHeader() {
           }} className="flex items-center space-x-3 group cursor-pointer relative">
             {/* Enhanced logo container with better background for mobile */}
             <div className="relative">
-              <Image
+                <Image
                 src="/logo.avif"
-                alt="CloudFloo Logo"
-                width={48}
-                height={48}
-                priority
-                fetchPriority="high"
-                className="w-12 h-12 object-contain relative z-10"
-                sizes="48px"
-              />
+                  alt="CloudFloo Logo"
+                  width={48}
+                  height={48}
+                  priority
+                  fetchPriority="high"
+                  className="w-12 h-12 object-contain relative z-10"
+                  sizes="48px"
+                />
               {/* Logo glow effect for better visibility */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>

@@ -32,13 +32,13 @@
 .btn-accessible:focus {
   outline: 2px solid #00e5ff;
   outline-offset: 2px;
-}
+  }
 
 .bg-gradient-neon {
   background: linear-gradient(135deg, #00e5ff 0%, #00b8d4 100%);
-}
-
-.text-neon {
+  }
+  
+  .text-neon {
   color: #00e5ff;
 }
 
@@ -48,12 +48,12 @@
 
 .shadow-neon {
   box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-}
-
+  }
+  
 .gradient-neon {
   background: linear-gradient(135deg, #00e5ff 0%, #00b8d4 100%);
-}
-
+  }
+  
 /* Optimized CSS Animations - replacing framer-motion */
 @keyframes slideIn {
   from {
@@ -173,7 +173,7 @@
 .animate-hero-subtitle {
   animation: heroSubtitle 0.6s ease-out 0.3s forwards;
   opacity: 0;
-}
+  }
 
 .animate-hero-button-1 {
   animation: heroButton 0.5s ease-out 0.6s forwards;
@@ -188,7 +188,7 @@
 .animate-hero-scroll {
   animation: heroButton 0.5s ease-out 1.2s forwards;
   opacity: 0;
-}
+  }
 
 .animate-scroll-bounce {
   animation: scrollBounce 2s infinite;
@@ -205,7 +205,7 @@
 
 .animate-modal-backdrop {
   animation: modalBackdrop 0.3s ease-out forwards;
-}
+  }
 
 .animate-modal-content {
   animation: modalContent 0.3s ease-out forwards;
@@ -230,7 +230,7 @@
 .animate-hero-scroll,
 .animate-float-slow {
   will-change: transform, opacity;
-}
+  }
 
 /* Remove will-change after animation completes */
 .animate-slide-in:not(.opacity-0),
@@ -240,10 +240,10 @@
 .animate-hero-button-2:not(.opacity-0),
 .animate-hero-scroll:not(.opacity-0) {
   will-change: auto;
-}
+  }
 
 /* Smooth scroll behavior */
-html {
+  html {
   scroll-behavior: smooth;
 }
 
@@ -279,8 +279,8 @@ html {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-}
-
+  }
+  
 @keyframes shimmer {
   0% {
     background-position: -200% 0;

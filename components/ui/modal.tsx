@@ -24,13 +24,13 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         onClose();
       }
     };
-
+    
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.addEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'hidden';
     }
-
+    
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -50,20 +50,20 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       
       {/* Modal content with CSS animation */}
       <div 
-        ref={modalRef}
+            ref={modalRef}
         className="relative z-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-slate-900 border border-gray-700 rounded-lg shadow-2xl animate-modal-content"
       >
         {/* Close button */}
-        <button
-          onClick={onClose}
+            <button
+              onClick={onClose}
           className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors z-20 bg-slate-800/80 rounded-full"
-        >
+            >
           <X className="w-5 h-5" />
-        </button>
-        
+            </button>
+            
         {/* Content */}
         <div className="p-6">
-          {children}
+            {children}
         </div>
       </div>
     </div>

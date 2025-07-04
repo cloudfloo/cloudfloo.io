@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { X, Settings, Shield, Eye } from 'lucide-react';
+import { X, Settings, Shield, Eye, ArrowRight, CheckCircle, BarChart3, Target, Zap } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ConsentState {
@@ -217,7 +217,7 @@ export default function ConsentBanner() {
   if (showSettings) {
     return (
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop">
-        <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-neon/20 border border-white/20 animate-modal-content">
+        <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/60 animate-modal-content">
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold flex items-center gap-3 bg-gradient-to-r from-neon to-blue-400 bg-clip-text text-transparent">
@@ -228,9 +228,9 @@ export default function ConsentBanner() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowSettings(false)}
-                className="h-10 w-10 p-0 rounded-full hover:bg-white/10 transition-colors"
+                className="h-10 w-10 p-0 text-neon hover:bg-neon/10 transition-all duration-300 group rounded-full"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
               </Button>
             </div>
             
@@ -264,7 +264,7 @@ export default function ConsentBanner() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Eye className="w-5 h-5 text-blue-400" />
+                      <BarChart3 className="w-5 h-5 text-blue-400" />
                       {texts.settings.analytics.title}
                     </h3>
                     <p className="text-sm text-gray-300 leading-relaxed">
@@ -274,10 +274,10 @@ export default function ConsentBanner() {
                   <div className="ml-6">
                     <button
                       onClick={() => toggleConsent('analytics')}
-                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.analytics 
-                          ? 'bg-gradient-to-r from-blue-400 to-blue-500 shadow-blue-400/25' 
-                          : 'bg-gray-600 hover:bg-gray-500'
+                          ? 'bg-gradient-to-r from-blue-400 to-blue-500 shadow-blue-400/25 hover:scale-105' 
+                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -293,7 +293,7 @@ export default function ConsentBanner() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Shield className="w-5 h-5 text-purple-400" />
+                      <Target className="w-5 h-5 text-purple-400" />
                       {texts.settings.marketing.title}
                     </h3>
                     <p className="text-sm text-gray-300 leading-relaxed">
@@ -303,10 +303,10 @@ export default function ConsentBanner() {
                   <div className="ml-6">
                     <button
                       onClick={() => toggleConsent('marketing')}
-                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.marketing 
-                          ? 'bg-gradient-to-r from-purple-400 to-purple-500 shadow-purple-400/25' 
-                          : 'bg-gray-600 hover:bg-gray-500'
+                          ? 'bg-gradient-to-r from-purple-400 to-purple-500 shadow-purple-400/25 hover:scale-105' 
+                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -322,7 +322,7 @@ export default function ConsentBanner() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Settings className="w-5 h-5 text-orange-400" />
+                      <Zap className="w-5 h-5 text-orange-400" />
                       {texts.settings.functional.title}
                     </h3>
                     <p className="text-sm text-gray-300 leading-relaxed">
@@ -332,10 +332,10 @@ export default function ConsentBanner() {
                   <div className="ml-6">
                     <button
                       onClick={() => toggleConsent('functional')}
-                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg ${
+                      className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.functional 
-                          ? 'bg-gradient-to-r from-orange-400 to-orange-500 shadow-orange-400/25' 
-                          : 'bg-gray-600 hover:bg-gray-500'
+                          ? 'bg-gradient-to-r from-orange-400 to-orange-500 shadow-orange-400/25 hover:scale-105' 
+                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -347,19 +347,27 @@ export default function ConsentBanner() {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Button 
                 onClick={() => saveConsent(consent)} 
-                className="flex-1 bg-gradient-to-r from-neon via-cyan-400 to-blue-400 hover:from-neon/90 hover:via-cyan-400/90 hover:to-blue-400/90 text-black font-bold py-3 rounded-xl shadow-lg shadow-neon/30 transition-all duration-300 text-base"
+                size="lg"
+                className="flex-1 bg-gradient-neon text-white hover:bg-gradient-neon/90 font-semibold transition-all duration-300 group relative overflow-hidden"
               >
-                {texts.settings.save}
+                <span className="relative z-10 flex items-center gap-2">
+                  {texts.settings.save}
+                  <CheckCircle className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                </span>
               </Button>
               <Button 
                 variant="outline" 
+                size="lg"
                 onClick={() => setShowSettings(false)}
-                className="border-white/30 hover:border-white/50 hover:bg-white/10 rounded-xl px-6 transition-all duration-300"
+                className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
               >
-                {texts.settings.close}
+                <span className="flex items-center gap-2">
+                  {texts.settings.close}
+                  <X className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90" />
+                </span>
               </Button>
             </div>
           </div>
@@ -370,40 +378,54 @@ export default function ConsentBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-slide-in">
-      <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-900/98 via-gray-800/98 to-gray-900/98 backdrop-blur-xl rounded-2xl shadow-2xl shadow-neon/25 border border-neon/40">
-        <div className="p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 p-3 bg-gradient-to-br from-neon/30 to-blue-400/30 rounded-xl border border-neon/20">
+      <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/80 relative">
+        <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+        <div className="relative">
+        <div className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <div className="flex-shrink-0 p-3 bg-gradient-to-br from-neon/30 to-blue-400/30 rounded-xl">
               <Shield className="w-6 h-6 text-neon" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-xl font-bold mb-3 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+              <h2 className="text-xl font-bold mb-3 text-white">
                 {texts.title}
               </h2>
-              <p className="text-gray-200 text-sm mb-6 leading-relaxed">
+              <p className="text-gray-100 text-sm mb-6 leading-relaxed font-medium">
                 {texts.description}
               </p>
               
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button 
                   onClick={acceptAll} 
-                  className="bg-gradient-to-r from-neon via-cyan-400 to-blue-400 hover:from-neon hover:via-cyan-300 hover:to-blue-300 text-black font-bold px-8 py-3 rounded-xl shadow-xl shadow-neon/40 transition-all duration-300 transform hover:scale-105 text-base border-2 border-neon/20 hover:border-neon/40"
+                  size="lg"
+                  className="bg-gradient-neon text-white hover:bg-gradient-neon/90 font-semibold transition-all duration-300 group relative overflow-hidden"
                 >
-                  {texts.acceptAll}
+                  <span className="relative z-10 flex items-center gap-2">
+                    {texts.acceptAll}
+                    <CheckCircle className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                  </span>
                 </Button>
                 <Button 
                   variant="outline" 
+                  size="lg"
                   onClick={acceptNecessary}
-                  className="border-white/40 hover:border-white/60 hover:bg-white/10 text-white rounded-xl px-6 py-3 transition-all duration-300 bg-white/5"
+                  className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
                 >
-                  {texts.acceptNecessary}
+                  <span className="flex items-center gap-2">
+                    {texts.acceptNecessary}
+                    <Shield className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                  </span>
                 </Button>
                 <Button 
-                  variant="ghost" 
+                  variant="outline" 
+                  size="lg"
                   onClick={() => setShowSettings(true)}
-                  className="text-gray-200 hover:text-white hover:bg-white/10 rounded-xl px-6 py-3 transition-all duration-300"
+                  className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
                 >
-                  {texts.customize}
+                  <span className="flex items-center gap-2">
+                    {texts.customize}
+                    <Settings className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90" />
+                  </span>
                 </Button>
               </div>
             </div>
@@ -411,11 +433,12 @@ export default function ConsentBanner() {
               variant="ghost"
               size="sm"
               onClick={() => setShowBanner(false)}
-              className="h-10 w-10 p-0 rounded-full hover:bg-white/15 transition-colors flex-shrink-0"
+              className="h-10 w-10 p-0 text-neon hover:bg-neon/10 flex-shrink-0 transition-all duration-300 group rounded-full"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
             </Button>
           </div>
+        </div>
         </div>
       </div>
     </div>

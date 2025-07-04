@@ -79,23 +79,23 @@ export default function Hero() {
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
             </Button>
             
-            <Button
+              <Button
               variant="outline"
               size="lg"
-              onClick={() => smoothScrollTo('contact')}
+                onClick={() => smoothScrollTo('contact')}
               className="border-neon text-neon hover:bg-neon/10 font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-neon/25 transition-all duration-300 group min-w-[200px] animate-hero-button-2"
-            >
+              >
               <span className="flex items-center gap-2">
                 {t('hero.cta.secondary')}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-            </Button>
+                </span>
+              </Button>
           </div>
 
           {/* Scroll Indicator with CSS Animation */}
           <div className="animate-hero-scroll">
             <button
-              onClick={() => smoothScrollTo('services')}
+                onClick={() => smoothScrollTo('services')}
               className="text-gray-400 hover:text-neon transition-colors duration-300 flex flex-col items-center gap-2 mx-auto group"
               aria-label="Scroll to services section"
             >

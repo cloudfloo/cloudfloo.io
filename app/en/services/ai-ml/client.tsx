@@ -19,24 +19,24 @@ export default function AIMachineLearningClient() {
       icon: Brain,
               title: t('services.aiMl.customMLModels'),
         description: t('services.aiMl.customMLModelsDesc')
-      },
-      {
-        icon: Cpu,
+    },
+    {
+      icon: Cpu,
         title: t('services.aiMl.mlOpsPipeline'),
         description: t('services.aiMl.mlOpsPipelineDesc')
-      },
-      {
-        icon: TrendingUp,
+    },
+    {
+      icon: TrendingUp,
         title: t('services.aiMl.predictiveAnalytics'),
         description: t('services.aiMl.predictiveAnalyticsDesc')
-      },
-      {
-        icon: Zap,
+    },
+    {
+      icon: Zap,
         title: t('services.aiMl.realTimeProcessing'),
         description: t('services.aiMl.realTimeProcessingDesc')
-      },
-      {
-        icon: Target,
+    },
+    {
+      icon: Target,
         title: t('services.aiMl.modelOptimization'),
         description: t('services.aiMl.modelOptimizationDesc')
     }
