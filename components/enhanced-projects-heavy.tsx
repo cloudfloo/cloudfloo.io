@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
 import { Badge } from '@/components/ui/badge';
-import { Modal } from '@/components/ui/modal';
+import Modal from '@/components/ui/modal';
 import { ImageCarousel } from '@/components/ui/image-carousel';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
