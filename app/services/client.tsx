@@ -52,8 +52,8 @@ export default function ServicesClient() {
     },
     {
       icon: Bot,
-      title: t('services.aiAutomation.title'),
-      description: t('services.aiAutomation.description'),
+      title: t('services.aiMl.title'),
+      description: t('services.aiMl.description'),
       href: '/services/ai-ml',
       features: ['Custom ML Models', 'Intelligent Automation', 'Predictive Analytics', 'MLOps Pipeline'],
       color: 'from-purple-500 to-pink-500',

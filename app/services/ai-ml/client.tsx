@@ -12,33 +12,33 @@ export default function AIMachineLearningClient() {
   const features = [
     {
       icon: Bot,
-      title: t('services.aiAutomation.intelligentAutomation'),
-      description: t('services.aiAutomation.intelligentAutomationDesc')
+      title: t('services.aiMl.intelligentAutomation'),
+      description: t('services.aiMl.intelligentAutomationDesc')
     },
     {
       icon: Brain,
-      title: t('services.aiAutomation.customMLModels'),
-      description: t('services.aiAutomation.customMLModelsDesc')
+      title: t('services.aiMl.customMLModels'),
+      description: t('services.aiMl.customMLModelsDesc')
     },
     {
       icon: Cpu,
-      title: t('services.aiAutomation.mlOpsPipeline'),
-      description: t('services.aiAutomation.mlOpsPipelineDesc')
+      title: t('services.aiMl.mlOpsPipeline'),
+      description: t('services.aiMl.mlOpsPipelineDesc')
     },
     {
       icon: TrendingUp,
-      title: t('services.aiAutomation.predictiveAnalytics'),
-      description: t('services.aiAutomation.predictiveAnalyticsDesc')
+      title: t('services.aiMl.predictiveAnalytics'),
+      description: t('services.aiMl.predictiveAnalyticsDesc')
     },
     {
       icon: Zap,
-      title: t('services.aiAutomation.realTimeProcessing'),
-      description: t('services.aiAutomation.realTimeProcessingDesc')
+      title: t('services.aiMl.realTimeProcessing'),
+      description: t('services.aiMl.realTimeProcessingDesc')
     },
     {
       icon: Target,
-      title: t('services.aiAutomation.modelOptimization'),
-      description: t('services.aiAutomation.modelOptimizationDesc')
+      title: t('services.aiMl.modelOptimization'),
+      description: t('services.aiMl.modelOptimizationDesc')
     }
   ];
 
@@ -92,7 +92,7 @@ export default function AIMachineLearningClient() {
           <div className="flex items-center space-x-4">
             <BackToHomeButton />
             <div className="text-gray-500">/</div>
-            <div className="text-neon">{t('services.aiAutomation.title')}</div>
+            <div className="text-neon">{t('services.aiMl.title')}</div>
           </div>
         </div>
       </header>
@@ -108,17 +108,17 @@ export default function AIMachineLearningClient() {
             <h1 
               id="ai-ml-solutions"
               className="text-5xl md:text-6xl font-bold mb-6"
-              dangerouslySetInnerHTML={{ __html: t('services.aiAutomation.heroTitle') }}
+              dangerouslySetInnerHTML={{ __html: t('services.aiMl.heroTitle') }}
             />
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              {t('services.aiAutomation.heroDescription')}
+              {t('services.aiMl.heroDescription')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-gradient-neon text-white">
-                {t('services.aiAutomation.ctaMain')}
+                {t('services.aiMl.ctaMain')}
               </Button>
               <Button size="lg" variant="outline" className="border-neon text-neon hover:bg-neon/10">
-                {t('services.aiAutomation.ctaSecondary')}
+                {t('services.aiMl.ctaSecondary')}
               </Button>
             </div>
           </div>
@@ -129,9 +129,9 @@ export default function AIMachineLearningClient() {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">{t('services.aiAutomation.featuresTitle')}</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('services.aiMl.featuresTitle')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('services.aiAutomation.featuresDescription')}
+              {t('services.aiMl.featuresDescription')}
             </p>
           </div>
           
@@ -162,9 +162,9 @@ export default function AIMachineLearningClient() {
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">{t('services.aiAutomation.aiServicesTitle')}</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('services.aiMl.aiServicesTitle')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('services.aiAutomation.aiServicesDescription')}
+              {t('services.aiMl.aiServicesDescription')}
             </p>
           </div>
           
@@ -194,9 +194,9 @@ export default function AIMachineLearningClient() {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">{t('services.aiAutomation.technologiesTitle')}</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('services.aiMl.technologiesTitle')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('services.aiAutomation.technologiesDescription')}
+              {t('services.aiMl.technologiesDescription')}
             </p>
           </div>
           
@@ -217,9 +217,9 @@ export default function AIMachineLearningClient() {
       <section className="py-20 bg-black/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">{t('services.aiAutomation.useCasesTitle')}</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('services.aiMl.useCasesTitle')}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('services.aiAutomation.useCasesDescription')}
+              {t('services.aiMl.useCasesDescription')}
             </p>
           </div>
           
@@ -251,16 +251,16 @@ export default function AIMachineLearningClient() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">{t('services.aiAutomation.readyTitle')}</h2>
+          <h2 className="text-4xl font-bold mb-6">{t('services.aiMl.readyTitle')}</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            {t('services.aiAutomation.readyDescription')}
+            {t('services.aiMl.readyDescription')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-gradient-neon text-white">
-              {t('services.aiAutomation.ctaProject')}
+              {t('services.aiMl.ctaProject')}
             </Button>
             <Button size="lg" variant="outline" className="border-neon text-neon hover:bg-neon/10">
-              {t('services.aiAutomation.ctaGuide')}
+              {t('services.aiMl.ctaGuide')}
             </Button>
           </div>
         </div>

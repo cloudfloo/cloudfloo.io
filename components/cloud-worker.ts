@@ -33,7 +33,7 @@ const memory = nav.deviceMemory ?? 8;
 const config = {
   lowEndThresholds: { hardware: 4, memory: 4 },
   particleCounts: { lowEnd: 2000, highEnd: 5000 },
-  frameIntervals: { lowEnd: 1000 / 24, highEnd: 1000 / 30 },
+  frameIntervals: { lowEnd: 500 / 24, highEnd: 500 / 30 },
   progressiveLoadingRatio: 0.2
 };
 
@@ -334,18 +334,12 @@ function dispose() {
   performanceMetrics = { initTime: 0, frameCount: 0, avgFrameTime: 0 };
 }
 
-let debugLogCount = 0;
-const MAX_DEBUG_LOGS = 5;
-
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
   
-  // Only log first few messages and important ones to reduce console spam
-  if (debugLogCount < MAX_DEBUG_LOGS || ['init', 'dispose', 'visibility'].includes(data.type)) {
+  // Only log important messages to reduce console spam
+  if (['init', 'dispose', 'visibility'].includes(data.type)) {
     console.log('Cloud worker received message:', data.type);
-    if (data.type === 'mouse' || data.type === 'scroll') {
-      debugLogCount++;
-    }
   }
   
   switch (data.type) {

@@ -115,9 +115,9 @@ export default function EnhancedHeader() {
       description: t('services.cloudSolutions.description')
     },
     {
-      title: t('services.aiAutomation.title'),
+      title: t('services.aiMl.title'),
       href: '/services/ai-ml',
-      description: t('services.aiAutomation.description')
+      description: t('services.aiMl.description')
     },
     {
       title: t('services.devops.title'),
