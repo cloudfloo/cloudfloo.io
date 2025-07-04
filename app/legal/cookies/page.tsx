@@ -61,7 +61,7 @@ export default function CookiePolicyPage() {
           <div className="flex items-center space-x-4">
             <BackToHomeButton />
             <div className="text-gray-500">/</div>
-            <div className="text-neon">Cookie Policy</div>
+            <div className="text-neon">{t('common.cookies')}</div>
           </div>
         </div>
       </header>
@@ -73,9 +73,12 @@ export default function CookiePolicyPage() {
             <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Cookie className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Cookie Policy</h1>
+            <h1
+              className="text-4xl md:text-5xl font-bold mb-4"
+              dangerouslySetInnerHTML={{ __html: t('legal.cookies.heroTitle') }}
+            />
             <p className="text-xl text-gray-300 mb-4">
-              Learn about how we use cookies and similar technologies to improve your experience.
+              {t('legal.cookies.heroSubtitle')}
             </p>
             <p className="text-sm text-gray-400">
               Last updated: {new Date(lastUpdated).toLocaleDateString('en-US', { 

@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
           <div className="flex items-center space-x-4">
             <BackToHomeButton />
             <div className="text-gray-500">/</div>
-            <div className="text-neon">Privacy Policy</div>
+            <div className="text-neon">{t('common.privacy')}</div>
           </div>
         </div>
       </header>
@@ -46,9 +46,12 @@ export default function PrivacyPolicyPage() {
             <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Shield className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+            <h1
+              className="text-4xl md:text-5xl font-bold mb-4"
+              dangerouslySetInnerHTML={{ __html: t('legal.privacy.heroTitle') }}
+            />
             <p className="text-xl text-gray-300 mb-4">
-              Your privacy is important to us. This policy explains how we collect, use, and protect your information.
+              {t('legal.privacy.heroSubtitle')}
             </p>
             <p className="text-sm text-gray-400">
               Last updated: {new Date(lastUpdated).toLocaleDateString('en-US', { 

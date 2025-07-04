@@ -349,6 +349,8 @@
     "gdpr": {
       "title": "Zgodność z RODO - Ochrona Danych | CloudFloo",
       "description": "Informacje o zgodności CloudFloo z RODO i środkach ochrony danych osobowych w usługach cloud computing",
+      "heroTitle": "Zgodność <span class=\"text-neon\">z RODO</span>",
+      "heroSubtitle": "Twoje prawa do ochrony danych i nasze zobowiązanie do przestrzegania RODO.",
       "exercisingRights": "Korzystanie z praw",
       "exercisingRightsDesc": "Aby skorzystać z praw wynikających z RODO, możesz:",
       "contactDPO": "Skontaktować się z naszym Inspektorem Ochrony Danych pod adresem dpo@cloudfloo.io",
@@ -362,6 +364,8 @@
     "cookies": {
       "title": "Polityka Cookies - Zarządzanie Cookies | CloudFloo",
       "description": "Informacje o używaniu i zarządzaniu cookies przez CloudFloo w usługach cloud computing",
+      "heroTitle": "Polityka Cookies",
+      "heroSubtitle": "Dowiedz się, jak używamy plików cookie i podobnych technologii, aby ulepszyć Twoje doświadczenia.",
       "managingCookies": "Zarządzanie cookies",
       "managingCookiesDesc": "Masz kilka opcji zarządzania cookies:",
       "browserSettings": "Ustawienia przeglądarki",
@@ -380,6 +384,8 @@
     "terms": {
       "title": "Regulamin Usług - Warunki Współpracy | CloudFloo",
       "description": "Regulamin usług CloudFloo i warunki współpracy dla usług cloud computing",
+      "heroTitle": "Regulamin",
+      "heroSubtitle": "Warunki prawne regulujące korzystanie z usług CloudFloo.io",
       "userAccounts": "Konta użytkowników",
       "userAccountsDesc": "Aby uzyskać dostęp do niektórych funkcji naszych Usług, może być wymagane utworzenie konta. Zgadzasz się:",
       "provideAccurate": "Podawać dokładne, aktualne i kompletne informacje",
@@ -391,7 +397,9 @@
     },
     "privacy": {
       "title": "Polityka Prywatności - Ochrona Danych | CloudFloo",
-      "description": "Polityka prywatności CloudFloo i środki ochrony danych w usługach cloud computing"
+      "description": "Polityka prywatności CloudFloo i środki ochrony danych w usługach cloud computing",
+      "heroTitle": "Polityka Prywatności",
+      "heroSubtitle": "Twoja prywatność jest dla nas ważna. Ta polityka wyjaśnia, jak zbieramy, wykorzystujemy i chronimy Twoje informacje."
     }
   },
   "careers": {
@@ -479,6 +487,28 @@
   "languages": {
     "en": "Angielski",
     "pl": "Polski"
+  },
+  "blog": {
+    "heroTitle": "CloudFloo <span class=\"text-neon\">Blog</span>",
+    "heroSubtitle": "Wgląd, tutoriale i leadership technologiczny w dziedzinie chmury, AI i nowoczesnego rozwoju oprogramowania.",
+    "featuredTitle": "Polecane wpisy",
+    "featuredSubtitle": "Najnowsze artykuły i dogłębne analizy nowoczesnych technologii.",
+    "featured": "Wyróżnione",
+    "categories": {
+      "all": "Wszystkie wpisy",
+      "cloud": "Cloud Computing",
+      "ai": "AI i uczenie maszynowe",
+      "devops": "DevOps",
+      "security": "Bezpieczeństwo",
+      "tutorials": "Poradniki"
+    },
+    "searchPlaceholder": "Szukaj artykułów...",
+    "readMore": "Czytaj dalej",
+    "stayUpdatedTitle": "Bądź na bieżąco",
+    "stayUpdatedSubtitle": "Zapisz się do naszego newslettera, aby otrzymywać najnowsze informacje i aktualizacje.",
+    "newsletterPlaceholder": "Wpisz swój email",
+    "subscribe": "Subskrybuj",
+    "noPosts": "Nie znaleziono wpisów spełniających Twoje kryteria."
   },
   "projectWebkd": {
     "title": "WebKD: Zaawansowane rozwiązanie webowe dla przedsiębiorstw",

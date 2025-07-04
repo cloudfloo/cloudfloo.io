@@ -29,11 +29,12 @@ export default function GDPRClient() {
             <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <Shield className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-              GDPR <span className="text-neon">Compliance</span>
-            </h1>
+            <h1
+              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              dangerouslySetInnerHTML={{ __html: t('legal.gdpr.heroTitle') }}
+            />
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Your data protection rights and our commitment to privacy compliance.
+              {t('legal.gdpr.heroSubtitle')}
             </p>
           </div>
         </div>

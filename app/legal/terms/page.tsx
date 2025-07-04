@@ -36,7 +36,7 @@ export default function TermsOfServicePage() {
           <div className="flex items-center space-x-4">
             <BackToHomeButton />
             <div className="text-gray-500">/</div>
-            <div className="text-neon">Terms of Service</div>
+            <div className="text-neon">{t('common.terms')}</div>
           </div>
         </div>
       </header>
@@ -48,9 +48,12 @@ export default function TermsOfServicePage() {
             <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Scale className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
+            <h1
+              className="text-4xl md:text-5xl font-bold mb-4"
+              dangerouslySetInnerHTML={{ __html: t('legal.terms.heroTitle') }}
+            />
             <p className="text-xl text-gray-300 mb-4">
-              Legal terms and conditions governing your use of CloudFloo.io services.
+              {t('legal.terms.heroSubtitle')}
             </p>
             <p className="text-sm text-gray-400">
               Last updated: {new Date(lastUpdated).toLocaleDateString('en-US', { 
