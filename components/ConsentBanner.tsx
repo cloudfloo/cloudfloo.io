@@ -39,19 +39,27 @@ export default function ConsentBanner() {
       setConsent(parsedConsent);
       updateGoogleConsent(parsedConsent);
     }
+  }, []);
+
+  // Separate useEffect for event listener - always active
+  useEffect(() => {
+    if (!mounted) return;
 
     // Listen for custom event to open consent settings
     const handleOpenConsentSettings = () => {
+      console.log('ConsentBanner: Otrzymano event openConsentSettings');
       setShowSettings(true);
       setShowBanner(true);
     };
 
     window.addEventListener('openConsentSettings', handleOpenConsentSettings);
+    console.log('ConsentBanner: Event listener dodany');
     
     return () => {
       window.removeEventListener('openConsentSettings', handleOpenConsentSettings);
+      console.log('ConsentBanner: Event listener usunięty');
     };
-  }, []);
+  }, [mounted]);
 
   // Initialize Google Consent Mode with default values
   useEffect(() => {

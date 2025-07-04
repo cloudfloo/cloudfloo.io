@@ -369,10 +369,6 @@
     "cookies": {
       "title": "Polityka Cookies - Zarządzanie Cookies | CloudFloo",
       "description": "Informacje o używaniu i zarządzaniu cookies przez CloudFloo w usługach cloud computing",
-<<<<<<< HEAD
-      "heroTitle": "Polityka Cookies",
-      "heroSubtitle": "Dowiedz się, jak używamy plików cookie i podobnych technologii, aby ulepszyć Twoje doświadczenia.",
-=======
       "breadcrumb": "Polityka Cookies",
       "subtitle": "Dowiedz się, jak używamy plików cookie i podobnych technologii, aby poprawić Twoje doświadczenia.",
       "lastUpdated": "Ostatnia aktualizacja",
@@ -527,7 +523,6 @@
         "note": "Uwaga"
       },
 
->>>>>>> d3f7d7b (feat: Połączenie preferencji cookies z stroną /legal/cookies/ + pełne tłumaczenie PL)
       "managingCookies": "Zarządzanie cookies",
       "managingCookiesDesc": "Masz kilka opcji zarządzania cookies:",
       "browserSettings": "Ustawienia przeglądarki",
