@@ -1,27 +1,46 @@
-import * as THREE from "three";
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  Points,
+  BufferGeometry,
+  BufferAttribute,
+  ShaderMaterial,
+  AdditiveBlending,
+  Vector2,
+  Vector3,
+  Material
+} from "three";
 
-console.log('Cloud worker loaded, THREE version:', THREE.REVISION);
+console.log('Cloud worker loaded with selective imports');
 
-let scene: THREE.Scene;
-let camera: THREE.PerspectiveCamera;
-let renderer: THREE.WebGLRenderer | undefined;
-let cloud: THREE.Points | undefined;
-let mouse = new THREE.Vector2();
+let scene: Scene;
+let camera: PerspectiveCamera;
+let renderer: WebGLRenderer | undefined;
+let cloud: Points | undefined;
+let mouse = new Vector2();
 let animationId: number;
+let isVisible = true;
+let performanceMetrics = {
+  initTime: 0,
+  frameCount: 0,
+  avgFrameTime: 0
+};
 
 const nav = (self as any).navigator || {};
 const hardware = nav.hardwareConcurrency ?? 8;
 const memory = nav.deviceMemory ?? 8;
 const config = {
   lowEndThresholds: { hardware: 4, memory: 4 },
-  particleCounts: { lowEnd: 10000, highEnd: 20000 },
-  frameIntervals: { lowEnd: 1000 / 30, highEnd: 1000 / 60 },
+  particleCounts: { lowEnd: 2000, highEnd: 5000 },
+  frameIntervals: { lowEnd: 1000 / 24, highEnd: 1000 / 30 },
+  progressiveLoadingRatio: 0.2
 };
 
 const isLowEnd =
   hardware <= config.lowEndThresholds.hardware ||
   memory <= config.lowEndThresholds.memory;
-const PARTICLE_COUNT = isLowEnd
+let PARTICLE_COUNT = isLowEnd
   ? config.particleCounts.lowEnd
   : config.particleCounts.highEnd;
 const FRAME_INTERVAL = isLowEnd
@@ -31,196 +50,187 @@ let lastFrame = 0;
 
 console.log('Cloud worker config:', { isLowEnd, PARTICLE_COUNT, FRAME_INTERVAL });
 
-// Creating thousands of particles at once can block the worker event loop for
-// noticeable time. We generate them in chunks during idle periods to keep the
-// UI responsive.
-async function createCloudSystem(): Promise<THREE.Points> {
+function generateParticle(
+  index: number, 
+  positions: Float32Array, 
+  randomValues: Float32Array
+): void {
+  const spreadBias = Math.pow(Math.random(), 0.1);
+  const radius = spreadBias * 25 + Math.random() * 15;
+  const layer = Math.floor(Math.random() * 6);
+  const layerRadius = radius * (0.6 + layer * 0.15);
+  const height = (Math.random() - 0.5) * (8 - layer) * 1.5;
+
+  const angle = Math.random() * Math.PI * 2;
+  const x = Math.cos(angle) * layerRadius * (0.3 + Math.random() * 0.7);
+  const z = Math.sin(angle) * layerRadius * (0.3 + Math.random() * 0.7);
+  const y = height + Math.sin(x * 0.03) * 2.5 + Math.cos(z * 0.03) * 2.5;
+
+  positions[index * 3] = x;
+  positions[index * 3 + 1] = y;
+  positions[index * 3 + 2] = z;
+
+  randomValues[index * 3] = Math.random();
+  randomValues[index * 3 + 1] = Math.random();
+  randomValues[index * 3 + 2] = Math.random();
+}
+
+async function createCloudSystem(): Promise<Points> {
   const positions = new Float32Array(PARTICLE_COUNT * 3);
   const randomValues = new Float32Array(PARTICLE_COUNT * 3);
-
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    const spreadBias = Math.pow(Math.random(), 0.1);
-    const radius = spreadBias * 25 + Math.random() * 15;
-    const layer = Math.floor(Math.random() * 6);
-    const layerRadius = radius * (0.6 + layer * 0.15);
-    const height = (Math.random() - 0.5) * (8 - layer) * 1.5;
-
-    const angle = Math.random() * Math.PI * 2;
-    const x = Math.cos(angle) * layerRadius * (0.3 + Math.random() * 0.7);
-    const z = Math.sin(angle) * layerRadius * (0.3 + Math.random() * 0.7);
-    const y = height + Math.sin(x * 0.03) * 2.5 + Math.cos(z * 0.03) * 2.5;
-
-    positions[i * 3] = x;
-    positions[i * 3 + 1] = y;
-    positions[i * 3 + 2] = z;
-
-    randomValues[i * 3] = Math.random();
-    randomValues[i * 3 + 1] = Math.random();
-    randomValues[i * 3 + 2] = Math.random();
-
-    // Yield every few thousand iterations so we don't block for >16ms
-    if (i % 5000 === 0) {
-      await new Promise((r) => setTimeout(r, 50));
-    }
+  
+  const initialCount = Math.floor(PARTICLE_COUNT * config.progressiveLoadingRatio);
+  
+  for (let i = 0; i < initialCount; i++) {
+    generateParticle(i, positions, randomValues);
   }
 
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute("aRandom", new THREE.BufferAttribute(randomValues, 3));
+  const geometry = new BufferGeometry();
+  geometry.setAttribute("position", new BufferAttribute(positions, 3));
+  geometry.setAttribute("aRandom", new BufferAttribute(randomValues, 3));
 
-  const material = new THREE.ShaderMaterial({
+  const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
-    blending: THREE.AdditiveBlending,
+    blending: AdditiveBlending,
     uniforms: {
       uTime: { value: 0 },
-      uMouse: { value: new THREE.Vector2() },
+      uMouse: { value: new Vector2() },
       uScroll: { value: 0 },
     },
     vertexShader: `
       uniform float uTime;
       uniform vec2 uMouse;
       uniform float uScroll;
-
       attribute vec3 aRandom;
-
-      varying vec3 vPosition;
-      varying float vDistance;
+      
       varying vec3 vColor;
-      varying float vBrightness;
-      varying vec3 vRandom;
-
-      float noise(vec3 p) {
-        return sin(p.x * 0.1 + uTime) * cos(p.y * 0.1 + uTime * 0.7) * sin(p.z * 0.1 + uTime * 0.5);
-      }
-
-      float randomLighting(vec3 pos, vec3 random) {
-        float light1 = sin(uTime * 1.5 + random.x * 10.0 + pos.x * 0.1) * 0.5 + 0.5;
-        float light2 = cos(uTime * 2.0 + random.y * 8.0 + pos.y * 0.1) * 0.3 + 0.7;
-        float light3 = sin(uTime * 0.8 + random.z * 12.0 + pos.z * 0.1) * 0.4 + 0.6;
-        return light1 * light2 * light3;
-      }
+      varying float vAlpha;
+      varying float vDistance;
 
       void main() {
-        vPosition = position;
-        vDistance = length(position);
-        vRandom = aRandom;
-
         vec3 pos = position;
-
-        pos.x += sin(uTime * 0.3 + position.z * 0.008) * 2.0;
-        pos.y += cos(uTime * 0.2 + position.x * 0.008) * 1.5;
-        pos.z += sin(uTime * 0.25 + position.y * 0.008) * 1.8;
-
-        float n = noise(position * 0.03 + uTime * 0.15);
-        pos += normalize(position) * n * 0.8;
-
-        pos.x += sin(uTime * 1.2 + position.y * 0.05) * 0.4;
-        pos.y += cos(uTime * 0.9 + position.z * 0.05) * 0.3;
-
+        vDistance = length(position);
+        
         float angle = uTime * 0.05;
-        mat3 rotY = mat3(
-          cos(angle), 0.0, sin(angle),
-          0.0, 1.0, 0.0,
-          -sin(angle), 0.0, cos(angle)
-        );
-        pos = rotY * pos;
-
-        pos *= 1.0 + uScroll * 0.3;
-
-        vec2 m = uMouse * 2.0;
-        float dist = distance(pos.xy, m);
-        float bounceRadius = 8.0;
-
-        if(dist < bounceRadius) {
-          float bounceStrength = (bounceRadius - dist) / bounceRadius;
-          bounceStrength = smoothstep(0.0, 1.0, bounceStrength);
-          vec2 bounceDir = normalize(pos.xy - m + vec2(aRandom.x - 0.5, aRandom.y - 0.5) * 0.5);
-          pos.xy += bounceDir * bounceStrength * 2.5;
-          pos.z += sin(bounceStrength * 3.14159) * 1.5;
+        pos.x = position.x * cos(angle) - position.z * sin(angle);
+        pos.z = position.x * sin(angle) + position.z * cos(angle);
+        
+        pos.y += sin(uTime * 0.5 + position.x * 0.1) * 2.0;
+        pos.x += cos(uTime * 0.3 + position.z * 0.1) * 1.0;
+        
+        pos *= 1.0 + uScroll * 0.2;
+        
+        vec2 mouseOffset = pos.xy - uMouse * 5.0;
+        float mouseDist = length(mouseOffset);
+        if(mouseDist < 8.0) {
+          vec2 pushDir = normalize(mouseOffset + vec2(aRandom.x - 0.5, aRandom.y - 0.5) * 2.0);
+          pos.xy += pushDir * (8.0 - mouseDist) * 0.5;
         }
-
-        float d = length(position) / 30.0;
-
+        
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-
-        float baseSize = 60.0 * (1.0 - d * 0.5);
-        float sizeVariation = sin(uTime * 2.0 + aRandom.x * 10.0) * 0.4 + 0.8;
-        gl_PointSize = max(baseSize * sizeVariation, 8.0);
-
-        float colorPhase = uTime * 0.3 + d * 3.0 + aRandom.x * 2.0;
-        float colorMix = sin(colorPhase) * 0.5 + 0.5;
-
-        vec3 color1 = vec3(0.2, 0.6, 0.8);
-        vec3 color2 = vec3(0.6, 0.3, 0.7);
-        vec3 color3 = vec3(0.4, 0.7, 0.9);
-        vec3 color4 = vec3(0.8, 0.4, 0.6);
-
-        vec3 mixA = mix(color1, color2, colorMix);
-        vec3 mixB = mix(color3, color4, sin(colorPhase * 1.3) * 0.5 + 0.5);
-        vColor = mix(mixA, mixB, sin(colorPhase * 0.7 + aRandom.y * 3.0) * 0.5 + 0.5);
-
-        vBrightness = randomLighting(pos, aRandom) * 0.5 + 0.2;
+        
+        float distanceFactor = 1.0 - vDistance / 40.0;
+        gl_PointSize = max(40.0 * distanceFactor * (0.8 + aRandom.z * 0.4), 8.0);
+        
+        float colorPhase = uTime * 0.2 + vDistance * 0.1 + aRandom.x;
+        vColor = mix(
+          vec3(0.2, 0.6, 0.8), 
+          vec3(0.8, 0.4, 0.6), 
+          sin(colorPhase) * 0.5 + 0.5
+        );
+        
+        vAlpha = distanceFactor * 0.1;
       }
     `,
     fragmentShader: `
-      varying vec3 vPosition;
-      varying float vDistance;
       varying vec3 vColor;
-      varying float vBrightness;
-      varying vec3 vRandom;
+      varying float vAlpha;
+      varying float vDistance;
       uniform float uTime;
 
       void main() {
         vec2 center = gl_PointCoord - vec2(0.5);
         float dist = length(center);
         if (dist > 0.5) discard;
-
-        float alpha = 1.0 - smoothstep(0.3, 0.5, dist);
-
-        float core = 1.0 - smoothstep(0.0, 0.2, dist);
-        alpha += core * 0.5;
-
-        float distanceFade = 1.0 - smoothstep(15.0, 50.0, vDistance);
-        distanceFade = max(distanceFade, 0.05);
-
-        float pulse = sin(uTime * 1.5 + vDistance * 0.05 + vRandom.z * 5.0) * 0.2 + 0.8;
-
-        vec3 finalColor = vColor * vBrightness * 0.8;
-
-        float finalAlpha = alpha * distanceFade * pulse * 0.07;
-
-        gl_FragColor = vec4(finalColor, finalAlpha);
+        
+        float alpha = (1.0 - dist * 2.0) * vAlpha;
+        
+        alpha *= 0.8 + sin(uTime + vDistance * 0.1) * 0.2;
+        
+        gl_FragColor = vec4(vColor, alpha);
       }
     `,
   });
 
-  const cloud = new THREE.Points(geometry, material);
-  return cloud;
+  const cloudPoints = new Points(geometry, material);
+  
+  if (initialCount < PARTICLE_COUNT) {
+    setTimeout(async () => {
+      for (let i = initialCount; i < PARTICLE_COUNT; i++) {
+        generateParticle(i, positions, randomValues);
+        
+        if (i % 500 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 16));
+        }
+      }
+      
+      geometry.attributes.position.needsUpdate = true;
+      geometry.attributes.aRandom.needsUpdate = true;
+      
+      console.log('Progressive particle loading completed');
+    }, 100);
+  }
+
+  return cloudPoints;
 }
 
 function animate(time: number = 0) {
-  if (!scene || !camera || !renderer || !cloud) return;
+  if (!scene || !camera || !renderer || !cloud || !isVisible) {
+    if (isVisible) {
+      animationId = requestAnimationFrame(animate);
+    }
+    return;
+  }
 
-  if (time - lastFrame < FRAME_INTERVAL) {
+  if (time - lastFrame < FRAME_INTERVAL * 1.5) {
     animationId = requestAnimationFrame(animate);
     return;
   }
+  
+  const frameStart = performance.now();
   lastFrame = time;
-
   const t = time * 0.001;
 
-  if ((cloud.material as THREE.ShaderMaterial).uniforms) {
-    (cloud.material as THREE.ShaderMaterial).uniforms.uTime.value = t;
-    (cloud.material as THREE.ShaderMaterial).uniforms.uMouse.value = mouse;
+  if (performanceMetrics.frameCount % 2 === 0) {
+    if ((cloud.material as ShaderMaterial).uniforms) {
+      (cloud.material as ShaderMaterial).uniforms.uTime.value = t;
+      (cloud.material as ShaderMaterial).uniforms.uMouse.value = mouse;
+    }
   }
 
-  camera.position.x = Math.sin(t * 0.15) * 8;
-  camera.position.y = Math.cos(t * 0.12) * 6;
-  camera.position.z = 50 + Math.sin(t * 0.08) * 4;
+  camera.position.x = Math.sin(t * 0.1) * 5;
+  camera.position.y = Math.cos(t * 0.08) * 3;
+  camera.position.z = 50 + Math.sin(t * 0.05) * 3;
   camera.lookAt(0, 0, 0);
 
   renderer.render(scene, camera);
+  
+  const frameTime = performance.now() - frameStart;
+  performanceMetrics.frameCount++;
+  performanceMetrics.avgFrameTime = 
+    (performanceMetrics.avgFrameTime * (performanceMetrics.frameCount - 1) + frameTime) / 
+    performanceMetrics.frameCount;
+  
+  if (performanceMetrics.frameCount % 120 === 0 && performanceMetrics.avgFrameTime > 16) {
+    console.warn('High frame time detected, consider reducing particles');
+    self.postMessage({ 
+      type: 'performance', 
+      metric: 'highFrameTime', 
+      value: performanceMetrics.avgFrameTime 
+    });
+  }
+  
   animationId = requestAnimationFrame(animate);
 }
 
@@ -229,6 +239,7 @@ async function init(
   width: number,
   height: number
 ) {
+  const initStart = performance.now();
   console.log('Cloud worker init called with:', { canvas: !!canvas, width, height });
   
   if (!canvas) {
@@ -246,23 +257,22 @@ async function init(
     }
   }
 
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
+  scene = new Scene();
+  camera = new PerspectiveCamera(45, width / height, 0.1, 2000);
   camera.position.set(0, 0, 50);
 
   try {
-    renderer = new THREE.WebGLRenderer({
+    renderer = new WebGLRenderer({
       canvas,
-      antialias: true,
+      antialias: !isLowEnd,
       alpha: true,
       powerPreference: "high-performance",
     });
+    
     if (renderer.domElement) {
       const hasStyle = (renderer.domElement as any).style !== undefined;
       renderer.setSize(width, height, hasStyle);
-      const pixelRatio = isLowEnd
-        ? 1
-        : Math.min((self as any).devicePixelRatio || 1, 2);
+      const pixelRatio = isLowEnd ? 1 : Math.min((self as any).devicePixelRatio || 1, 1.5);
       renderer.setPixelRatio(pixelRatio);
       renderer.setClearColor(0x000000, 0);
     } else {
@@ -279,7 +289,20 @@ async function init(
   console.log('Creating cloud system...');
   cloud = await createCloudSystem();
   scene.add(cloud);
-  console.log('Cloud system created and added to scene');
+  
+  performanceMetrics.initTime = performance.now() - initStart;
+  console.log('Cloud system created in', performanceMetrics.initTime, 'ms');
+  
+  if (performanceMetrics.initTime > 1000 && PARTICLE_COUNT > 1000) {
+    console.warn('Slow init detected, reducing particle count for future instances');
+    PARTICLE_COUNT = Math.max(1000, PARTICLE_COUNT * 0.7);
+  }
+  
+  self.postMessage({ 
+    type: 'performance', 
+    metric: 'init', 
+    value: performanceMetrics.initTime 
+  });
 
   animate(0);
   console.log('Animation started');
@@ -299,7 +322,7 @@ function dispose() {
   cancelAnimationFrame(animationId);
   if (cloud) {
     cloud.geometry.dispose();
-    if (cloud.material instanceof THREE.Material) {
+    if (cloud.material instanceof Material) {
       cloud.material.dispose();
     }
     cloud = undefined;
@@ -308,11 +331,13 @@ function dispose() {
     renderer.dispose();
     renderer = undefined;
   }
+  performanceMetrics = { initTime: 0, frameCount: 0, avgFrameTime: 0 };
 }
 
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
   console.log('Cloud worker received message:', data.type);
+  
   switch (data.type) {
     case "init":
       init(data.canvas, data.width, data.height);
@@ -325,9 +350,18 @@ self.onmessage = (event: MessageEvent) => {
       mouse.y = data.y;
       break;
     case "scroll":
-      if (cloud && (cloud.material as THREE.ShaderMaterial).uniforms) {
-        (cloud.material as THREE.ShaderMaterial).uniforms.uScroll.value =
-          data.value;
+      if (cloud && (cloud.material as ShaderMaterial).uniforms) {
+        (cloud.material as ShaderMaterial).uniforms.uScroll.value = data.value;
+      }
+      break;
+    case "visibility":
+      isVisible = data.visible;
+      if (!isVisible) {
+        cancelAnimationFrame(animationId);
+        console.log('Animation paused - not visible');
+      } else if (scene && camera && renderer && cloud) {
+        animate();
+        console.log('Animation resumed - visible');
       }
       break;
     case "dispose":
@@ -336,5 +370,4 @@ self.onmessage = (event: MessageEvent) => {
   }
 };
 
-// Export functions for unit testing
 export { init, resize, dispose };
