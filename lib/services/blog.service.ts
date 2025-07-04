@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client'
 import { 
   BlogPost, 
   BlogCategory, 
@@ -81,6 +81,10 @@ export class BlogService {
 
   // Get posts with filtering and pagination
   async getPosts(params: BlogSearchParams = {}): Promise<BlogPaginatedResponse> {
+    if (!isSupabaseConfigured) {
+      console.warn('Supabase not configured: returning empty posts')
+      return { posts: [], total: 0, hasMore: false }
+    }
     const {
       status = 'published',
       category,
@@ -163,6 +167,10 @@ export class BlogService {
 
   // Get single post by slug
   async getPostBySlug(slug: string): Promise<BlogPost | null> {
+    if (!isSupabaseConfigured) {
+      console.warn('Supabase not configured: cannot fetch post')
+      return null
+    }
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
@@ -193,6 +201,10 @@ export class BlogService {
 
   // Get all categories
   async getCategories(): Promise<BlogCategory[]> {
+    if (!isSupabaseConfigured) {
+      console.warn('Supabase not configured: returning empty categories')
+      return []
+    }
     const { data, error } = await supabase
       .from('blog_categories')
       .select('*')
@@ -208,6 +220,10 @@ export class BlogService {
 
   // Search posts
   async searchPosts(query: string, limit = 10): Promise<BlogPost[]> {
+    if (!isSupabaseConfigured) {
+      console.warn('Supabase not configured: returning empty search results')
+      return []
+    }
     const { data, error } = await supabase
       .from('blog_posts')
       .select(`
@@ -254,6 +270,9 @@ export class BlogService {
   }
 
   async incrementViewCount(slug: string): Promise<void> {
+    if (!isSupabaseConfigured) {
+      return
+    }
     const { error } = await supabase.rpc('increment_view_count', { post_slug: slug })
     
     if (error) {
