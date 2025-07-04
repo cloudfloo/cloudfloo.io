@@ -4,27 +4,25 @@ import localFont from 'next/font/local';
 import Script from 'next/script';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import DefaultSeoProvider from '@/components/DefaultSeoProvider';
+import Analytics from '@/components/Analytics';
+import ConsentBanner from '@/components/ConsentBanner';
+import { Inter } from 'next/font/google';
 
 // Primary font (regular) - preloaded for immediate use
-const interRegular = localFont({
-  src: '../public/InterVariable.woff2',
-  variable: '--font-inter',
+const interRegular = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
-  preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-  adjustFontFallback: 'Arial',
+  variable: '--font-inter',
 });
 
 // Italic font - loaded on demand to avoid preload warning
-const interItalic = localFont({
-  src: '../public/InterVariable-Italic.woff2',
-  variable: '--font-inter-italic',
+const interItalic = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
-  preload: false,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+  variable: '--font-inter-italic',
 });
-
-import Analytics from "@/components/Analytics";
 
 // Minimal metadata for App Router - next-seo handles most SEO
 export const metadata: Metadata = {
@@ -94,6 +92,7 @@ export default function RootLayout({
           <DefaultSeoProvider />
           {children}
           <Analytics />
+          <ConsentBanner />
         </LanguageProvider>
       </body>
     </html>
