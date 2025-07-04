@@ -1,15 +1,13 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { ArrowLeft, Settings, GitBranch, Zap, Shield, Monitor, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-export const metadata: Metadata = {
-  title: 'DevOps i Automatyzacja - CI/CD, Kubernetes | CloudFloo',
-  description: 'Pipeline\'y CI/CD, Kubernetes, Terraform, monitoring Grafana/Prometheus. Automatyzacja infrastruktury i deploymentów 🔧',
-};
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function DevOpsPage() {
+  const { t } = useLanguage();
   const features = [
     {
       icon: GitBranch,
@@ -98,7 +96,7 @@ export default function DevOpsPage() {
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center text-gray-300 hover:text-neon transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Home
+              {t('common.backToHome')}
             </Link>
             <div className="text-gray-500">/</div>
             <div className="text-neon">DevOps & Automation</div>
