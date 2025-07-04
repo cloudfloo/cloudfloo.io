@@ -100,7 +100,12 @@
         "gcp": "Google Cloud Platform",
         "architecture": "Cloud Architecture"
       },
-      "detailedFeatures": ["Architecture Design", "Migration Planning", "Cost Optimization", "Security Assessment"],
+      "detailedFeatures": [
+        "Architecture Design",
+        "Migration Planning",
+        "Cost Optimization",
+        "Security Assessment"
+      ],
       "heroTitle": "Cloud <span class=\"text-neon\">Solutions</span>",
       "heroDescription": "Transform your infrastructure with enterprise-grade cloud solutions. We provide comprehensive migration, scaling, and optimization services that reduce costs while improving performance and reliability.",
       "ctaMain": "Start Your Migration",
@@ -115,8 +120,18 @@
       "shortTitle": "Custom Application Development",
       "description": "Custom web and mobile applications built with modern frameworks.",
       "longDescription": "Scalable, modern applications built with your specific requirements in mind, leveraging cutting-edge technologies.",
-      "features": ["Full-Stack Development", "Mobile Applications", "Web Applications", "Performance Optimization"],
-      "detailedFeatures": ["Full-Stack Development", "API Integration", "Performance Optimization", "Responsive Design"],
+      "features": [
+        "Full-Stack Development",
+        "Mobile Applications",
+        "Web Applications",
+        "Performance Optimization"
+      ],
+      "detailedFeatures": [
+        "Full-Stack Development",
+        "API Integration",
+        "Performance Optimization",
+        "Responsive Design"
+      ],
       "heroTitle": "Application <span class=\"text-neon\">Development</span>",
       "heroDescription": "Build powerful, scalable applications that drive business growth. From web platforms to mobile apps, we create custom solutions using modern technologies and best practices.",
       "ctaMain": "Start Your Project",
@@ -131,41 +146,6 @@
       "shortTitle": "Intelligent Automation",
       "description": "Intelligent automation and ML operations for data-driven insights.",
       "longDescription": "AI-powered solutions that streamline operations and enhance productivity through smart workflow automation.",
-      "heroTitle": "AI & <span class=\"text-gradient-neon\">Machine Learning</span> Solutions",
-      "heroDescription": "Transform your business with intelligent automation and ML operations for data-driven insights.",
-      "ctaMain": "Start AI Project",
-      "ctaSecondary": "View AI Portfolio",
-      "featuresTitle": "AI/ML Capabilities",
-      "featuresDescription": "Comprehensive AI and machine learning solutions to drive your business forward.",
-      "aiServicesTitle": "AI Service Categories",
-      "aiServicesDescription": "Specialized AI services across different domains and use cases.",
-      "technologiesTitle": "AI Technologies",
-      "technologiesDescription": "Cutting-edge technologies and frameworks we use for AI/ML development.",
-      "useCasesTitle": "Real-World AI Applications",
-      "useCasesDescription": "Proven AI solutions that deliver measurable business results.",
-      "readyTitle": "Ready to Harness AI Power?",
-      "readyDescription": "Let's discuss how AI and machine learning can transform your business operations.",
-      "ctaProject": "Start AI Project",
-      "ctaGuide": "Download AI Guide",
-      "intelligentAutomation": "Intelligent Automation",
-      "intelligentAutomationDesc": "Automate complex workflows with AI-powered decision making and process optimization.",
-      "customMLModels": "Custom ML Models",
-      "customMLModelsDesc": "Develop tailored machine learning models specifically designed for your business needs.",
-      "mlOpsPipeline": "MLOps Pipeline",
-      "mlOpsPipelineDesc": "Complete machine learning operations pipeline from development to production deployment.",
-      "predictiveAnalytics": "Predictive Analytics",
-      "predictiveAnalyticsDesc": "Forecast trends and behaviors using advanced statistical modeling and machine learning.",
-      "realTimeProcessing": "Real-Time Processing",
-      "realTimeProcessingDesc": "Process and analyze data streams in real-time for immediate insights and actions.",
-      "modelOptimization": "Model Optimization",
-      "modelOptimizationDesc": "Optimize ML models for performance, accuracy, and resource efficiency.",
-      "features": {
-        "models": "Custom ML Models",
-        "automation": "Intelligent Automation",
-        "analytics": "Predictive Analytics",
-        "deployment": "MLOps Pipeline"
-      },
-      "detailedFeatures": ["Process Automation", "AI Integration", "Workflow Optimization", "Predictive Analytics"],
       "heroTitle": "AI & <span class=\"text-neon\">Machine Learning</span>",
       "heroDescription": "Harness the power of artificial intelligence to automate processes, gain insights, and drive innovation. Our AI solutions are designed to integrate seamlessly with your existing systems and scale with your business.",
       "ctaMain": "Explore AI Solutions",
@@ -193,7 +173,19 @@
       "realTimeProcessing": "Real-time Processing",
       "realTimeProcessingDesc": "High-performance ML inference with sub-millisecond response times.",
       "modelOptimization": "Model Optimization",
-      "modelOptimizationDesc": "Continuous model improvement with A/B testing and performance monitoring."
+      "modelOptimizationDesc": "Continuous model improvement with A/B testing and performance monitoring.",
+      "features": {
+        "models": "Custom ML Models",
+        "automation": "Intelligent Automation",
+        "analytics": "Predictive Analytics",
+        "deployment": "MLOps Pipeline"
+      },
+      "detailedFeatures": [
+        "Process Automation",
+        "AI Integration",
+        "Workflow Optimization",
+        "Predictive Analytics"
+      ]
     },
     "devops": {
       "title": "DevOps & Automation",
@@ -231,7 +223,12 @@
       "title": "Edge Computing",
       "description": "Ultra-fast edge functions and CDN solutions for global performance.",
       "longDescription": "Ultra-fast, globally distributed solutions that bring computation closer to your users for optimal performance.",
-      "features": ["Ultra-Low Latency", "Global Distribution", "Serverless Functions", "Real-time Processing"],
+      "features": [
+        "Ultra-Low Latency",
+        "Global Distribution",
+        "Serverless Functions",
+        "Real-time Processing"
+      ],
       "heroTitle": "Edge <span class=\"text-neon\">Computing</span>",
       "heroDescription": "Deliver lightning-fast experiences with edge computing solutions. Process data at the network edge for ultra-low latency, improved performance, and reduced bandwidth costs.",
       "ctaMain": "Deploy to Edge",
@@ -482,5 +479,24 @@
   "languages": {
     "en": "English",
     "pl": "Polish"
+  },
+  "projectWebkd": {
+    "title": "WebKD: Advanced Enterprise Web Solution",
+    "shortDescription": "Sophisticated enterprise web application with modern microservices architecture, focusing on robust security, performance, and scalability.",
+    "fullDescription": "WebKD is a sophisticated enterprise web application built with a modern microservices architecture, focusing on robust security, performance, and scalability. The project features multiple frontend applications and a powerful backend system, all developed with best-in-class technologies.\n\nThis enterprise solution demonstrates advanced software engineering principles with a focus on maintainability, scalability, and performance. The project follows industry best practices including Test-Driven Development (TDD), Page Object Model for E2E testing, comprehensive documentation, and structured PR workflow with quality gates.",
+    "badge": "Enterprise Solution",
+    "customer": "HSK Data Ltd. Sp. z o.o.",
+    "metrics": {
+      "performance": "99.9% Uptime",
+      "security": "Enterprise Grade",
+      "scalability": "Auto-scaling",
+      "testing": "95% Coverage"
+    },
+    "metricNames": {
+      "performance": "Performance",
+      "security": "Security",
+      "scalability": "Scalability",
+      "testing": "Testing"
+    }
   }
 }

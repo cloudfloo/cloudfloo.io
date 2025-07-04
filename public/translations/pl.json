@@ -100,7 +100,12 @@
         "gcp": "Google Cloud Platform",
         "architecture": "Architektura chmury"
       },
-      "detailedFeatures": ["Projektowanie architektury", "Planowanie migracji", "Optymalizacja kosztów", "Ocena bezpieczeństwa"],
+      "detailedFeatures": [
+        "Projektowanie architektury",
+        "Planowanie migracji",
+        "Optymalizacja kosztów",
+        "Ocena bezpieczeństwa"
+      ],
       "heroTitle": "<span class=\"text-neon\">Rozwiązania</span> chmurowe",
       "heroDescription": "Przekształć swoją infrastrukturę za pomocą rozwiązań chmurowych klasy enterprise. Dostarczamy kompleksowe usługi migracji, skalowania i optymalizacji, które obniżają koszty przy jednoczesnej poprawie wydajności i niezawodności.",
       "ctaMain": "Rozpocznij migrację",
@@ -115,8 +120,18 @@
       "shortTitle": "Niestandardowe tworzenie aplikacji",
       "description": "Niestandardowe aplikacje webowe i mobilne zbudowane z nowoczesnymi frameworkami.",
       "longDescription": "Skalowalne, nowoczesne aplikacje zbudowane z myślą o Twoich konkretnych wymaganiach, wykorzystujące najnowocześniejsze technologie.",
-      "features": ["Rozwój Full-Stack", "Aplikacje mobilne", "Aplikacje webowe", "Optymalizacja wydajności"],
-      "detailedFeatures": ["Rozwój Full-Stack", "Integracja API", "Optymalizacja wydajności", "Responsywny design"],
+      "features": [
+        "Rozwój Full-Stack",
+        "Aplikacje mobilne",
+        "Aplikacje webowe",
+        "Optymalizacja wydajności"
+      ],
+      "detailedFeatures": [
+        "Rozwój Full-Stack",
+        "Integracja API",
+        "Optymalizacja wydajności",
+        "Responsywny design"
+      ],
       "heroTitle": "<span class=\"text-neon\">Rozwój</span> aplikacji",
       "heroDescription": "Buduj potężne, skalowalne aplikacje, które napędzają wzrost biznesu. Od platform webowych po aplikacje mobilne, tworzymy niestandardowe rozwiązania wykorzystujące nowoczesne technologie i najlepsze praktyki.",
       "ctaMain": "Rozpocznij swój projekt",
@@ -131,41 +146,6 @@
       "shortTitle": "Inteligentna automatyzacja",
       "description": "Inteligentna automatyzacja i operacje ML dla spostrzeżeń opartych na danych.",
       "longDescription": "Rozwiązania oparte na AI, które usprawniają operacje i zwiększają produktywność poprzez inteligentną automatyzację przepływów pracy.",
-      "heroTitle": "Rozwiązania <span class=\"text-gradient-neon\">AI i Machine Learning</span>",
-      "heroDescription": "Przekształć swój biznes dzięki inteligentnej automatyzacji i operacjom ML dla spostrzeżeń opartych na danych.",
-      "ctaMain": "Rozpocznij projekt AI",
-      "ctaSecondary": "Zobacz portfolio AI",
-      "featuresTitle": "Możliwości AI/ML",
-      "featuresDescription": "Kompleksowe rozwiązania AI i machine learning do napędzania Twojego biznesu.",
-      "aiServicesTitle": "Kategorie usług AI",
-      "aiServicesDescription": "Specjalistyczne usługi AI w różnych domenach i przypadkach użycia.",
-      "technologiesTitle": "Technologie AI",
-      "technologiesDescription": "Najnowocześniejsze technologie i frameworki używane w rozwoju AI/ML.",
-      "useCasesTitle": "Rzeczywiste aplikacje AI",
-      "useCasesDescription": "Sprawdzone rozwiązania AI, które dostarczają wymierne rezultaty biznesowe.",
-      "readyTitle": "Gotowy wykorzystać moc AI?",
-      "readyDescription": "Porozmawiajmy o tym, jak AI i machine learning mogą przekształcić Twoje operacje biznesowe.",
-      "ctaProject": "Rozpocznij projekt AI",
-      "ctaGuide": "Pobierz przewodnik AI",
-      "intelligentAutomation": "Inteligentna automatyzacja",
-      "intelligentAutomationDesc": "Automatyzuj złożone przepływy pracy dzięki podejmowaniu decyzji zasilanym przez AI i optymalizacji procesów.",
-      "customMLModels": "Niestandardowe modele ML",
-      "customMLModelsDesc": "Opracowuj dostosowane modele machine learning specjalnie zaprojektowane dla Twoich potrzeb biznesowych.",
-      "mlOpsPipeline": "Pipeline MLOps",
-      "mlOpsPipelineDesc": "Kompletny pipeline operacji machine learning od rozwoju do wdrożenia produkcyjnego.",
-      "predictiveAnalytics": "Analityka predykcyjna",
-      "predictiveAnalyticsDesc": "Prognozuj trendy i zachowania przy użyciu zaawansowanego modelowania statystycznego i machine learning.",
-      "realTimeProcessing": "Przetwarzanie w czasie rzeczywistym",
-      "realTimeProcessingDesc": "Przetwarzaj i analizuj strumienie danych w czasie rzeczywistym dla natychmiastowych spostrzeżeń i działań.",
-      "modelOptimization": "Optymalizacja modeli",
-      "modelOptimizationDesc": "Optymalizuj modele ML pod kątem wydajności, dokładności i efektywności zasobów.",
-      "features": {
-        "models": "Niestandardowe modele ML",
-        "automation": "Inteligentna automatyzacja",
-        "analytics": "Analityka predykcyjna",
-        "deployment": "Pipeline MLOps"
-      },
-      "detailedFeatures": ["Automatyzacja procesów", "Integracja AI", "Optymalizacja przepływów pracy", "Analityka predykcyjna"],
       "heroTitle": "AI i <span class=\"text-neon\">Machine Learning</span>",
       "heroDescription": "Wykorzystaj moc sztucznej inteligencji do automatyzacji procesów, uzyskiwania spostrzeżeń i napędzania innowacji. Nasze rozwiązania AI są zaprojektowane do płynnej integracji z istniejącymi systemami i skalowania wraz z biznesem.",
       "ctaMain": "Poznaj rozwiązania AI",
@@ -193,7 +173,19 @@
       "realTimeProcessing": "Przetwarzanie w czasie rzeczywistym",
       "realTimeProcessingDesc": "Wysokowydajne wnioskowanie ML z czasami odpowiedzi poniżej milisekundy.",
       "modelOptimization": "Optymalizacja modeli",
-      "modelOptimizationDesc": "Ciągłe usprawnianie modeli z testami A/B i monitorowaniem wydajności."
+      "modelOptimizationDesc": "Ciągłe usprawnianie modeli z testami A/B i monitorowaniem wydajności.",
+      "features": {
+        "models": "Niestandardowe modele ML",
+        "automation": "Inteligentna automatyzacja",
+        "analytics": "Analityka predykcyjna",
+        "deployment": "Pipeline MLOps"
+      },
+      "detailedFeatures": [
+        "Automatyzacja procesów",
+        "Integracja AI",
+        "Optymalizacja przepływów pracy",
+        "Analityka predykcyjna"
+      ]
     },
     "devops": {
       "title": "DevOps i automatyzacja",
@@ -231,7 +223,12 @@
       "title": "Obliczenia brzegowe",
       "description": "Ultraszybkie funkcje brzegowe i rozwiązania CDN dla globalnej wydajności.",
       "longDescription": "Ultraszybkie, globalnie rozproszone rozwiązania, które przybliżają obliczenia do użytkowników dla optymalnej wydajności.",
-      "features": ["Ultraniskie opóźnienia", "Globalna dystrybucja", "Funkcje serverless", "Przetwarzanie w czasie rzeczywistym"],
+      "features": [
+        "Ultraniskie opóźnienia",
+        "Globalna dystrybucja",
+        "Funkcje serverless",
+        "Przetwarzanie w czasie rzeczywistym"
+      ],
       "heroTitle": "Obliczenia <span class=\"text-neon\">brzegowe</span>",
       "heroDescription": "Dostarczaj błyskawiczne doświadczenia dzięki rozwiązaniom edge computing. Przetwarzaj dane na brzegu sieci dla ultraniskich opóźnień, lepszej wydajności i obniżonych kosztów przepustowości.",
       "ctaMain": "Wdróż na brzeg",
@@ -482,5 +479,24 @@
   "languages": {
     "en": "Angielski",
     "pl": "Polski"
+  },
+  "projectWebkd": {
+    "title": "WebKD: Zaawansowane rozwiązanie webowe dla przedsiębiorstw",
+    "shortDescription": "Zaawansowana aplikacja webowa klasy enterprise z nowoczesną architekturą mikrousług, skupiona na bezpieczeństwie, wydajności i skalowalności.",
+    "fullDescription": "WebKD to zaawansowana aplikacja webowa klasy enterprise zbudowana w nowoczesnej architekturze mikrousług, koncentrująca się na solidnym bezpieczeństwie, wydajności i skalowalności. Projekt obejmuje wiele aplikacji frontendowych oraz potężny system backendowy, rozwijanych z wykorzystaniem najlepszych technologii.\n\nTo rozwiązanie klasy enterprise prezentuje zaawansowane zasady inżynierii oprogramowania z naciskiem na łatwość utrzymania, skalowalność i wydajność. Projekt stosuje najlepsze praktyki branżowe, w tym Test-Driven Development (TDD), model strony (Page Object Model) dla testów E2E, pełną dokumentację oraz uporządkowany workflow PR z kontrolą jakości.",
+    "badge": "Rozwiązanie klasy enterprise",
+    "customer": "HSK Data Ltd. Sp. z o.o.",
+    "metrics": {
+      "performance": "99,9% dostępności",
+      "security": "Klasa enterprise",
+      "scalability": "Automatyczne skalowanie",
+      "testing": "95% pokrycia testami"
+    },
+    "metricNames": {
+      "performance": "Wydajność",
+      "security": "Bezpieczeństwo",
+      "scalability": "Skalowalność",
+      "testing": "Testy"
+    }
   }
 }

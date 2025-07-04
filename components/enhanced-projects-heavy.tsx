@@ -20,11 +20,9 @@ export default function EnhancedProjects() {
 
   const project = {
     id: 1,
-    title: 'WebKD: Advanced Enterprise Web Solution',
-    shortDescription: 'Sophisticated enterprise web application with modern microservices architecture, focusing on robust security, performance, and scalability.',
-    fullDescription: `WebKD is a sophisticated enterprise web application built with a modern microservices architecture, focusing on robust security, performance, and scalability. The project features multiple frontend applications and a powerful backend system, all developed with best-in-class technologies.
-
-This enterprise solution demonstrates advanced software engineering principles with a focus on maintainability, scalability, and performance. The project follows industry best practices including Test-Driven Development (TDD), Page Object Model for E2E testing, comprehensive documentation, and structured PR workflow with quality gates.`,
+    title: t('projectWebkd.title'),
+    shortDescription: t('projectWebkd.shortDescription'),
+    fullDescription: t('projectWebkd.fullDescription'),
     image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
     images: [
       'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -34,7 +32,7 @@ This enterprise solution demonstrates advanced software engineering principles w
       'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     customer: {
-      name: 'HSK Data Ltd. Sp. z o.o.',
+      name: t('projectWebkd.customer'),
       logo: '/hsk.png'
     },
     technologies: {
@@ -53,10 +51,10 @@ This enterprise solution demonstrates advanced software engineering principles w
       'Internationalization'
     ],
     metrics: {
-      performance: '99.9% Uptime',
-      security: 'Enterprise Grade',
-      scalability: 'Auto-scaling',
-      testing: '95% Coverage'
+      performance: t('projectWebkd.metrics.performance'),
+      security: t('projectWebkd.metrics.security'),
+      scalability: t('projectWebkd.metrics.scalability'),
+      testing: t('projectWebkd.metrics.testing')
     },
     achievements: [
       'Modern microservices architecture for scalability',
@@ -214,7 +212,7 @@ This enterprise solution demonstrates advanced software engineering principles w
 
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 <Badge className="bg-gradient-neon text-white font-semibold">
-                  Enterprise Solution
+                  {t('projectWebkd.badge')}
                 </Badge>
                 <div className="flex items-center gap-2 px-3 py-1 bg-black/70 rounded-full">
                   <div className="relative w-6 h-6 flex-shrink-0">
@@ -251,7 +249,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                 transition={{ delay: 0.3 }}
               >
                 {Object.entries(project.metrics).map(([key, value], index) => (
-                  <motion.div 
+                  <motion.div
                     key={index} 
                     className="text-center p-3 bg-black/30 rounded-lg"
                     initial={{ scale: 0 }}
@@ -259,7 +257,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                     transition={{ delay: index * 0.1 + 0.4, type: 'spring', stiffness: 200 }}
                   >
                     <div className="text-neon font-semibold text-sm">{value}</div>
-                    <div className="text-gray-400 text-xs capitalize">{key}</div>
+                    <div className="text-gray-400 text-xs capitalize">{t(`projectWebkd.metricNames.${key}`)}</div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -321,7 +319,7 @@ This enterprise solution demonstrates advanced software engineering principles w
                   <div className="flex-1">
                     <h3 id="project-details" className="text-3xl font-bold text-white mb-4">{selectedProject.title}</h3>
                     <Badge className="bg-gradient-neon text-white font-semibold mb-4">
-                      Enterprise Solution
+                      {t('projectWebkd.badge')}
                     </Badge>
                   </div>
                 </div>
