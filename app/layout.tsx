@@ -3,9 +3,12 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 import DefaultSeoProvider from '@/components/DefaultSeoProvider';
 import Analytics from '@/components/Analytics';
 import ConsentBanner from '@/components/ConsentBanner';
+import { AuthDebug } from '@/components/AuthDebug';
+import { SupabaseConnectionTest } from '@/components/SupabaseConnectionTest';
 import { Inter } from 'next/font/google';
 
 // Primary font (regular) - preloaded for immediate use
@@ -89,10 +92,14 @@ export default function RootLayout({
       </head>
       <body className={`${interRegular.className} ${interItalic.variable}`} suppressHydrationWarning>
         <LanguageProvider>
-          <DefaultSeoProvider />
-          {children}
-          <Analytics />
-          <ConsentBanner />
+          <AuthProvider>
+            <DefaultSeoProvider />
+            {children}
+            <AuthDebug />
+            <SupabaseConnectionTest />
+            <Analytics />
+            <ConsentBanner />
+          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>

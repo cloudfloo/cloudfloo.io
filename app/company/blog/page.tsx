@@ -1,104 +1,95 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import BackToHomeButton from '@/components/BackToHomeButton';
-import { Search, Calendar, User, ArrowRight, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import SEO from '@/components/SEO';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { blogService } from '@/lib/services/blog.service';
+import { BlogPostCard } from '@/components/blog/BlogPostCard';
+import { BlogSearch } from '@/components/blog/BlogSearch';
+import { BlogPost, BlogCategory } from '@/lib/types/blog.types';
 
 export default function BlogPage() {
   const { t } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState<BlogCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const categories = [
-    { id: 'all', label: t('blog.categories.all') },
-    { id: 'cloud', label: t('blog.categories.cloud') },
-    { id: 'ai', label: t('blog.categories.ai') },
-    { id: 'devops', label: t('blog.categories.devops') },
-    { id: 'security', label: t('blog.categories.security') },
-    { id: 'tutorials', label: t('blog.categories.tutorials') }
-  ];
+  // Load initial data
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [postsResult, categoriesResult] = await Promise.all([
+          blogService.getPosts({ status: 'published' }),
+          blogService.getCategories()
+        ]);
+        
+        setPosts(postsResult.posts);
+        setCategories(categoriesResult);
+      } catch (error) {
+        console.error('Error loading blog data:', error);
+        setPosts([]);
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'The Future of Serverless Computing: Trends and Predictions for 2024',
-      excerpt: 'Explore the latest developments in serverless architecture and what they mean for modern application development.',
-      content: 'Serverless computing has revolutionized how we build and deploy applications...',
-      author: 'Sarah Rodriguez',
-      date: '2024-01-15',
-      category: 'cloud',
-      tags: ['serverless', 'aws', 'architecture'],
-      image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600',
-      readTime: '8 min read',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Building Resilient AI Systems: Best Practices for Production ML',
-      excerpt: 'Learn how to design and implement machine learning systems that can handle real-world challenges.',
-      content: 'Production machine learning systems face unique challenges...',
-      author: 'Alex Chen',
-      date: '2024-01-12',
-      category: 'ai',
-      tags: ['machine-learning', 'mlops', 'production'],
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600',
-      readTime: '12 min read',
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'Kubernetes Security: A Comprehensive Guide to Container Orchestration',
-      excerpt: 'Deep dive into Kubernetes security best practices and how to protect your containerized applications.',
-      content: 'Container security is more critical than ever...',
-      author: 'David Kim',
-      date: '2024-01-10',
-      category: 'security',
-      tags: ['kubernetes', 'security', 'containers'],
-      image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600',
-      readTime: '15 min read'
-    },
-    {
-      id: 4,
-      title: 'GitOps Workflow: Streamlining Deployment with Infrastructure as Code',
-      excerpt: 'Implement GitOps practices to automate your deployment pipeline and improve reliability.',
-      content: 'GitOps represents a paradigm shift in how we manage deployments...',
-      author: 'Maria Santos',
-      date: '2024-01-08',
-      category: 'devops',
-      tags: ['gitops', 'ci-cd', 'automation'],
-      image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=600',
-      readTime: '10 min read'
-    },
-    {
-      id: 5,
-      title: 'Edge Computing Revolution: Bringing Processing Closer to Users',
-      excerpt: 'Understand how edge computing is transforming application performance and user experience.',
-      content: 'Edge computing is reshaping the digital landscape...',
-      author: 'James Wilson',
-      date: '2024-01-05',
-      category: 'cloud',
-      tags: ['edge-computing', 'performance', 'cdn'],
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600',
-      readTime: '7 min read'
+    loadData();
+  }, []);
+
+  // Handle search
+  const handleSearch = useCallback(async (query: string) => {
+    setSearchQuery(query);
+    setLoading(true);
+    
+    try {
+      if (query.trim()) {
+        const result = await blogService.searchPosts(query);
+        setPosts(result);
+      } else {
+        // Reset to all posts
+        const result = await blogService.getPosts({ 
+          status: 'published',
+          category: selectedCategory || undefined
+        });
+        setPosts(result.posts);
+      }
+    } catch (error) {
+      console.error('Error searching posts:', error);
+      setPosts([]);
+    } finally {
+      setLoading(false);
     }
-  ];
+  }, [selectedCategory]);
 
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  // Handle category filter
+  const handleCategoryFilter = useCallback(async (categorySlug: string | null) => {
+    setSelectedCategory(categorySlug);
+    setLoading(true);
+    
+    try {
+      const result = await blogService.getPosts({ 
+        status: 'published',
+        category: categorySlug || undefined
+      });
+      setPosts(result.posts);
+    } catch (error) {
+      console.error('Error filtering by category:', error);
+      setPosts([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  const featuredPosts = blogPosts.filter(post => post.featured);
+  const featuredPosts = posts.filter(post => post.featured);
+  const regularPosts = posts.filter(post => !post.featured);
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,7 +121,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              dangerouslySetInnerHTML={{ __html: t('blog.heroTitle') }}
+              dangerouslySetInnerHTML={{ __html: t('blog.heroTitle') || 'Tech <span class="text-neon">Insights</span>' }}
             />
             <motion.p
               className="text-xl text-gray-300 mb-8 leading-relaxed"
@@ -138,213 +129,97 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {t('blog.heroSubtitle')}
+              {t('blog.heroSubtitle') || 'Discover the latest trends in cloud computing, DevOps, AI, and software development from our team of experts.'}
             </motion.p>
           </div>
         </div>
       </section>
 
       {/* Featured Posts Carousel */}
-      <section className="py-20 bg-black/30">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-bold mb-6">{t('blog.featuredTitle')}</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('blog.featuredSubtitle')}
-            </p>
-          </motion.div>
+      {featuredPosts.length > 0 && (
+        <section className="py-20 bg-black/30">
+          <div className="container mx-auto px-6">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl font-bold mb-6">{t('blog.featuredTitle') || 'Featured Articles'}</h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                {t('blog.featuredSubtitle') || 'Hand-picked articles showcasing the latest innovations and best practices in technology.'}
+              </p>
+            </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {featuredPosts.map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden h-full">
-                  <div className="relative overflow-hidden">
-                    <motion.img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-48 object-cover"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-gradient-neon text-white">
-                        {t('blog.featured')}
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  <CardHeader>
-                    <div className="flex items-center space-x-4 text-sm text-gray-400 mb-2">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {new Date(post.date).toLocaleDateString()}
-                      </div>
-                      <span>{post.readTime}</span>
-                    </div>
-                    <CardTitle className="text-xl text-white group-hover:text-neon transition-colors duration-300">
-                      {post.title}
-                    </CardTitle>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-gray-300 leading-relaxed">
-                      {post.excerpt}
-                    </CardDescription>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-2 py-1 bg-gradient-neon/10 text-neon text-xs rounded-full border border-neon/20"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <Button 
-                      size="sm" 
-                      className="w-full bg-transparent border border-neon text-neon hover:bg-neon hover:text-black transition-all duration-300 group/btn"
-                    >
-                      {t('blog.readMore')}
-                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {featuredPosts.map((post, index) => (
+                <BlogPostCard
+                  key={post.id}
+                  post={post}
+                  locale="en"
+                  variant="featured"
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Search and Filter */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            {/* Search Bar */}
-            <motion.div 
-              className="relative mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                type="text"
-                placeholder={t('blog.searchPlaceholder')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20"
-              />
-            </motion.div>
-
-            {/* Category Filter */}
-            <motion.div 
-              className="flex flex-wrap justify-center gap-4 mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-4 py-2 rounded-full border text-sm font-medium transition-all duration-300 ${
-                    selectedCategory === category.id
-                      ? 'bg-neon/20 border-neon text-neon'
-                      : 'border-gray-600 text-gray-300 hover:border-neon/50 hover:text-neon'
-                  }`}
-                >
-                  <Tag className="w-4 h-4 inline mr-2" />
-                  {category.label}
-                </button>
-              ))}
-            </motion.div>
+            <BlogSearch
+              categories={categories}
+              onSearch={handleSearch}
+              onCategoryFilter={handleCategoryFilter}
+              selectedCategory={selectedCategory}
+            />
 
             {/* Blog Posts Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden h-full">
-                    <div className="relative overflow-hidden">
-                      <motion.img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-40 object-cover"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                      />
+            <div className="mt-12">
+              {loading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="glass border-gray-700 rounded-lg overflow-hidden h-96">
+                        <div className="bg-gray-700 h-48"></div>
+                        <div className="p-6 space-y-4">
+                          <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+                          <div className="h-4 bg-gray-700 rounded w-1/2"></div>
+                          <div className="space-y-2">
+                            <div className="h-3 bg-gray-700 rounded"></div>
+                            <div className="h-3 bg-gray-700 rounded w-5/6"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <CardHeader>
-                      <div className="flex items-center space-x-4 text-xs text-gray-400 mb-2">
-                        <div className="flex items-center">
-                          <User className="w-3 h-3 mr-1" />
-                          {post.author}
-                        </div>
-                        <div className="flex items-center">
-                          <Calendar className="w-3 h-3 mr-1" />
-                          {new Date(post.date).toLocaleDateString()}
-                        </div>
-                      </div>
-                      <CardTitle className="text-lg text-white group-hover:text-neon transition-colors duration-300 line-clamp-2">
-                        {post.title}
-                      </CardTitle>
-                    </CardHeader>
-                    
-                    <CardContent className="space-y-4">
-                      <CardDescription className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-                        {post.excerpt}
-                      </CardDescription>
-                      
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-400">{post.readTime}</span>
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          className="text-neon hover:bg-neon/10 p-2"
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {regularPosts.map((post, index) => (
+                    <BlogPostCard
+                      key={post.id}
+                      post={post}
+                      locale="en"
+                      index={index}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
-            {filteredPosts.length === 0 && (
+            {!loading && regularPosts.length === 0 && (
               <motion.div 
                 className="text-center py-12"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="text-gray-400 text-lg">{t('blog.noPosts')}</p>
+                <p className="text-gray-400 text-lg">{t('blog.noPosts') || 'No articles found matching your criteria.'}</p>
               </motion.div>
             )}
           </div>
@@ -361,18 +236,18 @@ export default function BlogPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-6">{t('blog.stayUpdatedTitle')}</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('blog.stayUpdatedTitle') || 'Stay Updated'}</h2>
             <p className="text-xl text-gray-300 mb-8">
-              {t('blog.stayUpdatedSubtitle')}
+              {t('blog.stayUpdatedSubtitle') || 'Get the latest insights delivered directly to your inbox.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <Input
                 type="email"
-                placeholder={t('blog.newsletterPlaceholder')}
+                placeholder={t('blog.newsletterPlaceholder') || 'Enter your email'}
                 className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20"
               />
               <Button className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
-                {t('blog.subscribe')}
+                {t('blog.subscribe') || 'Subscribe'}
               </Button>
             </div>
           </motion.div>
