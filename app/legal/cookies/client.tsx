@@ -7,46 +7,75 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CookiePolicyClient() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const lastUpdated = '2024-01-15';
 
+  // Open consent modal function
+  const openConsentSettings = () => {
+    console.log('CookiePage: Kliknięto przycisk zarządzania preferencjami');
+    // Trigger the consent banner settings
+    const event = new CustomEvent('openConsentSettings');
+    window.dispatchEvent(event);
+    console.log('CookiePage: Wysłano event openConsentSettings');
+  };
+
   const tableOfContents = [
-    { id: 'what-are-cookies', title: 'What Are Cookies?' },
-    { id: 'how-we-use', title: 'How We Use Cookies' },
-    { id: 'types-of-cookies', title: 'Types of Cookies' },
-    { id: 'third-party', title: 'Third-Party Cookies' },
-    { id: 'managing-cookies', title: 'Managing Cookies' },
-    { id: 'updates', title: 'Policy Updates' },
-    { id: 'contact', title: 'Contact Information' }
+    { id: 'what-are-cookies', title: t('legal.cookies.sections.whatAreCookies') },
+    { id: 'how-we-use', title: t('legal.cookies.sections.howWeUse') },
+    { id: 'types-of-cookies', title: t('legal.cookies.sections.typesOfCookies') },
+    { id: 'third-party', title: t('legal.cookies.sections.thirdParty') },
+    { id: 'managing-cookies', title: t('legal.cookies.sections.managingCookies') },
+    { id: 'updates', title: t('legal.cookies.sections.updates') },
+    { id: 'contact', title: t('legal.cookies.sections.contact') }
   ];
 
   const cookieTypes = [
     {
       icon: Settings,
-      title: 'Essential Cookies',
-      description: 'Required for basic website functionality and security.',
-      examples: ['Authentication', 'Security', 'Load balancing', 'Form submissions'],
+      title: t('legal.cookies.types.essential.title'),
+      description: t('legal.cookies.types.essential.description'),
+      examples: [
+        t('legal.cookies.types.essential.examples.authentication'),
+        t('legal.cookies.types.essential.examples.security'),
+        t('legal.cookies.types.essential.examples.loadBalancing'),
+        t('legal.cookies.types.essential.examples.formSubmissions')
+      ],
       canDisable: false
     },
     {
       icon: BarChart,
-      title: 'Analytics Cookies',
-      description: 'Help us understand how visitors interact with our website.',
-      examples: ['Google Analytics', 'Page views', 'User behavior', 'Performance metrics'],
+      title: t('legal.cookies.types.analytics.title'),
+      description: t('legal.cookies.types.analytics.description'),
+      examples: [
+        t('legal.cookies.types.analytics.examples.googleAnalytics'),
+        t('legal.cookies.types.analytics.examples.pageViews'),
+        t('legal.cookies.types.analytics.examples.userBehavior'),
+        t('legal.cookies.types.analytics.examples.performanceMetrics')
+      ],
       canDisable: true
     },
     {
       icon: Cookie,
-      title: 'Functional Cookies',
-      description: 'Remember your preferences and provide enhanced features.',
-      examples: ['Language preferences', 'Theme settings', 'Region selection', 'Saved preferences'],
+      title: t('legal.cookies.types.functional.title'),
+      description: t('legal.cookies.types.functional.description'),
+      examples: [
+        t('legal.cookies.types.functional.examples.languagePreferences'),
+        t('legal.cookies.types.functional.examples.themeSettings'),
+        t('legal.cookies.types.functional.examples.regionSelection'),
+        t('legal.cookies.types.functional.examples.savedPreferences')
+      ],
       canDisable: true
     },
     {
       icon: Shield,
-      title: 'Marketing Cookies',
-      description: 'Used to deliver relevant advertisements and track campaign effectiveness.',
-      examples: ['Ad targeting', 'Campaign tracking', 'Social media integration', 'Remarketing'],
+      title: t('legal.cookies.types.marketing.title'),
+      description: t('legal.cookies.types.marketing.description'),
+      examples: [
+        t('legal.cookies.types.marketing.examples.adTargeting'),
+        t('legal.cookies.types.marketing.examples.campaignTracking'),
+        t('legal.cookies.types.marketing.examples.socialMediaIntegration'),
+        t('legal.cookies.types.marketing.examples.remarketing')
+      ],
       canDisable: true
     }
   ];
@@ -59,7 +88,7 @@ export default function CookiePolicyClient() {
           <div className="flex items-center space-x-4">
             <BackToHomeButton />
             <div className="text-gray-500">/</div>
-            <div className="text-neon">{t('common.cookies')}</div>
+            <div className="text-neon">{t('legal.cookies.breadcrumb')}</div>
           </div>
         </div>
       </header>
@@ -71,15 +100,12 @@ export default function CookiePolicyClient() {
             <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Cookie className="w-8 h-8 text-white" />
             </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold mb-4"
-              dangerouslySetInnerHTML={{ __html: t('legal.cookies.heroTitle') }}
-            />
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('legal.cookies.title')}</h1>
             <p className="text-xl text-gray-300 mb-4">
-              {t('legal.cookies.heroSubtitle')}
+              {t('legal.cookies.subtitle')}
             </p>
             <p className="text-sm text-gray-400">
-              Last updated: {new Date(lastUpdated).toLocaleDateString('en-US', { 
+              {t('legal.cookies.lastUpdated')}: {new Date(lastUpdated).toLocaleDateString(language === 'pl' ? 'pl-PL' : 'en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
@@ -92,7 +118,7 @@ export default function CookiePolicyClient() {
             <div className="lg:col-span-1">
               <Card className="glass border-gray-700 sticky top-8">
                 <CardHeader>
-                  <CardTitle className="text-white text-lg">Table of Contents</CardTitle>
+                  <CardTitle className="text-white text-lg">{t('legal.cookies.tableOfContents')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <nav className="space-y-2">
@@ -115,36 +141,29 @@ export default function CookiePolicyClient() {
               <Card className="glass border-gray-700">
                 <CardContent className="p-8 prose prose-invert max-w-none">
                   <section id="what-are-cookies" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">What Are Cookies?</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.whatAreCookies')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>
-                        Cookies are small text files that are stored on your device when you visit a website. 
-                        They are widely used to make websites work more efficiently and provide information to website owners.
-                      </p>
-                      <p>
-                        Cookies can be "persistent" (remain on your device until deleted) or "session" cookies 
-                        (deleted when you close your browser). They can also be "first-party" (set by our website) 
-                        or "third-party" (set by other domains).
-                      </p>
+                      <p>{t('legal.cookies.content.whatAreCookies.paragraph1')}</p>
+                      <p>{t('legal.cookies.content.whatAreCookies.paragraph2')}</p>
                     </div>
                   </section>
 
                   <section id="how-we-use" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">How We Use Cookies</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.howWeUse')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>We use cookies for several purposes:</p>
+                      <p>{t('legal.cookies.content.howWeUse.intro')}</p>
                       <ul className="list-disc pl-6 space-y-2">
-                        <li><strong>Essential functionality:</strong> To provide core website features and security</li>
-                        <li><strong>Performance:</strong> To analyze how our website is used and improve performance</li>
-                        <li><strong>Personalization:</strong> To remember your preferences and provide customized content</li>
-                        <li><strong>Analytics:</strong> To understand visitor behavior and optimize our services</li>
-                        <li><strong>Marketing:</strong> To deliver relevant advertisements and measure campaign effectiveness</li>
+                        <li><strong>{t('legal.cookies.content.howWeUse.list.essential.title')}:</strong> {t('legal.cookies.content.howWeUse.list.essential.description')}</li>
+                        <li><strong>{t('legal.cookies.content.howWeUse.list.performance.title')}:</strong> {t('legal.cookies.content.howWeUse.list.performance.description')}</li>
+                        <li><strong>{t('legal.cookies.content.howWeUse.list.personalization.title')}:</strong> {t('legal.cookies.content.howWeUse.list.personalization.description')}</li>
+                        <li><strong>{t('legal.cookies.content.howWeUse.list.analytics.title')}:</strong> {t('legal.cookies.content.howWeUse.list.analytics.description')}</li>
+                        <li><strong>{t('legal.cookies.content.howWeUse.list.marketing.title')}:</strong> {t('legal.cookies.content.howWeUse.list.marketing.description')}</li>
                       </ul>
                     </div>
                   </section>
 
                   <section id="types-of-cookies" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Types of Cookies</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.typesOfCookies')}</h2>
                     <div className="space-y-6">
                       {cookieTypes.map((type, index) => {
                         const Icon = type.icon;
@@ -163,7 +182,7 @@ export default function CookiePolicyClient() {
                                         ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
                                         : 'bg-red-500/20 text-red-400 border border-red-500/30'
                                     }`}>
-                                      {type.canDisable ? 'Optional' : 'Required'}
+                                      {type.canDisable ? t('legal.cookies.labels.optional') : t('legal.cookies.labels.required')}
                                     </span>
                                   </div>
                                 </div>
@@ -172,7 +191,7 @@ export default function CookiePolicyClient() {
                             <CardContent>
                               <p className="text-gray-300 mb-3">{type.description}</p>
                               <div>
-                                <h4 className="text-sm font-semibold text-white mb-2">Examples:</h4>
+                                <h4 className="text-sm font-semibold text-white mb-2">{t('legal.cookies.labels.examples')}:</h4>
                                 <div className="flex flex-wrap gap-2">
                                   {type.examples.map((example, exampleIndex) => (
                                     <span
@@ -192,80 +211,77 @@ export default function CookiePolicyClient() {
                   </section>
 
                   <section id="third-party" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Third-Party Cookies</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.thirdParty')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>We may use third-party services that set cookies on our website:</p>
+                      <p>{t('legal.cookies.content.thirdParty.intro')}</p>
                       <ul className="list-disc pl-6 space-y-2">
-                        <li><strong>Google Analytics:</strong> For website analytics and performance monitoring</li>
-                        <li><strong>Social Media:</strong> For social sharing and embedded content</li>
-                        <li><strong>Advertising:</strong> For targeted advertising and campaign measurement</li>
-                        <li><strong>Support Tools:</strong> For customer support and live chat functionality</li>
+                        <li><strong>{t('legal.cookies.content.thirdParty.list.googleAnalytics.title')}:</strong> {t('legal.cookies.content.thirdParty.list.googleAnalytics.description')}</li>
+                        <li><strong>{t('legal.cookies.content.thirdParty.list.socialMedia.title')}:</strong> {t('legal.cookies.content.thirdParty.list.socialMedia.description')}</li>
+                        <li><strong>{t('legal.cookies.content.thirdParty.list.advertising.title')}:</strong> {t('legal.cookies.content.thirdParty.list.advertising.description')}</li>
+                        <li><strong>{t('legal.cookies.content.thirdParty.list.supportTools.title')}:</strong> {t('legal.cookies.content.thirdParty.list.supportTools.description')}</li>
                       </ul>
-                      <p>
-                        These third parties have their own privacy policies and cookie practices. 
-                        We recommend reviewing their policies to understand how they use cookies.
-                      </p>
+                      <p>{t('legal.cookies.content.thirdParty.conclusion')}</p>
                     </div>
                   </section>
 
                   <section id="managing-cookies" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Managing Cookies</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.managingCookies')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>You have several options for managing cookies:</p>
+                      <p>{t('legal.cookies.content.managing.intro')}</p>
                       
-                      <h3 className="text-lg font-semibold text-white">Browser Settings</h3>
-                      <p>Most browsers allow you to:</p>
+                      <h3 className="text-lg font-semibold text-white">{t('legal.cookies.content.managing.browserSettings.title')}</h3>
+                      <p>{t('legal.cookies.content.managing.browserSettings.intro')}</p>
                       <ul className="list-disc pl-6 space-y-2">
-                        <li>View and delete cookies</li>
-                        <li>Block cookies from specific websites</li>
-                        <li>Block third-party cookies</li>
-                        <li>Clear all cookies when you close the browser</li>
-                        <li>Set up notifications when cookies are set</li>
+                        <li>{t('legal.cookies.content.managing.browserSettings.list.viewDelete')}</li>
+                        <li>{t('legal.cookies.content.managing.browserSettings.list.blockSpecific')}</li>
+                        <li>{t('legal.cookies.content.managing.browserSettings.list.blockThirdParty')}</li>
+                        <li>{t('legal.cookies.content.managing.browserSettings.list.clearAll')}</li>
+                        <li>{t('legal.cookies.content.managing.browserSettings.list.notifications')}</li>
                       </ul>
 
-                      <h3 className="text-lg font-semibold text-white">Cookie Preferences</h3>
-                      <p>You can manage your cookie preferences using our cookie consent tool:</p>
+                      <h3 className="text-lg font-semibold text-white">{t('legal.cookies.content.managing.cookiePreferences.title')}</h3>
+                      <p>{t('legal.cookies.content.managing.cookiePreferences.description')}</p>
                       
                       <div className="mt-4">
-                        <Button className="bg-gradient-neon text-white">
-                          Manage Cookie Preferences
+                        <Button 
+                          onClick={openConsentSettings}
+                          className="bg-gradient-neon text-white hover:bg-gradient-neon/90"
+                        >
+                          {t('legal.cookies.manageCookiePreferences')}
                         </Button>
                       </div>
 
-                      <h3 className="text-lg font-semibold text-white">Opt-Out Links</h3>
-                      <p>You can opt out of certain third-party cookies:</p>
+                      <h3 className="text-lg font-semibold text-white">{t('legal.cookies.content.managing.optOutLinks.title')}</h3>
+                      <p>{t('legal.cookies.content.managing.optOutLinks.description')}</p>
                       <ul className="list-disc pl-6 space-y-2">
-                        <li><a href="https://tools.google.com/dlpage/gaoptout" className="text-neon hover:underline">Google Analytics Opt-out</a></li>
-                        <li><a href="https://www.aboutads.info/choices/" className="text-neon hover:underline">Digital Advertising Alliance Opt-out</a></li>
-                        <li><a href="https://www.networkadvertising.org/choices/" className="text-neon hover:underline">Network Advertising Initiative Opt-out</a></li>
+                        <li><a href="https://tools.google.com/dlpage/gaoptout" className="text-neon hover:underline">{t('legal.cookies.content.managing.optOutLinks.googleAnalytics')}</a></li>
+                        <li><a href="https://www.aboutads.info/choices/" className="text-neon hover:underline">{t('legal.cookies.content.managing.optOutLinks.digitalAdvertising')}</a></li>
+                        <li><a href="https://www.networkadvertising.org/choices/" className="text-neon hover:underline">{t('legal.cookies.content.managing.optOutLinks.networkAdvertising')}</a></li>
                       </ul>
 
                       <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mt-4">
                         <p className="text-yellow-400 text-sm">
-                          <strong>Note:</strong> Disabling certain cookies may affect website functionality and your user experience.
+                          <strong>{t('legal.cookies.labels.note')}:</strong> {t('legal.cookies.content.managing.disclaimer')}
                         </p>
                       </div>
                     </div>
                   </section>
 
                   <section id="updates" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Policy Updates</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.updates')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>
-                        We may update this Cookie Policy from time to time to reflect changes in our practices or for legal reasons. 
-                        We will notify you of any material changes by posting the updated policy on this page.
-                      </p>
+                      <p>{t('legal.cookies.content.updates.paragraph')}</p>
                     </div>
                   </section>
 
                   <section id="contact" className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Contact Information</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">{t('legal.cookies.sections.contact')}</h2>
                     <div className="text-gray-300 space-y-4">
-                      <p>If you have any questions about our use of cookies, please contact us:</p>
+                      <p>{t('legal.cookies.content.contact.intro')}</p>
                       <ul className="list-none space-y-2">
-                        <li><strong>Email:</strong> privacy@cloudfloo.io</li>
-                        <li><strong>Address:</strong> CloudFloo.io, 123 Cloud Street, San Francisco, CA 94105</li>
-                        <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+                        <li><strong>{t('legal.cookies.content.contact.email')}:</strong> privacy@cloudfloo.io</li>
+                        <li><strong>{t('legal.cookies.content.contact.address')}:</strong> CloudFloo.io, 123 Cloud Street, San Francisco, CA 94105</li>
+                        <li><strong>{t('legal.cookies.content.contact.phone')}:</strong> +1 (555) 123-4567</li>
                       </ul>
                     </div>
                   </section>
