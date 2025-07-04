@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/metadata';
 import dynamic from 'next/dynamic';
+import ImmersiveCloudVisualization from '@/components/immersive-cloud-visualization';
 
 // Critical components - load immediately
 import EnhancedHeader from '@/components/enhanced-header-fixed';
@@ -8,11 +9,7 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import PolishLanguageWrapper from '@/components/PolishLanguageWrapper';
 
-// Cloud visualization - lazy load when needed
-const ImmersiveCloudVisualization = dynamic(() => import('@/components/immersive-cloud-visualization'), { 
-  ssr: false,
-  loading: () => null
-});
+// Cloud visualization loaded lazily inside the component itself
 
 // Above-the-fold components - load with priority
 const EnhancedServices = dynamic(() => import('@/components/enhanced-services'), { 
