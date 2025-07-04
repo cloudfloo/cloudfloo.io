@@ -95,27 +95,6 @@ export default function RootLayout({
           {children}
           <Analytics />
         </LanguageProvider>
-        
-        {/* Google Analytics 4 - Non-blocking, Production Only */}
-        {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
-          <>
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-D5F48XPHZJ"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-D5F48XPHZJ', {
-                  page_title: document.title,
-                  page_location: window.location.href
-                });
-              `}
-            </Script>
-          </>
-        )}
       </body>
     </html>
   );

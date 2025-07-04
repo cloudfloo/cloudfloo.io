@@ -12,8 +12,11 @@ export const GA_TRACKING_ID = 'G-D5F48XPHZJ';
 // Check if analytics is enabled (production only)
 export const isAnalyticsEnabled = () => {
   return typeof window !== 'undefined' && 
-         process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && 
-         window.gtag;
+         typeof window.gtag === 'function' &&
+         (process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === 'true' ||
+          process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' || 
+          process.env.NODE_ENV === 'production' ||
+          window.location.hostname !== 'localhost');
 };
 
 // Track page views
