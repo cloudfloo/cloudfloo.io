@@ -1,31 +1,36 @@
+'use client';
+
 import LanguageAwareLink from '@/components/LanguageAwareLink';
 import Image from 'next/image';
 import { placeholders, DEFAULT_BLUR } from '@/data/placeholders';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   const footerLinks = {
-    Services: [
-      { name: 'Cloud Solutions', href: '/services/cloud-solutions' },
-      { name: 'AI & Machine Learning', href: '/services/ai-ml' },
-      { name: 'DevOps & Automation', href: '/services/devops' },
-      { name: 'Data Engineering', href: '/services/data-engineering' },
-      { name: 'Application Development', href: '/services/app-development' },
-      { name: 'Edge Computing', href: '/services/edge-computing' },
+    [t('footer.services')]: [
+      { name: t('services.cloudSolutions.title'), href: '/services/cloud-solutions' },
+      { name: t('services.aiMl.title'), href: '/services/ai-ml' },
+      { name: t('services.devops.title'), href: '/services/devops' },
+      { name: t('services.dataEngineering.title'), href: '/services/data-engineering' },
+      { name: t('services.appDevelopment.title'), href: '/services/app-development' },
+      { name: t('services.edgeComputing.title'), href: '/services/edge-computing' },
     ],
-    Company: [
-      { name: 'About Us', href: '/#about' },
-      { name: 'Our Team', href: '/team' },
-      { name: 'Careers', href: '/company/careers' },
-      { name: 'Blog', href: '/company/blog' },
-      { name: 'Press', href: '/company/press' },
+    [t('footer.company')]: [
+      { name: t('common.about'), href: '/#about' },
+      { name: t('navigation.team'), href: '/team' },
+      { name: t('common.careers'), href: '/company/careers' },
+      { name: t('common.blog'), href: '/company/blog' },
+      { name: t('common.press'), href: '/company/press' },
     ],
-    Legal: [
-      { name: 'Privacy Policy', href: '/legal/privacy' },
-      { name: 'Terms of Service', href: '/legal/terms' },
-      { name: 'Cookie Policy', href: '/legal/cookies' },
-      { name: 'GDPR Compliance', href: '/legal/gdpr' },
+    [t('footer.legal')]: [
+      { name: t('common.privacy'), href: '/legal/privacy' },
+      { name: t('common.terms'), href: '/legal/terms' },
+      { name: t('common.cookies'), href: '/legal/cookies' },
+      { name: t('common.gdpr'), href: '/legal/gdpr' },
     ],
   };
 
@@ -57,18 +62,18 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-300 mb-8 max-w-md leading-relaxed" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              Empowering businesses with next-generation cloud solutions and AI-driven automation.
+              {t('footer.description')}
             </p>
             
             {/* Contact Information */}
             <div className="mb-8 space-y-3" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               <div className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Address:</strong><br />
+                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.address')}</strong><br />
                 <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Chmieleniec 17/69</span><br />
                 <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>30-348 Krakow, Poland</span>
               </div>
               <div className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Phone:</strong> <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>+48 728 963 591</span>
+                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.phone')}</strong> <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>+48 728 963 591</span>
               </div>
             </div>
             
@@ -115,7 +120,7 @@ export default function Footer() {
         <div className="border-t border-gray-700/50 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
           <div className="flex flex-col md:flex-row items-center gap-6 mb-6 md:mb-0">
             <p className="text-gray-300 text-sm" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              © 2025 CloudFloo.io. All rights reserved.
+              {t('footer.copyright')}
             </p>
             <div className="opacity-75">
               <LanguageSwitcher />
@@ -124,11 +129,11 @@ export default function Footer() {
           
           <div className="flex items-center space-x-6" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
             <span className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              Built with ❤️ using Next.js
+              {t('footer.builtWith')}
             </span>
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>All systems operational</span>
+              <span className="text-sm text-green-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.systemsOperational')}</span>
             </div>
           </div>
         </div>
