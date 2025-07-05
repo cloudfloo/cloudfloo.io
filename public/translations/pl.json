@@ -616,6 +616,7 @@
       "companyPlaceholder": "Twoja firma",
       "messagePlaceholder": "Opowiedz nam o swoim projekcie...",
       "submit": "Wyślij wiadomość"
+      ,"success": "Wiadomość została wysłana pomyślnie!"
     },
     "info": {
       "title": "Informacje kontaktowe",
