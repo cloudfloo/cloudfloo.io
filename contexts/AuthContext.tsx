@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { authService } from '@/lib/auth/auth.service'
+import { isSupabaseConfigured } from '@/lib/supabase/client'
 import { AuthContextType, AuthUser, SignInCredentials, SignUpCredentials, UserProfile } from '@/lib/auth/auth.types'
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -19,11 +20,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Check for existing session on mount
     checkUser()
 
-    // Listen for auth state changes
-    const { data: { subscription } } = authService.onAuthStateChange((authUser) => {
-      setUser(authUser)
-      setLoading(false)
-    })
+    // Listen for auth state changes when configured
+    let subscription: any
+    if (isSupabaseConfigured) {
+      const { data } = authService.onAuthStateChange((authUser) => {
+        setUser(authUser)
+        setLoading(false)
+      })
+      subscription = data?.subscription
+    }
 
     return () => {
       subscription?.unsubscribe()
