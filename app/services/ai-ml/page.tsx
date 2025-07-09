@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/metadata';
 import AIMachineLearningClient from './client';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 export const metadata: Metadata = generatePageMetadata(
   '/services/ai-ml',
@@ -12,5 +13,9 @@ export const metadata: Metadata = generatePageMetadata(
 
 
 export default function AIMachineLearningPage() {
-  return <AIMachineLearningClient />;
+  return (
+    <AuroraBackground className="aurora-purple">
+      <AIMachineLearningClient />
+    </AuroraBackground>
+  );
 }

@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Github, Linkedin } from 'lucide-react';
 import { TeamMember } from '@/data/team';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 interface TeamCardProps {
   person: TeamMember;
@@ -24,6 +25,7 @@ export default function TeamCard({ person }: TeamCardProps) {
       className="h-full"
     >
       <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden h-full rounded-2xl shadow-md">
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <CardHeader className="p-4">
           <LanguageAwareLink href={`/team/${person.slug}`} className="block">
             <div className="relative w-full aspect-square mb-4 overflow-hidden rounded-xl">

@@ -12,6 +12,7 @@ import Modal from '@/components/ui/modal';
 import { ImageCarousel } from '@/components/ui/image-carousel';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function EnhancedProjects() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -161,6 +162,8 @@ export default function EnhancedProjects() {
             className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden"
             onClick={handleProjectClick}
           >
+            <GlowingEffect glow={true} disabled={false} borderWidth={1} />
+            <GlowingEffect glow={true} disabled={false} borderWidth={1} />
             <div className="relative overflow-hidden">
               <div className="relative w-full aspect-[16/9]">
                 <Image

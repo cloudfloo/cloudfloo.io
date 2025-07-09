@@ -4,6 +4,7 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { placeholders, DEFAULT_BLUR } from "@/data/placeholders";
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function Projects() {
   const projects = [
@@ -72,6 +73,7 @@ export default function Projects() {
                 animationDelay: `${index * 0.1}s`
               }}
             >
+              <GlowingEffect glow={true} disabled={false} borderWidth={1} />
               <div className="relative overflow-hidden">
                 <div className="relative w-full h-48">
                   <Image

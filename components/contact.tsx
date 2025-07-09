@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -93,6 +94,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <div className="glass rounded-lg p-8">
+            <GlowingEffect glow={true} disabled={false} borderWidth={1} />
             <h3 className="text-2xl font-bold text-white mb-6">Send us a message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -173,6 +175,7 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div className="glass rounded-lg p-8">
+              <GlowingEffect glow={true} disabled={false} borderWidth={1} />
               <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => {
@@ -198,6 +201,7 @@ export default function Contact() {
 
             {/* Map Placeholder */}
             <div className="glass rounded-lg p-8 h-64 flex items-center justify-center">
+              <GlowingEffect glow={true} disabled={false} borderWidth={1} />
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-neon mx-auto mb-4" />
                 <p className="text-gray-300">Interactive map coming soon</p>

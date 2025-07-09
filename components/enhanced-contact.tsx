@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function EnhancedContact() {
   const { t, isLoaded } = useLanguage();
@@ -177,6 +178,7 @@ export default function EnhancedContact() {
             animate={formVisible ? "visible" : "hidden"}
           >
             <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+              <GlowingEffect glow={true} disabled={false} borderWidth={1} />
               <CardHeader>
                 <CardTitle id="contact-form" className="text-2xl font-bold text-white mb-6">
                   {t('contact.form.title')}
@@ -283,52 +285,40 @@ export default function EnhancedContact() {
             initial="hidden"
             animate={infoVisible ? "visible" : "hidden"}
           >
-            <motion.div variants={itemVariants}>
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
-                <CardHeader>
-                  <CardTitle id="contact-info" className="text-2xl font-bold text-white mb-6">
-                    {t('contact.info.title')}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {contactInfo.map((info, index) => {
-                    const Icon = info.icon;
-                    return (
-                      <motion.a
-                        key={index}
-                        href={info.link}
-                        className="flex items-start space-x-4 group hover:text-neon transition-colors duration-300 p-3 rounded-lg hover:bg-white/5"
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={infoVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        style={{ transitionDelay: `${index * 0.1}s` }}
-                        target={info.link.startsWith('http') ? '_blank' : undefined}
-                        rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+            {contactInfo.map((info, index) => {
+              const Icon = info.icon;
+              return (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="w-full"
+                >
+                  <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+                    <GlowingEffect glow={true} disabled={false} borderWidth={1} />
+                    <CardHeader className="flex flex-row items-center gap-4">
+                      <motion.div 
+                        className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
                       >
-                        <motion.div 
-                          className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <Icon className="w-5 h-5 text-white" />
-                        </motion.div>
-                        <div className="flex-1">
-                          <div className="text-sm text-gray-400">{info.title}</div>
-                          <div className="text-white group-hover:text-neon transition-colors duration-300 text-sm">
-                            {info.value}
-                          </div>
+                        <Icon className="w-5 h-5 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <div className="text-sm text-gray-400">{info.title}</div>
+                        <div className="text-white group-hover:text-neon transition-colors duration-300 text-sm">
+                          {info.value}
                         </div>
-                      </motion.a>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-            </motion.div>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </motion.div>
+              );
+            })}
 
             {/* Map Placeholder */}
             <motion.div variants={itemVariants}>
               <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+                <GlowingEffect glow={true} disabled={false} borderWidth={1} />
                 <CardContent className="p-8 h-64 flex items-center justify-center">
                   <motion.div 
                     className="text-center"

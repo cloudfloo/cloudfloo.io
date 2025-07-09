@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/metadata';
 import CloudSolutionsClient from './client';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 export const metadata: Metadata = generatePageMetadata(
   '/services/cloud-solutions',
@@ -10,5 +11,9 @@ export const metadata: Metadata = generatePageMetadata(
 );
 
 export default function CloudSolutionsPage() {
-  return <CloudSolutionsClient />;
+  return (
+    <AuroraBackground className="aurora-blue">
+      <CloudSolutionsClient />
+    </AuroraBackground>
+  );
 }

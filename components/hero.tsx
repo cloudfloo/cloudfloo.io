@@ -37,13 +37,6 @@ export default function Hero() {
       {/* Optimized static gradient background for fast LCP */}
       <div 
         className="absolute inset-0 z-0"
-        style={{
-          background: `linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.4) 0%, 
-            rgba(30, 58, 138, 0.3) 35%, 
-            rgba(67, 56, 202, 0.2) 100%
-          )`
-        }}
       />
 
       <div className="container mx-auto px-6 text-center relative z-20">

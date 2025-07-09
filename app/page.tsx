@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/metadata';
 import dynamic from 'next/dynamic';
-import ImmersiveCloudVisualization from '@/components/immersive-cloud-visualization';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 
 // Critical components - load immediately
 import EnhancedHeader from '@/components/enhanced-header-fixed';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import PolishLanguageWrapper from '@/components/PolishLanguageWrapper';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 // Cloud visualization loaded lazily inside the component itself
 
@@ -53,15 +54,24 @@ export default function Home() {
   return (
     <PolishLanguageWrapper>
       <main className="relative">
-        <ImmersiveCloudVisualization />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <EnhancedHeader />
-        <Hero />
+        <AuroraBackground>
+          <Hero />
+        </AuroraBackground>
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <EnhancedServices />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <EnhancedAbout />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <TeamSection />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <EnhancedProjects />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <FAQSection />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <EnhancedContact />
+        <GlowingEffect glow={true} disabled={false} borderWidth={1} />
         <Footer />
       </main>
     </PolishLanguageWrapper>
