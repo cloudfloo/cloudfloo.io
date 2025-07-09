@@ -157,6 +157,17 @@ export default function EnhancedProjects() {
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
         >
+          {/* 
+            BUG FIX: Removed duplicate GlowingEffect components
+            Previously there were two identical GlowingEffect components:
+            <GlowingEffect glow={true} disabled={false} borderWidth={1}>
+              <GlowingEffect glow={true} disabled={false} borderWidth={1}>
+                <Card>...</Card>
+              </GlowingEffect>
+            </GlowingEffect>
+            
+            Now correctly wrapped with only one GlowingEffect:
+          */}
           <Card 
             className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden"
             onClick={handleProjectClick}
