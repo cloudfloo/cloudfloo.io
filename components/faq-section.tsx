@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function FAQSection() {
   const { ref, isVisible } = useScrollAnimation();
@@ -69,6 +70,7 @@ export default function FAQSection() {
           }`}
         >
           <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+            <GlowingEffect glow={true} disabled={false} borderWidth={1} />
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-white text-center">
                 {t('faq.tableOfContents')}

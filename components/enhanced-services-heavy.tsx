@@ -9,6 +9,7 @@ import { Cloud, Code2, Database, Cpu, Shield, GitBranch, Bot, Zap, ArrowRight } 
 import { DEFAULT_BLUR } from "@/data/placeholders";
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 // Simplified tech icon component - reduced complexity
 function TechIcon({ name, logo, fallbackIcon: FallbackIcon, className = '' }: {
@@ -175,6 +176,7 @@ export default function EnhancedServices() {
                     </Button>
                   </Link>
                 </CardContent>
+                <GlowingEffect glow={true} disabled={false} borderWidth={1} />
               </Card>
             );
           })}
@@ -221,6 +223,7 @@ export default function EnhancedServices() {
                   ))}
                 </div>
               </CardContent>
+              <GlowingEffect glow={true} disabled={false} borderWidth={1} />
             </Card>
           ))}
         </div>

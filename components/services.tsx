@@ -1,6 +1,7 @@
 'use client';
 
 import { Cloud, Code, Bot, Settings, Database, Zap, Server } from 'lucide-react';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export default function Services() {
   const services = [
@@ -71,6 +72,7 @@ export default function Services() {
                 key={index}
                 className="glass rounded-lg p-6 hover:neon-glow transition-all duration-500 group cursor-pointer card-3d"
               >
+                <GlowingEffect glow={true} disabled={false} borderWidth={1} />
                 <div className="mb-4">
                   <div className="w-12 h-12 bg-gradient-neon rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Icon className="w-6 h-6 text-white" />
