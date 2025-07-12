@@ -4,13 +4,21 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase/client'
 
 export function SupabaseConnectionTest() {
-  const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error'>('testing')
+  const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'error' | 'missing-config'>('testing')
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const testConnection = async () => {
       try {
         console.log('🔗 Testing Supabase connection...')
+
+        // Check if Supabase URL and key are configured
+        if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+          console.warn('🚨 Supabase URL or key not configured')
+          setError('Supabase URL or key not configured. Check your .env.local file.')
+          setConnectionStatus('missing-config')
+          return
+        }
         
         // Test basic connection
         const { data, error } = await supabase
@@ -45,8 +53,9 @@ export function SupabaseConnectionTest() {
       <div className="font-bold mb-2">🔗 Supabase Test</div>
       <div>Status: {
         connectionStatus === 'testing' ? '🔄 Testing...' :
-        connectionStatus === 'connected' ? '✅ Connected' :
-        '🚨 Error'
+        connectionStatus === 'connected' ? '✅ Connected' : 
+        connectionStatus === 'missing-config' ? '⚠️ Not Configured' :
+        '🚨 Connection Error'
       }</div>
       {error && (
         <div className="mt-2 text-red-400">

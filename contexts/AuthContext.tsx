@@ -19,11 +19,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Check for existing session on mount
     checkUser()
 
-    // Listen for auth state changes
-    const { data: { subscription } } = authService.onAuthStateChange((authUser) => {
-      setUser(authUser)
+    let subscription: { unsubscribe: () => void } | undefined;
+    
+    try {
+      // Listen for auth state changes
+      const { data } = authService.onAuthStateChange((authUser) => {
+        setUser(authUser)
+        setLoading(false)
+      })
+      
+      subscription = data.subscription;
+    } catch (err) {
+      console.error('Error setting up auth state change listener:', err)
       setLoading(false)
-    })
+    }
 
     return () => {
       subscription?.unsubscribe()

@@ -199,14 +199,26 @@ class AuthService {
    * Listen to auth state changes
    */
   onAuthStateChange(callback: (user: AuthUser | null) => void) {
-    return supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session?.user) {
-        const authUser = await this.transformUser(session.user)
-        callback(authUser)
-      } else {
-        callback(null)
+    try {
+      return supabase.auth.onAuthStateChange(async (event, session) => {
+        if (session?.user) {
+          const authUser = await this.transformUser(session.user)
+          callback(authUser)
+        } else {
+          callback(null)
+        }
+      })
+    } catch (error) {
+      console.error('Error in onAuthStateChange:', error)
+      // Return a dummy subscription object to prevent errors
+      return {
+        data: {
+          subscription: {
+            unsubscribe: () => {}
+          }
+        }
       }
-    })
+    }
   }
 }
 
