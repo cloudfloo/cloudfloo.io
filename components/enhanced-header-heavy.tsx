@@ -246,8 +246,8 @@ export default function EnhancedHeader() {
       animate="animate"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isMenuOpen 
-          ? 'bg-black/90 backdrop-blur-md border-b border-gray-800/50' 
-          : 'bg-transparent'
+          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
+          : 'bg-white/80 backdrop-blur-sm'
       }`}
       style={isScrolled ? headerVariants.scrolled : {}}
     >
@@ -257,7 +257,7 @@ export default function EnhancedHeader() {
             e.preventDefault();
             smoothScrollTo('home');
           }} className="flex items-center space-x-3 group cursor-pointer relative">
-            {/* Enhanced logo container with better background for mobile */}
+            {/* Modern logo container with subtle shadow */}
             <div className="relative">
                 <Image
                 src="/logo.avif"
@@ -266,31 +266,29 @@ export default function EnhancedHeader() {
                   height={48}
                   priority
                   fetchPriority="high"
-                  className="w-12 h-12 object-contain relative z-10"
+                  className="w-10 h-10 object-contain relative z-10 rounded-lg"
                   sizes="48px"
                 />
-              {/* Logo glow effect for better visibility */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Subtle shadow effect for better visibility */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             
-            {/* Enhanced logo text with better contrast */}
+            {/* Modern logo text with better contrast */}
             <motion.span 
-              className="text-xl font-bold relative z-10"
+              className="text-xl font-bold relative z-10 text-gray-900"
               style={{
-                color: '#ffffff',
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.5)',
-                background: 'linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%)',
-                backgroundClip: 'padding-box',
-                WebkitBackgroundClip: 'padding-box',
-                padding: '4px 8px',
-                borderRadius: '6px',
-                backdropFilter: 'blur(8px)'
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #0070f3 0%, #0761d1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                padding: '4px 0',
+                borderRadius: '6px'
               }}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
               whileHover={{
-                textShadow: '0 0 20px rgba(0, 229, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)',
+                scale: 1.05,
                 transition: { duration: 0.3 }
               }}
             >
@@ -314,32 +312,32 @@ export default function EnhancedHeader() {
                           custom={index}
                         >
                           <NavigationMenuTrigger 
-                            className="text-gray-300 hover:text-neon transition-colors duration-300 relative group px-3 py-2 bg-transparent"
+                            className="text-gray-700 hover:text-primary transition-colors duration-300 relative group px-3 py-2 bg-transparent"
                             onClick={() => smoothScrollTo('services')}
                             onMouseEnter={() => setHoveredItem('services')}
                             onMouseLeave={() => setHoveredItem(null)}
                           >
                             {t('navigation.services')}
                             <motion.span 
-                              className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-neon transition-all duration-300 ${
+                              className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
                                 shouldShowUnderline('services') ? 'w-full' : 'w-0'
                               }`}
                             />
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <div className="grid w-[600px] grid-cols-2 gap-3 p-6 bg-black/95 backdrop-blur-md border border-gray-700 rounded-lg">
+                            <div className="grid w-[600px] grid-cols-2 gap-3 p-6 bg-white shadow-lg border border-gray-100 rounded-lg">
                               {services.map((service) => (
                                 <NavigationMenuLink key={service.href} asChild>
                                   <LanguageAwareLink
                                     href={service.href}
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-800/50 focus:bg-gray-800/50 group"
+                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 focus:bg-blue-50 group"
                                   >
-                                    <div className="text-sm font-medium leading-none text-white group-hover:text-neon transition-colors">
-                                      {service.title}
+                                    <div className="text-sm font-medium leading-none text-gray-900 group-hover:text-primary transition-colors">
+                              className="text-gray-700 hover:text-primary transition-colors duration-300 relative group px-3 py-2"
                                     </div>
-                                    <p className="line-clamp-2 text-sm leading-snug text-gray-400">
+                                    <p className="line-clamp-2 text-sm leading-snug text-gray-500">
                                       {service.description}
-                                    </p>
+                                className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
                                   </LanguageAwareLink>
                                 </NavigationMenuLink>
                               ))}
@@ -354,7 +352,7 @@ export default function EnhancedHeader() {
                     <NavigationMenuItem key={item.href}>
                       <motion.div
                         variants={navItemVariants}
-                        initial="hidden"
+                className="bg-gradient-primary text-white hover:shadow-md transition-all duration-300"
                         animate="visible"
                         custom={index}
                       >
@@ -392,15 +390,14 @@ export default function EnhancedHeader() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white hover:text-neon transition-colors duration-300 relative z-10"
+            className="md:hidden text-gray-700 hover:text-primary transition-colors duration-300 relative z-10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={t('navigation.toggleMenu')}
             style={{
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
               padding: '8px',
               borderRadius: '6px',
-              background: isMenuOpen ? 'rgba(0, 0, 0, 0.3)' : 'transparent',
-              backdropFilter: isMenuOpen ? 'blur(8px)' : 'none'
+              background: isMenuOpen ? 'rgba(243, 244, 246, 0.8)' : 'transparent',
+              backdropFilter: isMenuOpen ? 'blur(4px)' : 'none'
             }}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -410,7 +407,7 @@ export default function EnhancedHeader() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <motion.div 
-            className="md:hidden mt-4 bg-black/95 backdrop-blur-md rounded-lg p-6 overflow-hidden border border-gray-800/50"
+            className="md:hidden mt-4 bg-white/95 backdrop-blur-md rounded-lg p-6 overflow-hidden border border-gray-200 shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -421,29 +418,23 @@ export default function EnhancedHeader() {
                 <button
                   key={item.href}
                   onClick={() => smoothScrollTo(item.id)}
-                  className={`block text-gray-300 hover:text-neon transition-colors duration-300 py-3 w-full text-left text-lg font-medium ${
-                    pathname === '/' && activeSection === item.id ? 'text-neon' : ''
+                  className={`block text-gray-700 hover:text-primary transition-colors duration-300 py-3 w-full text-left text-lg font-medium ${
+                    pathname === '/' && activeSection === item.id ? 'text-primary' : ''
                   }`}
-                  style={{
-                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.8)',
-                  }}
                 >
                   {item.label}
                 </button>
               ))}
               
               {/* Mobile Services Menu */}
-              <div className="py-2 border-t border-gray-800/50 mt-4">
+              <div className="py-2 border-t border-gray-200 mt-4">
                 <div className="pl-4 space-y-3">
                   {services.map((service) => (
                     <LanguageAwareLink
                       key={service.href}
                       href={service.href}
-                      className="block text-sm text-gray-400 hover:text-neon transition-colors duration-300 py-2"
+                      className="block text-sm text-gray-500 hover:text-primary transition-colors duration-300 py-2"
                       onClick={() => setIsMenuOpen(false)}
-                      style={{
-                        textShadow: '0 1px 4px rgba(0, 0, 0, 0.8)',
-                      }}
                     >
                       {service.title}
                     </LanguageAwareLink>
@@ -453,7 +444,7 @@ export default function EnhancedHeader() {
               
               <MotionButton 
                 onClick={() => smoothScrollTo('contact')}
-                className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mt-6"
+                className="w-full bg-gradient-primary text-white hover:shadow-md transition-all duration-300 mt-6"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

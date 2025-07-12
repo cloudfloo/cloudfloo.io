@@ -126,10 +126,10 @@ export default function EnhancedServices() {
         <div className="text-center mb-16 animate-slide-in">
           <h2 
             id="expert-solutions" 
-            className="text-4xl md:text-5xl font-bold mb-6 text-white"
+            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
             dangerouslySetInnerHTML={{ __html: t('services.title') }}
           />
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {t('services.subtitle')}
           </p>
         </div>
@@ -141,34 +141,34 @@ export default function EnhancedServices() {
             return (
               <Card 
                 key={index}
-                className="glass border-gray-700 hover:border-neon/50 transition-all duration-300 group h-full card-3d"
+                className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-300 group h-full card-3d bg-white"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardHeader>
                   <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <CardTitle className="text-2xl text-white group-hover:text-neon transition-colors duration-300">
+                  <CardTitle className="text-2xl text-gray-900 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-gray-600 mb-6 leading-relaxed">
                     {service.description}
                   </p>
                   
                   <div className="space-y-2 mb-6">
                     {service.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center opacity-0 animate-slide-in" style={{ animationDelay: `${(index * 0.1) + (featureIndex * 0.1)}s`, animationFillMode: 'forwards' }}>
-                        <div className="w-2 h-2 bg-neon rounded-full mr-3 flex-shrink-0"></div>
-                        <span className="text-sm text-gray-300">{feature}</span>
+                        <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                        <span className="text-sm text-gray-600">{feature}</span>
                       </div>
                     ))}
                   </div>
 
                   <Link href={service.link}>
                     <Button 
-                      className="w-full group bg-gradient-to-r from-neon/20 to-transparent border border-neon/30 text-neon hover:bg-neon/10"
+                      className="w-full group bg-gradient-to-r from-blue-50 to-transparent border border-blue-200 text-primary hover:bg-blue-50"
                     >
                       {t('services.learnMore')}
                       <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-2" />
@@ -184,10 +184,10 @@ export default function EnhancedServices() {
         <div className="text-center mb-16 animate-slide-in" style={{ animationDelay: '0.4s' }}>
           <h3 
             id="technologies-we-master"
-            className="text-3xl font-bold mb-6 text-white"
+            className="text-3xl font-bold mb-6 text-gray-900"
             dangerouslySetInnerHTML={{ __html: t('services.techStack.title') }}
           />
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {t('services.techStack.subtitle')}
           </p>
         </div>
@@ -196,18 +196,18 @@ export default function EnhancedServices() {
           {Object.entries(technologyStack).map(([category, technologies], categoryIndex) => (
             <Card 
               key={category} 
-              className="glass border-gray-700 hover:border-neon/30 transition-all duration-500 h-full card-3d"
+              className="glass border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-500 h-full card-3d bg-white"
               style={{ animationDelay: `${0.5 + (categoryIndex * 0.1)}s` }}
             >
               <CardHeader>
-                <CardTitle className="text-lg text-white text-center">{category}</CardTitle>
+                <CardTitle className="text-lg text-gray-900 text-center">{category}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
                   {technologies.map((tech, techIndex) => (
                     <div 
                       key={techIndex}
-                      className="flex flex-col items-center p-3 rounded-lg hover:bg-white/5 transition-colors duration-300 group opacity-0 animate-slide-in"
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-blue-50 transition-colors duration-300 group opacity-0 animate-slide-in"
                       style={{ animationDelay: `${0.6 + (categoryIndex * 0.1) + (techIndex * 0.05)}s`, animationFillMode: 'forwards' }}
                     >
                       <TechIcon 
@@ -216,7 +216,7 @@ export default function EnhancedServices() {
                         fallbackIcon={tech.fallback}
                         className="w-8 h-8 mb-2"
                       />
-                      <span className="text-xs text-gray-300 text-center">{tech.name}</span>
+                      <span className="text-xs text-gray-700 text-center">{tech.name}</span>
                     </div>
                   ))}
                 </div>
