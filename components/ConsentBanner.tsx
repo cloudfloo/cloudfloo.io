@@ -216,43 +216,43 @@ export default function ConsentBanner() {
 
   if (showSettings) {
     return (
-      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop">
-        <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/60 animate-modal-content">
+      <div className="fixed inset-0 bg-gray-500/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop">
+        <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-xl animate-modal-content">
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold flex items-center gap-3 bg-gradient-to-r from-neon to-blue-400 bg-clip-text text-transparent">
-                <Settings className="w-6 h-6 text-neon" />
+              <h2 className="text-2xl font-bold flex items-center gap-3 text-gray-900">
+                <Settings className="w-6 h-6 text-primary" />
                 {texts.settings.title}
               </h2>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowSettings(false)}
-                className="h-10 w-10 p-0 text-neon hover:bg-neon/10 transition-all duration-300 group rounded-full"
+                className="h-10 w-10 p-0 text-gray-500 hover:bg-gray-100 transition-all duration-300 group rounded-full"
               >
                 <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
               </Button>
             </div>
             
-            <p className="text-gray-300 mb-8 text-base leading-relaxed">
+            <p className="text-gray-600 mb-8 text-base leading-relaxed">
               {texts.settings.description}
             </p>
 
             <div className="space-y-6">
               {/* Necessary Cookies */}
-              <div className="bg-gradient-to-r from-green-500/10 to-green-400/10 backdrop-blur-sm rounded-xl p-6 border border-green-500/30">
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Shield className="w-5 h-5 text-green-400" />
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg text-gray-900">
+                      <Shield className="w-5 h-5 text-green-600" />
                       {texts.settings.necessary.title}
                     </h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {texts.settings.necessary.description}
                     </p>
                   </div>
                   <div className="ml-6">
-                    <div className="w-12 h-7 bg-gradient-to-r from-green-400 to-green-500 rounded-full relative shadow-lg">
+                    <div className="w-12 h-7 bg-green-500 rounded-full relative shadow-sm">
                       <div className="w-5 h-5 bg-white rounded-full absolute top-1 right-1 transition-transform shadow-sm" />
                     </div>
                   </div>
@@ -260,14 +260,14 @@ export default function ConsentBanner() {
               </div>
 
               {/* Analytics Cookies */}
-              <div className="bg-gradient-to-r from-blue-500/10 to-blue-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-blue-400/40 transition-colors">
+              <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-300 transition-colors">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <BarChart3 className="w-5 h-5 text-blue-400" />
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg text-gray-900">
+                      <BarChart3 className="w-5 h-5 text-blue-500" />
                       {texts.settings.analytics.title}
                     </h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {texts.settings.analytics.description}
                     </p>
                   </div>
@@ -276,8 +276,8 @@ export default function ConsentBanner() {
                       onClick={() => toggleConsent('analytics')}
                       className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.analytics 
-                          ? 'bg-gradient-to-r from-blue-400 to-blue-500 shadow-blue-400/25 hover:scale-105' 
-                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
+                          ? 'bg-blue-500 shadow-blue-200 hover:scale-105' 
+                          : 'bg-gray-300 hover:bg-gray-400 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -289,14 +289,14 @@ export default function ConsentBanner() {
               </div>
 
               {/* Marketing Cookies */}
-              <div className="bg-gradient-to-r from-purple-500/10 to-purple-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-purple-400/40 transition-colors">
+              <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-purple-300 transition-colors">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Target className="w-5 h-5 text-purple-400" />
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg text-gray-900">
+                      <Target className="w-5 h-5 text-purple-500" />
                       {texts.settings.marketing.title}
                     </h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {texts.settings.marketing.description}
                     </p>
                   </div>
@@ -305,8 +305,8 @@ export default function ConsentBanner() {
                       onClick={() => toggleConsent('marketing')}
                       className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.marketing 
-                          ? 'bg-gradient-to-r from-purple-400 to-purple-500 shadow-purple-400/25 hover:scale-105' 
-                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
+                          ? 'bg-purple-500 shadow-purple-200 hover:scale-105' 
+                          : 'bg-gray-300 hover:bg-gray-400 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -318,14 +318,14 @@ export default function ConsentBanner() {
               </div>
 
               {/* Functional Cookies */}
-              <div className="bg-gradient-to-r from-orange-500/10 to-orange-400/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-orange-400/40 transition-colors">
+              <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-orange-300 transition-colors">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg">
-                      <Zap className="w-5 h-5 text-orange-400" />
+                    <h3 className="font-semibold flex items-center gap-3 mb-2 text-lg text-gray-900">
+                      <Zap className="w-5 h-5 text-orange-500" />
                       {texts.settings.functional.title}
                     </h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {texts.settings.functional.description}
                     </p>
                   </div>
@@ -334,8 +334,8 @@ export default function ConsentBanner() {
                       onClick={() => toggleConsent('functional')}
                       className={`w-12 h-7 rounded-full relative transition-all duration-300 shadow-lg group/switch ${
                         consent.functional 
-                          ? 'bg-gradient-to-r from-orange-400 to-orange-500 shadow-orange-400/25 hover:scale-105' 
-                          : 'bg-gray-600 hover:bg-gray-500 hover:scale-105'
+                          ? 'bg-orange-500 shadow-orange-200 hover:scale-105' 
+                          : 'bg-gray-300 hover:bg-gray-400 hover:scale-105'
                       }`}
                     >
                       <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform duration-300 shadow-sm ${
@@ -351,7 +351,7 @@ export default function ConsentBanner() {
               <Button 
                 onClick={() => saveConsent(consent)} 
                 size="lg"
-                className="flex-1 bg-gradient-neon text-white hover:bg-gradient-neon/90 font-semibold transition-all duration-300 group relative overflow-hidden"
+                className="flex-1 bg-gradient-primary text-white hover:bg-blue-600 font-semibold transition-all duration-300 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {texts.settings.save}
@@ -362,7 +362,7 @@ export default function ConsentBanner() {
                 variant="outline" 
                 size="lg"
                 onClick={() => setShowSettings(false)}
-                className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
+                className="border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold transition-all duration-300 group"
               >
                 <span className="flex items-center gap-2">
                   {texts.settings.close}
@@ -378,19 +378,18 @@ export default function ConsentBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-slide-in">
-      <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/80 relative">
-        <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl relative">
         <div className="relative">
         <div className="p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="flex-shrink-0 p-3 bg-gradient-to-br from-neon/30 to-blue-400/30 rounded-xl">
-              <Shield className="w-6 h-6 text-neon" />
+            <div className="flex-shrink-0 p-3 bg-blue-100 rounded-xl">
+              <Shield className="w-6 h-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-xl font-bold mb-3 text-white">
+              <h2 className="text-xl font-bold mb-3 text-gray-900">
                 {texts.title}
               </h2>
-              <p className="text-gray-100 text-sm mb-6 leading-relaxed font-medium">
+              <p className="text-gray-600 text-sm mb-6 leading-relaxed font-medium">
                 {texts.description}
               </p>
               
@@ -398,7 +397,7 @@ export default function ConsentBanner() {
                 <Button 
                   onClick={acceptAll} 
                   size="lg"
-                  className="bg-gradient-neon text-white hover:bg-gradient-neon/90 font-semibold transition-all duration-300 group relative overflow-hidden"
+                  className="bg-gradient-primary text-white hover:bg-blue-600 font-semibold transition-all duration-300 group relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {texts.acceptAll}
@@ -409,7 +408,7 @@ export default function ConsentBanner() {
                   variant="outline" 
                   size="lg"
                   onClick={acceptNecessary}
-                  className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold transition-all duration-300 group"
                 >
                   <span className="flex items-center gap-2">
                     {texts.acceptNecessary}
@@ -420,7 +419,7 @@ export default function ConsentBanner() {
                   variant="outline" 
                   size="lg"
                   onClick={() => setShowSettings(true)}
-                  className="border-neon text-neon hover:bg-neon/10 font-semibold transition-all duration-300 group"
+                  className="border-primary text-primary hover:bg-blue-50 font-semibold transition-all duration-300 group"
                 >
                   <span className="flex items-center gap-2">
                     {texts.customize}
@@ -433,7 +432,7 @@ export default function ConsentBanner() {
               variant="ghost"
               size="sm"
               onClick={() => setShowBanner(false)}
-              className="h-10 w-10 p-0 text-neon hover:bg-neon/10 flex-shrink-0 transition-all duration-300 group rounded-full"
+              className="h-10 w-10 p-0 text-gray-500 hover:bg-gray-100 flex-shrink-0 transition-all duration-300 group rounded-full"
             >
               <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
             </Button>

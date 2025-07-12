@@ -11,13 +11,13 @@ const config: Config = {
     './contexts/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [
-    'bg-neon/20',
-    'text-neon',
+    'bg-primary/20',
+    'text-primary',
     'border',
-    'border-neon/30',
-    'text-gray-300',
-    'hover:bg-white/10',
-    'hover:text-white',
+    'border-primary/30',
+    'text-gray-600',
+    'hover:bg-blue-50',
+    'hover:text-gray-900',
     'from-blue-500',
     'to-cyan-500',
     'from-purple-500',
@@ -35,8 +35,8 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-primary': 'linear-gradient(135deg, #0070f3 0%, #0761d1 100%)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -46,6 +46,11 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: '#0070f3',
+          light: '#3291ff',
+          dark: '#0761d1',
+        },
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',

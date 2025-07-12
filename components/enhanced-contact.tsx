@@ -140,7 +140,7 @@ export default function EnhancedContact() {
   };
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden scroll-offset">
+    <section id="contact" className="py-20 relative overflow-hidden scroll-offset bg-white">
       <div className="container mx-auto px-6">
         <motion.div 
           ref={titleRef}
@@ -151,7 +151,7 @@ export default function EnhancedContact() {
         >
           <motion.h2 
             id="contact-us"
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={titleVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -159,7 +159,7 @@ export default function EnhancedContact() {
             {t('contact.title')}
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={titleVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -176,9 +176,9 @@ export default function EnhancedContact() {
             initial="hidden"
             animate={formVisible ? "visible" : "hidden"}
           >
-            <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+            <Card className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 bg-white">
               <CardHeader>
-                <CardTitle id="contact-form" className="text-2xl font-bold text-white mb-6">
+                <CardTitle id="contact-form" className="text-2xl font-bold text-gray-900 mb-6">
                   {t('contact.form.title')}
                 </CardTitle>
               </CardHeader>
@@ -186,7 +186,7 @@ export default function EnhancedContact() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <motion.div variants={inputVariants}>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                         {t('contact.form.nameRequired')}
                       </label>
                       <Input
@@ -196,12 +196,12 @@ export default function EnhancedContact() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
+                        className="bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-primary/20 transition-all duration-300"
                         placeholder={t('contact.form.namePlaceholder')}
                       />
                     </motion.div>
                     <motion.div variants={inputVariants}>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                         {t('contact.form.emailRequired')}
                       </label>
                       <Input
@@ -211,14 +211,14 @@ export default function EnhancedContact() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
+                        className="bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-primary/20 transition-all duration-300"
                         placeholder={t('contact.form.emailPlaceholder')}
                       />
                     </motion.div>
                   </div>
                   
                   <motion.div variants={inputVariants}>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                       {t('contact.form.company')}
                     </label>
                     <Input
@@ -227,13 +227,13 @@ export default function EnhancedContact() {
                       type="text"
                       value={formData.company}
                       onChange={handleChange}
-                      className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 transition-all duration-300"
+                      className="bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-primary/20 transition-all duration-300"
                       placeholder={t('contact.form.companyPlaceholder')}
                     />
                   </motion.div>
                   
                   <motion.div variants={inputVariants}>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                       {t('contact.form.messageRequired')}
                     </label>
                     <Textarea
@@ -243,7 +243,7 @@ export default function EnhancedContact() {
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      className="bg-white/5 border-gray-600 text-white placeholder-gray-400 focus:border-neon focus:ring-neon/20 resize-none transition-all duration-300"
+                      className="bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-primary/20 resize-none transition-all duration-300"
                       placeholder={t('contact.form.messagePlaceholder')}
                     />
                   </motion.div>
@@ -256,7 +256,7 @@ export default function EnhancedContact() {
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 group"
+                        className="w-full bg-gradient-primary text-white hover:shadow-lg transition-all duration-300 group"
                       >
                         {t('contact.form.submit')}
                         <motion.span
@@ -284,9 +284,9 @@ export default function EnhancedContact() {
             animate={infoVisible ? "visible" : "hidden"}
           >
             <motion.div variants={itemVariants}>
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+              <Card className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 bg-white">
                 <CardHeader>
-                  <CardTitle id="contact-info" className="text-2xl font-bold text-white mb-6">
+                  <CardTitle id="contact-info" className="text-2xl font-bold text-gray-900 mb-6">
                     {t('contact.info.title')}
                   </CardTitle>
                 </CardHeader>
@@ -297,7 +297,7 @@ export default function EnhancedContact() {
                       <motion.a
                         key={index}
                         href={info.link}
-                        className="flex items-start space-x-4 group hover:text-neon transition-colors duration-300 p-3 rounded-lg hover:bg-white/5"
+                        className="flex items-start space-x-4 group hover:text-primary transition-colors duration-300 p-3 rounded-lg hover:bg-blue-50"
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                         initial={{ opacity: 0, x: -20 }}
@@ -311,11 +311,11 @@ export default function EnhancedContact() {
                           whileHover={{ rotate: 360 }}
                           transition={{ duration: 0.6 }}
                         >
-                          <Icon className="w-5 h-5 text-white" />
+                          <Icon className="w-5 h-5 text-primary" />
                         </motion.div>
                         <div className="flex-1">
-                          <div className="text-sm text-gray-400">{info.title}</div>
-                          <div className="text-white group-hover:text-neon transition-colors duration-300 text-sm">
+                          <div className="text-sm text-gray-500">{info.title}</div>
+                          <div className="text-gray-900 group-hover:text-primary transition-colors duration-300 text-sm">
                             {info.value}
                           </div>
                         </div>
@@ -328,7 +328,7 @@ export default function EnhancedContact() {
 
             {/* Map Placeholder */}
             <motion.div variants={itemVariants}>
-              <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500">
+              <Card className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 bg-white">
                 <CardContent className="p-8 h-64 flex items-center justify-center">
                   <motion.div 
                     className="text-center"
@@ -340,10 +340,10 @@ export default function EnhancedContact() {
                       whileHover={{ scale: 1.1, rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <MapPin className="w-12 h-12 text-neon mx-auto mb-4" />
+                      <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
                     </motion.div>
-                    <p className="text-gray-300">{t('contact.info.mapComing')}</p>
-                    <p className="text-sm text-gray-400 mt-2">{t('contact.info.location')}</p>
+                    <p className="text-gray-700">{t('contact.info.mapComing')}</p>
+                    <p className="text-sm text-gray-500 mt-2">{t('contact.info.location')}</p>
                   </motion.div>
                 </CardContent>
               </Card>

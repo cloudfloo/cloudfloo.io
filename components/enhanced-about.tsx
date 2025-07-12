@@ -81,13 +81,13 @@ export default function EnhancedAbout() {
   }, []);
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden scroll-offset">
+    <section id="about" className="py-20 relative overflow-hidden scroll-offset bg-gray-50">
       {/* Simplified floating background elements with CSS animations */}
       <div className="absolute inset-0 pointer-events-none">
         {isClient && floatingElements.map((element) => (
           <div
             key={element.id}
-            className="absolute w-2 h-2 bg-neon/20 rounded-full animate-float-slow"
+            className="absolute w-2 h-2 bg-blue-300/30 rounded-full animate-float-slow"
             style={{
               left: `${element.x}%`,
               top: `${element.y}%`,
@@ -102,7 +102,7 @@ export default function EnhancedAbout() {
       <div
         className="absolute inset-0 opacity-10"
         style={{
-          background: 'radial-gradient(ellipse 800px 400px at 50% 50%, rgba(0,229,255,0.1) 0%, transparent 50%)'
+          background: 'radial-gradient(ellipse 800px 400px at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 50%)'
         }}
       />
 
@@ -116,12 +116,12 @@ export default function EnhancedAbout() {
         >
           <h2 
             id="about-us"
-            className="text-4xl md:text-5xl font-bold mb-6 text-white animate-slide-in"
+            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 animate-slide-in"
             style={{ animationDelay: '0.1s' }}
             dangerouslySetInnerHTML={{ __html: t('about.title') }}
           />
           <p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 animate-slide-in"
+            className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 animate-slide-in"
             style={{ animationDelay: '0.3s' }}
           >
             {t('about.subtitle')}
@@ -147,17 +147,17 @@ export default function EnhancedAbout() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer card-3d">
+                <Card className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 group cursor-pointer card-3d bg-white">
                   <CardContent className="p-6 text-center">
-                    <div className="w-12 h-12 bg-gradient-neon/10 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-neon/20 transition-all duration-300 group-hover:scale-110">
-                      <Icon className="w-6 h-6 text-neon" />
+                    <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-100 transition-all duration-300 group-hover:scale-110">
+                      <Icon className="w-6 h-6 text-primary" />
                     </div>
                     
-                    <div className="text-3xl font-bold text-neon mb-2 animate-counter">
+                    <div className="text-3xl font-bold text-primary mb-2 animate-counter">
                       {index === 1 ? counter.count.toFixed(2) : counter.count}{stat.suffix}
                     </div>
                     
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-gray-600">
                       {stat.label}
                     </div>
                   </CardContent>
@@ -176,17 +176,17 @@ export default function EnhancedAbout() {
               : 'opacity-0 translate-y-8 scale-95'
           }`}
         >
-          <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 max-w-4xl mx-auto overflow-hidden card-3d">
+          <Card className="glass border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 max-w-4xl mx-auto overflow-hidden card-3d bg-white">
             <CardContent className="p-8">
               <h3 
                 id="our-promise"
-                className="text-2xl font-bold text-neon mb-4 animate-slide-in"
+                className="text-2xl font-bold text-primary mb-4 animate-slide-in"
                 style={{ animationDelay: '0.3s' }}
               >
                 {t('about.promise.title')}
               </h3>
               <p 
-                className="text-lg text-gray-300 leading-relaxed animate-slide-in"
+                className="text-lg text-gray-600 leading-relaxed animate-slide-in"
                 style={{ animationDelay: '0.5s' }}
               >
                 {t('about.promise.description')}

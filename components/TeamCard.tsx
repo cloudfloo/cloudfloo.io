@@ -23,7 +23,7 @@ export default function TeamCard({ person }: TeamCardProps) {
       transition={{ duration: 0.3 }}
       className="h-full"
     >
-      <Card className="glass border-gray-700 hover:border-neon/50 transition-all duration-500 group cursor-pointer overflow-hidden h-full rounded-2xl shadow-md">
+      <Card className="bg-white border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-500 group cursor-pointer overflow-hidden h-full rounded-2xl shadow-sm">
         <CardHeader className="p-4">
           <LanguageAwareLink href={`/team/${person.slug}`} className="block">
             <div className="relative w-full aspect-square mb-4 overflow-hidden rounded-xl">
@@ -60,27 +60,27 @@ export default function TeamCard({ person }: TeamCardProps) {
             </div>
           </LanguageAwareLink>
           
-          <CardTitle className="text-xl text-white group-hover:text-neon transition-colors duration-300">
+          <CardTitle className="text-xl text-gray-900 group-hover:text-primary transition-colors duration-300">
             {person.name}
           </CardTitle>
-          <p className="text-neon font-medium text-sm">
+          <p className="text-primary font-medium text-sm">
             {t(`team.members.${person.slug}.title`) || person.title}
           </p>
         </CardHeader>
         
         <CardContent className="p-4 pt-0 space-y-4">
-          <p className="text-gray-300 text-sm leading-relaxed">
+          <p className="text-gray-600 text-sm leading-relaxed">
             {t(`team.members.${person.slug}.shortBio`) || person.shortBio}
           </p>
           
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-white">{t('team.member.expertise')}:</h4>
+            <h4 className="text-sm font-semibold text-gray-900">{t('team.member.expertise')}:</h4>
             <div className="flex flex-wrap gap-1">
               {person.expertise.slice(0, 3).map((skill, index) => (
                 <Badge 
                   key={index} 
                   variant="outline" 
-                  className="text-xs bg-gradient-neon/10 text-neon border-neon/20"
+                  className="text-xs bg-blue-50 text-primary border-blue-200"
                 >
                   {skill}
                 </Badge>
@@ -88,7 +88,7 @@ export default function TeamCard({ person }: TeamCardProps) {
               {person.expertise.length > 3 && (
                 <Badge 
                   variant="outline" 
-                  className="text-xs bg-gray-700/50 text-gray-300 border-gray-600"
+                  className="text-xs bg-gray-100 text-gray-600 border-gray-200"
                 >
                   +{person.expertise.length - 3}
                 </Badge>
@@ -96,7 +96,7 @@ export default function TeamCard({ person }: TeamCardProps) {
             </div>
           </div>
           
-          <div className="flex items-center justify-between pt-4 border-t border-gray-700">
+          <div className="flex items-center justify-between pt-4 border-t border-gray-200">
             <div className="flex items-center gap-2">
               {person.linkedin && (
                 <motion.a
@@ -104,12 +104,12 @@ export default function TeamCard({ person }: TeamCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`LinkedIn ${person.name}`}
-                  className="w-8 h-8 glass rounded-full flex items-center justify-center hover:bg-neon/20 transition-colors duration-300 group/social"
+                  className="w-8 h-8 bg-white shadow-sm rounded-full flex items-center justify-center hover:bg-blue-50 transition-colors duration-300 group/social"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <Linkedin className="w-4 h-4 text-gray-400 group-hover/social:text-neon transition-colors duration-300" />
+                  <Linkedin className="w-4 h-4 text-gray-400 group-hover/social:text-primary transition-colors duration-300" />
                 </motion.a>
               )}
               
@@ -119,19 +119,19 @@ export default function TeamCard({ person }: TeamCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`GitHub ${person.name}`}
-                  className="w-8 h-8 glass rounded-full flex items-center justify-center hover:bg-neon/20 transition-colors duration-300 group/social"
+                  className="w-8 h-8 bg-white shadow-sm rounded-full flex items-center justify-center hover:bg-blue-50 transition-colors duration-300 group/social"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <Github className="w-4 h-4 text-gray-400 group-hover/social:text-neon transition-colors duration-300" />
+                  <Github className="w-4 h-4 text-gray-400 group-hover/social:text-primary transition-colors duration-300" />
                 </motion.a>
               )}
             </div>
             
             <LanguageAwareLink href={`/team/${person.slug}`}>
               <motion.button
-                className="text-xs text-gray-400 hover:text-neon transition-colors duration-300 flex items-center gap-1"
+                className="text-xs text-gray-500 hover:text-primary transition-colors duration-300 flex items-center gap-1"
                 whileHover={{ x: 2 }}
                 onClick={(e) => e.stopPropagation()}
               >

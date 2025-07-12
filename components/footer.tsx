@@ -42,7 +42,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-900/40 backdrop-blur-sm border-t border-gray-700/30 mt-16 mb-8" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+    <footer className="bg-gray-50 border-t border-gray-200 mt-16 mb-8" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
       <div className="container mx-auto px-6 py-16" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
@@ -57,23 +57,23 @@ export default function Footer() {
                 className="object-contain w-8 h-8"
                 sizes="32px"
               />
-              <span className="text-xl font-bold text-neon" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+              <span className="text-xl font-bold text-primary" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                 cloudfloo.io
               </span>
             </div>
-            <p className="text-gray-300 mb-8 max-w-md leading-relaxed" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+            <p className="text-gray-600 mb-8 max-w-md leading-relaxed" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               {t('footer.description')}
             </p>
             
             {/* Contact Information */}
             <div className="mb-8 space-y-3" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              <div className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.address')}</strong><br />
+              <div className="text-sm text-gray-600" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+                <strong className="text-gray-900" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.address')}</strong><br />
                 <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>Chmieleniec 17/69</span><br />
                 <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>30-348 Krakow, Poland</span>
               </div>
-              <div className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-                <strong className="text-white" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.phone')}</strong> <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>+48 728 963 591</span>
+              <div className="text-sm text-gray-600" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+                <strong className="text-gray-900" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.phone')}</strong> <span style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>+48 728 963 591</span>
               </div>
             </div>
             
@@ -85,7 +85,7 @@ export default function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 glass rounded-lg flex items-center justify-center hover:bg-neon/10 hover:text-neon transition-all duration-300 group"
+                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center hover:bg-blue-50 hover:text-primary shadow-sm hover:shadow-md transition-all duration-300 group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -99,13 +99,13 @@ export default function Footer() {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category} className="mt-4" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-              <h3 className="text-white font-semibold mb-6" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{category}</h3>
+              <h3 className="text-gray-900 font-semibold mb-6" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{category}</h3>
               <ul className="space-y-3" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                 {links.map((link, index) => (
                   <li key={index} style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
                     <LanguageAwareLink
                       href={link.href}
-                      className="text-gray-300 hover:text-neon transition-colors duration-300 text-sm hover:translate-x-1 transform inline-block"
+                      className="text-gray-600 hover:text-primary transition-colors duration-300 text-sm hover:translate-x-1 transform inline-block"
                       style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}
                     >
                       {link.name}
@@ -117,9 +117,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-gray-700/50 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+        <div className="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
           <div className="flex flex-col md:flex-row items-center gap-6 mb-6 md:mb-0">
-            <p className="text-gray-300 text-sm" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+            <p className="text-gray-600 text-sm" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               {t('footer.copyright')}
             </p>
             <div className="opacity-75">
@@ -128,12 +128,12 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center space-x-6" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
-            <span className="text-sm text-gray-300" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
+            <span className="text-sm text-gray-600" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>
               {t('footer.builtWith')}
             </span>
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-400" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.systemsOperational')}</span>
+              <span className="text-sm text-green-600" style={{ userSelect: 'text', WebkitUserSelect: 'text', MozUserSelect: 'text' }}>{t('footer.systemsOperational')}</span>
             </div>
           </div>
         </div>
