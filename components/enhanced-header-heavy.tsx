@@ -18,7 +18,7 @@ import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Create a motion-enabled Button component
-const MotionButton = motion.create(Button);
+const MotionButton = motion(Button);
 
 export default function EnhancedHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -333,11 +333,11 @@ export default function EnhancedHeader() {
                                     className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 focus:bg-blue-50 group"
                                   >
                                     <div className="text-sm font-medium leading-none text-gray-900 group-hover:text-primary transition-colors">
-                              className="text-gray-700 hover:text-primary transition-colors duration-300 relative group px-3 py-2"
+                                      {service.title}
                                     </div>
                                     <p className="line-clamp-2 text-sm leading-snug text-gray-500">
                                       {service.description}
-                                className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
+                                    </p>
                                   </LanguageAwareLink>
                                 </NavigationMenuLink>
                               ))}
@@ -352,7 +352,7 @@ export default function EnhancedHeader() {
                     <NavigationMenuItem key={item.href}>
                       <motion.div
                         variants={navItemVariants}
-                className="bg-gradient-primary text-white hover:shadow-md transition-all duration-300"
+                        initial="hidden"
                         animate="visible"
                         custom={index}
                       >
@@ -361,11 +361,11 @@ export default function EnhancedHeader() {
                             onClick={() => smoothScrollTo(item.id)}
                             onMouseEnter={() => setHoveredItem(item.id)}
                             onMouseLeave={() => setHoveredItem(null)}
-                            className="text-gray-300 hover:text-neon transition-colors duration-300 relative group px-3 py-2"
+                            className="text-gray-700 hover:text-primary transition-colors duration-300 relative group px-3 py-2"
                           >
                             {item.label}
                             <motion.span 
-                              className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-neon transition-all duration-300 ${
+                              className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
                                 shouldShowUnderline(item.id) ? 'w-full' : 'w-0'
                               }`}
                             />
@@ -380,7 +380,7 @@ export default function EnhancedHeader() {
             
             <MotionButton 
               onClick={() => smoothScrollTo('contact')}
-              className="bg-gradient-neon text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+              className="bg-gradient-primary text-white hover:shadow-md transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -418,7 +418,7 @@ export default function EnhancedHeader() {
                 <button
                   key={item.href}
                   onClick={() => smoothScrollTo(item.id)}
-                  className={`block text-gray-700 hover:text-primary transition-colors duration-300 py-3 w-full text-left text-lg font-medium ${
+                  className={\`block text-gray-700 hover:text-primary transition-colors duration-300 py-3 w-full text-left text-lg font-medium ${
                     pathname === '/' && activeSection === item.id ? 'text-primary' : ''
                   }`}
                 >
