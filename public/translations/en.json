@@ -621,6 +621,7 @@
       "companyPlaceholder": "Your company",
       "messagePlaceholder": "Tell us about your project...",
       "submit": "Send Message"
+      ,"success": "Message sent successfully!"
     },
     "info": {
       "title": "Contact Information",

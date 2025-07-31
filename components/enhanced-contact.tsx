@@ -39,7 +39,7 @@ export default function EnhancedContact() {
       );
 
       if (res.ok) {
-        toast({ title: t('common.success') });
+        toast({ title: t('contact.form.success') });
         setFormData({ name: '', email: '', company: '', message: '' });
       } else {
         toast({ title: t('common.error'), variant: 'destructive' });

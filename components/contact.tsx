@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ export default function Contact() {
     company: '',
     message: ''
   });
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,13 +36,13 @@ export default function Contact() {
       );
 
       if (res.ok) {
-        toast({ title: 'Success' });
+        toast({ title: t('contact.form.success') });
         setFormData({ name: '', email: '', company: '', message: '' });
       } else {
-        toast({ title: 'Error', variant: 'destructive' });
+        toast({ title: t('common.error'), variant: 'destructive' });
       }
     } catch (error) {
-      toast({ title: 'Error', variant: 'destructive' });
+      toast({ title: t('common.error'), variant: 'destructive' });
     }
   };
 
