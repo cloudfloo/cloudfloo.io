@@ -61,7 +61,7 @@
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@types/node": "20.19.1",
-    "@types/react": "18.2.22",
+    "@types/react": "18.3.23",
     "@types/react-dom": "18.2.7",
     "@types/three": "^0.160.0",
     "autoprefixer": "10.4.15",
