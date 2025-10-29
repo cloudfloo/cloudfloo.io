@@ -8,7 +8,7 @@ COPY . .
 RUN npm run static
 
 # Production image with nginx to serve static files
-FROM nginx:alpine AS runner
+FROM nginx:1.29.3-alpine3.22 AS runner
 COPY --from=builder /app/out/ /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 3000
